@@ -65,7 +65,7 @@ body::after {
   align-items: center;
   justify-content: flex-start;
   text-align: center;
-  padding-top: 140px;
+  padding-top: 100px;
   overflow: hidden;
   position: relative;
   z-index: 1;
@@ -79,9 +79,7 @@ body::after {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-top: auto;
-  margin-bottom: auto;
-  padding-bottom: 160px; /* leave room for peeking image */
+  padding-bottom: 48px;
 }
 
 /* Badge */
@@ -115,11 +113,11 @@ body::after {
 .hero-headline {
   font-family: var(--font-heading);
   font-weight: 800;
-  font-size: clamp(48px, 7vw, 96px);
+  font-size: clamp(32px, 4.5vw, 60px);
   line-height: 0.92;
-  letter-spacing: -3px;
+  letter-spacing: -2px;
   color: var(--cream);
-  margin-bottom: 20px;
+  margin-bottom: 14px;
   border-radius: 0;
 }
 
@@ -131,7 +129,7 @@ body::after {
   font-family: var(--font-body);
   font-weight: 300;
   font-style: italic;
-  font-size: clamp(44px, 6.5vw, 88px);
+  font-size: clamp(28px, 4vw, 54px);
   /* slightly smaller to sit visually with the Syne weight */
 }
 
@@ -139,11 +137,11 @@ body::after {
 .hero-subtext {
   font-family: var(--font-body);
   font-weight: 300;
-  font-size: 17px;
+  font-size: 14px;
   color: var(--muted);
-  line-height: 1.6;
-  max-width: 480px;
-  margin: 0 auto 40px;
+  line-height: 1.5;
+  max-width: 380px;
+  margin: 0 auto 24px;
 }
 
 /* Buttons */
@@ -200,9 +198,9 @@ body::after {
 /* Visual — in flow after buttons, peeks at bottom, zooms to fullscreen on scroll */
 .hero-visual-wrapper {
   position: absolute;
-  left: 19vw;
-  right: 19vw;
-  top: calc(100vh - 120px);  /* peeks ~120px above the fold edge */
+  left: 8vw;
+  right: 8vw;
+  top: clamp(460px, 52vh, 580px);
   border-radius: 20px;
   padding: 1.5px;
   background: linear-gradient(135deg, rgba(120,120,120,0.5) 0%, rgba(180,60,0,0.6) 100%);
@@ -211,13 +209,11 @@ body::after {
 
 .hero-visual {
   width: 100%;
-  height: 55vh;
+  height: 160vh;
   background: #0a0a0a;
   border-radius: 19px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
+  position: relative;
 }
 
 .hero-visual__label {
@@ -233,6 +229,52 @@ body::after {
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+/* Hero 3D table carousel */
+.hero-table {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+  padding: 0 8px;
+  transform: perspective(900px) rotateX(15deg) scale(1.35);
+  transform-origin: 50% 60%;
+  will-change: transform;
+}
+
+.hero-table-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  will-change: transform;
+}
+
+.hero-table-card {
+  border-radius: 14px;
+  flex-shrink: 0;
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: filter 0.3s ease;
+}
+
+/* Fade masks so cards fade at top + bottom */
+.hero-visual__fade-top,
+.hero-visual__fade-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 28%;
+  pointer-events: none;
+  z-index: 2;
+}
+.hero-visual__fade-top {
+  top: 0;
+  background: linear-gradient(to bottom, #0a0a0a 0%, transparent 100%);
+}
+.hero-visual__fade-bottom {
+  bottom: 0;
+  background: linear-gradient(to top, #0a0a0a 0%, transparent 100%);
 }
 
 /* ─── Mobile Hero ─── */
@@ -1075,7 +1117,6 @@ body::after {
   justify-content: center;
   padding: 0;
   overflow: hidden;
-  min-height: 100vh;
   position: relative;
 }
 
@@ -1131,9 +1172,9 @@ body::after {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 120px 24px;
-  max-width: 900px;
-  gap: 24px;
+  padding: 40px 24px;
+  max-width: 600px;
+  gap: 12px;
 }
 
 .about-eyebrow {
@@ -1148,9 +1189,9 @@ body::after {
 .about-headline {
   font-family: var(--font-heading);
   font-weight: 800;
-  font-size: clamp(48px, 7vw, 96px);
+  font-size: clamp(32px, 4.5vw, 60px);
   line-height: 0.95;
-  letter-spacing: -3px;
+  letter-spacing: -2px;
   color: #0f0f0f;
 }
 
@@ -1161,10 +1202,10 @@ body::after {
 .about-sub {
   font-family: var(--font-body);
   font-weight: 300;
-  font-size: 17px;
-  line-height: 1.7;
+  font-size: 13px;
+  line-height: 1.6;
   color: rgba(0,0,0,0.45);
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 @media (max-width: 640px) {
@@ -1379,6 +1420,10 @@ body::after {
   padding: 0 32px;
   transform: perspective(1200px) rotateX(30deg) scale(0.82);
   transform-origin: 50% 65%;
+  height: 520px;
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
 }
 
 .work-col {
@@ -1386,6 +1431,7 @@ body::after {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  will-change: transform;
 }
 
 .work-card {
@@ -1403,13 +1449,12 @@ body::after {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #111 0%, #161616 100%);
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: filter 0.3s ease;
 }
 
 .work-card__placeholder:hover {
-  background: linear-gradient(135deg, #161616 0%, #1e1218 100%);
+  filter: brightness(1.3);
 }
 
 .work-card__add {

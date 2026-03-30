@@ -59,21 +59,14 @@ export default function About() {
       <div ref={textRef} className="about-body">
         <p className="about-eyebrow about-animate">About us</p>
         <h2 className="about-headline">
-          <span className="about-animate">We're a cinematic</span>
-          <br />
-          <span className="about-animate about-headline--light">marketing studio</span>
-          <br />
-          <span className="about-animate">that builds brands</span>
+          <span className="about-animate">We build brands</span>
           <br />
           <span className="about-animate about-headline--light">people remember.</span>
         </h2>
         <p className="about-sub about-animate">
-          From strategy to screen — we craft campaigns that move people,<br />
-          drive revenue, and make your competitors nervous.
+          From strategy to screen — we craft campaigns that move people.
         </p>
       </div>
-
-      <MarqueeStrip reverse={true} />
 
     </section>
   )

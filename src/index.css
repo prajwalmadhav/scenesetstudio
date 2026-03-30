@@ -841,8 +841,18 @@ body::after {
 .feat-section {
   position: relative;
   height: 100vh;
-  overflow: hidden;
+  overflow: clip;
   background: var(--bg);
+}
+
+.feat-track {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 100px 80px 0;
+  will-change: transform;
+  height: 100%;
+  width: max-content;
 }
 
 .feat-header {
@@ -882,14 +892,6 @@ body::after {
   line-height: 1;
 }
 
-.feat-track {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  padding: 0 80px;
-  will-change: transform;
-  height: 100%;
-}
 
 /* ── Base card ── */
 .feat-card {

@@ -115,10 +115,16 @@ export default function Services() {
       {/* ── Main content ── */}
       <div ref={contentRef} className="svc-body">
         <div className="svc-left">
-          <p className="svc-index svc-animate">{svc.index}</p>
-          <h2 className="svc-title svc-animate">{svc.label}</h2>
-          <p className="svc-tagline svc-animate">{svc.tagline}</p>
-          <p className="svc-desc svc-animate">{svc.description}</p>
+          <div className="svc-left-vertical">
+            <span className="svc-vertical-label svc-animate">{svc.label}</span>
+            <span className="svc-vertical-line" />
+          </div>
+          <div className="svc-left-content">
+            <p className="svc-index svc-animate">{svc.index}</p>
+            <h2 className="svc-title svc-animate">{svc.label}</h2>
+            <p className="svc-tagline svc-animate">{svc.tagline}</p>
+            <p className="svc-desc svc-animate">{svc.description}</p>
+          </div>
         </div>
 
         <div className="svc-right">

@@ -1,10 +1,14 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-// 60 cards scattered across a 5000×4000 canvas
-// Sizes and positions mimic the reference: large cluster near center,
-// medium mid-ring, tiny scattered at edges. No rotation — clean like reference.
+gsap.registerPlugin(ScrollTrigger)
+
+// Center the camera on the first card (2100, 1560)
 const CARDS = [
+  // ── PORTAL (The one we zoom into, 720px x 480px centered) ──
+  { w: 720, h: 480, x: 2140, y: 1760, portal: true }, 
+
   // ── LARGE (hero, 300–520px) — center cluster ──
   { w: 520, h: 360, x: 2100, y: 1560 },
   { w: 440, h: 300, x: 2700, y: 1480 },
@@ -71,70 +75,139 @@ const CARDS = [
   { w: 44,  h: 31,  x: 3100, y: 2560 },
 ]
 
-// Muted placeholder fills — warm grays, no bright color
-const FILLS = [
-  '#e8e5e0', '#dddad5', '#d5d2cc', '#e2ddd8',
-  '#cecac4', '#d8d5cf', '#e5e2dc', '#ccc9c3',
-]
-
 export default function OurWork() {
   const sectionRef = useRef(null)
   const canvasRef  = useRef(null)
+  const brandingRef = useRef(null)
+  const portalRef  = useRef(null)
+  const labelRef   = useRef(null)
 
   useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
+    const section = sectionRef.current
+    const canvas  = canvasRef.current
+    const label   = labelRef.current
+    const branding = brandingRef.current
+    const portal   = portalRef.current
+    if (!section || !canvas || !label || !branding || !portal) return
 
     const CANVAS_W = 5000
     const CANVAS_H = 4000
     const vw = window.innerWidth
     const vh = window.innerHeight
 
-    // Start centered, slightly zoomed in so large images fill viewport
-    const cx = -(CANVAS_W / 2 - vw / 2)
-    const cy = -(CANVAS_H / 2 - vh / 2)
+    // Center view exactly on the portal card cluster start
+    const targetCard = CARDS[0]
+    const cx = -(targetCard.x + targetCard.w / 2 - vw / 2)
+    const cy = -(targetCard.y + targetCard.h / 2 - vh / 2)
 
-    gsap.set(canvas, { x: cx, y: cy, scale: 1.7, transformOrigin: '50% 50%' })
+    // Initial state: Zoomed in view of translucent cards
+    gsap.set(canvas, { 
+      x: cx, 
+      y: cy, 
+      scale: 1, // Start zoomed in
+      opacity: 1,
+      transformOrigin: '50% 50%'
+    })
+    
+    gsap.set('.ourwork-item', { 
+      backgroundColor: 'rgba(5, 5, 5, 0.65)',
+      backdropFilter: 'blur(8px)',
+      WebkitBackdropFilter: 'blur(8px)'
+    })
+    
+    gsap.set(branding, { 
+      '-webkit-text-stroke': '1px rgba(0,0,0,0.06)', 
+      color: 'transparent' 
+    })
+    gsap.set(portal, { opacity: 0, scale: 0.5 })
 
-    // Zoom out + slow pan — mirrors the reference video
-    gsap.to(canvas, {
-      scale: 0.38,
-      x: cx + 80,
-      y: cy + 60,
-      duration: 36,
-      ease: 'sine.inOut',
-      repeat: -1,
-      yoyo: true,
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: 'top top',
+        end: '+=4500', 
+        scrub: 1.2,
+        pin: true,
+        anticipatePin: 1,
+      }
     })
 
-    return () => gsap.killTweensOf(canvas)
+    // Straight infinite zoom
+    tl.to(canvas, {
+      scale: 25, 
+      x: cx - 800, 
+      y: cy - 200,
+      duration: 5,
+      ease: 'power3.inOut'
+    }, 'start')
+
+    // Fade out label as we go deep
+    tl.to(label, {
+      opacity: 0,
+      y: -40,
+      duration: 1.5
+    }, 'start+=1')
+
+    // Phase 2: Final Portal Border Reveal
+    tl.to(portal, {
+      opacity: 1,
+      scale: 4, // expansive glowing border reveal
+      duration: 2,
+      ease: 'power4.out'
+    }, 'start+=3.5')
+
+    // Dissolve everything except the portal logic for reveal
+    tl.to(canvas, {
+      opacity: 0,
+      duration: 1,
+    })
+
+    return () => {
+      ScrollTrigger.getAll().forEach(t => t.kill())
+    }
   }, [])
 
   return (
     <section ref={sectionRef} className="ourwork-section" id="ourwork">
 
-      {/* Label */}
-      <div className="ourwork-label">
-        <span className="ourwork-label__eyebrow">Portfolio</span>
-        <h2 className="ourwork-label__title">Our Work</h2>
-        <p className="ourwork-label__sub">Scroll to explore</p>
+      {/* Subtle background branding watermark */}
+      <div ref={brandingRef} className="ourwork-bg-branding">
+        <div className="branding-line">SCENE SET</div>
+        <div className="branding-line">STUDIO</div>
       </div>
+
+      {/* Expanding Glowing Border Reveal */}
+      <div ref={portalRef} className="ourwork-portal-reveal" />
 
       {/* Galaxy canvas */}
       <div ref={canvasRef} className="ourwork-canvas">
         {CARDS.map((card, i) => (
           <div
             key={i}
-            className="ourwork-img"
+            className={`ourwork-item ${card.portal ? 'portal' : ''}`}
             style={{
               width:  card.w,
               height: card.h,
               left:   card.x,
               top:    card.y,
-              background: FILLS[i % FILLS.length],
+              border: card.portal ? 'none' : '1px solid rgba(0,0,0,0.1)',
             }}
-          />
+          >
+            {card.portal && (
+              <div className="ourwork-portal-content">
+                <span className="portal-eyebrow">Discover</span>
+                <h3 className="portal-title">Client Success</h3>
+              </div>
+            )}
+          </div>
         ))}
+      </div>
+
+      {/* Floating label */}
+      <div ref={labelRef} className="ourwork-label">
+        <span className="ourwork-label__eyebrow">Portfolio</span>
+        <h2 className="ourwork-label__title">Our Work</h2>
+        <p className="ourwork-label__sub">Endless creativity, distilled.</p>
       </div>
 
     </section>

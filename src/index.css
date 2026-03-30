@@ -318,7 +318,7 @@ body::after {
 }
 
 .navbar__inner {
-  max-width: 1100px;
+  max-width: 720px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -329,7 +329,7 @@ body::after {
   -webkit-backdrop-filter: blur(28px) saturate(160%);
   border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: 999px;
-  padding: 10px 14px 10px 28px;
+  padding: 10px 14px 10px 24px;
   box-shadow: 0 4px 32px rgba(0, 0, 0, 0.45), 0 1px 0 rgba(255,255,255,0.05) inset;
   transition: background 0.4s ease, box-shadow 0.4s ease;
   pointer-events: all;
@@ -880,227 +880,146 @@ body::after {
    FEATURES — Horizontal Parallax Section
 ═══════════════════════════════════════ */
 
+/* ═══════════════════════════════════════
+   FEATURES — Lando Norris style
+   Dark→light, scattered images + text
+═══════════════════════════════════════ */
+
 .feat-section {
   position: relative;
-  height: 100vh;
-  overflow: clip;
-  background: var(--bg);
 }
 
-.feat-track {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-  padding: 100px 80px 0;
-  will-change: transform;
-  height: 100%;
-  width: max-content;
+/* Full-bleed background that transitions color */
+.feat-bg {
+  position: fixed;
+  inset: 0;
+  background-color: #080808;
+  z-index: -1;
+  pointer-events: none;
+  transition: background-color 0.1s;
 }
 
-.feat-header {
-  position: absolute;
-  top: 40px;
-  left: 64px;
-  right: 64px;
+/* Sticky label top-left */
+.feat-sticky-label {
+  position: sticky;
+  top: 0;
   z-index: 10;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 28px 64px;
+  pointer-events: none;
 }
 
-.feat-eyebrow {
+.feat-sticky-eyebrow {
   font-family: var(--font-body);
   font-size: 11px;
   font-weight: 500;
-  letter-spacing: 3px;
+  letter-spacing: 4px;
   text-transform: uppercase;
-  color: var(--muted);
+  color: rgba(196,32,135,0.8);
 }
 
-.feat-drag-hint {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.feat-sticky-hint {
   font-family: var(--font-body);
   font-size: 12px;
-  font-weight: 400;
-  color: var(--muted);
-  letter-spacing: 0.5px;
+  color: rgba(255,255,255,0.3);
 }
 
-.feat-drag-hint__icon {
-  font-size: 16px;
-  color: #C42087;
-  line-height: 1;
+/* Each panel = 100vh scroll beat */
+.feat-panel {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 64px;
 }
 
-
-/* ── Base card ── */
-.feat-card {
+/* Text column — left ~35% */
+.feat-text-col {
+  width: 35%;
   flex-shrink: 0;
-  border-radius: 16px;
-  overflow: hidden;
-  position: relative;
-}
-
-/* ── Image card ── */
-.feat-card--img {
-  background: #0c0c0c;
-}
-
-.feat-card__img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  filter: brightness(0.75);
-  transition: filter 0.4s ease;
-}
-
-.feat-card--img:hover .feat-card__img {
-  filter: brightness(0.88);
-}
-
-.feat-card__overlay {
-  position: absolute;
-  inset: 0;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: 24px 28px;
-  background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 55%);
-}
-
-.feat-card__num {
-  font-family: var(--font-heading);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  color: #C42087;
-  margin-bottom: 6px;
-  display: block;
-}
-
-.feat-card__label {
-  font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: 18px;
-  letter-spacing: -0.5px;
-  color: var(--cream);
-  display: block;
-}
-
-/* ── Text card ── */
-.feat-card--text {
-  background: #0f0f0f;
-  border: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 32px 32px 28px;
-}
-
-.feat-card__big-num {
-  font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: clamp(80px, 10vw, 120px);
-  line-height: 0.85;
-  letter-spacing: -5px;
-  color: rgba(242, 240, 235, 0.06);
-  display: block;
-  user-select: none;
-}
-
-.feat-card__text-body {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.feat-card__service-name {
-  font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: clamp(22px, 2.4vw, 30px);
-  letter-spacing: -1px;
-  color: var(--cream);
-  line-height: 1.05;
-}
-
-.feat-card__tagline {
-  font-family: var(--font-body);
-  font-weight: 300;
-  font-style: italic;
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--muted);
-}
-
-.feat-card__accent-line {
-  width: 40px;
-  height: 2px;
-  background: #C42087;
-  border-radius: 2px;
-}
-
-/* ── Quote card ── */
-.feat-card--quote {
-  background: #0f0f0f;
-  border: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 36px 32px;
   gap: 16px;
+  z-index: 2;
   position: relative;
+  transition: color 1.4s ease;
 }
 
-.feat-card--quote .feat-card__num {
-  font-family: var(--font-heading);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  color: #C42087;
-}
-
-.feat-card__quote-mark {
-  font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: 96px;
-  line-height: 0.6;
-  color: rgba(196, 32, 135, 0.2);
-  user-select: none;
-}
-
-.feat-card__quote-text {
-  font-family: var(--font-body);
-  font-weight: 300;
-  font-style: italic;
-  font-size: 17px;
-  line-height: 1.65;
-  color: rgba(242, 240, 235, 0.75);
-}
-
-.feat-card--quote .feat-card__label {
+.feat-num {
   font-family: var(--font-body);
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--muted);
+  color: rgba(196,32,135,0.9);
 }
 
-/* ── Mobile ── */
-@media (max-width: 860px) {
-  .feat-header {
-    left: 24px;
-    right: 24px;
-    top: 28px;
-  }
+.feat-service-name {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(36px, 4.5vw, 64px);
+  letter-spacing: -2px;
+  line-height: 0.95;
+}
 
-  .feat-track {
-    padding: 0 24px;
-    gap: 16px;
-  }
+.feat-tagline {
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.5;
+  opacity: 0.75;
+}
+
+.feat-body {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  max-width: 340px;
+  opacity: 0.55;
+}
+
+/* Image zone — absolute, fills right 65% */
+.feat-img-zone {
+  position: absolute;
+  left: 35%;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+/* Scattered image blocks — positioned absolutely within zone */
+.feat-img-block {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.feat-img-fill {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #1a1a1a 0%, #111 100%);
+  flex: 1;
+}
+
+.feat-img-label {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  padding-top: 6px;
+}
+
+@media (max-width: 860px) {
+  .feat-panel { padding: 80px 24px; flex-direction: column; }
+  .feat-text-col { width: 100%; }
+  .feat-img-zone { display: none; }
 }
 
 
@@ -1469,8 +1388,53 @@ body::after {
 .ourwork-section {
   position: relative;
   height: 100vh;
-  background: #FAFAFA;
+  background: #f4f4f5; /* Subtle very light grey */
   overflow: hidden;
+}
+
+/* Background watermark within OurWork only */
+.ourwork-bg-branding {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 0;
+  text-align: center;
+  user-select: none;
+}
+
+.branding-line {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(80px, 15vw, 240px);
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  will-change: -webkit-text-stroke, color;
+}
+
+/* Glowing Border Portal Reveal */
+.ourwork-portal-reveal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30vw;
+  height: 20vw;
+  transform: translate(-50%, -50%);
+  border: 2px solid #fff;
+  border-radius: 12px;
+  box-shadow: 
+    0 0 20px 2px rgba(255,255,255,0.8),
+    0 0 60px 10px rgba(255,255,255,0.4),
+    0 0 0 4000px rgba(5,5,5,0); /* placeholder for unpinning */
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0;
+  will-change: transform, opacity;
 }
 
 /* Floating label — stays in top-left */
@@ -1483,6 +1447,7 @@ body::after {
   flex-direction: column;
   gap: 6px;
   pointer-events: none;
+  transition: color 0.4s ease;
 }
 
 .ourwork-label__eyebrow {
@@ -1491,7 +1456,8 @@ body::after {
   font-weight: 500;
   letter-spacing: 4px;
   text-transform: uppercase;
-  color: rgba(0,0,0,0.28);
+  color: inherit;
+  opacity: 0.4;
 }
 
 .ourwork-label__title {
@@ -1500,14 +1466,15 @@ body::after {
   font-size: clamp(36px, 4vw, 52px);
   letter-spacing: -2px;
   line-height: 1;
-  color: #0f0f0f;
+  color: inherit;
 }
 
 .ourwork-label__sub {
   font-family: var(--font-body);
   font-size: 12px;
   font-weight: 300;
-  color: rgba(0,0,0,0.32);
+  color: inherit;
+  opacity: 0.5;
   margin-top: 2px;
 }
 
@@ -1521,11 +1488,41 @@ body::after {
   will-change: transform;
 }
 
-/* Individual image cards — no border-radius like reference */
-.ourwork-img {
+/* Individual image cards */
+.ourwork-item {
   position: absolute;
   overflow: hidden;
-  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px; /* Slight softening */
+}
+
+/* Portal content — inside the card we zoom into */
+.ourwork-portal-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.portal-eyebrow {
+  font-family: var(--font-body);
+  font-size: clamp(14px, 2vw, 24px);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+
+.portal-title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(48px, 6vw, 100px);
+  letter-spacing: -0.04em;
+  color: var(--cream);
+  line-height: 1;
 }
 
 /* ═══════════════════════════════════════

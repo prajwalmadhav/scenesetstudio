@@ -102,19 +102,19 @@ export default function Hero() {
   return (
     <section className="hero-section">
       <LiquidBackground
-        color1="#050505"
+        color1="#120410"
         color2="#C42087"
-        color3="#050505"
-        speed={0.039}
-        scale={0.48}
-        swirl={1.3}
-        distortion={0.08}
-        swirlIterations={5}
-        proportion={0.33}
-        softness={1.0}
-        shapeSize={0.48}
+        color3="#120410"
+        speed={0.65}
+        scale={0.5}
+        swirl={2.2}
+        distortion={0.22}
+        swirlIterations={8}
+        proportion={0.55}
+        softness={0.75}
+        shapeSize={0.55}
         shape={2}
-        rotation={0}
+        rotation={45}
       />
 
       {/* Text + CTA */}

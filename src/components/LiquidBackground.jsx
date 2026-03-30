@@ -157,7 +157,7 @@ function hexToRGBA(hex) {
 
 export default function LiquidBackground({
   color1 = '#050505',
-  color2 = '#FF66B8',
+  color2 = '#C42087',
   color3 = '#050505',
   speed = 0.35,
   scale = 0.48,

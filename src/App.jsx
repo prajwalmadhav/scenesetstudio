@@ -1,5 +1,6 @@
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
+import Services from './components/Services'
 import ParticlesBackground from './components/ParticlesBackground'
 import './index.css'
 
@@ -9,6 +10,7 @@ function App() {
       <ParticlesBackground />
       <Navbar />
       <Hero />
+      <Services />
     </main>
   )
 }

@@ -80,7 +80,7 @@ export default function Features() {
 
           if (card.type === 'img') return (
             <div key={card.id} ref={el => cardRefs.current[i] = el} className="feat-card feat-card--img" style={style}>
-              <img src="/assets/images/trialimg1.png" alt={card.label} className="feat-card__img" />
+              <img src={`${import.meta.env.BASE_URL}assets/images/trialimg1.png`} alt={card.label} className="feat-card__img" />
               <div className="feat-card__overlay">
                 <span className="feat-card__num feat-animate">{card.num}</span>
                 <span className="feat-card__label feat-animate">{card.label}</span>

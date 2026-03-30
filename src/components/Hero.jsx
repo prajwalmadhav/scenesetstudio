@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
+import LiquidBackground from './LiquidBackground'
 
 export default function Hero() {
   const badgeRef = useRef(null)
@@ -60,41 +61,47 @@ export default function Hero() {
 
   return (
     <section className="hero-section">
-      {/* Badge */}
-      <div ref={badgeRef} className="hero-badge" style={{ opacity: 0 }}>
-        <span className="hero-badge__dot" />
-        <span className="hero-badge__text">Now accepting new clients</span>
-      </div>
+      {/* Liquid shader — sits at z:0, fills the entire hero */}
+      <LiquidBackground />
 
-      {/* Headline */}
-      <h1 ref={headlineRef} className="hero-headline">
-        <span className="hero-word">Marketing</span>{' '}
-        <span className="hero-word">that</span>
-        <br />
-        <span className="hero-word hero-word--italic">actually</span>{' '}
-        <span className="hero-word">works.</span>
-      </h1>
+      {/* All content floats above the shader at z:1 */}
+      <div className="hero-content">
+        {/* Badge */}
+        <div ref={badgeRef} className="hero-badge" style={{ opacity: 0 }}>
+          <span className="hero-badge__dot" />
+          <span className="hero-badge__text">Now accepting new clients</span>
+        </div>
 
-      {/* Subtext */}
-      <p ref={subtextRef} className="hero-subtext" style={{ opacity: 0 }}>
-        Cinematic storytelling meets performance marketing.
-        <br />
-        We build brands that convert.
-      </p>
+        {/* Headline */}
+        <h1 ref={headlineRef} className="hero-headline">
+          <span className="hero-word">Marketing</span>{' '}
+          <span className="hero-word">that</span>
+          <br />
+          <span className="hero-word hero-word--italic">actually</span>{' '}
+          <span className="hero-word">works.</span>
+        </h1>
 
-      {/* Buttons */}
-      <div ref={buttonsRef} className="hero-buttons">
-        <button className="hero-btn hero-btn--primary" style={{ opacity: 0 }}>
-          Start Your Project →
-        </button>
-        <button className="hero-btn hero-btn--ghost" style={{ opacity: 0 }}>
-          See Our Work
-        </button>
-      </div>
+        {/* Subtext */}
+        <p ref={subtextRef} className="hero-subtext" style={{ opacity: 0 }}>
+          Cinematic storytelling meets performance marketing.
+          <br />
+          We build brands that convert.
+        </p>
 
-      {/* Visual Placeholder */}
-      <div ref={visualRef} className="hero-visual" style={{ opacity: 0 }}>
-        <span className="hero-visual__label">[ Visual ]</span>
+        {/* Buttons */}
+        <div ref={buttonsRef} className="hero-buttons">
+          <button className="hero-btn hero-btn--primary" style={{ opacity: 0 }}>
+            Start Your Project →
+          </button>
+          <button className="hero-btn hero-btn--ghost" style={{ opacity: 0 }}>
+            See Our Work
+          </button>
+        </div>
+
+        {/* Visual Placeholder */}
+        <div ref={visualRef} className="hero-visual" style={{ opacity: 0 }}>
+          <span className="hero-visual__label">[ Visual ]</span>
+        </div>
       </div>
     </section>
   )

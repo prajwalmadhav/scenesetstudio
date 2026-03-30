@@ -112,12 +112,10 @@ void main() {
       float shape = smoothstep(.0, .55, f) * smoothstep(1., .45, f);
       mixer = shape + .48 * sign(proportion - .5) * pow(abs(proportion - .5), .5);
     } else {
-      float sh = 1. - gl_FragCoord.y / u_resolution.y;
-      sh -= .5;
-      sh /= (noise_scale * u_resolution.y / u_pixelRatio);
-      sh += .5;
-      float shape_scaling = .2 * (1. - u_shapeScale);
-      float shape = smoothstep(.45 - shape_scaling, .55 + shape_scaling, sh + .3 * (proportion - .5));
+      // Use the distorted uv coordinate instead of raw gl_FragCoord for organic "Mist"
+      float sh = 1.0 - uv.y;
+      float shape_scaling = 0.2 * (1.0 - u_shapeScale);
+      float shape = smoothstep(0.45 - shape_scaling, 0.55 + shape_scaling, sh + 0.3 * (proportion - 0.5));
       mixer = shape;
     }
 
@@ -161,16 +159,16 @@ export default function LiquidBackground({
   color1 = '#050505',
   color2 = '#FF66B8',
   color3 = '#050505',
-  speed = 0.39,
+  speed = 0.35,
   scale = 0.48,
   rotation = 0,
-  proportion = 0.33,
-  distortion = 0.08,
-  swirl = 0.65,
-  swirlIterations = 5,
-  softness = 1.0,
+  proportion = 0.35,
+  distortion = 0.12,
+  swirl = 0.8,
+  swirlIterations = 14,
+  softness = 0.85,
   shape = 2,
-  shapeSize = 0.48,
+  shapeSize = 0.5,
 }) {
   const canvasRef = useRef(null)
   const rafRef = useRef(null)

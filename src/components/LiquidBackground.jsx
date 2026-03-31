@@ -159,16 +159,16 @@ export default function LiquidBackground({
   color1 = '#050505',
   color2 = '#C42087',
   color3 = '#050505',
-  speed = 0.35,
+  speed = 0.1,
   scale = 0.48,
-  rotation = 0,
-  proportion = 0.35,
-  distortion = 0.12,
-  swirl = 0.8,
-  swirlIterations = 14,
-  softness = 0.85,
+  rotation = 3,
+  proportion = 1,
+  distortion = 0.06,
+  swirl = 1,
+  swirlIterations = 10,
+  softness = 1,
   shape = 2,
-  shapeSize = 0.5,
+  shapeSize = 3,
 }) {
   const canvasRef = useRef(null)
   const rafRef = useRef(null)
@@ -195,7 +195,7 @@ export default function LiquidBackground({
     const buf = gl.createBuffer()
     gl.bindBuffer(gl.ARRAY_BUFFER, buf)
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]), gl.STATIC_DRAW)
-    
+
     const posLoc = gl.getAttribLocation(prog, 'a_position')
     gl.enableVertexAttribArray(posLoc)
     gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0)
@@ -236,14 +236,14 @@ export default function LiquidBackground({
       gl.uniform1f(uLocs.time, elapsed)
       gl.uniform1f(uLocs.pixelRatio, dpr)
       gl.uniform2f(uLocs.resolution, canvas.width, canvas.height)
-      
+
       const c1 = hexToRGBA(color1)
       const c2 = hexToRGBA(color2)
       const c3 = hexToRGBA(color3)
       gl.uniform4f(uLocs.color1, c1[0], c1[1], c1[2], c1[3])
       gl.uniform4f(uLocs.color2, c2[0], c2[1], c2[2], c2[3])
       gl.uniform4f(uLocs.color3, c3[0], c3[1], c3[2], c3[3])
-      
+
       gl.uniform1f(uLocs.proportion, proportion)
       gl.uniform1f(uLocs.softness, softness)
       gl.uniform1f(uLocs.shape, shape)

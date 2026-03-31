@@ -19,13 +19,20 @@ function App() {
       <Features />
       <Process />
       <Services />
-      <OurWork />
-      <Testimonials />
-      <CTA />
-      <Footer />
+
+      {/* Light zone: OurWork → Testimonials → CTA → Footer share the same bg + branding */}
+      <div className="light-zone">
+        <div className="light-zone__branding" aria-hidden="true">
+          <span className="light-zone__brand-line">SCENE SET</span>
+          <span className="light-zone__brand-line">STUDIO</span>
+        </div>
+        <OurWork />
+        <Testimonials />
+        <CTA />
+        <Footer />
+      </div>
     </main>
   )
 }
-
 
 export default App

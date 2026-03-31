@@ -4,202 +4,146 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-// Center the camera on the first card (2100, 1560)
+// Scattered cards — mix of sizes like the reference gallery
 const CARDS = [
-  // ── PORTAL (The one we zoom into, 720px x 480px centered) ──
-  { w: 720, h: 480, x: 2140, y: 1760, portal: true }, 
+  // Large anchors
+  { w: 480, h: 320, x: 1900, y: 1600 },
+  { w: 420, h: 560, x: 2480, y: 1500 },
+  { w: 560, h: 380, x: 1380, y: 1820 },
+  { w: 380, h: 260, x: 2960, y: 1680 },
+  { w: 320, h: 430, x: 2200, y: 1900 },
+  { w: 440, h: 300, x: 1680, y: 1400 },
+  { w: 500, h: 340, x: 2700, y: 1360 },
 
-  // ── LARGE (hero, 300–520px) — center cluster ──
-  { w: 520, h: 360, x: 2100, y: 1560 },
-  { w: 440, h: 300, x: 2700, y: 1480 },
-  { w: 380, h: 260, x: 1700, y: 1700 },
-  { w: 460, h: 320, x: 2400, y: 1900 },
-  { w: 340, h: 240, x: 3000, y: 1700 },
-  { w: 390, h: 270, x: 1860, y: 1360 },
-  { w: 420, h: 290, x: 2560, y: 1260 },
-  { w: 310, h: 220, x: 3180, y: 1940 },
-  { w: 360, h: 250, x: 1540, y: 1940 },
+  // Medium
+  { w: 260, h: 180, x: 1200, y: 1480 },
+  { w: 220, h: 300, x: 3200, y: 1520 },
+  { w: 300, h: 200, x: 2060, y: 1340 },
+  { w: 240, h: 160, x: 2360, y: 2120 },
+  { w: 200, h: 270, x: 1560, y: 2080 },
+  { w: 280, h: 190, x: 3060, y: 1880 },
+  { w: 190, h: 130, x: 1080, y: 1760 },
+  { w: 240, h: 170, x: 3380, y: 1760 },
+  { w: 210, h: 140, x: 2560, y: 2200 },
+  { w: 170, h: 230, x: 1760, y: 2260 },
+  { w: 230, h: 155, x: 2900, y: 2100 },
 
-  // ── MEDIUM (120–280px) — mid ring ──
-  { w: 260, h: 180, x: 1200, y: 1400 },
-  { w: 220, h: 155, x: 1300, y: 1180 },
-  { w: 280, h: 195, x: 3380, y: 1380 },
-  { w: 240, h: 168, x: 3460, y: 1620 },
-  { w: 195, h: 136, x: 2100, y: 1180 },
-  { w: 230, h: 160, x: 2800, y: 1220 },
-  { w: 200, h: 140, x: 1640, y: 2180 },
-  { w: 250, h: 175, x: 2940, y: 2100 },
-  { w: 175, h: 122, x: 1140, y: 1720 },
-  { w: 210, h: 147, x: 3540, y: 1860 },
-  { w: 185, h: 130, x: 2300, y: 2180 },
-  { w: 165, h: 115, x: 1960, y: 2280 },
-  { w: 245, h: 172, x: 2720, y: 2200 },
-  { w: 155, h: 108, x: 1380, y: 2060 },
-  { w: 190, h: 133, x: 3200, y: 2220 },
+  // Small
+  { w: 140, h: 95,  x: 960,  y: 1360 },
+  { w: 120, h: 160, x: 1080, y: 1960 },
+  { w: 155, h: 105, x: 3480, y: 1400 },
+  { w: 110, h: 150, x: 3540, y: 1940 },
+  { w: 130, h: 88,  x: 2160, y: 1220 },
+  { w: 145, h: 98,  x: 2620, y: 1180 },
+  { w: 115, h: 155, x: 1640, y: 2340 },
+  { w: 160, h: 108, x: 3100, y: 2260 },
+  { w: 105, h: 70,  x: 2040, y: 2460 },
+  { w: 135, h: 90,  x: 2780, y: 2380 },
 
-  // ── SMALL (55–130px) — outer scatter ──
-  { w: 128, h: 90,  x: 900,  y: 1200 },
-  { w: 110, h: 77,  x: 1020, y: 1540 },
-  { w: 95,  h: 67,  x: 1100, y: 1920 },
-  { w: 118, h: 83,  x: 3640, y: 1240 },
-  { w: 105, h: 74,  x: 3700, y: 1500 },
-  { w: 88,  h: 62,  x: 3660, y: 1760 },
-  { w: 122, h: 86,  x: 2000, y: 1020 },
-  { w: 100, h: 70,  x: 2400, y: 980  },
-  { w: 115, h: 81,  x: 2800, y: 1040 },
-  { w: 90,  h: 63,  x: 1680, y: 1120 },
-  { w: 130, h: 91,  x: 3100, y: 1100 },
-  { w: 108, h: 76,  x: 1800, y: 2440 },
-  { w: 95,  h: 67,  x: 2200, y: 2480 },
-  { w: 118, h: 83,  x: 2620, y: 2440 },
-  { w: 85,  h: 60,  x: 3000, y: 2380 },
-
-  // ── TINY (20–55px) — far edges ──
-  { w: 54,  h: 38,  x: 620,  y: 1080 },
-  { w: 46,  h: 32,  x: 740,  y: 1340 },
-  { w: 60,  h: 42,  x: 660,  y: 1640 },
-  { w: 42,  h: 30,  x: 700,  y: 1900 },
-  { w: 52,  h: 36,  x: 780,  y: 2100 },
-  { w: 48,  h: 34,  x: 3840, y: 1120 },
-  { w: 58,  h: 41,  x: 3900, y: 1380 },
-  { w: 44,  h: 31,  x: 3860, y: 1640 },
-  { w: 50,  h: 35,  x: 3920, y: 1900 },
-  { w: 40,  h: 28,  x: 3800, y: 2080 },
-  { w: 55,  h: 39,  x: 1600, y: 860  },
-  { w: 38,  h: 27,  x: 2100, y: 800  },
-  { w: 48,  h: 34,  x: 2700, y: 820  },
-  { w: 45,  h: 32,  x: 3200, y: 900  },
-  { w: 52,  h: 36,  x: 1500, y: 2620 },
-  { w: 42,  h: 30,  x: 2100, y: 2680 },
-  { w: 50,  h: 35,  x: 2700, y: 2660 },
-  { w: 44,  h: 31,  x: 3100, y: 2560 },
+  // Tiny scatter
+  { w: 72,  h: 48,  x: 780,  y: 1260 },
+  { w: 60,  h: 40,  x: 860,  y: 1540 },
+  { w: 80,  h: 54,  x: 820,  y: 1820 },
+  { w: 64,  h: 43,  x: 740,  y: 2060 },
+  { w: 76,  h: 51,  x: 3680, y: 1280 },
+  { w: 58,  h: 39,  x: 3760, y: 1560 },
+  { w: 70,  h: 47,  x: 3720, y: 1820 },
+  { w: 62,  h: 42,  x: 3640, y: 2060 },
+  { w: 84,  h: 57,  x: 1860, y: 1060 },
+  { w: 68,  h: 46,  x: 2240, y: 1020 },
+  { w: 78,  h: 52,  x: 2740, y: 1060 },
+  { w: 66,  h: 44,  x: 3260, y: 1140 },
+  { w: 74,  h: 50,  x: 1480, y: 2540 },
+  { w: 56,  h: 38,  x: 2100, y: 2580 },
+  { w: 70,  h: 47,  x: 2820, y: 2560 },
+  { w: 60,  h: 40,  x: 3160, y: 2480 },
 ]
 
+// Center of the galaxy
+const CX = 2500
+const CY = 1900
+
 export default function OurWork() {
-  const sectionRef = useRef(null)
-  const canvasRef  = useRef(null)
-  const brandingRef = useRef(null)
-  const portalRef  = useRef(null)
-  const labelRef   = useRef(null)
+  const sectionRef  = useRef(null)
+  const canvasRef   = useRef(null)
+  const labelRef    = useRef(null)
+  const portalRef   = useRef(null)
 
   useEffect(() => {
     const section = sectionRef.current
     const canvas  = canvasRef.current
     const label   = labelRef.current
-    const branding = brandingRef.current
-    const portal   = portalRef.current
-    if (!section || !canvas || !label || !branding || !portal) return
+    const portal  = portalRef.current
+    if (!section || !canvas || !label || !portal) return
 
-    const CANVAS_W = 5000
-    const CANVAS_H = 4000
     const vw = window.innerWidth
     const vh = window.innerHeight
 
-    // Center view exactly on the portal card cluster start
-    const targetCard = CARDS[0]
-    const cx = -(targetCard.x + targetCard.w / 2 - vw / 2)
-    const cy = -(targetCard.y + targetCard.h / 2 - vh / 2)
+    // Offset so galaxy center is at viewport center
+    const ox = -(CX - vw / 2)
+    const oy = -(CY - vh / 2)
 
-    // Initial state: Zoomed in view of translucent cards
-    gsap.set(canvas, { 
-      x: cx, 
-      y: cy, 
-      scale: 1, // Start zoomed in
-      opacity: 1,
-      transformOrigin: '50% 50%'
-    })
-    
-    gsap.set('.ourwork-item', { 
-      backgroundColor: 'rgba(5, 5, 5, 0.65)',
-      backdropFilter: 'blur(8px)',
-      WebkitBackdropFilter: 'blur(8px)'
-    })
-    
-    gsap.set(branding, { 
-      '-webkit-text-stroke': '1px rgba(0,0,0,0.06)', 
-      color: 'transparent' 
-    })
-    gsap.set(portal, { opacity: 0, scale: 0.5 })
+    // Start zoomed IN (scale 2.8), pull back to reveal full galaxy
+    gsap.set(canvas, { x: ox, y: oy, scale: 2.8, transformOrigin: '50% 50%' })
+    gsap.set(portal, { opacity: 0, scale: 0.06, xPercent: -50, yPercent: -50, transformOrigin: '50% 50%' })
+    gsap.set(label,  { opacity: 0, y: 20 })
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
         start: 'top top',
-        end: '+=4500', 
-        scrub: 1.2,
+        end: '+=5000',
         pin: true,
+        scrub: 1.4,
         anticipatePin: 1,
-      }
+      },
     })
 
-    // Straight infinite zoom
+    // Phase 1 (0→60%): label fades in, galaxy zooms out
+    tl.to(label, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, 0)
     tl.to(canvas, {
-      scale: 25, 
-      x: cx - 800, 
-      y: cy - 200,
-      duration: 5,
-      ease: 'power3.inOut'
-    }, 'start')
+      scale: 0.42,
+      duration: 3,
+      ease: 'power2.inOut',
+    }, 0)
 
-    // Fade out label as we go deep
-    tl.to(label, {
-      opacity: 0,
-      y: -40,
-      duration: 1.5
-    }, 'start+=1')
+    // Phase 2 (60→80%): label fades out
+    tl.to(label, { opacity: 0, y: -20, duration: 0.6 }, 2)
 
-    // Phase 2: Final Portal Border Reveal
+    // Phase 3 (80→100%): portal card zooms from center to fullscreen
     tl.to(portal, {
       opacity: 1,
-      scale: 4, // expansive glowing border reveal
-      duration: 2,
-      ease: 'power4.out'
-    }, 'start+=3.5')
+      scale: 1,
+      duration: 1.6,
+      ease: 'power3.inOut',
+    }, 2.4)
 
-    // Dissolve everything except the portal logic for reveal
+    // Fade canvas as portal takes over
     tl.to(canvas, {
       opacity: 0,
-      duration: 1,
-    })
+      duration: 0.6,
+    }, 3.0)
 
-    return () => {
-      ScrollTrigger.getAll().forEach(t => t.kill())
-    }
+    return () => ScrollTrigger.getAll().forEach(t => t.kill())
   }, [])
 
   return (
     <section ref={sectionRef} className="ourwork-section" id="ourwork">
 
-      {/* Subtle background branding watermark */}
-      <div ref={brandingRef} className="ourwork-bg-branding">
+      {/* Background branding watermark */}
+      <div className="ourwork-bg-branding">
         <div className="branding-line">SCENE SET</div>
         <div className="branding-line">STUDIO</div>
       </div>
-
-      {/* Expanding Glowing Border Reveal */}
-      <div ref={portalRef} className="ourwork-portal-reveal" />
 
       {/* Galaxy canvas */}
       <div ref={canvasRef} className="ourwork-canvas">
         {CARDS.map((card, i) => (
           <div
             key={i}
-            className={`ourwork-item ${card.portal ? 'portal' : ''}`}
-            style={{
-              width:  card.w,
-              height: card.h,
-              left:   card.x,
-              top:    card.y,
-              border: card.portal ? 'none' : '1px solid rgba(0,0,0,0.1)',
-            }}
-          >
-            {card.portal && (
-              <div className="ourwork-portal-content">
-                <span className="portal-eyebrow">Discover</span>
-                <h3 className="portal-title">Client Success</h3>
-              </div>
-            )}
-          </div>
+            className="ourwork-item"
+            style={{ width: card.w, height: card.h, left: card.x, top: card.y }}
+          />
         ))}
       </div>
 
@@ -209,6 +153,9 @@ export default function OurWork() {
         <h2 className="ourwork-label__title">Our Work</h2>
         <p className="ourwork-label__sub">Endless creativity, distilled.</p>
       </div>
+
+      {/* Portal — center card that expands to fullscreen → reveals Testimonials */}
+      <div ref={portalRef} className="ourwork-portal" />
 
     </section>
   )

@@ -1,120 +1,166 @@
-import { Link } from 'react-router-dom'
+import { useState, useEffect, useRef } from 'react'
+import gsap from 'gsap'
 import SEO from '../components/SEO'
 
 const SERVICES = [
   {
-    number: '01',
-    name: 'Brand Strategy',
-    description: 'We build the strategic foundation your brand needs to cut through noise. Market positioning, audience mapping, messaging architecture, and a creative direction that holds across every channel.',
-    deliverables: ['Brand positioning deck', 'Audience personas', 'Messaging framework', 'Visual identity guidelines'],
+    index: '01',
+    label: 'Brand Strategy',
+    bg: 'BRAND',
+    tagline: 'Identity that commands attention.',
+    description:
+      'We build the strategic foundation your brand stands on — from positioning and messaging to visual language that makes you unmistakable in any market.',
+    deliverables: ['Brand Positioning', 'Messaging Framework', 'Visual Identity', 'Brand Guidelines', 'Competitive Analysis'],
   },
   {
-    number: '02',
-    name: 'Content Production',
-    description: 'High-output creative production — from concept to final cut. Video, photography, motion graphics, and editorial content built for the platforms where your audience actually lives.',
-    deliverables: ['Video & reels production', 'Photography direction', 'Motion graphics', 'Platform-native content'],
+    index: '02',
+    label: 'Content Production',
+    bg: 'CONTENT',
+    tagline: 'Stories that stop the scroll.',
+    description:
+      'From concept to final cut, we produce high-impact content built for the platforms your audience lives on — crafted to convert, not just impress.',
+    deliverables: ['Campaign Concepts', 'Copywriting', 'Photography Direction', 'Short-Form Content', 'Content Calendar'],
   },
   {
-    number: '03',
-    name: 'Paid Advertising',
-    description: 'Performance campaigns that convert. We handle creative strategy, media buying, and ongoing optimisation across Meta, Google, TikTok, and beyond — with a focus on ROAS that moves.',
-    deliverables: ['Creative strategy & testing', 'Media buying & management', 'Audience segmentation', 'Performance reporting'],
+    index: '03',
+    label: 'Paid Advertising',
+    bg: 'PAID',
+    tagline: 'Every rupee working harder.',
+    description:
+      'Data-driven ad campaigns across Meta, Google, and beyond. We build, test, and scale paid systems that consistently beat your cost-per-acquisition targets.',
+    deliverables: ['Media Buying', 'Ad Creative', 'Audience Strategy', 'A/B Testing', 'Performance Reporting'],
   },
   {
-    number: '04',
-    name: 'Social Media',
-    description: 'Content calendars, community management, and growth strategy that builds real audiences. We handle the day-to-day so your brand stays consistent, relevant, and impossible to ignore.',
-    deliverables: ['Content calendar & scheduling', 'Community management', 'Growth strategy', 'Monthly analytics reports'],
+    index: '04',
+    label: 'Social Media',
+    bg: 'SOCIAL',
+    tagline: 'Presence that builds equity.',
+    description:
+      'We manage your social presence end-to-end — turning followers into fans and platforms into revenue channels through consistent, on-brand storytelling.',
+    deliverables: ['Channel Strategy', 'Content Creation', 'Community Management', 'Influencer Partnerships', 'Monthly Analytics'],
   },
   {
-    number: '05',
-    name: 'Web Design',
-    description: 'Conversion-focused design with editorial craft. From landing pages to full-site builds — every pixel is intentional, every interaction earns its place.',
-    deliverables: ['UI/UX design', 'Development & launch', 'Copywriting', 'CRO audits'],
+    index: '05',
+    label: 'Web Design',
+    bg: 'WEB',
+    tagline: 'Interfaces that earn trust.',
+    description:
+      "Conversion-focused web experiences designed and developed to match your brand's ambition — fast, beautiful, and built to perform.",
+    deliverables: ['UX Strategy', 'UI Design', 'Framer / Webflow Dev', 'Motion Design', 'CRO Optimisation'],
+  },
+  {
+    index: '06',
+    label: 'Video Production',
+    bg: 'VIDEO',
+    tagline: 'Cinematic. Commercial. Compelling.',
+    description:
+      'Full-service video production from pre-production through final delivery — brand films, reels, product videos and everything in between.',
+    deliverables: ['Concept Development', 'Scripting & Storyboard', 'On-Location Shoot', 'Edit & Colour Grade', 'Motion Graphics'],
   },
 ]
 
-const label = { fontFamily: 'var(--font-body)', fontSize: '11px', letterSpacing: '0.14em', color: 'rgba(242,240,235,0.35)', textTransform: 'uppercase', margin: 0 }
-
 export default function Services() {
+  const [active, setActive] = useState(0)
+  const contentRef = useRef(null)
+  const bgTextRef  = useRef(null)
+  const sectionRef = useRef(null)
+
+  const goTo = (index) => {
+    if (index === active) return
+    setActive(index)
+  }
+
+  useEffect(() => {
+    if (!contentRef.current) return
+    gsap.fromTo(
+      contentRef.current.querySelectorAll('.svc-animate'),
+      { opacity: 0, y: 24 },
+      { opacity: 1, y: 0, stagger: 0.06, duration: 0.55, ease: 'power3.out' }
+    )
+  }, [active])
+
+  useEffect(() => {
+    if (!bgTextRef.current) return
+    gsap.fromTo(
+      bgTextRef.current,
+      { opacity: 0, x: -30 },
+      { opacity: 1, x: 0, duration: 0.7, ease: 'power3.out' }
+    )
+  }, [active])
+
+  const svc = SERVICES[active]
+
   return (
     <>
       <SEO
         title="Services | Scene Set Studio"
-        description="Brand strategy, content production, paid advertising, social media, and web design — Scene Set Studio."
+        description="Brand strategy, content production, paid advertising, social media, web design, and video production — Scene Set Studio."
       />
 
-      <div style={{ minHeight: '100vh', background: '#080808', paddingTop: '120px' }}>
+      <div style={{ paddingTop: '80px' }}>
+        <section ref={sectionRef} className="svc-section" id="services">
 
-        {/* Header */}
-        <div style={{ padding: '0 64px 80px', borderBottom: '1px solid #1a1a1a' }}>
-          <p style={{ fontFamily: 'var(--font-body)', fontSize: '11px', letterSpacing: '0.16em', color: 'rgba(242,240,235,0.4)', textTransform: 'uppercase', marginBottom: '24px' }}>
-            What We Do
-          </p>
-          <h1 style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: 'clamp(48px, 7vw, 96px)', color: '#F2F0EB', lineHeight: 0.92, letterSpacing: '-0.03em', margin: '0 0 32px' }}>
-            Creative work that<br />moves the needle.
-          </h1>
-          <p style={{ fontFamily: 'var(--font-body)', fontSize: '18px', fontWeight: 300, color: 'rgba(242,240,235,0.55)', lineHeight: 1.7, maxWidth: '520px', margin: 0 }}>
-            We are a full-service creative studio. Every engagement is built around the specific outcome you need.
-          </p>
-        </div>
+          {/* ── Decorative background text ── */}
+          <div className="svc-bg-text-wrap">
+            <span ref={bgTextRef} className="svc-bg-text svc-bg-text--h">
+              {svc.bg}
+            </span>
+            <span className="svc-bg-text svc-bg-text--v">
+              SERVICES
+            </span>
+          </div>
 
-        {/* Services list */}
-        <div style={{ padding: '0 64px 120px' }}>
-          {SERVICES.map((s, i) => (
-            <div
-              key={s.number}
-              style={{
-                display: 'grid',
-                gridTemplateColumns: '80px 1fr 1fr',
-                gap: '48px',
-                padding: '64px 0',
-                borderBottom: '1px solid #1a1a1a',
-                alignItems: 'start',
-              }}
-            >
-              <span style={{ fontFamily: 'var(--font-body)', fontSize: '11px', letterSpacing: '0.1em', color: 'rgba(242,240,235,0.25)', paddingTop: '6px' }}>{s.number}</span>
-              <div>
-                <h2 style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: 'clamp(28px, 3.5vw, 48px)', color: '#F2F0EB', letterSpacing: '-0.03em', margin: '0 0 20px', lineHeight: 1 }}>
-                  {s.name}
-                </h2>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: '16px', fontWeight: 300, color: 'rgba(242,240,235,0.6)', lineHeight: 1.8, margin: 0, maxWidth: '480px' }}>
-                  {s.description}
-                </p>
+          {/* ── Top label row ── */}
+          <div className="svc-top-row">
+            <span className="svc-eyebrow">What we do</span>
+            <span className="svc-counter">{svc.index} <span>/</span> 06</span>
+          </div>
+
+          {/* ── Main content ── */}
+          <div ref={contentRef} className="svc-body">
+            <div className="svc-left">
+              <div className="svc-left-vertical">
+                <span className="svc-vertical-label svc-animate">{svc.label}</span>
+                <span className="svc-vertical-line" />
               </div>
-              <div>
-                <p style={{ ...label, marginBottom: '20px' }}>Deliverables</p>
-                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  {s.deliverables.map(d => (
-                    <li key={d} style={{ fontFamily: 'var(--font-body)', fontSize: '14px', fontWeight: 300, color: 'rgba(242,240,235,0.5)', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                      <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: '#C8F535', flexShrink: 0 }} />
-                      {d}
-                    </li>
-                  ))}
-                </ul>
+              <div className="svc-left-content">
+                <p className="svc-index svc-animate">{svc.index}</p>
+                <h2 className="svc-title svc-animate">{svc.label}</h2>
+                <p className="svc-tagline svc-animate">{svc.tagline}</p>
+                <p className="svc-desc svc-animate">{svc.description}</p>
               </div>
             </div>
-          ))}
-        </div>
 
-        {/* CTA strip */}
-        <div style={{ borderTop: '1px solid #1a1a1a', padding: '80px 64px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#0a0a0a' }}>
-          <div>
-            <p style={{ ...label, marginBottom: '16px' }}>Ready to start?</p>
-            <p style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: 'clamp(24px, 3vw, 40px)', color: '#F2F0EB', letterSpacing: '-0.03em', margin: 0 }}>
-              Let's talk about your project.
-            </p>
+            <div className="svc-right">
+              <p className="svc-deliverables-label svc-animate">Deliverables</p>
+              <ul className="svc-deliverables">
+                {svc.deliverables.map((d, i) => (
+                  <li key={d} className="svc-deliverable svc-animate" style={{ transitionDelay: `${i * 0.04}s` }}>
+                    <span className="svc-deliverable__dot" />
+                    {d}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-          <Link
-            to="/contact"
-            style={{ fontFamily: 'var(--font-body)', fontSize: '13px', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#0a0a0a', background: '#C8F535', padding: '14px 28px', textDecoration: 'none', fontWeight: 500, display: 'inline-block', transition: 'opacity 0.2s' }}
-            onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
-            onMouseLeave={e => e.currentTarget.style.opacity = '1'}
-          >
-            Start a Project
-          </Link>
-        </div>
 
+          {/* ── Navigation ── */}
+          <nav className="svc-nav">
+            {SERVICES.map((s, i) => (
+              <button
+                key={s.index}
+                className={`svc-nav-btn${i === active ? ' is-active' : ''}`}
+                onClick={() => goTo(i)}
+                aria-label={s.label}
+              >
+                <span className="svc-nav-btn__num">{s.index}</span>
+                <span className="svc-nav-btn__label">{s.label}</span>
+                <span className="svc-nav-btn__line" />
+              </button>
+            ))}
+          </nav>
+
+        </section>
       </div>
     </>
   )

@@ -1,3 +1,9 @@
+import { useEffect, useRef } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+
 const IconX = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.261 5.635 5.903-5.635Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
@@ -61,30 +67,88 @@ function Card({ t }) {
 }
 
 export default function Testimonials() {
+  const containerRef = useRef(null)
+  const panelRef     = useRef(null)
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        panelRef.current,
+        { scale: 0.08, borderRadius: '16px' },
+        {
+          scale: 1,
+          borderRadius: '0px',
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: 'top top',
+            end: 'center top',
+            scrub: 2,
+          },
+        }
+      )
+    }, containerRef)
+
+    return () => ctx.revert()
+  }, [])
+
   return (
-    <section className="testi-section" id="testimonials">
+    // Negative margin pulls this section UP so it overlaps the last 100vh of FrameScroll
+    // The tiny card appears ON the video's last frame, then expands to cover it
+    <div ref={containerRef} style={{ position: 'relative', height: '220vh', marginTop: '-140vh' }}>
 
-      <div className="testi-header">
-        <span className="testi-eyebrow">Social proof</span>
-        <h2 className="testi-title">What clients say</h2>
-      </div>
+      {/* z-index: 2 ensures this sits above the FrameScroll video */}
+      <div
+        style={{
+          position: 'sticky',
+          top: 0,
+          height: '100vh',
+          background: 'transparent',   /* video shows through until card covers it */
+          overflow: 'hidden',
+          zIndex: 2,
+        }}
+      >
+        {/* Panel — starts as a small centered film-card, expands to fill */}
+        <div
+          ref={panelRef}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: '#E8E6E1',
+            transformOrigin: 'center center',
+            willChange: 'transform',
+            overflow: 'hidden',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+          }}
+        >
+          <section className="testi-section" id="testimonials">
 
-      <div className="testi-viewport">
-        <div className="testi-track testi-track--left">
-          {[...ROW1, ...ROW1].map((t, i) => <Card key={i} t={t} />)}
+            <div className="testi-header">
+              <span className="testi-eyebrow">Social proof</span>
+              <h2 className="testi-title">What clients say</h2>
+            </div>
+
+            <div className="testi-viewport">
+              <div className="testi-track testi-track--left">
+                {[...ROW1, ...ROW1].map((t, i) => <Card key={i} t={t} />)}
+              </div>
+              <div className="testi-fade testi-fade--left" />
+              <div className="testi-fade testi-fade--right" />
+            </div>
+
+            <div className="testi-viewport">
+              <div className="testi-track testi-track--right">
+                {[...ROW2, ...ROW2].map((t, i) => <Card key={i} t={t} />)}
+              </div>
+              <div className="testi-fade testi-fade--left" />
+              <div className="testi-fade testi-fade--right" />
+            </div>
+
+          </section>
         </div>
-        <div className="testi-fade testi-fade--left" />
-        <div className="testi-fade testi-fade--right" />
       </div>
-
-      <div className="testi-viewport">
-        <div className="testi-track testi-track--right">
-          {[...ROW2, ...ROW2].map((t, i) => <Card key={i} t={t} />)}
-        </div>
-        <div className="testi-fade testi-fade--left" />
-        <div className="testi-fade testi-fade--right" />
-      </div>
-
-    </section>
+    </div>
   )
 }

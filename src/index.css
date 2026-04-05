@@ -335,8 +335,14 @@ body::after {
 }
 
 .navbar--scrolled .navbar__inner {
-  background: rgba(38, 34, 32, 0.94);
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6), 0 1px 0 rgba(255,255,255,0.06) inset;
+  background: rgba(8, 8, 8, 0.55);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgba(255,255,255,0.07);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.08) inset,   /* top highlight — gives 3D lift */
+    0 -1px 0 rgba(0,0,0,0.4) inset,          /* bottom inner shadow */
+    0 8px 32px rgba(0,0,0,0.45);
 }
 
 /* Logo */
@@ -1981,14 +1987,78 @@ body::after {
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   font-family: var(--font-heading);
-  font-size: clamp(48px, 7vw, 96px);
+  font-size: clamp(32px, 4.8vw, 66px);   /* ~30% smaller */
   font-weight: 900;
-  letter-spacing: -2px;
+  letter-spacing: -1px;
   text-transform: uppercase;
   color: transparent;
   -webkit-text-stroke: 1.5px rgba(255,255,255,0.1);
   line-height: 0.88;
   flex-shrink: 0;
+}
+
+/* ── Neon rotate: one word glows at a time, 9s total cycle ── */
+/* SCENE = 0–3s ON  |  SET = 3–6s ON  |  STUDIO = 6–9s ON     */
+
+.brand-zone-bg__vert--neon,
+.brand-zone-bg__horiz--neon {
+  animation: neon-rotate 9s infinite;
+}
+
+/* SET starts 3s in */
+.brand-zone-bg__vert--neon-delay1 {
+  animation-delay: 3s;
+}
+
+/* STUDIO starts 6s in */
+.brand-zone-bg__horiz--neon {
+  animation-delay: 6s;
+}
+
+@keyframes neon-rotate {
+  /* ── OFF (waiting) — subtle base visibility ── */
+  0%, 1% {
+    opacity: 1;
+    filter: none;
+    -webkit-text-stroke: 1.5px rgba(255,255,255,0.08);
+  }
+
+  /* ── Snap ON with glow ── */
+  2%, 4%, 6%, 8%, 24%, 27%, 30% {
+    opacity: 1;
+    -webkit-text-stroke: 1.5px rgba(255,255,255,0.55);
+    filter:
+      drop-shadow(0 0 3px rgba(255,255,255,0.4))
+      drop-shadow(0 0 10px rgba(255,255,255,0.18));
+  }
+
+  /* ── Quick blink while ON ── */
+  5% {
+    opacity: 0.15;
+    filter: none;
+    -webkit-text-stroke: 1.5px rgba(255,255,255,0.1);
+  }
+
+  /* ── Brief dim flicker ── */
+  25% {
+    opacity: 0.3;
+    filter: drop-shadow(0 0 2px rgba(255,255,255,0.1));
+    -webkit-text-stroke: 1.5px rgba(255,255,255,0.2);
+  }
+
+  /* ── Another blink ── */
+  28% {
+    opacity: 0.15;
+    filter: none;
+    -webkit-text-stroke: 1.5px rgba(255,255,255,0.1);
+  }
+
+  /* ── Back to subtle base at 33% = 6s mark ── */
+  33%, 100% {
+    opacity: 1;
+    filter: none;
+    -webkit-text-stroke: 1.5px rgba(255,255,255,0.08);
+  }
 }
 
 .brand-zone-bg__horiz {
@@ -2274,25 +2344,47 @@ body::after {
 }
 
 .footer-top {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  /* col 1 = logo+socials, col 2 = nav — both pushed past SCENE|SET letters */
+  grid-template-columns: 1fr auto;
+  align-items: start;
   gap: 48px;
-  flex-wrap: wrap;
+  /* Left offset clears the SCENE | SET vertical columns (≈ 2 × 9vw) */
+  padding-left: clamp(110px, 16vw, 220px);
 }
 
 .footer-brand {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  max-width: 320px;
+  gap: 16px;
+  max-width: 300px;
 }
 
+
 .footer-logo {
-  font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: 17px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   color: var(--cream);
-  letter-spacing: -0.5px;
+  margin-top: -8px;       /* nudge slightly upward */
+  margin-left: -6px;      /* nudge slightly left */
+}
+
+.footer-logo svg {
+  color: var(--cream);
+  flex-shrink: 0;
+}
+
+.footer-logo__text {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: -0.3px;
+  color: var(--cream);
+}
+
+.footer-logo__text strong {
+  font-weight: 800;
 }
 
 .footer-tagline {
@@ -2386,6 +2478,7 @@ body::after {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-left: clamp(110px, 16vw, 220px);
   font-family: var(--font-body);
   font-size: 11px;
   font-weight: 300;
@@ -2642,27 +2735,26 @@ body::after {
   z-index: 1;
 }
 
-/* Google review button */
+/* Google review button — matches footer branding */
 .footer-review-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   margin-top: 6px;
-  padding: 8px 16px;
-  border-radius: 8px;
-  background: rgba(251,188,4,0.08);
-  border: 1px solid rgba(251,188,4,0.25);
-  color: #fbc404 !important;
-  font-size: 12px !important;
-  font-weight: 500 !important;
-  letter-spacing: 0.5px;
-  transition: background 0.2s ease, border-color 0.2s ease !important;
+  padding: 7px 14px;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.55) !important;
+  font-size: 11px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.06em;
+  transition: border-color 0.2s ease, color 0.2s ease !important;
 }
 
 .footer-review-btn:hover {
-  background: rgba(251,188,4,0.15) !important;
-  border-color: rgba(251,188,4,0.5) !important;
-  color: #fbc404 !important;
+  border-color: rgba(255,255,255,0.35) !important;
+  color: rgba(255,255,255,0.85) !important;
 }
 
 /* ═══════════════════════════════════════

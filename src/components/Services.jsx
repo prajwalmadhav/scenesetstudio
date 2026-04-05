@@ -29,6 +29,7 @@ const SERVICES = [
       'Data-driven ad campaigns across Meta, Google, and beyond. We build, test, and scale paid systems that consistently beat your cost-per-acquisition targets.',
     deliverables: ['Media Buying', 'Ad Creative', 'Audience Strategy', 'A/B Testing', 'Performance Reporting'],
   },
+  /* Social Media, Web Design, Video Production hidden for now
   {
     index: '04',
     label: 'Social Media',
@@ -56,6 +57,7 @@ const SERVICES = [
       'Full-service video production from pre-production through final delivery — brand films, reels, product videos and everything in between.',
     deliverables: ['Concept Development', 'Scripting & Storyboard', 'On-Location Shoot', 'Edit & Colour Grade', 'Motion Graphics'],
   },
+  */
 ]
 
 export default function Services() {
@@ -109,7 +111,7 @@ export default function Services() {
       {/* ── Top label row ── */}
       <div className="svc-top-row">
         <span className="svc-eyebrow">What we do</span>
-        <span className="svc-counter">{svc.index} <span>/</span> 06</span>
+        <span className="svc-counter">{svc.index} <span>/</span> {String(SERVICES.length).padStart(2,'0')}</span>
       </div>
 
       {/* ── Main content ── */}

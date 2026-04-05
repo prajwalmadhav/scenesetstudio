@@ -34,6 +34,7 @@ const PANELS = [
       { role: 'mid',   top: '55%', left: '20%', w: '36%', h: '38%', rotate: 1   },
     ],
   },
+  /* Social Media, Web Design, Video Production hidden for now
   {
     num: '04', service: 'Social Media',
     body: 'Followers become fans. Platforms become revenue.',
@@ -62,6 +63,7 @@ const PANELS = [
       { role: 'small', top: '65%', left: '68%', w: '22%', h: '28%', rotate: 2   },
     ],
   },
+  */
 ]
 
 function lerp(a, b, t) { return a + (b - a) * t }
@@ -136,7 +138,7 @@ export default function Features() {
       <div ref={bgRef} className="feat-bg" />
 
       <div className="feat-header">
-        <span className="feat-header__label">Our Services</span>
+        <span className="feat-header__label">Selected Work</span>
         <span className="feat-header__hint">Scroll →</span>
       </div>
 
@@ -146,9 +148,9 @@ export default function Features() {
         <div className="feat-panel feat-panel--intro">
           <div className="feat-intro-bg" />
           <div className="feat-intro-overlay">
-            <p className="feat-text-reveal feat-intro__eyebrow">What we do</p>
-            <h2 className="feat-text-reveal feat-intro__title">Six pillars.<br />One vision.</h2>
-            <p className="feat-text-reveal feat-intro__sub">Engineered to work alone — and amplify each other.</p>
+            <p className="feat-text-reveal feat-intro__eyebrow">Our Work</p>
+            <h2 className="feat-text-reveal feat-intro__title">Selected<br />Work.</h2>
+            <p className="feat-text-reveal feat-intro__sub">A curated look at what we've built.</p>
           </div>
         </div>
 

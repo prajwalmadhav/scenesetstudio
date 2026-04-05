@@ -118,7 +118,15 @@ export default function Footer() {
 
 <div className="footer-top">
         <div className="footer-brand">
-          <span className="footer-logo">✦ SceneSet Studio</span>
+          <div className="footer-logo">
+            {/* SS mark */}
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+              <rect x="1" y="1" width="34" height="34" rx="4" stroke="currentColor" strokeWidth="1.2" strokeOpacity="0.4"/>
+              <path d="M10 13c0-1.657 1.343-3 3-3h4.5c1.657 0 3 1.343 3 3s-1.343 3-3 3H13c-1.657 0-3 1.343-3 3s1.343 3 3 3h4.5c1.657 0 3-1.343 3-3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+              <path d="M19 13c0-1.657 1.343-3 3-3h.5c1.657 0 3 1.343 3 3s-1.343 3-3 3H19c-1.657 0-3 1.343-3 3s1.343 3 3 3h.5c1.657 0 3-1.343 3-3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+            </svg>
+            <span className="footer-logo__text">SceneSet<strong>Studio</strong></span>
+          </div>
           <p className="footer-tagline">Cinematic storytelling meets performance marketing.</p>
           <div className="footer-socials">
             <p className="footer-dock-label">Follow our work</p>
@@ -153,7 +161,10 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="footer-review-btn"
             >
-              ★ Leave a Google Review
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style={{flexShrink:0}}>
+                <path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/>
+              </svg>
+              Leave a Google Review
             </a>
           </div>
         </nav>

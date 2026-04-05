@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import gsap from 'gsap'
 
-export default function Navbar({ onServicesClick, onHomeClick, activePage }) {
-  const navRef = useRef(null)
+export default function Navbar() {
+  const navRef     = useRef(null)
   const overlayRef = useRef(null)
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const { pathname } = useLocation()
 
   useEffect(() => {
     gsap.fromTo(
@@ -33,43 +35,31 @@ export default function Navbar({ onServicesClick, onHomeClick, activePage }) {
     }
   }, [menuOpen])
 
-  const handleServicesClick = (e) => {
-    e.preventDefault()
-    setMenuOpen(false)
-    onServicesClick()
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
-  const handleHomeClick = (e) => {
-    e.preventDefault()
-    setMenuOpen(false)
-    onHomeClick()
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
+  const close = () => setMenuOpen(false)
 
   return (
     <>
       <header ref={navRef} className={`navbar${scrolled ? ' navbar--scrolled' : ''}`} style={{ opacity: 0 }}>
         <div className="navbar__inner">
-          <a href="/" className="navbar__logo" aria-label="Scene Set Studio home" onClick={handleHomeClick}>
+          <Link to="/" className="navbar__logo" aria-label="Scene Set Studio home" onClick={close}>
             <span className="navbar__logo-main">Scene</span>
             <span className="navbar__logo-accent"> Set</span>
             <span className="navbar__logo-main"> Studio</span>
-          </a>
+          </Link>
 
           <nav className="navbar__links" aria-label="Primary navigation">
-            <a href="#work"    className={`navbar__link${activePage === 'home' ? '' : ''}`} onClick={handleHomeClick}>Work</a>
-            <a href="#services" className={`navbar__link${activePage === 'services' ? ' navbar__link--active' : ''}`} onClick={handleServicesClick}>Services</a>
-            <a href="#about"   className="navbar__link" onClick={handleHomeClick}>About</a>
-            <a href="#process" className="navbar__link" onClick={handleHomeClick}>Process</a>
-            <a href="#contact" className="navbar__link">Contact</a>
+            <Link to="/work"     className={`navbar__link${pathname === '/work'     ? ' navbar__link--active' : ''}`}>Work</Link>
+            <Link to="/services" className={`navbar__link${pathname === '/services' ? ' navbar__link--active' : ''}`}>Services</Link>
+            <Link to="/about"    className={`navbar__link${pathname === '/about'    ? ' navbar__link--active' : ''}`}>About</Link>
+            <Link to="/#process" className="navbar__link">Process</Link>
+            <Link to="/contact"  className={`navbar__link${pathname === '/contact'  ? ' navbar__link--active' : ''}`}>Contact</Link>
           </nav>
 
           <div className="navbar__actions">
-            <a href="#contact" className="navbar__cta">Start a Project</a>
+            <Link to="/contact" className="navbar__cta">Start a Project</Link>
             <button
               className={`navbar__hamburger${menuOpen ? ' is-open' : ''}`}
-              onClick={() => setMenuOpen((v) => !v)}
+              onClick={() => setMenuOpen(v => !v)}
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={menuOpen}
             >
@@ -82,12 +72,12 @@ export default function Navbar({ onServicesClick, onHomeClick, activePage }) {
 
       <div ref={overlayRef} className="mobile-menu" aria-hidden={!menuOpen} style={{ opacity: 0, pointerEvents: 'none' }}>
         <nav className="mobile-menu__links" aria-label="Mobile navigation">
-          <a href="#work"     className="mobile-link" onClick={handleHomeClick}>Work</a>
-          <a href="#services" className="mobile-link" onClick={handleServicesClick}>Services</a>
-          <a href="#about"    className="mobile-link" onClick={handleHomeClick}>About</a>
-          <a href="#process"  className="mobile-link" onClick={handleHomeClick}>Process</a>
-          <a href="#contact"  className="mobile-link" onClick={() => setMenuOpen(false)}>Contact</a>
-          <a href="#contact"  className="mobile-link mobile-link--cta" onClick={() => setMenuOpen(false)}>Start a Project</a>
+          <Link to="/work"     className="mobile-link" onClick={close}>Work</Link>
+          <Link to="/services" className="mobile-link" onClick={close}>Services</Link>
+          <Link to="/about"    className="mobile-link" onClick={close}>About</Link>
+          <Link to="/"         className="mobile-link" onClick={close}>Process</Link>
+          <Link to="/contact"  className="mobile-link" onClick={close}>Contact</Link>
+          <Link to="/contact"  className="mobile-link mobile-link--cta" onClick={close}>Start a Project</Link>
         </nav>
       </div>
     </>

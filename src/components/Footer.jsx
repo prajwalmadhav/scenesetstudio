@@ -3,6 +3,7 @@ import { useRef, useState } from 'react'
 const DOCK_ITEMS = [
   {
     label: 'Instagram',
+    platform: 'instagram',
     href: '#',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
@@ -14,6 +15,7 @@ const DOCK_ITEMS = [
   },
   {
     label: 'LinkedIn',
+    platform: 'linkedin',
     href: '#',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
@@ -25,6 +27,7 @@ const DOCK_ITEMS = [
   },
   {
     label: 'X / Twitter',
+    platform: 'x',
     href: '#',
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
@@ -34,6 +37,7 @@ const DOCK_ITEMS = [
   },
   {
     label: 'Behance',
+    platform: 'behance',
     href: '#',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
@@ -45,6 +49,7 @@ const DOCK_ITEMS = [
   },
   {
     label: 'YouTube',
+    platform: 'youtube',
     href: '#',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
@@ -56,18 +61,18 @@ const DOCK_ITEMS = [
 ]
 
 function Dock() {
-  const itemsRef  = useRef([])
+  const itemsRef = useRef([])
   const [tooltip, setTooltip] = useState({ visible: false, label: '', x: 0 })
 
   const handleMouseMove = (e) => {
     itemsRef.current.forEach((item) => {
       if (!item) return
-      const rect   = item.getBoundingClientRect()
-      const cx     = rect.left + rect.width / 2
-      const dist   = Math.abs(e.clientX - cx)
-      const max    = 110
-      const scale  = dist < max ? 1 + (1 - dist / max) * 0.75 : 1
-      const lift   = dist < max ? -(scale - 1) * 22 : 0
+      const rect  = item.getBoundingClientRect()
+      const cx    = rect.left + rect.width / 2
+      const dist  = Math.abs(e.clientX - cx)
+      const max   = 90
+      const scale = dist < max ? 1 + (1 - dist / max) * 0.6 : 1
+      const lift  = dist < max ? -(scale - 1) * 18 : 0
       item.style.transform = `scale(${scale}) translateY(${lift}px)`
     })
   }
@@ -82,15 +87,14 @@ function Dock() {
   return (
     <div className="dock" onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
       {tooltip.visible && (
-        <div className="dock-tooltip" style={{ left: tooltip.x }}>
-          {tooltip.label}
-        </div>
+        <div className="dock-tooltip" style={{ left: tooltip.x }}>{tooltip.label}</div>
       )}
       {DOCK_ITEMS.map((item, i) => (
         <a
           key={item.label}
           href={item.href}
           className="dock-item"
+          data-platform={item.platform}
           ref={el => itemsRef.current[i] = el}
           aria-label={item.label}
           onMouseEnter={(e) => {
@@ -111,10 +115,15 @@ export default function Footer() {
   return (
     <footer className="footer">
 
-      <div className="footer-top">
+
+<div className="footer-top">
         <div className="footer-brand">
           <span className="footer-logo">✦ SceneSet Studio</span>
           <p className="footer-tagline">Cinematic storytelling meets performance marketing.</p>
+          <div className="footer-socials">
+            <p className="footer-dock-label">Follow our work</p>
+            <Dock />
+          </div>
         </div>
 
         <nav className="footer-nav">
@@ -148,12 +157,6 @@ export default function Footer() {
             </a>
           </div>
         </nav>
-      </div>
-
-      {/* macOS-style Dock */}
-      <div className="footer-dock-wrap">
-        <p className="footer-dock-label">Follow our work</p>
-        <Dock />
       </div>
 
       <div className="footer-bottom">

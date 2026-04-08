@@ -1,5 +1,6 @@
 # React + Vite
-https://prajwalmadhav.github.io/scenesetstudio/
+scenesetstudio.com
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:

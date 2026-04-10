@@ -51,7 +51,7 @@ export default function Navbar() {
             <Link to="/work"     className={`navbar__link${pathname === '/work'     ? ' navbar__link--active' : ''}`}>Work</Link>
             <Link to="/services" className={`navbar__link${pathname === '/services' ? ' navbar__link--active' : ''}`}>Services</Link>
             <Link to="/about"    className={`navbar__link${pathname === '/about'    ? ' navbar__link--active' : ''}`}>About</Link>
-            <Link to="/#process" className="navbar__link">Process</Link>
+            <Link to="/process"  className={`navbar__link${pathname === '/process' ? ' navbar__link--active' : ''}`}>Process</Link>
             <Link to="/contact"  className={`navbar__link${pathname === '/contact'  ? ' navbar__link--active' : ''}`}>Contact</Link>
           </nav>
 
@@ -75,7 +75,7 @@ export default function Navbar() {
           <Link to="/work"     className="mobile-link" onClick={close}>Work</Link>
           <Link to="/services" className="mobile-link" onClick={close}>Services</Link>
           <Link to="/about"    className="mobile-link" onClick={close}>About</Link>
-          <Link to="/"         className="mobile-link" onClick={close}>Process</Link>
+          <Link to="/process"  className="mobile-link" onClick={close}>Process</Link>
           <Link to="/contact"  className="mobile-link" onClick={close}>Contact</Link>
           <Link to="/contact"  className="mobile-link mobile-link--cta" onClick={close}>Start a Project</Link>
         </nav>

@@ -13,7 +13,7 @@
   --muted: #555550;
   --dim: #1e1e1e;
 
-  --font-heading: 'Syne', sans-serif;
+  --font-heading: 'Playfair Display', Georgia, serif;
   --font-body: 'DM Sans', sans-serif;
 }
 
@@ -563,8 +563,8 @@ body::after {
 
 .svc-bg-text {
   position: absolute;
-  font-family: var(--font-heading);
-  font-weight: 800;
+  font-family: 'Syne', sans-serif;
+  font-weight: 900;
   color: transparent;
   -webkit-text-stroke: 2px rgba(255,255,255,0.18);
   user-select: none;
@@ -1540,8 +1540,8 @@ body::after {
   white-space: nowrap;
 }
 .branding-line {
-  font-family: var(--font-heading);
-  font-weight: 800;
+  font-family: 'Syne', sans-serif;
+  font-weight: 900;
   font-size: clamp(80px, 16vw, 260px);
   line-height: 0.82;
   letter-spacing: -0.04em;
@@ -1627,26 +1627,40 @@ body::after {
 
 
 /* ═══════════════════════════════════════
+   PROCESS MAP — responsive show/hide
+═══════════════════════════════════════ */
+
+.proc-map-mobile  { display: none; }
+.proc-map-desktop { display: block; }
+
+@media (max-width: 767px) {
+  .proc-map-desktop { display: none; }
+  .proc-map-mobile  { display: flex; }
+}
+
+/* ═══════════════════════════════════════
    PROCESS — Figma-style whiteboard
 ═══════════════════════════════════════ */
 
 .proc-section {
   position: relative;
-  min-height: 100vh;
+  min-height: 120vh;
   background: var(--bg);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 80px 24px 64px;
-  gap: 32px;
+  padding: 100px 16px 180px;
+  gap: 40px;
+  box-sizing: border-box;
 }
 
 .proc-label {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  text-align: center;
+  align-items: flex-start;
+  gap: 10px;
+  text-align: left;
+  width: 100%;
 }
 
 .proc-eyebrow {
@@ -1661,23 +1675,23 @@ body::after {
 .proc-title {
   font-family: var(--font-heading);
   font-weight: 800;
-  font-size: clamp(32px, 4.5vw, 56px);
-  letter-spacing: -2px;
+  font-size: clamp(40px, 5.5vw, 80px);
+  letter-spacing: -3px;
   color: var(--cream);
-  line-height: 1;
+  line-height: 0.95;
 }
 
 .proc-chrome {
   width: 100%;
-  max-width: 1100px;
-  height: 560px;
-  border-radius: 12px;
+  max-width: 1060px;
+  aspect-ratio: 4 / 3.5;
+  border-radius: 0;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.1);
-  box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 32px 100px rgba(0,0,0,0.7);
   display: grid;
   grid-template-rows: 44px 1fr 28px;
-  grid-template-columns: 200px 1fr 200px;
+  grid-template-columns: 180px 1fr 180px;
   grid-template-areas:
     "toolbar toolbar toolbar"
     "left    canvas  right"
@@ -1893,13 +1907,13 @@ body::after {
   font-weight: 800;
   font-size: 13px;
   letter-spacing: -0.3px;
-  color: #0f0f0f;
+  color: var(--cream);
 }
 
 .proc-node__desc {
   font-family: var(--font-body);
   font-size: 10px;
-  color: rgba(0,0,0,0.4);
+  color: rgba(242,240,235,0.5);
 }
 
 .proc-cursor {
@@ -1926,6 +1940,47 @@ body::after {
   margin-top: 16px;
 }
 
+/* ── Flip cards ── */
+.proc-flip-card {
+  perspective: 900px;
+  position: relative;
+}
+
+.proc-flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.proc-flip-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  border: 1px solid;
+  padding: 22px 18px 18px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.proc-flip-back {
+  transform: rotateY(180deg);
+}
+
+/* Desktop only flip — on mobile just show front static */
+@media (max-width: 860px) {
+  .proc-flip-inner { transform: none !important; }
+  .proc-flip-back  { display: none; }
+  .proc-flip-front { position: relative; inset: unset; }
+  .proc-flip-card  { perspective: none; }
+}
+
 .proc-statusbar {
   grid-area: status;
   background: #1c1c1e;
@@ -1941,7 +1996,8 @@ body::after {
 
 @media (max-width: 860px) {
   .proc-chrome {
-    height: 420px;
+    aspect-ratio: unset;
+    height: clamp(420px, 90vw, 560px);
     grid-template-columns: 0 1fr 0;
     grid-template-areas:
       "toolbar toolbar toolbar"
@@ -1986,7 +2042,7 @@ body::after {
 .brand-zone-bg__vert {
   writing-mode: vertical-rl;
   transform: rotate(180deg);
-  font-family: var(--font-heading);
+  font-family: 'Syne', sans-serif;
   font-size: clamp(32px, 4.8vw, 66px);   /* ~30% smaller */
   font-weight: 900;
   letter-spacing: -1px;
@@ -2062,7 +2118,7 @@ body::after {
 }
 
 .brand-zone-bg__horiz {
-  font-family: var(--font-heading);
+  font-family: 'Syne', sans-serif;
   font-size: clamp(64px, 10vw, 140px);
   font-weight: 900;
   letter-spacing: -3px;
@@ -2376,7 +2432,7 @@ body::after {
 }
 
 .footer-logo__text {
-  font-family: var(--font-heading);
+  font-family: 'Syne', sans-serif;
   font-weight: 400;
   font-size: 16px;
   letter-spacing: -0.3px;

@@ -1,29 +1,29 @@
 import { useEffect, useRef, useState } from 'react'
 
-const VIDEO_SRC    = `${import.meta.env.BASE_URL}video/ourwork.mp4`
+const VIDEO_SRC = `${import.meta.env.BASE_URL}video/ourwork.mp4`
 const SCROLL_HEIGHT = '400vh'
-const LERP_FACTOR   = 0.07
+const LERP_FACTOR = 0.07
 
 export default function FrameScroll() {
-  const containerRef  = useRef(null)
-  const videoRef      = useRef(null)
-  const targetRef     = useRef(0)   // raw scroll-mapped time
-  const currentRef    = useRef(0)   // lerped time actually applied
-  const rafRef        = useRef(null)
+  const containerRef = useRef(null)
+  const videoRef = useRef(null)
+  const targetRef = useRef(0)   // raw scroll-mapped time
+  const currentRef = useRef(0)   // lerped time actually applied
+  const rafRef = useRef(null)
   const [hideIndicator, setHideIndicator] = useState(false)
 
   useEffect(() => {
-    const video     = videoRef.current
+    const video = videoRef.current
     const container = containerRef.current
     if (!video || !container) return
 
     // ── Scroll → update target time ──────────────────────────────────────
     function onScroll() {
       if (!video.duration) return
-      const rect     = container.getBoundingClientRect()
-      const total    = container.offsetHeight - window.innerHeight
+      const rect = container.getBoundingClientRect()
+      const total = container.offsetHeight - window.innerHeight
       if (total <= 0) return
-      const progress  = Math.max(0, Math.min(1, -rect.top / total))
+      const progress = Math.max(0, Math.min(1, -rect.top / total))
       targetRef.current = progress * video.duration
       if (progress > 0.02) setHideIndicator(true)
     }
@@ -33,7 +33,7 @@ export default function FrameScroll() {
       const diff = targetRef.current - currentRef.current
       if (Math.abs(diff) > 0.001) {
         currentRef.current += diff * LERP_FACTOR
-        video.currentTime   = currentRef.current
+        video.currentTime = currentRef.current
       }
       rafRef.current = requestAnimationFrame(loop)
     }
@@ -41,7 +41,7 @@ export default function FrameScroll() {
     // ── Prime video so seeking is unlocked ────────────────────────────────
     const prime = () => {
       video.play()
-        .catch(() => {})
+        .catch(() => { })
         .finally(() => {
           video.pause()
           video.currentTime = 0.001
@@ -111,7 +111,7 @@ export default function FrameScroll() {
             <span
               key={word}
               style={{
-                fontFamily: 'var(--font-heading)',
+                fontFamily: "'Syne', sans-serif",
                 fontWeight: 900,
                 fontSize: 'clamp(80px, 14vw, 180px)',
                 letterSpacing: '-0.04em',

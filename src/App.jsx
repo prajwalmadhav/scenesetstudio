@@ -10,6 +10,7 @@ import Testimonials from './components/Testimonials'
 import CTA from './components/CTA'
 import Footer from './components/Footer'
 import WorkPage from './pages/Work'
+import ProcessPage from './pages/Process'
 import CaseStudyPage from './pages/CaseStudy'
 import ServicesPage from './pages/Services'
 import AboutPage from './pages/About'
@@ -61,6 +62,7 @@ function App() {
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/about"    element={<AboutPage />} />
         <Route path="/contact"  element={<ContactPage />} />
+        <Route path="/process"  element={<ProcessPage />} />
         <Route path="*"         element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>

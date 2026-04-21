@@ -172,6 +172,16 @@ export default function Footer() {
 
       <div className="footer-bottom">
         <span>© {new Date().getFullYear()} SceneSet Studio. All rights reserved.</span>
+        <a
+          href="/card.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: 'inherit', opacity: 0.5, fontSize: '12px', textDecoration: 'none', letterSpacing: '0.04em', transition: 'opacity 0.2s' }}
+          onMouseEnter={e => e.currentTarget.style.opacity = '1'}
+          onMouseLeave={e => e.currentTarget.style.opacity = '0.5'}
+        >
+          Digital Business Card ↗
+        </a>
         <span>Made with precision.</span>
       </div>
 

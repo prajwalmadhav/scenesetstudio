@@ -59,6 +59,13 @@
     padding: 32px 28px 28px;
   }
 
+  .badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 22px;
+  }
+
   .badge {
     display: inline-flex;
     align-items: center;
@@ -72,8 +79,15 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--accent);
-    margin-bottom: 22px;
   }
+
+  .badge--ghost {
+    background: rgba(255,255,255,0.04);
+    border-color: var(--border);
+    color: var(--muted);
+  }
+
+  .badge--ghost::before { display: none; }
 
   .badge::before {
     content: '';
@@ -428,7 +442,10 @@
 
   <!-- HEADER -->
   <section class="header">
-    <div class="badge">Creative &amp; Marketing Agency</div>
+    <div class="badges">
+      <div class="badge">Digital Business Card</div>
+      <div class="badge badge--ghost">Creative &amp; Marketing Agency</div>
+    </div>
 
     <h1 class="studio-name">
       <span class="accent">Scene</span>Set<br>Studio
@@ -624,7 +641,7 @@
 
 <script>
   // Web3Forms — get your free key at web3forms.com (enter team@scenesetstudio.com)
-  const W3F_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY';
+  const W3F_KEY = '58c63997-b2b2-4544-9a83-436a2cfe6361';
 
   async function submitCard() {
     const nameEl    = document.getElementById('inp-name');

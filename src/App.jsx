@@ -49,10 +49,26 @@ function HomePage() {
   )
 }
 
+const WM_TEXT = 'SCENE SET STUDIO · SSS · '.repeat(10)
+
+function BrandWatermark() {
+  return (
+    <div className="brand-wm" aria-hidden="true">
+      {Array.from({ length: 10 }).map((_, i) => (
+        <span key={'a' + i} className="brand-wm__line brand-wm__line--a" style={{ top: `${i * 12}%` }}>{WM_TEXT}</span>
+      ))}
+      {Array.from({ length: 10 }).map((_, i) => (
+        <span key={'b' + i} className="brand-wm__line brand-wm__line--b" style={{ top: `${i * 12}%` }}>{WM_TEXT}</span>
+      ))}
+    </div>
+  )
+}
+
 function App() {
   const base = import.meta.env.BASE_URL.replace(/\/$/, '') || '/'
   return (
     <BrowserRouter basename={base}>
+      <BrandWatermark />
       <ScrollToTop />
       <Navbar />
       <Routes>

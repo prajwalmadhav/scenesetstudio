@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<meta name="description" content="Prajwal S. — Founder & Creative Director at SceneSet Studio. Cinematic branding, video production & AI-powered marketing.">
-<title>Prajwal S. · SceneSet Studio</title>
+<meta name="description" content="Prajwal Madhav — Founder & Creative Director at SceneSet Studio. Cinematic branding, video production & AI-powered marketing.">
+<title>Prajwal Madhav · SceneSet Studio</title>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -439,7 +439,7 @@
     <div class="rule"></div>
 
     <div class="founder">
-      <span class="founder-name">Prajwal S.</span>
+      <span class="founder-name">Prajwal Madhav</span>
       <span class="founder-title">Founder &amp; Creative Director</span>
     </div>
   </section>
@@ -531,7 +531,7 @@
   <section class="contact">
     <p class="section-label">Get in touch</p>
 
-    <a href="mailto:hello@sceneset.studio" class="contact-row">
+    <a href="mailto:prajwal@scenesetstudio.com" class="contact-row">
       <div class="contact-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -540,11 +540,11 @@
       </div>
       <div class="contact-text">
         <span class="contact-label">Email</span>
-        <span class="contact-value">hello@sceneset.studio</span>
+        <span class="contact-value">prajwal@scenesetstudio.com</span>
       </div>
     </a>
 
-    <a href="tel:+16132345678" class="contact-row">
+    <a href="tel:+16138702919" class="contact-row">
       <div class="contact-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
           <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.32 12 19.79 19.79 0 011.13 3.4 2 2 0 013.11 1.22h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
@@ -552,11 +552,11 @@
       </div>
       <div class="contact-text">
         <span class="contact-label">Phone</span>
-        <span class="contact-value">+1 (613) 234-5678</span>
+        <span class="contact-value">+1 (613) 870-2919</span>
       </div>
     </a>
 
-    <a href="https://sceneset.studio" target="_blank" rel="noopener noreferrer" class="contact-row">
+    <a href="https://scenesetstudio.com" target="_blank" rel="noopener noreferrer" class="contact-row">
       <div class="contact-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="10"/>
@@ -566,7 +566,21 @@
       </div>
       <div class="contact-text">
         <span class="contact-label">Website</span>
-        <span class="contact-value">sceneset.studio</span>
+        <span class="contact-value">scenesetstudio.com</span>
+      </div>
+    </a>
+
+    <a href="https://instagram.com/scenesetstudio" target="_blank" rel="noopener noreferrer" class="contact-row">
+      <div class="contact-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5"/>
+          <circle cx="12" cy="12" r="4.5"/>
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+        </svg>
+      </div>
+      <div class="contact-text">
+        <span class="contact-label">Instagram</span>
+        <span class="contact-value">@scenesetstudio</span>
       </div>
     </a>
 
@@ -601,31 +615,51 @@
 
   <!-- CARD FOOTER -->
   <div class="card-footer">
-    <a href="https://sceneset.studio" target="_blank" rel="noopener noreferrer">sceneset.studio</a>
+    <a href="https://scenesetstudio.com" target="_blank" rel="noopener noreferrer">scenesetstudio.com</a>
     <div class="footer-dot"></div>
-    <a href="mailto:hello@sceneset.studio">hello@sceneset.studio</a>
+    <a href="mailto:prajwal@scenesetstudio.com">prajwal@scenesetstudio.com</a>
   </div>
 
 </div>
 
 <script>
-  function submitCard() {
-    const name    = document.getElementById('inp-name');
-    const contact = document.getElementById('inp-contact');
+  // Web3Forms — get your free key at web3forms.com (enter team@scenesetstudio.com)
+  const W3F_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY';
+
+  async function submitCard() {
+    const nameEl    = document.getElementById('inp-name');
+    const contactEl = document.getElementById('inp-contact');
+    const btn       = document.querySelector('.cta-btn');
     let valid = true;
 
-    [name, contact].forEach(el => el.classList.remove('error'));
+    [nameEl, contactEl].forEach(el => el.classList.remove('error'));
 
-    if (!name.value.trim()) {
-      name.classList.add('error');
-      valid = false;
-    }
-    if (!contact.value.trim()) {
-      contact.classList.add('error');
-      valid = false;
-    }
-
+    if (!nameEl.value.trim())    { nameEl.classList.add('error');    valid = false; }
+    if (!contactEl.value.trim()) { contactEl.classList.add('error'); valid = false; }
     if (!valid) return;
+
+    btn.disabled    = true;
+    btn.textContent = 'Sending…';
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: W3F_KEY,
+          subject:    'New lead from SceneSet Studio business card',
+          from_name:  'SceneSet Studio Card',
+          name:       nameEl.value.trim(),
+          contact:    contactEl.value.trim(),
+          message:    `Name: ${nameEl.value.trim()}\nContact: ${contactEl.value.trim()}`,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok || !data.success) throw new Error(data.message || 'Send failed');
+    } catch (err) {
+      console.error(err);
+    }
 
     document.getElementById('form-body').style.display = 'none';
     const s = document.getElementById('success');

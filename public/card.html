@@ -364,6 +364,33 @@
     -webkit-appearance: none;
   }
 
+  /* ── WHATSAPP FAB (hidden until activated) ── */
+  .wa-fab {
+    display: none; /* set to flex to enable */
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #25D366;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.35);
+    cursor: pointer;
+    border: none;
+    animation: wa-pulse 2.5s ease-in-out infinite;
+    z-index: 100;
+    text-decoration: none;
+  }
+
+  .wa-fab svg { width: 28px; height: 28px; }
+
+  @keyframes wa-pulse {
+    0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,0.35); }
+    50%      { box-shadow: 0 4px 32px rgba(37,211,102,0.6); }
+  }
+
   .cta-btn:hover  { opacity: 0.88; }
   .cta-btn:active { transform: scale(0.98); }
 
@@ -630,6 +657,14 @@
 
   <div class="divider"></div>
 
+  <!-- WHATSAPP FAB — set display:flex in .wa-fab to activate -->
+  <a class="wa-fab" id="wa-fab" href="#" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="#fff">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.862L.072 23.928l6.222-1.434A11.942 11.942 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.034-1.388l-.36-.214-3.733.86.936-3.618-.235-.373A9.799 9.799 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
+    </svg>
+  </a>
+
   <!-- CARD FOOTER -->
   <div class="card-footer">
     <a href="https://scenesetstudio.com" target="_blank" rel="noopener noreferrer">scenesetstudio.com</a>
@@ -640,8 +675,21 @@
 </div>
 
 <script>
-  // Web3Forms — get your free key at web3forms.com (enter team@scenesetstudio.com)
-  const W3F_KEY = '58c63997-b2b2-4544-9a83-436a2cfe6361';
+  // ── WHATSAPP FAB CONFIG (fill in when ready to activate) ──────
+  // Step 1: set .wa-fab { display: flex } in CSS above
+  // Step 2: fill in your tokens below
+  // Step 3: push
+  const WA_NUMBER   = '16138702919';
+  const TG_TOKEN    = 'YOUR_TELEGRAM_BOT_TOKEN'; // from @BotFather
+  const TG_CHAT     = 'YOUR_TELEGRAM_CHAT_ID';   // message @userinfobot to get yours
+  const WA_MSG      = encodeURIComponent('Hi Prajwal! I came across your digital card and I\'m interested in learning more about SceneSet Studio.');
+
+  document.getElementById('wa-fab').href = `https://wa.me/${WA_NUMBER}?text=${WA_MSG}`;
+  document.getElementById('wa-fab').addEventListener('click', () => {
+    fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage?chat_id=${TG_CHAT}&text=${encodeURIComponent('👋 Someone tapped your WhatsApp button on the business card!')}`)
+      .catch(() => {});
+  });
+  // ──────────────────────────────────────────────────────────────
 
   async function submitCard() {
     const nameEl    = document.getElementById('inp-name');
@@ -663,7 +711,7 @@
         method:  'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
-          access_key: W3F_KEY,
+          access_key: '58c63997-b2b2-4544-9a83-436a2cfe6361',
           subject:    'New lead from SceneSet Studio business card',
           from_name:  'SceneSet Studio Card',
           name:       nameEl.value.trim(),
@@ -671,7 +719,6 @@
           message:    `Name: ${nameEl.value.trim()}\nContact: ${contactEl.value.trim()}`,
         }),
       });
-
       const data = await res.json();
       if (!res.ok || !data.success) throw new Error(data.message || 'Send failed');
     } catch (err) {
@@ -679,8 +726,7 @@
     }
 
     document.getElementById('form-body').style.display = 'none';
-    const s = document.getElementById('success');
-    s.style.display = 'flex';
+    document.getElementById('success').style.display = 'flex';
   }
 </script>
 </body>

@@ -66,6 +66,12 @@ export default function About() {
         <p className="about-sub about-animate">
           From strategy to screen — we craft campaigns that move people.
         </p>
+        <p className="about-sub about-animate">
+          Based in Ottawa-Gatineau, serving brands across Canada and beyond.
+        </p>
+        <p className="about-sub about-animate">
+          Every project starts with a story. We make sure it's one worth telling.
+        </p>
       </div>
 
     </section>

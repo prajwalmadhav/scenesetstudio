@@ -74,6 +74,8 @@ export default function Features() {
   const bgRef      = useRef(null)
 
   useEffect(() => {
+    ScrollTrigger.normalizeScroll(true)
+
     const ctx = gsap.context(() => {
       const track   = trackRef.current
       const section = sectionRef.current

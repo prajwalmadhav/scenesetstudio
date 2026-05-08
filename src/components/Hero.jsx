@@ -109,7 +109,7 @@ export default function Hero() {
         ease: 'none',
       }, 0)
       .to(visualRef.current, {
-        height: '100vh',
+        height: '100dvh',
         borderRadius: 0,
         ease: 'none',
       }, 0)

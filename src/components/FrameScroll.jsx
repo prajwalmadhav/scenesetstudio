@@ -73,9 +73,9 @@ export default function FrameScroll() {
     }
   }, [isMobile])
 
-  const sectionHeight = isMobile ? '140vh' : '180vh'
-  const stickyTop = isMobile ? '8svh' : 0
-  const stickyHeight = isMobile ? '80svh' : '100vh'
+  const sectionHeight = isMobile ? '160dvh' : '180dvh'
+  const stickyTop = isMobile ? '6dvh' : 0
+  const stickyHeight = isMobile ? '88dvh' : '100dvh'
 
   return (
     <div

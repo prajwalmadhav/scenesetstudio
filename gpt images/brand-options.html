@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scene Set Studio - Brand Directions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=DM+Sans:wght@400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080808;
+      --surface: #121214;
+      --surface-2: #18181b;
+      --border: rgba(255,255,255,0.09);
+      --text: #f1eee8;
+      --muted: rgba(241,238,232,0.62);
+      --muted-2: rgba(241,238,232,0.34);
+      --magenta: #c42087;
+      --lime: #c8f535;
+      --red: #d92f2f;
+      --mint: #7dffc8;
+      --stone: #eee7dd;
+      --aubergine: #34214b;
+      --brass: #b08a57;
+      --display: "Playfair Display", serif;
+      --body: "DM Sans", sans-serif;
+      --label: "Syne", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top right, rgba(196,32,135,0.08), transparent 28%),
+        linear-gradient(180deg, #070707 0%, #0d0d0f 100%);
+      color: var(--text);
+      font-family: var(--body);
+    }
+
+    .shell {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: 100vh;
+    }
+
+    aside {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 28px 24px;
+      border-right: 1px solid var(--border);
+      background: rgba(7,7,8,0.88);
+      backdrop-filter: blur(20px);
+    }
+
+    .brand-kicker {
+      font-family: var(--label);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--magenta);
+      margin-bottom: 10px;
+    }
+
+    .brand-name {
+      font-family: var(--display);
+      font-size: 30px;
+      font-weight: 900;
+      line-height: 0.96;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+    }
+
+    .brand-note {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .nav a {
+      display: block;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 8px 0;
+    }
+
+    main {
+      padding: 48px 48px 90px;
+    }
+
+    .banner {
+      border: 1px solid var(--border);
+      background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      padding: 18px 22px;
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 30px;
+    }
+
+    .hero {
+      padding: 18px 0 42px;
+    }
+
+    .eyebrow {
+      font-family: var(--label);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--lime);
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-family: var(--display);
+      font-size: clamp(44px, 6vw, 92px);
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+      margin: 0 0 18px;
+      max-width: 900px;
+    }
+
+    .hero p {
+      max-width: 720px;
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      gap: 24px;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      padding: 24px;
+    }
+
+    .card h2, .card h3 {
+      margin: 0 0 10px;
+    }
+
+    .direction-name {
+      font-family: var(--display);
+      font-size: 30px;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+
+    .direction-meta {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .pill {
+      padding: 6px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .swatches {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .swatch {
+      min-height: 92px;
+      display: flex;
+      align-items: end;
+      padding: 10px;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.82);
+    }
+
+    .section-title {
+      font-family: var(--display);
+      font-size: 38px;
+      letter-spacing: -0.03em;
+      margin: 52px 0 16px;
+    }
+
+    .section-copy {
+      max-width: 860px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .logo-card {
+      border: 1px solid var(--border);
+      padding: 24px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .logo-preview {
+      min-height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .logo-label {
+      font-family: var(--label);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+      margin-bottom: 8px;
+    }
+
+    .type-sample {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .type-card {
+      border: 1px solid var(--border);
+      padding: 24px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .type-head {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .type-mark {
+      font-size: 54px;
+      line-height: 0.95;
+      margin-bottom: 16px;
+    }
+
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .carousel-card {
+      border: 1px solid var(--border);
+      padding: 20px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .carousel-stack {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .slide {
+      aspect-ratio: 4 / 5;
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 10px;
+      display: flex;
+      align-items: end;
+      font-size: 11px;
+      line-height: 1.3;
+    }
+
+    .recommend {
+      border-color: rgba(200,245,53,0.45);
+      box-shadow: 0 0 0 1px rgba(200,245,53,0.12) inset;
+    }
+
+    .recommend-badge {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 6px 10px;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1px solid rgba(200,245,53,0.28);
+      color: var(--lime);
+    }
+
+    .mono {
+      font-family: var(--label);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 1100px) {
+      .shell {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        position: relative;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+      main {
+        padding: 28px 22px 70px;
+      }
+      .grid-3, .logo-grid, .type-sample, .carousel-grid {
+        grid-template-columns: 1fr;
+      }
+      .swatches {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside>
+      <div class="brand-kicker">Brand Audit</div>
+      <div class="brand-name">Scene Set<br>Studio</div>
+      <div class="brand-note">
+        A strategic visual audit derived from the current site language: cinematic, premium, high-contrast, and performance-aware.
+      </div>
+      <nav class="nav">
+        <a href="#directions">Directions</a>
+        <a href="#logos">Logo Icons</a>
+        <a href="#type">Typography</a>
+        <a href="#carousels">Instagram Carousel Ideas</a>
+      </nav>
+    </aside>
+
+    <main>
+      <div class="banner">
+        This is a strategic visualization based on the current project. Choose one direction first, then we can generate polished logo assets and social visuals inside this same folder.
+      </div>
+
+      <section class="hero">
+        <div class="eyebrow">Current Reading</div>
+        <h1>Scene Set Studio already feels like a cinematic performance studio. It just needs a tighter system.</h1>
+        <p>
+          The project already communicates luxury-dark editorial energy, strategic motion, and outcome-driven marketing. The strongest opportunity is not to invent a different brand, but to formalize the best instincts that are already showing up in the UI, typography, color accents, and copy.
+        </p>
+      </section>
+
+      <section id="directions">
+        <div class="section-title">Three Directions</div>
+        <div class="section-copy">
+          These are the three strongest routes based on your current site. Option A is the closest to what the project already wants to be. Option B pushes harder into social and campaign energy. Option C makes the brand feel more expensive and presentation-ready.
+        </div>
+
+        <div class="grid grid-3">
+          <article class="card recommend">
+            <div class="direction-name">A. Signal Noir</div>
+            <div class="direction-meta">Cinematic, premium, strategic, sharp. Best fit for the current studio direction.</div>
+            <div class="pill-row">
+              <span class="pill">Dark editorial</span>
+              <span class="pill">Performance-led</span>
+              <span class="pill">High contrast</span>
+            </div>
+            <div class="swatches">
+              <div class="swatch" style="background:#080808">#080808</div>
+              <div class="swatch" style="background:#111112">#111112</div>
+              <div class="swatch" style="background:#F0EEEA; color:#111">#F0EEEA</div>
+              <div class="swatch" style="background:#C42087">#C42087</div>
+              <div class="swatch" style="background:#C8F535; color:#111">#C8F535</div>
+            </div>
+            <div class="mono">Typography</div>
+            <p>Playfair Display + DM Sans + Syne</p>
+            <div class="recommend-badge">Recommended</div>
+          </article>
+
+          <article class="card">
+            <div class="direction-name">B. Editorial Voltage</div>
+            <div class="direction-meta">Bolder, louder, more campaign-native. Built for Instagram memorability and launch energy.</div>
+            <div class="pill-row">
+              <span class="pill">Culture-led</span>
+              <span class="pill">Social-first</span>
+              <span class="pill">Fashion energy</span>
+            </div>
+            <div class="swatches">
+              <div class="swatch" style="background:#09090D">#09090D</div>
+              <div class="swatch" style="background:#F5F2EC; color:#111">#F5F2EC</div>
+              <div class="swatch" style="background:#D92F2F">#D92F2F</div>
+              <div class="swatch" style="background:#7DFFC8; color:#111">#7DFFC8</div>
+              <div class="swatch" style="background:#6E717B">#6E717B</div>
+            </div>
+            <div class="mono">Typography</div>
+            <p>Instrument Serif + Space Grotesk + Syne</p>
+          </article>
+
+          <article class="card">
+            <div class="direction-name">C. Luxe Frame</div>
+            <div class="direction-meta">Refined, architectural, composed. Best if you want more trust-heavy premium clients.</div>
+            <div class="pill-row">
+              <span class="pill">Light premium</span>
+              <span class="pill">Luxury trust</span>
+              <span class="pill">Presentation-ready</span>
+            </div>
+            <div class="swatches">
+              <div class="swatch" style="background:#EEE7DD; color:#111">#EEE7DD</div>
+              <div class="swatch" style="background:#131313">#131313</div>
+              <div class="swatch" style="background:#34214B">#34214B</div>
+              <div class="swatch" style="background:#B08A57">#B08A57</div>
+              <div class="swatch" style="background:#BDB4AA; color:#111">#BDB4AA</div>
+            </div>
+            <div class="mono">Typography</div>
+            <p>Cormorant Garamond + DM Sans + Syne</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="logos">
+        <div class="section-title">Logo Icon Routes</div>
+        <div class="section-copy">
+          The brand should feel authored and intentional. These logo routes stay aligned with the current site language without drifting into startup-generic territory.
+        </div>
+
+        <div class="logo-grid">
+          <article class="logo-card">
+            <div class="logo-label">Option A icon</div>
+            <div class="logo-preview">
+              <svg width="220" height="140" viewBox="0 0 220 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="28" y="30" width="74" height="52" stroke="#C42087" stroke-width="2"/>
+                <rect x="60" y="56" width="74" height="52" stroke="#F0EEEA" stroke-width="2" opacity="0.85"/>
+                <text x="28" y="118" fill="#F0EEEA" font-family="Syne, sans-serif" font-size="17" letter-spacing="3">SCENE SET STUDIO</text>
+              </svg>
+            </div>
+            <h3>Frame Mark</h3>
+            <p>Two offset frames that suggest staging, direction, and composed perspective. Best match for the name.</p>
+          </article>
+
+          <article class="logo-card">
+            <div class="logo-label">Option B icon</div>
+            <div class="logo-preview">
+              <svg width="220" height="140" viewBox="0 0 220 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M53 37H103C114 37 121 43 121 52C121 60 116 65 107 67C117 69 124 75 124 85C124 97 114 103 100 103H53" stroke="#F5F2EC" stroke-width="8" stroke-linecap="round"/>
+                <path d="M116 37H165" stroke="#D92F2F" stroke-width="8" stroke-linecap="round"/>
+                <path d="M116 103H165" stroke="#7DFFC8" stroke-width="8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>Signal Mark</h3>
+            <p>An abstract `S` built from interruption and direction. Best for social-first and high-energy brand expression.</p>
+          </article>
+
+          <article class="logo-card">
+            <div class="logo-label">Option C icon</div>
+            <div class="logo-preview">
+              <svg width="220" height="140" viewBox="0 0 220 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="64" y="24" width="92" height="92" rx="8" stroke="#B08A57" stroke-width="2"/>
+                <path d="M92 54C92 46.82 97.82 41 105 41H118C125.18 41 131 46.82 131 54C131 61.18 125.18 67 118 67H105C97.82 67 92 72.82 92 80C92 87.18 97.82 93 105 93H118C125.18 93 131 87.18 131 80" stroke="#131313" stroke-width="6" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>Monogram Mark</h3>
+            <p>A composed monogram in a luxury frame. Best for premium decks, business cards, and quieter upscale clients.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="type">
+        <div class="section-title">Typography Systems</div>
+        <div class="section-copy">
+          Your site already benefits from display drama plus clean interface text. These pairings give each direction its own version of that tension.
+        </div>
+
+        <div class="type-sample">
+          <article class="type-card">
+            <div class="type-head">Signal Noir</div>
+            <div class="type-mark" style="font-family:var(--display)">Set the scene.</div>
+            <p>Display: Playfair Display</p>
+            <p>Body: DM Sans</p>
+            <p>Labels: Syne</p>
+          </article>
+
+          <article class="type-card">
+            <div class="type-head">Editorial Voltage</div>
+            <div class="type-mark" style="font-family:var(--display); font-style:italic">Stop the scroll.</div>
+            <p>Display: Instrument Serif</p>
+            <p>Body: Space Grotesk</p>
+            <p>Labels: Syne</p>
+          </article>
+
+          <article class="type-card">
+            <div class="type-head">Luxe Frame</div>
+            <div class="type-mark" style="font-family:var(--display)">Command trust.</div>
+            <p>Display: Cormorant Garamond</p>
+            <p>Body: DM Sans</p>
+            <p>Labels: Syne</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="carousels">
+        <div class="section-title">Instagram Carousel Ideas</div>
+        <div class="section-copy">
+          These are meant to feel like brand systems, not one-off post ideas. Each concept can become a repeatable carousel series.
+        </div>
+
+        <div class="carousel-grid">
+          <article class="carousel-card">
+            <div class="logo-label">Series 01</div>
+            <h3>The Proof Stack</h3>
+            <div class="carousel-stack">
+              <div class="slide" style="background:#080808;color:#F0EEEA">What changed after the rebrand.</div>
+              <div class="slide" style="background:#111112;color:#C8F535">Before the strategy.</div>
+              <div class="slide" style="background:#C42087;color:#fff">The number that mattered.</div>
+            </div>
+            <p>Use this for case-study style content: one insight, one visual shift, one hard result.</p>
+          </article>
+
+          <article class="carousel-card">
+            <div class="logo-label">Series 02</div>
+            <h3>Scene Notes</h3>
+            <div class="carousel-stack">
+              <div class="slide" style="background:#09090D;color:#F5F2EC">Most brands are overdressed and underpositioned.</div>
+              <div class="slide" style="background:#F5F2EC;color:#09090D">What clients think they need.</div>
+              <div class="slide" style="background:#7DFFC8;color:#09090D">What actually moves the market.</div>
+            </div>
+            <p>Use this for thought leadership. It turns the studio’s perspective into a recognizable editorial series.</p>
+          </article>
+
+          <article class="carousel-card">
+            <div class="logo-label">Series 03</div>
+            <h3>Campaign Anatomy</h3>
+            <div class="carousel-stack">
+              <div class="slide" style="background:#EEE7DD;color:#131313">Audience</div>
+              <div class="slide" style="background:#34214B;color:#EEE7DD">Emotion</div>
+              <div class="slide" style="background:#B08A57;color:#131313">Outcome</div>
+            </div>
+            <p>Use this to show how campaigns are built. It makes your process feel proprietary and premium.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

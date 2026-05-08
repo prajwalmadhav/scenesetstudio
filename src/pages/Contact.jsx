@@ -50,7 +50,7 @@ export default function Contact() {
         description="Start a project with Scene Set Studio — brand strategy, content, advertising, and web design."
       />
 
-      <div style={{ minHeight: '100vh', background: '#080808', paddingTop: '120px' }}>
+      <div style={{ minHeight: '100dvh', background: '#080808', paddingTop: '120px' }}>
 
         {/* Header */}
         <div style={{ padding: '0 64px 80px', borderBottom: '1px solid #1a1a1a' }}>

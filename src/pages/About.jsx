@@ -25,7 +25,7 @@ export default function About() {
         description="Scene Set Studio is a full-service creative agency. We build brands, produce content, and run campaigns that move the needle."
       />
 
-      <div style={{ minHeight: '100vh', background: '#080808', paddingTop: '120px' }}>
+      <div style={{ minHeight: '100dvh', background: '#080808', paddingTop: '120px' }}>
 
         {/* Hero */}
         <div style={{ padding: '0 64px 80px', borderBottom: '1px solid #1a1a1a' }}>

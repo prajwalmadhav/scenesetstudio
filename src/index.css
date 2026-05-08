@@ -95,7 +95,7 @@ body::after {
 
 /* ─── Hero Section ─── */
 .hero-section {
-  height: 100vh;
+  height: 100dvh;
   background: #050104;
   display: flex;
   flex-direction: column;
@@ -277,7 +277,7 @@ body::after {
   position: absolute;
   left: 8vw;
   right: 8vw;
-  top: clamp(460px, 52vh, 580px);
+  top: clamp(460px, 52dvh, 580px);
   border-radius: 20px;
   padding: 1.5px;
   background: linear-gradient(135deg, rgba(120, 120, 120, 0.5) 0%, rgba(180, 60, 0, 0.6) 100%);
@@ -286,7 +286,7 @@ body::after {
 
 .hero-visual {
   width: 100%;
-  height: 160vh;
+  height: 160dvh;
   background: #0a0a0a;
   border-radius: 19px;
   overflow: hidden;
@@ -427,7 +427,7 @@ body::after {
   .hero-visual-wrapper {
     left: 5vw;
     right: 5vw;
-    top: clamp(320px, 56vh, 440px);
+    top: clamp(320px, 56dvh, 440px);
     bottom: 0;
   }
 
@@ -740,7 +740,7 @@ body::after {
 
 .svc-section {
   position: relative;
-  min-height: 100vh;
+  min-height: 100dvh;
   background: var(--bg);
   display: flex;
   flex-direction: column;
@@ -1085,7 +1085,7 @@ body::after {
 /* ── Services Hero (What We Do) ── */
 .svc-hero {
   position: relative;
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   background: #08080a;
@@ -1103,7 +1103,7 @@ body::after {
   position: relative;
   z-index: 1;
   max-width: 960px;
-  padding: 10vh 8vw;
+  padding: 10dvh 8vw;
 }
 
 .svc-hero__eyebrow {
@@ -1158,7 +1158,7 @@ body::after {
 
 .feat-section {
   position: relative;
-  height: 100vh;
+  height: 100dvh;
   background: linear-gradient(to bottom, #ede8e1 0%, #c8c0b6 18%, #7a6e64 38%, #2e2822 58%, #0d0b09 80%, #080808 100%);
   overflow: clip;
 }
@@ -1217,7 +1217,7 @@ body::after {
 .feat-track {
   display: flex;
   align-items: stretch;
-  height: 100vh;
+  height: 100dvh;
   width: max-content;
   position: relative;
   z-index: 1;
@@ -1227,7 +1227,7 @@ body::after {
 /* Base panel */
 .feat-panel {
   position: relative;
-  height: 100vh;
+  height: 100dvh;
   flex-shrink: 0;
   overflow: hidden;
   --text: rgba(242, 240, 235, 0.92);
@@ -1618,7 +1618,6 @@ body::after {
   left: 6%;
   transform: rotate(-8deg);
   opacity: 0;
-  pointer-events: none;
   z-index: 5;
 }
 
@@ -1626,8 +1625,7 @@ body::after {
   width: 218px;
   height: 218px;
   color: rgba(26, 22, 20, 1);
-  cursor: default;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .about-stamp__bg {
@@ -1636,7 +1634,11 @@ body::after {
 }
 
 @media (hover: hover) {
+  .about-stamp {
+    cursor: pointer;
+  }
   .about-stamp:hover .about-stamp__svg {
+    transform: scale(1.07);
     color: rgba(255, 255, 255, 0.95);
   }
   .about-stamp:hover .about-stamp__bg {
@@ -1890,6 +1892,7 @@ body::after {
 
   .about-section {
     min-height: unset;
+    margin-top: 48px;
   }
 }
 
@@ -1900,7 +1903,7 @@ body::after {
 
 .proc-section {
   position: relative;
-  height: 100vh;
+  height: 100dvh;
   background: #050505;
   display: flex;
   flex-direction: column;
@@ -2049,7 +2052,7 @@ body::after {
 
 .work-section {
   position: relative;
-  height: 100vh;
+  height: 100dvh;
   background: var(--bg);
   overflow: hidden;
 }
@@ -2154,7 +2157,7 @@ body::after {
 
 .ourwork-section {
   position: relative;
-  height: 100vh;
+  height: 100dvh;
   background: #ede8e1;
   overflow: hidden;
 }
@@ -2217,7 +2220,7 @@ body::after {
   top: 50%;
   left: 50%;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   background: #F5F4F0;
   z-index: 20;
   will-change: transform, opacity;
@@ -2333,7 +2336,7 @@ body::after {
 .proc-chrome {
   width: min(1400px, 96vw);
   max-width: 100%;
-  height: min(820px, 80vh);
+  height: min(820px, 80dvh);
   border-radius: 0;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -2605,12 +2608,15 @@ body::after {
 
 @media (max-width: 640px) {
   .proc-section {
-    padding-bottom: 40px;
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+    padding-bottom: 60px;
   }
 
   .proc-chrome {
     width: 100%;
-    height: 82svh;
+    height: 88dvh;
     grid-template-columns: 1fr;
     grid-template-rows: 44px 1fr 28px;
     grid-template-areas:
@@ -3106,7 +3112,7 @@ body::after {
 .deck-section {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -3642,7 +3648,7 @@ body::after {
 
 .work-hero {
   background: #080808;
-  min-height: 100vh;
+  min-height: 100dvh;
   padding: 100px 40px 60px;
   display: flex;
   flex-direction: column;

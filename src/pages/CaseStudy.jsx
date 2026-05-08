@@ -32,7 +32,7 @@ export default function CaseStudy() {
         description={`Case study: ${project.name} — ${project.category}`}
       />
 
-      <div style={{ minHeight: '100vh', background: '#080808', paddingTop: '120px' }}>
+      <div style={{ minHeight: '100dvh', background: '#080808', paddingTop: '120px' }}>
 
         {/* ── Hero ── */}
         <section style={{ padding: '0 64px 80px', borderBottom: '1px solid #1a1a1a' }}>

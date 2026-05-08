@@ -9,7 +9,7 @@ export default function NotFound() {
         description="Page not found — Scene Set Studio"
       />
 
-      <div style={{ minHeight: '100vh', background: '#080808', paddingTop: '120px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '120px 64px' }}>
+      <div style={{ minHeight: '100dvh', background: '#080808', paddingTop: '120px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '120px 64px' }}>
 
         <p style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: 'clamp(120px, 20vw, 240px)', color: 'rgba(242,240,235,0.04)', letterSpacing: '-0.05em', lineHeight: 1, margin: '0 0 -20px', userSelect: 'none' }}>
           404

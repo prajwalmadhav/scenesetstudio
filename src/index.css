@@ -1651,7 +1651,7 @@ body::after {
 }
 
 .about-stamp__kannada {
-  font-family: 'Tiro Kannada', serif;
+  font-family: 'Kohinoor Kannada', 'Noto Sans Kannada', 'Nirmala UI', 'Tiro Kannada', serif;
   font-size: 10.5px;
   fill: rgba(26, 22, 20, 0.9);
   letter-spacing: 1.5px;
@@ -1677,7 +1677,7 @@ body::after {
 }
 
 .about-stamp__word--kannada {
-  font-family: 'Tiro Kannada', serif;
+  font-family: 'Kohinoor Kannada', 'Noto Sans Kannada', 'Nirmala UI', 'Tiro Kannada', serif;
   font-size: 22px;
   font-weight: 700;
   letter-spacing: 0.5px;

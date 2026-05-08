@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import SEO from '../components/SEO'
+import WorkHero from '../components/WorkHero'
 
 const CASES = [
   { slug: 'fawill-cleaning',  name: 'Fawill Cleaning',   category: 'Brand Strategy / Content', year: '2024' },
@@ -16,17 +17,9 @@ export default function Work() {
         description="Case studies and project work from Scene Set Studio — brand strategy, content production, and paid advertising."
       />
 
-      <div style={{ minHeight: '100vh', background: '#080808', paddingTop: '120px' }}>
+      <div style={{ background: '#080808' }}>
 
-        {/* Header */}
-        <div style={{ padding: '0 64px 80px', borderBottom: '1px solid #1a1a1a' }}>
-          <p style={{ fontFamily: 'var(--font-body)', fontSize: '11px', letterSpacing: '0.16em', color: 'rgba(242,240,235,0.4)', textTransform: 'uppercase', marginBottom: '24px' }}>
-            Selected Work
-          </p>
-          <h1 style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: 'clamp(48px, 7vw, 96px)', color: '#F2F0EB', lineHeight: 0.92, letterSpacing: '-0.03em', margin: 0 }}>
-            Every project is a<br />story worth telling.
-          </h1>
-        </div>
+        <WorkHero />
 
         {/* Grid */}
         <div style={{ padding: '64px', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2px' }}>

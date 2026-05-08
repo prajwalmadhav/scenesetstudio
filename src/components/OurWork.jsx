@@ -47,40 +47,40 @@ const WAVE1_CARDS = [
   { w: 215, h: 300, x: 1740, y: 2260 },
   { w: 255, h: 175, x: 2900, y: 2100 },
   { w: 235, h: 165, x: 1660, y: 1360 },
-  { w: 135, h: 92,  x: 940,  y: 1320 },
+  { w: 135, h: 92, x: 940, y: 1320 },
   { w: 118, h: 162, x: 1060, y: 1940 },
   { w: 148, h: 100, x: 3500, y: 1360 },
   { w: 110, h: 152, x: 3560, y: 1920 },
-  { w: 128, h: 86,  x: 2150, y: 1180 },
-  { w: 140, h: 96,  x: 2660, y: 1140 },
+  { w: 128, h: 86, x: 2150, y: 1180 },
+  { w: 140, h: 96, x: 2660, y: 1140 },
   { w: 152, h: 104, x: 3100, y: 2260 },
-  { w: 130, h: 88,  x: 2820, y: 2380 },
-  { w: 70,  h: 48,  x: 780,  y: 1220 },
-  { w: 58,  h: 40,  x: 856,  y: 1520 },
-  { w: 78,  h: 54,  x: 818,  y: 1800 },
-  { w: 62,  h: 44,  x: 738,  y: 2060 },
-  { w: 74,  h: 50,  x: 680,  y: 1440 },
-  { w: 54,  h: 38,  x: 700,  y: 1700 },
-  { w: 66,  h: 46,  x: 660,  y: 1960 },
-  { w: 74,  h: 50,  x: 3700, y: 1240 },
-  { w: 56,  h: 38,  x: 3790, y: 1520 },
-  { w: 68,  h: 46,  x: 3750, y: 1780 },
-  { w: 60,  h: 42,  x: 3680, y: 2040 },
-  { w: 82,  h: 56,  x: 3820, y: 1300 },
-  { w: 64,  h: 44,  x: 3840, y: 1680 },
-  { w: 72,  h: 50,  x: 3760, y: 2000 },
-  { w: 82,  h: 56,  x: 1880, y: 1020 },
-  { w: 66,  h: 46,  x: 2260, y:  980 },
-  { w: 76,  h: 52,  x: 2760, y: 1020 },
-  { w: 64,  h: 44,  x: 3260, y: 1100 },
-  { w: 72,  h: 50,  x: 1480, y: 2540 },
-  { w: 54,  h: 38,  x: 2100, y: 2580 },
-  { w: 68,  h: 46,  x: 2840, y: 2560 },
-  { w: 58,  h: 40,  x: 3180, y: 2480 },
-  { w: 76,  h: 52,  x: 1220, y: 2340 },
-  { w: 62,  h: 42,  x: 1360, y: 2580 },
-  { w: 70,  h: 48,  x: 3340, y: 2380 },
-  { w: 56,  h: 38,  x: 3460, y: 2120 },
+  { w: 130, h: 88, x: 2820, y: 2380 },
+  { w: 70, h: 48, x: 780, y: 1220 },
+  { w: 58, h: 40, x: 856, y: 1520 },
+  { w: 78, h: 54, x: 818, y: 1800 },
+  { w: 62, h: 44, x: 738, y: 2060 },
+  { w: 74, h: 50, x: 680, y: 1440 },
+  { w: 54, h: 38, x: 700, y: 1700 },
+  { w: 66, h: 46, x: 660, y: 1960 },
+  { w: 74, h: 50, x: 3700, y: 1240 },
+  { w: 56, h: 38, x: 3790, y: 1520 },
+  { w: 68, h: 46, x: 3750, y: 1780 },
+  { w: 60, h: 42, x: 3680, y: 2040 },
+  { w: 82, h: 56, x: 3820, y: 1300 },
+  { w: 64, h: 44, x: 3840, y: 1680 },
+  { w: 72, h: 50, x: 3760, y: 2000 },
+  { w: 82, h: 56, x: 1880, y: 1020 },
+  { w: 66, h: 46, x: 2260, y: 980 },
+  { w: 76, h: 52, x: 2760, y: 1020 },
+  { w: 64, h: 44, x: 3260, y: 1100 },
+  { w: 72, h: 50, x: 1480, y: 2540 },
+  { w: 54, h: 38, x: 2100, y: 2580 },
+  { w: 68, h: 46, x: 2840, y: 2560 },
+  { w: 58, h: 40, x: 3180, y: 2480 },
+  { w: 76, h: 52, x: 1220, y: 2340 },
+  { w: 62, h: 42, x: 1360, y: 2580 },
+  { w: 70, h: 48, x: 3340, y: 2380 },
+  { w: 56, h: 38, x: 3460, y: 2120 },
 ]
 
 /* ─────────────────────────────────────────
@@ -103,40 +103,40 @@ const WAVE2_CARDS = [
   { w: 218, h: 304, x: 1800, y: 2280 },
   { w: 254, h: 174, x: 2940, y: 2120 },
   { w: 234, h: 164, x: 1700, y: 1380 },
-  { w: 132, h: 90,  x: 980,  y: 1360 },
+  { w: 132, h: 90, x: 980, y: 1360 },
   { w: 116, h: 160, x: 1040, y: 1980 },
-  { w: 146, h: 98,  x: 3480, y: 1340 },
+  { w: 146, h: 98, x: 3480, y: 1340 },
   { w: 112, h: 154, x: 3540, y: 1940 },
-  { w: 126, h: 84,  x: 2180, y: 1200 },
-  { w: 142, h: 98,  x: 2700, y: 1160 },
+  { w: 126, h: 84, x: 2180, y: 1200 },
+  { w: 142, h: 98, x: 2700, y: 1160 },
   { w: 150, h: 102, x: 3060, y: 2240 },
-  { w: 132, h: 90,  x: 2780, y: 2340 },
-  { w: 68,  h: 46,  x: 800,  y: 1240 },
-  { w: 56,  h: 38,  x: 876,  y: 1540 },
-  { w: 76,  h: 52,  x: 836,  y: 1820 },
-  { w: 60,  h: 42,  x: 756,  y: 2080 },
-  { w: 72,  h: 50,  x: 700,  y: 1460 },
-  { w: 52,  h: 36,  x: 720,  y: 1720 },
-  { w: 64,  h: 44,  x: 676,  y: 1980 },
-  { w: 72,  h: 50,  x: 3720, y: 1260 },
-  { w: 54,  h: 38,  x: 3810, y: 1540 },
-  { w: 66,  h: 44,  x: 3770, y: 1800 },
-  { w: 58,  h: 40,  x: 3700, y: 2060 },
-  { w: 80,  h: 54,  x: 3800, y: 1280 },
-  { w: 62,  h: 42,  x: 3860, y: 1700 },
-  { w: 70,  h: 48,  x: 3780, y: 2020 },
-  { w: 80,  h: 54,  x: 1900, y: 1040 },
-  { w: 64,  h: 44,  x: 2280, y: 1000 },
-  { w: 74,  h: 50,  x: 2740, y: 1000 },
-  { w: 62,  h: 42,  x: 3240, y: 1080 },
-  { w: 70,  h: 48,  x: 1500, y: 2560 },
-  { w: 52,  h: 36,  x: 2140, y: 2600 },
-  { w: 66,  h: 44,  x: 2860, y: 2580 },
-  { w: 56,  h: 38,  x: 3200, y: 2500 },
-  { w: 74,  h: 50,  x: 1240, y: 2360 },
-  { w: 60,  h: 42,  x: 1380, y: 2600 },
-  { w: 68,  h: 46,  x: 3360, y: 2400 },
-  { w: 54,  h: 38,  x: 3480, y: 2140 },
+  { w: 132, h: 90, x: 2780, y: 2340 },
+  { w: 68, h: 46, x: 800, y: 1240 },
+  { w: 56, h: 38, x: 876, y: 1540 },
+  { w: 76, h: 52, x: 836, y: 1820 },
+  { w: 60, h: 42, x: 756, y: 2080 },
+  { w: 72, h: 50, x: 700, y: 1460 },
+  { w: 52, h: 36, x: 720, y: 1720 },
+  { w: 64, h: 44, x: 676, y: 1980 },
+  { w: 72, h: 50, x: 3720, y: 1260 },
+  { w: 54, h: 38, x: 3810, y: 1540 },
+  { w: 66, h: 44, x: 3770, y: 1800 },
+  { w: 58, h: 40, x: 3700, y: 2060 },
+  { w: 80, h: 54, x: 3800, y: 1280 },
+  { w: 62, h: 42, x: 3860, y: 1700 },
+  { w: 70, h: 48, x: 3780, y: 2020 },
+  { w: 80, h: 54, x: 1900, y: 1040 },
+  { w: 64, h: 44, x: 2280, y: 1000 },
+  { w: 74, h: 50, x: 2740, y: 1000 },
+  { w: 62, h: 42, x: 3240, y: 1080 },
+  { w: 70, h: 48, x: 1500, y: 2560 },
+  { w: 52, h: 36, x: 2140, y: 2600 },
+  { w: 66, h: 44, x: 2860, y: 2580 },
+  { w: 56, h: 38, x: 3200, y: 2500 },
+  { w: 74, h: 50, x: 1240, y: 2360 },
+  { w: 60, h: 42, x: 1380, y: 2600 },
+  { w: 68, h: 46, x: 3360, y: 2400 },
+  { w: 54, h: 38, x: 3480, y: 2140 },
 ]
 
 const MAX_DIST = 1600
@@ -146,13 +146,13 @@ function clamp01(v) { return Math.max(0, Math.min(1, v)) }
 /* Wave 1 — fades in fast (already at medium zoom), flies past ~p=0.35–0.55 */
 function buildW1Configs(cards) {
   return cards.map((c) => {
-    const dist  = Math.sqrt((c.x + c.w / 2 - CX) ** 2 + (c.y + c.h / 2 - CY) ** 2)
+    const dist = Math.sqrt((c.x + c.w / 2 - CX) ** 2 + (c.y + c.h / 2 - CY) ** 2)
     const dNorm = clamp01(dist / MAX_DIST)
     return {
-      fadeInStart:  0.00,
-      fadeInEnd:    lerp(0.06, 0.02, dNorm),   // quick reveal
+      fadeInStart: 0.00,
+      fadeInEnd: lerp(0.06, 0.02, dNorm),   // quick reveal
       flyPastStart: lerp(0.38, 0.24, dNorm),
-      flyPastEnd:   lerp(0.52, 0.36, dNorm),
+      flyPastEnd: lerp(0.52, 0.36, dNorm),
     }
   })
 }
@@ -160,13 +160,13 @@ function buildW1Configs(cards) {
 /* Wave 2 — originates from deep bg at p=0.42, flies past p=0.72–0.88 */
 function buildW2Configs(cards) {
   return cards.map((c) => {
-    const dist  = Math.sqrt((c.x + c.w / 2 - CX) ** 2 + (c.y + c.h / 2 - CY) ** 2)
+    const dist = Math.sqrt((c.x + c.w / 2 - CX) ** 2 + (c.y + c.h / 2 - CY) ** 2)
     const dNorm = clamp01(dist / MAX_DIST)
     return {
-      fadeInStart:  0.42,
-      fadeInEnd:    lerp(0.52, 0.48, dNorm),
+      fadeInStart: 0.42,
+      fadeInEnd: lerp(0.52, 0.48, dNorm),
       flyPastStart: lerp(0.76, 0.62, dNorm),
-      flyPastEnd:   lerp(0.88, 0.74, dNorm),
+      flyPastEnd: lerp(0.88, 0.74, dNorm),
     }
   })
 }
@@ -178,17 +178,17 @@ export default function OurWork() {
   const sectionRef = useRef(null)
   const canvas1Ref = useRef(null)
   const canvas2Ref = useRef(null)
-  const labelRef   = useRef(null)
-  const portalRef  = useRef(null)
-  const wave1Refs  = useRef([])
-  const wave2Refs  = useRef([])
+  const labelRef = useRef(null)
+  const portalRef = useRef(null)
+  const wave1Refs = useRef([])
+  const wave2Refs = useRef([])
 
   useEffect(() => {
     const section = sectionRef.current
     const canvas1 = canvas1Ref.current
     const canvas2 = canvas2Ref.current
-    const label   = labelRef.current
-    const portal  = portalRef.current
+    const label = labelRef.current
+    const portal = portalRef.current
     if (!section || !canvas1 || !canvas2 || !label || !portal) return
 
     const vw = window.innerWidth
@@ -198,27 +198,45 @@ export default function OurWork() {
 
     /* ── Initial state: wave1 at MEDIUM ZOOM so imagery is immediately visible ── */
     gsap.set(canvas1, { x: ox, y: oy, scale: 0.55, opacity: 1, transformOrigin: '50% 50%' })
-    gsap.set(canvas2, { x: ox, y: oy, scale: 0.18, opacity: 0,  transformOrigin: '50% 50%' })
-    gsap.set(label,   { opacity: 1, y: 0 })
-    gsap.set(portal,  { opacity: 0, scaleX: 0, scaleY: 0, xPercent: -50, yPercent: -50, transformOrigin: '50% 50%' })
+    gsap.set(canvas2, { x: ox, y: oy, scale: 0.18, opacity: 0, transformOrigin: '50% 50%' })
+    gsap.set(label, { opacity: 1, y: 0 })
+    gsap.set(portal, { opacity: 0, scaleX: 0, scaleY: 0, xPercent: -50, yPercent: -50, transformOrigin: '50% 50%' })
 
     wave1Refs.current.forEach(el => { if (el) el.style.opacity = '0' })
     wave2Refs.current.forEach(el => { if (el) el.style.opacity = '0' })
 
     let portalUnlocked = false
 
+    function lerpColor(a, b, t) {
+      const parse = hex => [
+        parseInt(hex.slice(1, 3), 16),
+        parseInt(hex.slice(3, 5), 16),
+        parseInt(hex.slice(5, 7), 16),
+      ]
+      const [ar, ag, ab] = parse(a)
+      const [br, bg, bb] = parse(b)
+      const r = Math.round(ar + (br - ar) * t)
+      const g = Math.round(ag + (bg - ag) * t)
+      const bv = Math.round(ab + (bb - ab) * t)
+      return `rgb(${r},${g},${bv})`
+    }
+
     function onUpdate(self) {
       const p = self.progress
 
+      /* ── Background: cream → dark over first 25% of scroll ── */
+      const bgT = clamp01(p / 0.25)
+      section.style.background = lerpColor('#ede8e1', '#080808', bgT)
+
       /* ── Wave 1: medium zoom (0.55) → fly past (9.0), fades at p>0.50 ── */
-      const c1scale   = lerp(0.55, 9.0, clamp01(p / 0.55))
+      const c1scale = lerp(0.55, 9.0, clamp01(p / 0.55))
       const c1opacity = p < 0.50 ? 1 : clamp01(1 - (p - 0.50) / 0.10)
       gsap.set(canvas1, { scale: c1scale, opacity: c1opacity })
 
       /* ── Wave 2: deep background (0.18) → fly past (9.0), originates at p=0.42 ── */
-      const c2opacityIn  = clamp01((p - 0.42) / 0.08)
+      const c2opacityIn = clamp01((p - 0.42) / 0.08)
       const c2opacityOut = p < 0.82 ? 1 : clamp01(1 - (p - 0.82) / 0.08)
-      const c2scale      = lerp(0.18, 9.0, clamp01((p - 0.42) / 0.53))
+      const c2scale = lerp(0.18, 9.0, clamp01((p - 0.42) / 0.53))
       gsap.set(canvas2, { scale: c2scale, opacity: Math.min(c2opacityIn, c2opacityOut) })
 
       /* ── Label fades quickly after scroll starts ── */
@@ -240,11 +258,11 @@ export default function OurWork() {
         if (!el) return
         const { fadeInStart: a, fadeInEnd: b, flyPastStart: c, flyPastEnd: d } = WAVE1_CONFIGS[i]
         let o
-        if (p <= a)      o = 0
+        if (p <= a) o = 0
         else if (p <= b) o = clamp01((p - a) / (b - a))
         else if (p <= c) o = 1
         else if (p <= d) o = clamp01(1 - (p - c) / (d - c))
-        else             o = 0
+        else o = 0
         el.style.opacity = o
       })
 
@@ -253,11 +271,11 @@ export default function OurWork() {
         if (!el) return
         const { fadeInStart: a, fadeInEnd: b, flyPastStart: c, flyPastEnd: d } = WAVE2_CONFIGS[i]
         let o
-        if (p <= a)      o = 0
+        if (p <= a) o = 0
         else if (p <= b) o = clamp01((p - a) / (b - a))
         else if (p <= c) o = 1
         else if (p <= d) o = clamp01(1 - (p - c) / (d - c))
-        else             o = 0
+        else o = 0
         el.style.opacity = o
       })
     }

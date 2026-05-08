@@ -144,10 +144,7 @@ export default function Hero() {
         <p ref={subtextRef} className="hero-subtext" style={{ opacity: 0 }}>
           Cinematic storytelling meets performance marketing.
           <br />
-          We build brands that{' '}
-          <span className={`hero-cycle-word${fading ? ' hero-cycle-word--fade' : ''}`}>
-            {HERO_WORDS[wordIdx]}
-          </span>.
+          We build brands that resonate.
         </p>
 
         <div ref={buttonsRef} className="hero-buttons">

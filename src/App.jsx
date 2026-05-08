@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
+import useButtonRipple from './hooks/useButtonRipple'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -65,6 +66,7 @@ function BrandWatermark() {
 }
 
 function App() {
+  useButtonRipple()
   const base = import.meta.env.BASE_URL.replace(/\/$/, '') || '/'
   return (
     <BrowserRouter basename={base}>

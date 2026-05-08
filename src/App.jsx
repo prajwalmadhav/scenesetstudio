@@ -43,6 +43,17 @@ function HomePage() {
           <span className="brand-zone-bg__horiz brand-zone-bg__horiz--neon">STUDIO</span>
         </div>
         <CTA />
+
+        {/* Mobile-only scene set branding before footer */}
+        <div className="mobile-brand-stamp" aria-hidden="true">
+          <div className="mobile-brand-stamp__inner">
+            <span className="mobile-brand-stamp__word">SCENE</span>
+            <span className="mobile-brand-stamp__word">SET</span>
+            <span className="mobile-brand-stamp__word mobile-brand-stamp__word--studio">STUDIO</span>
+          </div>
+          <p className="mobile-brand-stamp__sub">Ottawa · Gatineau · Canada</p>
+        </div>
+
         <Footer />
       </div>
     </main>

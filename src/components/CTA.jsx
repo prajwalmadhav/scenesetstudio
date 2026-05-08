@@ -6,6 +6,44 @@ gsap.registerPlugin(ScrollTrigger)
 
 const WORDS = ['extraordinary', 'cinematic', 'unforgettable', 'iconic', 'legendary', 'immersive']
 
+/* ── Animated SVG underline on hover ── */
+function AnimatedUnderline({ children, color = '#C8F535', wave = false }) {
+  const pathRef = useRef(null)
+
+  function onEnter() {
+    gsap.fromTo(pathRef.current,
+      { strokeDashoffset: 1 },
+      { strokeDashoffset: 0, duration: 0.55, ease: 'power2.out' }
+    )
+  }
+  function onLeave() {
+    gsap.to(pathRef.current, { strokeDashoffset: -1, duration: 0.4, ease: 'power2.in' })
+  }
+
+  const d = wave
+    ? 'M 0 0.6 C 0.08 0.2, 0.18 1, 0.3 0.6 C 0.42 0.2, 0.52 1, 0.64 0.6 C 0.76 0.2, 0.88 1, 1 0.6'
+    : 'M 0.01 0.5 C 0.25 0.2, 0.5 0.85, 0.75 0.3 C 0.88 0.05, 0.96 0.6, 1 0.5'
+
+  return (
+    <span className="svg-underlink" onMouseEnter={onEnter} onMouseLeave={onLeave}>
+      {children}
+      <svg className="svg-underlink__svg" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true">
+        <path
+          ref={pathRef}
+          d={d}
+          fill="none"
+          stroke={color}
+          strokeWidth="0.07"
+          strokeLinecap="round"
+          pathLength="1"
+          strokeDasharray="1"
+          strokeDashoffset="1"
+        />
+      </svg>
+    </span>
+  )
+}
+
 export default function CTA() {
   const sectionRef = useRef(null)
   const [wordIndex, setWordIndex] = useState(0)
@@ -62,7 +100,7 @@ export default function CTA() {
 
         {/* ── Line 1: Let's build something ── */}
         <div className="cta-line cta-line--left">
-          Let's build something
+          Let's build <AnimatedUnderline color="#C8F535">something</AnimatedUnderline>
 
           {/* Thick marker highlight (behind text via z-index) */}
           <svg className="cta-doodle-svg cta-marker-svg" viewBox="0 0 600 32"
@@ -92,12 +130,14 @@ export default function CTA() {
 
         {/* ── Line 2: rotating glitch word ── */}
         <div className="cta-line cta-line--right cta-line--accent">
-          <span
-            className={`cta-glitch-word${isGlitching ? ' is-glitching' : ''}`}
-            data-text={WORDS[wordIndex]}
-          >
-            {WORDS[wordIndex]}
-          </span>
+          <AnimatedUnderline color="#C42087" wave>
+            <span
+              className={`cta-glitch-word${isGlitching ? ' is-glitching' : ''}`}
+              data-text={WORDS[wordIndex]}
+            >
+              {WORDS[wordIndex]}
+            </span>
+          </AnimatedUnderline>
           .
 
           {/* Wavy underline beneath the line */}
@@ -124,7 +164,7 @@ export default function CTA() {
 
       <div className="cta-action">
         <button className="cta-btn">
-          <span>Start Your Project</span>
+          <AnimatedUnderline color="#C8F535"><span>Start Your Project</span></AnimatedUnderline>
           <span className="cta-btn__arrow">→</span>
         </button>
         <p className="cta-sub">Free discovery call · No commitment</p>

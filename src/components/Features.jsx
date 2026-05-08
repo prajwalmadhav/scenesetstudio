@@ -97,11 +97,11 @@ export default function Features() {
           invalidateOnRefresh: true,
           onUpdate: (self) => {
             const t = self.progress
-            const r = Math.round(lerp(8,  238, t))
-            const g = Math.round(lerp(8,  235, t))
-            const b = Math.round(lerp(8,  230, t))
+            const r = Math.round(lerp(90,  5, t))
+            const g = Math.round(lerp(86,  5, t))
+            const b = Math.round(lerp(82,  5, t))
             bg.style.backgroundColor = `rgb(${r},${g},${b})`
-            const light = t > 0.46
+            const light = false
             section.querySelectorAll('.feat-panel').forEach(p => {
               p.style.setProperty('--text',  light ? 'rgba(10,10,10,0.9)'   : 'rgba(240,238,234,0.95)')
               p.style.setProperty('--muted', light ? 'rgba(10,10,10,0.38)'  : 'rgba(240,238,234,0.40)')

@@ -2,19 +2,9 @@ import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import LiquidBackground from './LiquidBackground'
+import PosterPlaceholderIcon from './PosterPlaceholderIcon'
 
 gsap.registerPlugin(ScrollTrigger)
-
-const CARD_COLORS = [
-  'linear-gradient(150deg, #1a0a12 0%, #2d0d1f 100%)',
-  'linear-gradient(150deg, #0a0f1a 0%, #0d1a2d 100%)',
-  'linear-gradient(150deg, #0a1a0f 0%, #0d2d18 100%)',
-  'linear-gradient(150deg, #1a100a 0%, #2d1a0d 100%)',
-  'linear-gradient(150deg, #150a1a 0%, #230d2d 100%)',
-  'linear-gradient(150deg, #0a1a18 0%, #0d2d28 100%)',
-  'linear-gradient(150deg, #1a1a0a 0%, #2d2d0d 100%)',
-  'linear-gradient(150deg, #0f0a1a 0%, #1a0d2d 100%)',
-]
 
 const BASE_COLS = [
   [{ h: 320, c: 0 }, { h: 380, c: 1 }, { h: 300, c: 2 }, { h: 360, c: 3 }, { h: 340, c: 4 }, { h: 290, c: 5 }],
@@ -25,6 +15,23 @@ const BASE_COLS = [
 ]
 
 const TABLE_COLS = BASE_COLS.map(col => [...col, ...col])
+
+const HERO_POSTER_SLOTS = {
+  // Replace these src values later with files in /public, for example:
+  // src: `${import.meta.env.BASE_URL}assets/hero-posters/brand-campaign-01.jpg`
+  'hero-0-0': { label: 'Column 1 / Card 1', src: '' },
+  'hero-0-1': { label: 'Column 1 / Card 2', src: '' },
+  'hero-0-2': { label: 'Column 1 / Card 3', src: '' },
+  'hero-0-3': { label: 'Column 1 / Card 4', src: '' },
+  'hero-1-0': { label: 'Column 2 / Card 1', src: '' },
+  'hero-1-1': { label: 'Column 2 / Card 2', src: '' },
+  'hero-1-2': { label: 'Column 2 / Card 3', src: '' },
+  'hero-1-3': { label: 'Column 2 / Card 4', src: '' },
+  'hero-2-0': { label: 'Column 3 / Card 1', src: '' },
+  'hero-2-1': { label: 'Column 3 / Card 2', src: '' },
+  'hero-2-2': { label: 'Column 3 / Card 3', src: '' },
+  'hero-2-3': { label: 'Column 3 / Card 4', src: '' },
+}
 
 export default function Hero() {
   const badgeRef        = useRef(null)
@@ -147,11 +154,30 @@ export default function Hero() {
                 ref={el => colRefs.current[ci] = el}
               >
                 {col.map((card, idx) => (
-                  <div
-                    key={idx}
-                    className="hero-table-card"
-                    style={{ height: card.h, background: CARD_COLORS[card.c] }}
-                  />
+                  (() => {
+                    const slotId = `hero-${ci}-${idx}`
+                    const poster = HERO_POSTER_SLOTS[slotId]
+                    const hasPoster = Boolean(poster?.src)
+
+                    return (
+                      <div
+                        key={idx}
+                        className={`hero-table-card${hasPoster ? ' hero-table-card--has-media' : ''}`}
+                        style={{ height: card.h }}
+                        data-slot={poster ? slotId : undefined}
+                      >
+                        {hasPoster ? (
+                          <img
+                            className="hero-table-card__media"
+                            src={poster.src}
+                            alt={poster.label}
+                          />
+                        ) : (
+                          <PosterPlaceholderIcon variant={card.c + ci + idx} />
+                        )}
+                      </div>
+                    )
+                  })()
                 ))}
               </div>
             ))}

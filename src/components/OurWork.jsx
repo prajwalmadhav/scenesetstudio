@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Testimonials from './Testimonials'
+import PosterPlaceholderIcon from './PosterPlaceholderIcon'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -12,33 +13,17 @@ const CX = 2400
 const CY = 1900
 
 /* ─────────────────────────────────────────
-   Editorial colour palette
-   Matches the reference: dark, red, green,
-   cream, deep-blue, brown, warm-grey.
+   Poster placeholder style
+   Cards stay black until replaced with real campaign artwork.
    ───────────────────────────────────────── */
-const DARK = '#1a1814'
-const PALETTE = [
-  '#C43A1E', // editorial red
-  '#2B4A3A', // forest green
-  '#BFC8A8', // sage / parchment
-  '#1E2840', // dark blue-navy
-  '#4A3828', // warm dark brown
-  '#9A8B72', // warm taupe
-  '#3A2E48', // dark purple
-  '#8B6050', // warm terracotta muted
-]
+const DARK = '#020202'
 
 /**
- * Assign a background colour to a card.
- * Large cards always get editorial tones.
- * Medium cards get editorial every 2nd.
- * Small / tiny cards stay near-black.
+ * Keep a single dark poster base while preserving the existing card API.
  */
 function cardBg(card, idx) {
-  const { w } = card
-  if (w >= 400)  return PALETTE[idx % PALETTE.length]
-  if (w >= 200)  return idx % 2 === 0 ? PALETTE[(idx * 3) % PALETTE.length] : DARK
-  if (w >= 100)  return idx % 4 === 0 ? PALETTE[(idx * 2) % PALETTE.length] : DARK
+  void card
+  void idx
   return DARK
 }
 
@@ -318,7 +303,9 @@ export default function OurWork() {
               opacity: 0,
               background: cardBg(c, i),
             }}
-          />
+          >
+            <PosterPlaceholderIcon variant={i} />
+          </div>
         ))}
       </div>
 
@@ -332,9 +319,11 @@ export default function OurWork() {
             style={{
               width: c.w, height: c.h, left: c.x, top: c.y,
               opacity: 0,
-              background: cardBg(c, i + 7), // offset palette so wave2 differs from wave1
+              background: cardBg(c, i + 7),
             }}
-          />
+          >
+            <PosterPlaceholderIcon variant={i + 7} />
+          </div>
         ))}
       </div>
 

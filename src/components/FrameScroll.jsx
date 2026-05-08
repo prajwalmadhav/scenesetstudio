@@ -1,27 +1,39 @@
 import { useEffect, useRef, useState } from 'react'
 
 const VIDEO_SRC = `${import.meta.env.BASE_URL}video/ourwork.mp4`
-const SCROLL_HEIGHT = '400vh'
 const LERP_FACTOR = 0.07
+const MOBILE_BREAKPOINT = 640
 
 export default function FrameScroll() {
   const containerRef = useRef(null)
+  const stickyRef = useRef(null)
   const videoRef = useRef(null)
   const targetRef = useRef(0)   // raw scroll-mapped time
   const currentRef = useRef(0)   // lerped time actually applied
   const rafRef = useRef(null)
   const [hideIndicator, setHideIndicator] = useState(false)
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= MOBILE_BREAKPOINT)
+
+  useEffect(() => {
+    function onResize() {
+      setIsMobile(window.innerWidth <= MOBILE_BREAKPOINT)
+    }
+
+    window.addEventListener('resize', onResize, { passive: true })
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
 
   useEffect(() => {
     const video = videoRef.current
     const container = containerRef.current
-    if (!video || !container) return
+    const sticky = stickyRef.current
+    if (!video || !container || !sticky) return
 
     // ── Scroll → update target time ──────────────────────────────────────
     function onScroll() {
       if (!video.duration) return
       const rect = container.getBoundingClientRect()
-      const total = container.offsetHeight - window.innerHeight
+      const total = container.offsetHeight - sticky.offsetHeight
       if (total <= 0) return
       const progress = Math.max(0, Math.min(1, -rect.top / total))
       targetRef.current = progress * video.duration
@@ -59,21 +71,29 @@ export default function FrameScroll() {
       cancelAnimationFrame(rafRef.current)
       window.removeEventListener('scroll', onScroll)
     }
-  }, [])
+  }, [isMobile])
+
+  const sectionHeight = isMobile ? '180vh' : '400vh'
+  const stickyTop = isMobile ? '12svh' : 0
+  const stickyHeight = isMobile ? '68svh' : '100vh'
+  const videoFit = isMobile ? 'contain' : 'cover'
 
   return (
     <div
       ref={containerRef}
-      style={{ position: 'relative', height: SCROLL_HEIGHT }}
+      style={{ position: 'relative', height: sectionHeight }}
     >
       <div
+        ref={stickyRef}
         style={{
           position: 'sticky',
-          top: 0,
+          top: stickyTop,
           width: '100%',
-          height: '100vh',
+          height: stickyHeight,
           overflow: 'hidden',
           background: '#E8E6E1',
+          borderRadius: isMobile ? '24px' : 0,
+          margin: isMobile ? '0 14px' : 0,
         }}
       >
         <video
@@ -87,7 +107,7 @@ export default function FrameScroll() {
             inset: 0,
             width: '100%',
             height: '100%',
-            objectFit: 'cover',
+            objectFit: videoFit,
             display: 'block',
           }}
         />
@@ -113,7 +133,7 @@ export default function FrameScroll() {
               style={{
                 fontFamily: "'Syne', sans-serif",
                 fontWeight: 900,
-                fontSize: 'clamp(80px, 14vw, 180px)',
+                fontSize: isMobile ? 'clamp(54px, 13vw, 92px)' : 'clamp(80px, 14vw, 180px)',
                 letterSpacing: '-0.04em',
                 textTransform: 'uppercase',
                 color: 'transparent',
@@ -131,11 +151,11 @@ export default function FrameScroll() {
         <div
           style={{
             position: 'absolute',
-            bottom: '40px',
+            bottom: isMobile ? '20px' : '40px',
             left: '50%',
             transform: 'translateX(-50%)',
             color: 'rgba(0,0,0,0.35)',
-            fontSize: '12px',
+            fontSize: isMobile ? '11px' : '12px',
             letterSpacing: '0.14em',
             fontFamily: 'monospace',
             opacity: hideIndicator ? 0 : 1,

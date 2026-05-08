@@ -382,12 +382,72 @@ function LogoGrid() {
   )
 }
 
+/* ── Mobile deck carousel ── */
+function MobileCarousel() {
+  const [current, setCurrent] = useState(0)
+  const touchStart = useRef(null)
+  const n = POSTS.length
+
+  useEffect(() => {
+    const t = setInterval(() => setCurrent(c => (c + 1) % n), 3000)
+    return () => clearInterval(t)
+  }, [n])
+
+  function goNext() { setCurrent(c => (c + 1) % n) }
+  function goPrev() { setCurrent(c => (c - 1 + n) % n) }
+
+  function onTouchStart(e) { touchStart.current = e.touches[0].clientX }
+  function onTouchEnd(e) {
+    if (touchStart.current === null) return
+    const dx = e.changedTouches[0].clientX - touchStart.current
+    if (dx < -40) goNext()
+    else if (dx > 40) goPrev()
+    touchStart.current = null
+  }
+
+  return (
+    <div className="mob-deck">
+      <div className="mob-deck__stage" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+        {POSTS.map((post, i) => {
+          const offset = (i - current + n) % n
+          if (offset > 2) return null
+          return (
+            <div key={i} className="mob-deck__card" style={{
+              zIndex: n - offset,
+              transform: `translateY(${offset * 12}px) scale(${1 - offset * 0.06})`,
+              opacity: offset === 0 ? 1 : 0.55,
+              transition: 'transform 0.45s cubic-bezier(0.34,1.56,0.64,1), opacity 0.4s ease',
+            }}>
+              <PhotoCard post={post} />
+            </div>
+          )
+        })}
+      </div>
+      <div className="mob-deck__nav">
+        <button className="mob-deck__btn" onClick={goPrev} aria-label="Previous">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+        </button>
+        <div className="mob-deck__dots">
+          {POSTS.map((_, i) => (
+            <span key={i} className={`mob-deck__dot${i === current ? ' mob-deck__dot--on' : ''}`} />
+          ))}
+        </div>
+        <button className="mob-deck__btn" onClick={goNext} aria-label="Next">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  )
+}
+
 /* ══════════════════════════════════════════════════════════════
    MAIN COMPONENT
 ══════════════════════════════════════════════════════════════ */
 export default function Testimonials() {
-  const containerRef = useRef(null)
-  const panelRef = useRef(null)
   const cardEls = useRef([])
   const carouselRef = useRef(null)
   const offsetRef = useRef(0)
@@ -430,27 +490,6 @@ export default function Testimonials() {
     setTimeout(() => { animating.current = false }, 600)
   }
 
-  /* Scroll-expand animation */
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        panelRef.current,
-        { scale: 0.08, borderRadius: '16px' },
-        {
-          scale: 1,
-          borderRadius: '0px',
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: 'top top',
-            end: 'center top',
-            scrub: 2,
-          },
-        }
-      )
-    }, containerRef)
-    return () => ctx.revert()
-  }, [])
 
   /* Hover: lift + slide toward outside edge based on fan position */
   function handleHoverEnter(i) {
@@ -492,20 +531,7 @@ export default function Testimonials() {
   }, [])
 
   return (
-    <div ref={containerRef} style={{ position: 'relative', height: '220vh', marginTop: '-140vh' }}>
-      <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden', zIndex: 2 }}>
-        <div
-          ref={panelRef}
-          style={{
-            position: 'absolute',
-            inset: 0,
-            background: '#0c0c0b',
-            transformOrigin: 'center center',
-            willChange: 'transform',
-            overflow: 'hidden',
-          }}
-        >
-          <section className="deck-section" id="testimonials">
+    <section className="deck-section" id="testimonials">
 
             {/* Header */}
             <div className="deck-header">
@@ -513,14 +539,8 @@ export default function Testimonials() {
               <h2 className="deck-title">Real results.<br />Real people.</h2>
             </div>
 
-            {/* Mobile carousel */}
-            <div className="fan-carousel" ref={carouselRef}>
-              {POSTS.map((post, i) => (
-                <div key={i} className="fan-carousel__card">
-                  <PhotoCard post={post} />
-                </div>
-              ))}
-            </div>
+            {/* Mobile deck */}
+            <MobileCarousel />
 
             {/* Fan stage — desktop only */}
             <div className="fan-stage">
@@ -543,9 +563,6 @@ export default function Testimonials() {
             {/* Logo grid */}
             <LogoGrid />
 
-          </section>
-        </div>
-      </div>
-    </div>
+    </section>
   )
 }

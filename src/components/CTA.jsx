@@ -96,6 +96,15 @@ export default function CTA() {
   return (
     <section ref={sectionRef} className="cta-section">
 
+      {/* Mobile-only brand stamp blended into CTA bg */}
+      <div className="mobile-brand-stamp" aria-hidden="true">
+        <div className="mobile-brand-stamp__verts">
+          <span className="mobile-brand-stamp__vert mobile-brand-stamp__vert--neon">SCENE</span>
+          <span className="mobile-brand-stamp__vert mobile-brand-stamp__vert--neon mobile-brand-stamp__vert--delay1">SET</span>
+        </div>
+        <span className="mobile-brand-stamp__horiz mobile-brand-stamp__horiz--neon">STUDIO</span>
+      </div>
+
       <div className="cta-text">
 
         {/* ── Line 1: Let's build something ── */}

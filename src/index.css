@@ -1443,11 +1443,51 @@ body::after {
 .about-stamp {
   position: absolute;
   top: 8%;
-  left: 7%;
+  left: 6%;
   transform: rotate(-8deg);
   opacity: 0;
   pointer-events: none;
   z-index: 5;
+}
+
+.about-stamp__svg {
+  width: 240px;
+  height: 240px;
+  color: rgba(232, 230, 225, 1);
+}
+
+.about-stamp__kannada {
+  font-family: 'Tiro Kannada', serif;
+  font-size: 10.5px;
+  fill: rgba(232, 230, 225, 0.9);
+  letter-spacing: 1.5px;
+}
+
+.about-stamp__since {
+  font-family: var(--font-body);
+  font-size: 8px;
+  fill: rgba(232, 230, 225, 0.75);
+  letter-spacing: 2px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.about-stamp__word {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  fill: rgba(232, 230, 225, 0.95);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.about-stamp__word--kannada {
+  font-family: 'Tiro Kannada', serif;
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  text-transform: none;
+  fill: rgba(232, 230, 225, 0.95);
 }
 
 .about-stamp__inner {
@@ -1486,12 +1526,13 @@ body::after {
 
 @media (max-width: 640px) {
   .about-stamp {
-    top: 6%;
-    left: 4%;
+    top: 4%;
+    left: 3%;
   }
 
-  .about-stamp__name {
-    font-size: clamp(24px, 7vw, 40px);
+  .about-stamp__svg {
+    width: 90px;
+    height: 90px;
   }
 }
 
@@ -2916,35 +2957,79 @@ body::after {
   overflow: visible;
 }
 
-/* ── Mobile carousel ── */
-.fan-carousel {
-  display: none;
-}
+/* ── Mobile deck carousel ── */
+.mob-deck { display: none; }
 
 @media (max-width: 600px) {
   .fan-stage { display: none; }
 
-  .fan-carousel {
+  .mob-deck {
     display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    gap: 14px;
-    padding: 20px 28px 36px;
-    scrollbar-width: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    padding: 16px 0 36px;
     width: 100%;
   }
-  .fan-carousel::-webkit-scrollbar { display: none; }
 
-  .fan-carousel__card {
-    flex-shrink: 0;
-    width: 200px;
-    scroll-snap-align: center;
+  .mob-deck__stage {
+    position: relative;
+    width: 210px;
+    height: 280px;
   }
 
-  .fan-carousel__card .scard--photo {
-    width: 200px;
-    aspect-ratio: 3 / 4;
+  .mob-deck__card {
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .mob-deck__card .scard--photo {
+    width: 210px;
+    height: 280px;
+    border-radius: 20px;
+  }
+
+  .mob-deck__nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .mob-deck__btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .mob-deck__btn:active { background: rgba(255,255,255,0.14); }
+
+  .mob-deck__dots {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .mob-deck__dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    transition: background 0.3s, transform 0.3s;
+  }
+
+  .mob-deck__dot--on {
+    background: white;
+    transform: scale(1.4);
   }
 }
 
@@ -3334,9 +3419,21 @@ body::after {
     border-bottom: none;
   }
 
+  .logo-grid {
+    padding: 0 16px;
+    margin-top: 80px;
+  }
+
   /* Scale logos down for mobile */
+  .logo-grid__cell {
+    overflow: hidden;
+    padding: 12px 8px;
+  }
+
   .logo-grid__cell svg {
-    transform: scale(0.72);
+    max-width: 100%;
+    height: auto;
+    transform: scale(0.55);
     transform-origin: center;
   }
 }
@@ -3622,7 +3719,12 @@ body::after {
     justify-content: flex-start;
   }
 
+  .footer-brand {
+    grid-column: 1;
+  }
+
   .footer-nav {
+    grid-column: 1;
     flex-direction: column;
     gap: 32px;
     justify-self: start;
@@ -3650,48 +3752,69 @@ body::after {
   .mobile-brand-stamp {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0;
-    padding: 48px 24px 40px;
-    background: var(--bg);
-    border-top: 1px solid var(--border);
+    align-items: flex-start;
+    justify-content: flex-end;
+    position: absolute;
+    bottom: 0;
+    left: 0;
     overflow: hidden;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+  }
+
+  /* Ensure CTA content sits above stamp */
+  .cta-section {
     position: relative;
   }
+  .cta-text, .cta-action {
+    position: relative;
+    z-index: 1;
+  }
 
-  .mobile-brand-stamp__inner {
+  .mobile-brand-stamp__verts {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    align-items: flex-end;
+  }
+
+  .mobile-brand-stamp__vert {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(40px, 16vw, 90px);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.08);
     line-height: 0.88;
+    flex-shrink: 0;
   }
 
-  .mobile-brand-stamp__word {
-    font-family: var(--font-heading);
-    font-weight: 800;
-    font-size: clamp(64px, 22vw, 110px);
-    letter-spacing: -0.04em;
-    color: rgba(232, 230, 225, 0.06);
+  .mobile-brand-stamp__horiz {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(48px, 18vw, 100px);
+    font-weight: 900;
+    letter-spacing: -0.02em;
     text-transform: uppercase;
-    user-select: none;
-    display: block;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.08);
+    line-height: 0.9;
+    white-space: nowrap;
   }
 
-  .mobile-brand-stamp__word--studio {
-    font-size: clamp(36px, 12vw, 60px);
-    letter-spacing: 0.18em;
-    color: rgba(232, 230, 225, 0.04);
+  .mobile-brand-stamp__vert--neon,
+  .mobile-brand-stamp__horiz--neon {
+    animation: neon-rotate 9s infinite;
   }
 
-  .mobile-brand-stamp__sub {
-    margin-top: 20px;
-    font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: rgba(232, 230, 225, 0.18);
+  .mobile-brand-stamp__vert--delay1 {
+    animation-delay: 3s;
+  }
+
+  .mobile-brand-stamp__horiz--neon {
+    animation-delay: 6s;
   }
 }
 
@@ -3732,7 +3855,13 @@ body::after {
 
 .cta-line--accent {
   color: transparent;
-  -webkit-text-stroke: 2px rgba(242, 240, 235, 0.3);
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.9);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 300;
+  font-style: italic;
+  text-shadow:
+    0 0 20px rgba(255, 255, 255, 0.15),
+    0 0 50px rgba(255, 255, 255, 0.07);
 }
 
 .cta-action {
@@ -4138,4 +4267,106 @@ body::after {
     transform: translateX(0);
     opacity: 0;
   }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CIRCLE EXPAND BUTTON ANIMATION
+   — Radial fill expands from center on hover across all CTAs
+═══════════════════════════════════════════════════════════ */
+
+.navbar__cta,
+.footer-cta__btn,
+.footer-review-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+/* The expanding circle — sits behind button content */
+.navbar__cta::after,
+.footer-cta__btn::after,
+.footer-review-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  transition: width 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+              height 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.55s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.navbar__cta:hover::after,
+.footer-cta__btn:hover::after,
+.footer-review-btn:hover::after {
+  width: 300%;
+  height: 300%;
+  opacity: 1;
+}
+
+/* CTA main button — replace ::before glow with circle expand */
+.cta-btn {
+  overflow: hidden;
+}
+
+.cta-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(196, 32, 135, 0.18);
+  transform: translate(-50%, -50%);
+  transition: width 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+              height 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.55s ease;
+  opacity: 0;
+  inset: auto;
+  box-shadow: none;
+}
+
+.cta-btn:hover::before {
+  width: 400%;
+  height: 400%;
+  opacity: 1;
+  box-shadow: none;
+}
+
+/* Mobile deck nav arrows */
+.mob-deck__btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.mob-deck__btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  transform: translate(-50%, -50%);
+  transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+              height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.45s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mob-deck__btn:hover::after,
+.mob-deck__btn:active::after {
+  width: 200%;
+  height: 200%;
+  opacity: 1;
 }

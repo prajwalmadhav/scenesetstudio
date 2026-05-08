@@ -9,8 +9,10 @@ const TITLE_LINES = ['We build', 'brands', 'that people', 'remember.', 'stories 
 
 const HANDLE_POS = ['tl','tm','tr','mr','br','bm','bl','ml']
 
-const C  = 'rgba(232,230,225,0.13)'   // main stroke color — text color, dimmed
-const CD = 'rgba(232,230,225,0.07)'   // dimmer variant
+const C  = 'rgba(0,0,0,0.25)'         // black main
+const CD = 'rgba(0,0,0,0.12)'         // black dim
+const W  = 'rgba(255,255,255,0.45)'   // white main
+const WD = 'rgba(255,255,255,0.2)'    // white dim
 
 function AboutSVGBg() {
   return (
@@ -94,6 +96,54 @@ function AboutSVGBg() {
         <line x1="1164" y1="200" x2="1176" y2="200" />
         <line x1="1164" y1="500" x2="1176" y2="500" />
       </g>
+
+      {/* ══ WHITE ELEMENTS ══ */}
+
+      {/* Large arc — top left quarter */}
+      <path d="M 0 300 A 340 340 0 0 1 340 0" fill="none" stroke={W} strokeWidth="1" />
+
+      {/* Diagonal rule — bottom center */}
+      <line x1="450" y1="700" x2="700" y2="500" stroke={W} strokeWidth="0.8" strokeOpacity="0.35" />
+
+      {/* White circles */}
+      <circle cx="350" cy="580" r="42"  fill="none" stroke={W}  strokeWidth="1" />
+      <circle cx="350" cy="580" r="22"  fill="none" stroke={WD} strokeWidth="0.6" strokeDasharray="4 6" />
+      <circle cx="900" cy="200" r="60"  fill="none" stroke={WD} strokeWidth="0.8" strokeDasharray="2 8" />
+      <circle cx="70"  cy="200" r="30"  fill="none" stroke={W}  strokeWidth="0.8" />
+
+      {/* White corner brackets — inner */}
+      <path d="M 320 60 L 320 110 L 370 110" fill="none" stroke={W}  strokeWidth="1.2" strokeLinecap="square" />
+      <path d="M 880 640 L 880 590 L 830 590" fill="none" stroke={WD} strokeWidth="1"   strokeLinecap="square" />
+
+      {/* White cross markers */}
+      {[
+        [520, 180],[700,520],[140,420],[1050,280],[820,80],[440,480],
+      ].map(([x,y],i) => (
+        <g key={'w'+i}>
+          <line x1={x-6} y1={y}   x2={x+6} y2={y}   stroke={W} strokeWidth="0.8" />
+          <line x1={x}   y1={y-6} x2={x}   y2={y+6} stroke={W} strokeWidth="0.8" />
+        </g>
+      ))}
+
+      {/* White arrows */}
+      <g stroke={W} strokeWidth="1" fill="none" strokeLinecap="round">
+        <line x1="200" y1="180" x2="200" y2="240" />
+        <polyline points="192,228 200,240 208,228" />
+      </g>
+      <g stroke={WD} strokeWidth="1" fill="none" strokeLinecap="round">
+        <line x1="960" y1="600" x2="1020" y2="560" />
+        <polyline points="1008,554 1020,560 1014,572" />
+      </g>
+
+      {/* White dimension line — horizontal bottom */}
+      <g stroke={WD} strokeWidth="0.7">
+        <line x1="80" y1="670" x2="400" y2="670" />
+        <line x1="80"  y1="664" x2="80"  y2="676" />
+        <line x1="400" y1="664" x2="400" y2="676" />
+      </g>
+
+      {/* White dotted arc — right side */}
+      <path d="M 1100 400 A 80 80 0 0 1 1180 480" fill="none" stroke={W} strokeWidth="0.8" strokeDasharray="3 6" />
     </svg>
   )
 }
@@ -194,11 +244,32 @@ export default function About() {
       <SelectionBox ref={selRef} />
 
       <div ref={stampRef} className="about-stamp" aria-hidden="true">
-        <div className="about-stamp__inner">
-          <span className="about-stamp__line about-stamp__line--top">SINCE 2024</span>
-          <span className="about-stamp__name">SCENE<br />SET</span>
-          <span className="about-stamp__line about-stamp__line--bottom">STUDIO · OTTAWA</span>
-        </div>
+        <svg className="about-stamp__svg" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <path id="top-arc"    d="M 16,80 A 64,64 0 0,1 144,80" />
+            <path id="bottom-arc" d="M 22,80 A 58,58 0 0,0 138,80" />
+          </defs>
+
+          {/* Outer dashed ring */}
+          <circle cx="80" cy="80" r="74" fill="none" stroke="currentColor" strokeWidth="1.2" strokeOpacity="0.9" strokeDasharray="3 5" />
+          {/* Inner solid ring */}
+          <circle cx="80" cy="80" r="67" fill="none" stroke="currentColor" strokeWidth="0.8" strokeOpacity="0.6" />
+
+          {/* SINCE 2024 — bottom arc */}
+          <text className="about-stamp__since">
+            <textPath href="#bottom-arc" startOffset="50%" textAnchor="middle">
+              SINCE  ✦  2024
+            </textPath>
+          </text>
+
+          {/* Center wordmark in Kannada */}
+          <text x="80" y="68" textAnchor="middle" className="about-stamp__word about-stamp__word--kannada">ಸೀನ್ ಸೆಟ್</text>
+          <text x="80" y="96" textAnchor="middle" className="about-stamp__word about-stamp__word--kannada">ಸ್ಟುಡಿಯೋ</text>
+
+          {/* Small decorative cross */}
+          <line x1="77" y1="79" x2="83" y2="79" stroke="currentColor" strokeWidth="0.8" strokeOpacity="0.8" />
+          <line x1="80" y1="76" x2="80" y2="82" stroke="currentColor" strokeWidth="0.8" strokeOpacity="0.8" />
+        </svg>
       </div>
 
     </section>

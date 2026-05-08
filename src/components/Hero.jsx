@@ -117,6 +117,9 @@ export default function Hero() {
         { rotateX: 15 },
         { rotateX: 62, ease: 'none' },
       0)
+      .to(headlineRef.current, { opacity: 0, ease: 'none' }, 0)
+      .to(subtextRef.current,  { opacity: 0, ease: 'none' }, 0)
+      .to(buttonsRef.current,  { opacity: 0, ease: 'none' }, 0)
     })
 
     return () => ctx.revert()

@@ -48,6 +48,14 @@ export default function Navbar() {
   }
 
   const active = (path) => pathname === path ? ' mobile-link--active' : ''
+  const isHome = pathname === '/'
+
+  const HomeIcon = () => (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1V9.5z"/>
+      <path d="M9 21V12h6v9"/>
+    </svg>
+  )
 
   return (
     <>
@@ -59,6 +67,12 @@ export default function Navbar() {
             <span className="navbar__logo-main"> Studio</span>
           </button>
 
+          {!isHome && (
+            <button className="navbar__home-btn" onClick={() => navigate('/')} aria-label="Go to home">
+              <HomeIcon />
+            </button>
+          )}
+
           <nav className="navbar__links" aria-label="Primary navigation">
             <Link to="/work"     className={`navbar__link${pathname === '/work'     ? ' navbar__link--active' : ''}`}>Work</Link>
             <Link to="/services" className={`navbar__link${pathname === '/services' ? ' navbar__link--active' : ''}`}>Services</Link>
@@ -69,6 +83,11 @@ export default function Navbar() {
 
           <div className="navbar__actions">
             <Link to="/contact" className="navbar__cta">Start a Project</Link>
+            {!isHome && (
+              <button className="navbar__home-btn navbar__home-btn--mobile" onClick={() => navigate('/')} aria-label="Go to home">
+                <HomeIcon />
+              </button>
+            )}
             <button
               className={`navbar__hamburger${menuOpen ? ' is-open' : ''}`}
               onClick={() => setMenuOpen(v => !v)}

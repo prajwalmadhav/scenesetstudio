@@ -97,9 +97,9 @@ export default function Hero() {
         scrollTrigger: {
           trigger: '.hero-section',
           start: 'top top',
-          end: '+=190%',
+          end: '+=70%',
           pin: true,
-          scrub: 0.6,
+          scrub: 0.4,
           anticipatePin: 1,
         },
       })

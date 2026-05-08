@@ -190,6 +190,15 @@ export default function Footer() {
             Digital Business Card ↗
           </a>
         </span>
+        <button
+          className="footer-back-top"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          aria-label="Back to top"
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M8 13V3M3 8l5-5 5 5"/>
+          </svg>
+        </button>
       </div>
 
     </footer>

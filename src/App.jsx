@@ -35,16 +35,15 @@ function HomePage() {
       <FrameScroll />
       <Testimonials />
       <div className="light-zone">
-        <div className="brand-zone-bg" aria-hidden="true">
-          <div className="brand-zone-bg__verts">
-            <span className="brand-zone-bg__vert brand-zone-bg__vert--neon">SCENE</span>
-            <span className="brand-zone-bg__vert brand-zone-bg__vert--neon brand-zone-bg__vert--neon-delay1">SET</span>
-          </div>
-          <span className="brand-zone-bg__horiz brand-zone-bg__horiz--neon">STUDIO</span>
-        </div>
         <CTA />
-
         <Footer />
+        <div className="footer-brand-bg" aria-hidden="true">
+          <div className="footer-brand-bg__vert-row">
+            <span className="footer-brand-bg__vert footer-brand-bg__vert--neon footer-brand-bg__vert--scene">SCENE</span>
+            <span className="footer-brand-bg__vert footer-brand-bg__vert--neon footer-brand-bg__vert--delay1 footer-brand-bg__vert--set"><span style={{textTransform:'uppercase'}}>S</span>et</span>
+          </div>
+          <span className="footer-brand-bg__horizontal footer-brand-bg__horiz--neon footer-brand-bg__horiz--studio">STUDIO</span>
+        </div>
       </div>
     </main>
   )

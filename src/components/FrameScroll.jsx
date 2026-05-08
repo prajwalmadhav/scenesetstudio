@@ -73,7 +73,7 @@ export default function FrameScroll() {
     }
   }, [isMobile])
 
-  const sectionHeight = isMobile ? '180vh' : '400vh'
+  const sectionHeight = isMobile ? '180vh' : '180vh'
   const stickyTop = isMobile ? '12svh' : 0
   const stickyHeight = isMobile ? '68svh' : '100vh'
   const videoFit = isMobile ? 'contain' : 'cover'

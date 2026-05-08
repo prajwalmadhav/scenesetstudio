@@ -1,8 +1,10 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import LiquidBackground from './LiquidBackground'
 import PosterPlaceholderIcon from './PosterPlaceholderIcon'
+
+const HERO_WORDS = ['convert', 'captivate', 'perform', 'resonate', 'scale']
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -34,6 +36,20 @@ const HERO_POSTER_SLOTS = {
 }
 
 export default function Hero() {
+  const [wordIdx, setWordIdx] = useState(0)
+  const [fading, setFading] = useState(false)
+
+  useEffect(() => {
+    const t = setInterval(() => {
+      setFading(true)
+      setTimeout(() => {
+        setWordIdx(i => (i + 1) % HERO_WORDS.length)
+        setFading(false)
+      }, 300)
+    }, 2800)
+    return () => clearInterval(t)
+  }, [])
+
   const badgeRef        = useRef(null)
   const headlineRef     = useRef(null)
   const subtextRef      = useRef(null)
@@ -128,7 +144,10 @@ export default function Hero() {
         <p ref={subtextRef} className="hero-subtext" style={{ opacity: 0 }}>
           Cinematic storytelling meets performance marketing.
           <br />
-          We build brands that convert.
+          We build brands that{' '}
+          <span className={`hero-cycle-word${fading ? ' hero-cycle-word--fade' : ''}`}>
+            {HERO_WORDS[wordIdx]}
+          </span>.
         </p>
 
         <div ref={buttonsRef} className="hero-buttons">

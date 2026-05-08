@@ -237,7 +237,7 @@ export default function Testimonials() {
     if (!el) return
     const pos = ((i - offsetRef.current) % POSTS.length + POSTS.length) % POSTS.length
     const xShift = pos < 3 ? -100 : pos > 3 ? 100 : 0
-    gsap.to(el, { x: xShift, y: '-=5', scale: 1.08, duration: 0.35, ease: 'power2.out', overwrite: 'auto' })
+    gsap.to(el, { x: xShift, y: '-=0', scale: 1.03, duration: 0.35, ease: 'power2.out', overwrite: 'auto' })
   }
 
   function handleHoverLeave(i) {

@@ -173,8 +173,7 @@ export default function CTA() {
 
       <div className="cta-action">
         <button className="cta-btn">
-          <AnimatedUnderline color="#C8F535"><span>Start Your Project</span></AnimatedUnderline>
-          <span className="cta-btn__arrow">→</span>
+          Start Your Project →
         </button>
         <p className="cta-sub">Free discovery call · No commitment</p>
       </div>

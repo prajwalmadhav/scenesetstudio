@@ -1367,7 +1367,6 @@ body::after {
 /* ── Body text ── */
 .about-body {
   position: relative;
-  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1419,23 +1418,38 @@ body::after {
   will-change: clip-path;
 }
 
-/* Dark clone wrapper — full section overlay, text mirrors original centering */
-.about-clone-wrap {
+/* ── HTML selection tool — mix-blend-mode inverts everything inside ── */
+.about-sel {
   position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  right: 6%;
+  top: 36%;
+  width: 42%;
+  height: 32%;
+  background: white;
+  mix-blend-mode: difference;
   pointer-events: none;
-  /* clip-path inset: top right bottom left — matches SVG selection box % of section */
-  clip-path: inset(42.1% 15% 27.1% 43.3%);
-  z-index: 2;
+  z-index: 10;
+  outline: 1px dashed rgba(255,255,255,0.5);
+  outline-offset: 0px;
 }
 
-.about-title-line--dark {
-  color: #0d0c0b;
+/* 8 handle squares */
+.about-sel__h {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #5A5652;
+  outline: 1.5px solid rgba(255,255,255,0.9);
+  mix-blend-mode: normal;
 }
+.about-sel__h--tl { top: -4px;  left: -4px; }
+.about-sel__h--tm { top: -4px;  left: calc(50% - 4px); }
+.about-sel__h--tr { top: -4px;  right: -4px; }
+.about-sel__h--mr { top: calc(50% - 4px); right: -4px; }
+.about-sel__h--br { bottom: -4px; right: -4px; }
+.about-sel__h--bm { bottom: -4px; left: calc(50% - 4px); }
+.about-sel__h--bl { bottom: -4px; left: -4px; }
+.about-sel__h--ml { top: calc(50% - 4px); left: -4px; }
 
 .about-title-line--accent {
   font-family: 'Playfair Display', Georgia, serif;

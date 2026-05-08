@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
 
 export default function Navbar() {
@@ -8,6 +8,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const { pathname } = useLocation()
+  const navigate = useNavigate()
 
   useEffect(() => {
     gsap.fromTo(
@@ -28,7 +29,7 @@ export default function Navbar() {
     if (menuOpen) {
       document.body.style.overflow = 'hidden'
       gsap.fromTo(overlay, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out', pointerEvents: 'all' })
-      gsap.fromTo(overlay.querySelectorAll('.mobile-link'), { opacity: 0, y: 30 }, { opacity: 1, y: 0, stagger: 0.07, duration: 0.5, ease: 'power3.out', delay: 0.1 })
+      gsap.fromTo(overlay.querySelectorAll('.mobile-link, .mobile-link--cta'), { opacity: 0, y: 30 }, { opacity: 1, y: 0, stagger: 0.07, duration: 0.5, ease: 'power3.out', delay: 0.1 })
     } else {
       document.body.style.overflow = ''
       gsap.to(overlay, { opacity: 0, y: -10, duration: 0.3, ease: 'power3.in', onComplete: () => { overlay.style.pointerEvents = 'none' } })
@@ -37,21 +38,32 @@ export default function Navbar() {
 
   const close = () => setMenuOpen(false)
 
+  const handleLogo = () => {
+    close()
+    if (pathname === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    } else {
+      navigate('/')
+    }
+  }
+
+  const active = (path) => pathname === path ? ' mobile-link--active' : ''
+
   return (
     <>
       <header ref={navRef} className={`navbar${scrolled ? ' navbar--scrolled' : ''}`} style={{ opacity: 0 }}>
         <div className="navbar__inner">
-          <Link to="/" className="navbar__logo" aria-label="Scene Set Studio home" onClick={close}>
+          <button className="navbar__logo" aria-label="Scene Set Studio home" onClick={handleLogo}>
             <span className="navbar__logo-main">Scene</span>
             <span className="navbar__logo-accent"> Set</span>
             <span className="navbar__logo-main"> Studio</span>
-          </Link>
+          </button>
 
           <nav className="navbar__links" aria-label="Primary navigation">
             <Link to="/work"     className={`navbar__link${pathname === '/work'     ? ' navbar__link--active' : ''}`}>Work</Link>
             <Link to="/services" className={`navbar__link${pathname === '/services' ? ' navbar__link--active' : ''}`}>Services</Link>
             <Link to="/about"    className={`navbar__link${pathname === '/about'    ? ' navbar__link--active' : ''}`}>About</Link>
-            <Link to="/process"  className={`navbar__link${pathname === '/process' ? ' navbar__link--active' : ''}`}>Process</Link>
+            <Link to="/process"  className={`navbar__link${pathname === '/process'  ? ' navbar__link--active' : ''}`}>Process</Link>
             <Link to="/contact"  className={`navbar__link${pathname === '/contact'  ? ' navbar__link--active' : ''}`}>Contact</Link>
           </nav>
 
@@ -72,12 +84,12 @@ export default function Navbar() {
 
       <div ref={overlayRef} className="mobile-menu" aria-hidden={!menuOpen} style={{ opacity: 0, pointerEvents: 'none' }}>
         <nav className="mobile-menu__links" aria-label="Mobile navigation">
-          <Link to="/work"     className="mobile-link" onClick={close}>Work</Link>
-          <Link to="/services" className="mobile-link" onClick={close}>Services</Link>
-          <Link to="/about"    className="mobile-link" onClick={close}>About</Link>
-          <Link to="/process"  className="mobile-link" onClick={close}>Process</Link>
-          <Link to="/contact"  className="mobile-link" onClick={close}>Contact</Link>
-          <Link to="/contact"  className="mobile-link mobile-link--cta" onClick={close}>Start a Project</Link>
+          <Link to="/work"     className={`mobile-link${active('/work')}`}     onClick={close}>Work</Link>
+          <Link to="/services" className={`mobile-link${active('/services')}`} onClick={close}>Services</Link>
+          <Link to="/about"    className={`mobile-link${active('/about')}`}    onClick={close}>About</Link>
+          <Link to="/process"  className={`mobile-link${active('/process')}`}  onClick={close}>Process</Link>
+          <Link to="/contact"  className={`mobile-link${active('/contact')}`}  onClick={close}>Contact</Link>
+          <Link to="/contact"  className="hero-btn hero-btn--primary mobile-link--cta" onClick={close}>Start a Project →</Link>
         </nav>
       </div>
     </>

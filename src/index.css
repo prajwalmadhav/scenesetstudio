@@ -514,6 +514,10 @@ body::after {
   align-items: baseline;
   gap: 0;
   flex-shrink: 0;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
 
 .navbar__logo-main {
@@ -710,27 +714,15 @@ body::after {
   text-align: center;
 }
 
-.mobile-link:hover {
+.mobile-link:hover,
+.mobile-link--active {
   color: var(--lime);
 }
 
 .mobile-link--cta {
   margin-top: 32px;
-  font-size: clamp(13px, 2vw, 14px);
-  font-family: var(--font-heading);
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--bg);
-  background: var(--lime);
-  padding: 14px 40px;
-  display: inline-flex;
   width: auto;
-}
-
-.mobile-link--cta:hover {
-  color: var(--bg);
-  opacity: 0.88;
+  opacity: 0;
 }
 
 

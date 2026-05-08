@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Editorial Voltage Iterations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "DM Sans", sans-serif;
+      color: #f5f2ec;
+      background:
+        radial-gradient(circle at top right, rgba(217,47,47,0.12), transparent 26%),
+        radial-gradient(circle at bottom left, rgba(125,255,200,0.08), transparent 24%),
+        #09090d;
+    }
+    .wrap {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 32px;
+    }
+    .intro {
+      padding: 18px 0 32px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 28px;
+    }
+    .eyebrow {
+      font-family: "Syne", sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #7dffc8;
+      margin-bottom: 14px;
+    }
+    h1 {
+      margin: 0 0 14px;
+      font-family: "Instrument Serif", serif;
+      font-size: clamp(46px, 8vw, 92px);
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+      font-weight: 400;
+      max-width: 900px;
+    }
+    .intro p {
+      margin: 0;
+      max-width: 760px;
+      color: rgba(245,242,236,0.7);
+      line-height: 1.8;
+      font-size: 16px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+    .card {
+      min-height: 100%;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      padding: 28px;
+    }
+    .card h2 {
+      margin: 0 0 10px;
+      font-family: "Instrument Serif", serif;
+      font-size: 38px;
+      font-weight: 400;
+      letter-spacing: -0.03em;
+    }
+    .sub {
+      color: rgba(245,242,236,0.68);
+      line-height: 1.75;
+      margin-bottom: 18px;
+      font-size: 14px;
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .chip {
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 6px 10px;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(245,242,236,0.72);
+    }
+    .swatches {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .swatch {
+      min-height: 86px;
+      padding: 10px;
+      display: flex;
+      align-items: end;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .label {
+      margin-top: 20px;
+      margin-bottom: 8px;
+      font-family: "Syne", sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(245,242,236,0.42);
+    }
+    .type-sample {
+      margin-bottom: 14px;
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.015);
+    }
+    .type-big {
+      font-size: 44px;
+      line-height: 0.96;
+      margin-bottom: 8px;
+      letter-spacing: -0.04em;
+    }
+    .poster-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .poster {
+      aspect-ratio: 4 / 5;
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 14px;
+      display: flex;
+      align-items: end;
+      font-size: 11px;
+      line-height: 1.35;
+    }
+    .rec {
+      margin-top: 26px;
+      padding: 18px 20px;
+      border: 1px solid rgba(125,255,200,0.22);
+      color: rgba(245,242,236,0.84);
+      background: rgba(125,255,200,0.03);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    @media (max-width: 980px) {
+      .wrap { padding: 20px; }
+      .grid { grid-template-columns: 1fr; }
+      .swatches, .poster-row { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="intro">
+      <div class="eyebrow">Option B Refinements</div>
+      <h1>Editorial Voltage, two ways.</h1>
+      <p>
+        Both directions keep the same social-first, high-contrast editorial base. The first is hotter and more campaign-driven. The second is cooler, sharper, and better balanced for long-term brand authority.
+      </p>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>Iteration 01<br>Redline Editorial</h2>
+        <div class="sub">The louder, sharper, fashion-campaign route. Built to feel immediate, dramatic, and impossible to miss in social surfaces.</div>
+        <div class="chips">
+          <span class="chip">Launch energy</span>
+          <span class="chip">Poster-first</span>
+          <span class="chip">Social impact</span>
+        </div>
+
+        <div class="swatches">
+          <div class="swatch" style="background:#09090D;color:#F5F2EC">#09090D</div>
+          <div class="swatch" style="background:#F5F2EC;color:#111">#F5F2EC</div>
+          <div class="swatch" style="background:#D92F2F;color:#fff">#D92F2F</div>
+          <div class="swatch" style="background:#7DFFC8;color:#111">#7DFFC8</div>
+          <div class="swatch" style="background:#6E717B;color:#fff">#6E717B</div>
+        </div>
+
+        <div class="label">Typography</div>
+        <div class="type-sample">
+          <div class="type-big" style="font-family:'Instrument Serif', serif;">Stop the scroll.</div>
+          <div style="font-family:'Space Grotesk', sans-serif;color:rgba(245,242,236,0.72);">Instrument Serif + Space Grotesk + Syne</div>
+        </div>
+
+        <div class="label">Logo route</div>
+        <p>Signal mark with interruption geometry. Use an abstract `S` or broken-frequency form rather than a restrained frame icon.</p>
+
+        <div class="label">Carousel mood</div>
+        <div class="poster-row">
+          <div class="poster" style="background:#09090D;color:#F5F2EC;">Why your brand looks expensive but says nothing.</div>
+          <div class="poster" style="background:#D92F2F;color:#fff;">The launch needed tension, not more content.</div>
+          <div class="poster" style="background:#F5F2EC;color:#111;">What makes people stop on slide one.</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>Iteration 02<br>Neon Review</h2>
+        <div class="sub">The cooler, more intelligent editorial route. Still bold, but better for premium trust, decks, and case-study storytelling.</div>
+        <div class="chips">
+          <span class="chip">Authority</span>
+          <span class="chip">Design annual</span>
+          <span class="chip">Premium edge</span>
+        </div>
+
+        <div class="swatches">
+          <div class="swatch" style="background:#0B0B10;color:#F2EFE8">#0B0B10</div>
+          <div class="swatch" style="background:#F2EFE8;color:#111">#F2EFE8</div>
+          <div class="swatch" style="background:#8BFFD1;color:#111">#8BFFD1</div>
+          <div class="swatch" style="background:#C93A32;color:#fff">#C93A32</div>
+          <div class="swatch" style="background:#8C8796;color:#111">#8C8796</div>
+        </div>
+
+        <div class="label">Typography</div>
+        <div class="type-sample">
+          <div class="type-big" style="font-family:'Instrument Serif', serif;">Command attention quietly.</div>
+          <div style="font-family:'DM Sans', sans-serif;color:rgba(245,242,236,0.72);">Instrument Serif + DM Sans + Syne</div>
+        </div>
+
+        <div class="label">Logo route</div>
+        <p>Frame and signal hybrid. Keep a composed structure, then cut it with one interruption move so it still feels editorial rather than corporate.</p>
+
+        <div class="label">Carousel mood</div>
+        <div class="poster-row">
+          <div class="poster" style="background:#0B0B10;color:#F2EFE8;">The before was not weak. It was unclear.</div>
+          <div class="poster" style="background:#8BFFD1;color:#111;">Campaign systems that still feel like art.</div>
+          <div class="poster" style="background:#F2EFE8;color:#111;">Why authority is usually a typography problem first.</div>
+        </div>
+      </article>
+    </section>
+
+    <div class="rec">
+      Recommendation: choose <strong>Iteration 02 - Neon Review</strong> if you want the strongest long-term identity system. Choose <strong>Iteration 01 - Redline Editorial</strong> if your priority is louder social presence and more campaign heat right away.
+    </div>
+  </div>
+</body>
+</html>

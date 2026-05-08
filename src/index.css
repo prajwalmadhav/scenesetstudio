@@ -429,9 +429,9 @@ body::after {
   .hero-visual-wrapper {
     left: 5vw;
     right: 5vw;
-    top: clamp(400px, 66dvh, 520px);
+    top: clamp(380px, 60dvh, 480px);
     bottom: 0;
-    z-index: 1;
+    z-index: 2;
   }
 
   .hero-visual {
@@ -1153,6 +1153,7 @@ body::after {
 
 .feat-section {
   position: relative;
+  height: 100vh;
   height: 100dvh;
   background: linear-gradient(to bottom, #ede8e1 0%, #c8c0b6 18%, #7a6e64 38%, #2e2822 58%, #0d0b09 80%, #080808 100%);
   overflow: hidden;
@@ -1473,15 +1474,15 @@ body::after {
   .feat-track {
     display: grid !important;
     grid-template-columns: repeat(2, 100vw);
-    grid-template-rows: repeat(2, 50svh);
+    grid-template-rows: repeat(2, 50dvh);
     grid-auto-flow: column;
     width: 200vw !important;
-    height: 100svh !important;
+    height: 100dvh !important;
   }
 
   .feat-panel {
     width: 100vw !important;
-    height: 50svh !important;
+    height: 50dvh !important;
   }
 
   .feat-panel--spacer {

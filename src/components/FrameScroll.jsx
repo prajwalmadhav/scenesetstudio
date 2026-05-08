@@ -73,10 +73,9 @@ export default function FrameScroll() {
     }
   }, [isMobile])
 
-  const sectionHeight = isMobile ? '180vh' : '180vh'
-  const stickyTop = isMobile ? '12svh' : 0
-  const stickyHeight = isMobile ? '68svh' : '100vh'
-  const videoFit = isMobile ? 'contain' : 'cover'
+  const sectionHeight = isMobile ? '140vh' : '180vh'
+  const stickyTop = isMobile ? '8svh' : 0
+  const stickyHeight = isMobile ? '80svh' : '100vh'
 
   return (
     <div
@@ -92,8 +91,8 @@ export default function FrameScroll() {
           height: stickyHeight,
           overflow: 'hidden',
           background: '#E8E6E1',
-          borderRadius: isMobile ? '24px' : 0,
-          margin: isMobile ? '0 14px' : 0,
+          borderRadius: isMobile ? '20px' : 0,
+          margin: isMobile ? '0 10px' : 0,
         }}
       >
         <video
@@ -105,9 +104,11 @@ export default function FrameScroll() {
           style={{
             position: 'absolute',
             inset: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: videoFit,
+            width: isMobile ? '140%' : '100%',
+            height: isMobile ? '140%' : '100%',
+            left: isMobile ? '-20%' : 0,
+            top: isMobile ? '-20%' : 0,
+            objectFit: 'cover',
             display: 'block',
           }}
         />

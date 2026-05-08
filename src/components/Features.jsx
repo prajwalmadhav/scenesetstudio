@@ -9,10 +9,10 @@ const PANELS = [
     num: '01', service: 'Brand Strategy',
     body: 'Visual language, positioning, and story.',
     tag: 'Identity / Positioning',
-    // img layout: [{ role: 'hero|mid|small', top, left, w, h, rotate }]
     imgs: [
-      { role: 'hero',  top: '8%',  left: '32%', w: '58%', h: '72%', rotate: 0   },
-      { role: 'small', top: '68%', left: '22%', w: '22%', h: '28%', rotate: -2  },
+      { role: 'hero',  top: '8%',  left: '32%', w: '58%', h: '72%', rotate: 0,  src: 'https://picsum.photos/seed/brand-hero/700/900',
+        overlay: { eyebrow: 'Campaign — 2024', headline: 'The\nArt of\nDistinction.' } },
+      { role: 'small', top: '68%', left: '22%', w: '22%', h: '28%', rotate: -2, src: 'https://picsum.photos/seed/brand-sm/400/520'    },
     ],
   },
   {
@@ -20,9 +20,9 @@ const PANELS = [
     body: 'Photo, video, motion — content people feel.',
     tag: 'Photo / Video / Motion',
     imgs: [
-      { role: 'hero',  top: '5%',  left: '28%', w: '44%', h: '62%', rotate: 1   },
-      { role: 'mid',   top: '52%', left: '60%', w: '32%', h: '42%', rotate: -1  },
-      { role: 'small', top: '70%', left: '18%', w: '20%', h: '24%', rotate: 2   },
+      { role: 'hero',  top: '5%',  left: '28%', w: '44%', h: '62%', rotate: 1,  src: 'https://picsum.photos/seed/content-hero/600/800' },
+      { role: 'mid',   top: '52%', left: '60%', w: '32%', h: '42%', rotate: -1, src: 'https://picsum.photos/seed/content-mid/500/640'  },
+      { role: 'small', top: '70%', left: '18%', w: '20%', h: '24%', rotate: 2,  src: 'https://picsum.photos/seed/content-sm/360/440'   },
     ],
   },
   {
@@ -30,8 +30,8 @@ const PANELS = [
     body: 'Precision targeting. Campaigns that scale.',
     tag: 'Meta / Google / Performance',
     imgs: [
-      { role: 'hero',  top: '6%',  left: '36%', w: '52%', h: '58%', rotate: -1  },
-      { role: 'mid',   top: '55%', left: '20%', w: '36%', h: '38%', rotate: 1   },
+      { role: 'hero',  top: '6%',  left: '36%', w: '52%', h: '58%', rotate: -1, src: 'https://picsum.photos/seed/ads-hero/660/760'   },
+      { role: 'mid',   top: '55%', left: '20%', w: '36%', h: '38%', rotate: 1,  src: 'https://picsum.photos/seed/ads-mid/520/580'    },
     ],
   },
   /* Social Media, Web Design, Video Production hidden for now
@@ -139,7 +139,25 @@ export default function Features() {
 
         {/* Intro — heading overlaid on large image */}
         <div className="feat-panel feat-panel--intro">
-          <div className="feat-intro-bg" />
+          <div className="feat-intro-bg">
+            <img
+              className="feat-intro-bg__img"
+              src="https://picsum.photos/seed/editorial-intro/800/1000"
+              alt=""
+              draggable="false"
+            />
+            <div className="feat-intro-bg__editorial">
+              <span className="feat-intro-bg__editorial-label">Editorial</span>
+              <div className="feat-intro-bg__editorial-body">
+                <p className="feat-intro-bg__editorial-text">
+                  Where craft<br />meets intent.
+                </p>
+                <p className="feat-intro-bg__editorial-para">
+                  Every frame is a decision. Every campaign a deliberate act of storytelling — built to move people, shift perception, and leave something behind.
+                </p>
+              </div>
+            </div>
+          </div>
           <div className="feat-intro-overlay">
             <p className="feat-text-reveal feat-intro__eyebrow">Our Work</p>
             <h2 className="feat-text-reveal feat-intro__title">Selected<br />Work.</h2>
@@ -163,7 +181,20 @@ export default function Features() {
                   transform: `rotate(${img.rotate}deg)`,
                 }}
               >
-                <div className="feat-img-fill" />
+                {img.src
+                  ? <img className="feat-img-fill feat-img-fill--photo" src={img.src} alt="" draggable="false" />
+                  : <div className="feat-img-fill" />
+                }
+                {img.overlay && (
+                  <div className="feat-img-editorial">
+                    <span className="feat-img-editorial__eyebrow">{img.overlay.eyebrow}</span>
+                    <p className="feat-img-editorial__headline">
+                      {img.overlay.headline.split('\n').map((line, i) => (
+                        <span key={i}>{line}<br /></span>
+                      ))}
+                    </p>
+                  </div>
+                )}
                 {img.role === 'hero' && (
                   <div className="feat-img-tag">{p.tag}</div>
                 )}

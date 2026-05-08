@@ -1,6 +1,7 @@
 import { useEffect, useRef, forwardRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import StudioStamp from './StudioStamp'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -244,32 +245,7 @@ export default function About() {
       <SelectionBox ref={selRef} />
 
       <div ref={stampRef} className="about-stamp" aria-hidden="true">
-        <svg className="about-stamp__svg" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <path id="top-arc"    d="M 16,80 A 64,64 0 0,1 144,80" />
-            <path id="bottom-arc" d="M 22,80 A 58,58 0 0,0 138,80" />
-          </defs>
-
-          {/* Outer dashed ring */}
-          <circle cx="80" cy="80" r="74" fill="none" stroke="currentColor" strokeWidth="1.2" strokeOpacity="0.9" strokeDasharray="3 5" />
-          {/* Inner solid ring */}
-          <circle cx="80" cy="80" r="67" fill="none" stroke="currentColor" strokeWidth="0.8" strokeOpacity="0.6" />
-
-          {/* SINCE 2024 — bottom arc */}
-          <text className="about-stamp__since">
-            <textPath href="#bottom-arc" startOffset="50%" textAnchor="middle">
-              SINCE  ✦  2024
-            </textPath>
-          </text>
-
-          {/* Center wordmark in Kannada */}
-          <text x="80" y="68" textAnchor="middle" className="about-stamp__word about-stamp__word--kannada">ಸೀನ್ ಸೆಟ್</text>
-          <text x="80" y="96" textAnchor="middle" className="about-stamp__word about-stamp__word--kannada">ಸ್ಟುಡಿಯೋ</text>
-
-          {/* Small decorative cross */}
-          <line x1="77" y1="79" x2="83" y2="79" stroke="currentColor" strokeWidth="0.8" strokeOpacity="0.8" />
-          <line x1="80" y1="76" x2="80" y2="82" stroke="currentColor" strokeWidth="0.8" strokeOpacity="0.8" />
-        </svg>
+        <StudioStamp />
       </div>
 
     </section>

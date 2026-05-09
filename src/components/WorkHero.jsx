@@ -1,40 +1,49 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 
-const TILES = [
-  { id: 0, col: '1 / 3', row: '1 / 3', label: 'Brand Strategy',      year: '2024', seed: 'sss-w1' },
-  { id: 1, col: '3 / 4', row: '1 / 2', label: 'Content Production',  year: '2024', seed: 'sss-w2' },
-  { id: 2, col: '4 / 5', row: '1 / 2', label: 'Web Design',          year: '2025', seed: 'sss-w3' },
-  { id: 3, col: '3 / 5', row: '2 / 3', label: 'Paid Advertising',    year: '2024', seed: 'sss-w4' },
-  { id: 4, col: '1 / 2', row: '3 / 4', label: 'Social Media',        year: '2025', seed: 'sss-w5' },
-  { id: 5, col: '2 / 4', row: '3 / 4', label: 'Video Production',    year: '2025', seed: 'sss-w6' },
-  { id: 6, col: '4 / 5', row: '3 / 4', label: 'Identity Design',     year: '2024', seed: 'sss-w7' },
+const CARDS = [
+  { id: 0, label: 'Brand Identity',      category: 'Branding',   seed: 'sss-f1' },
+  { id: 1, label: 'Presentation Slides', category: 'Design',     seed: 'sss-f2' },
+  { id: 2, label: 'Web Design',          category: 'Digital',    seed: 'sss-f3' },
+  { id: 3, label: 'Campaign Assets',     category: 'Marketing',  seed: 'sss-f4' },
+  { id: 4, label: 'Video Production',    category: 'Video',      seed: 'sss-f5' },
+  { id: 5, label: 'Social Content',      category: 'Social',     seed: 'sss-f6' },
+  { id: 6, label: 'Promo Graphics',      category: 'Design',     seed: 'sss-f7' },
+  { id: 7, label: 'Digital Promotions',  category: 'Digital',    seed: 'sss-f8' },
 ]
 
 export default function WorkHero() {
-  const gridRef = useRef(null)
-  const tileRefs = useRef([])
+  const cardRefs = useRef([])
+  const infoRefs = useRef([])
 
   useEffect(() => {
-    const tiles = tileRefs.current.filter(Boolean)
+    const cards = cardRefs.current.filter(Boolean)
 
-    gsap.set(tiles, { opacity: 0, scale: 0.88, y: 24 })
-    gsap.to(tiles, {
+    gsap.set(cards, { opacity: 0, y: 28 })
+    gsap.to(cards, {
       opacity: 1,
-      scale: 1,
       y: 0,
       duration: 0.72,
       ease: 'power3.out',
-      stagger: { amount: 0.55, from: 'random' },
-      delay: 0.1,
+      stagger: 0.065,
+      delay: 0.2,
     })
+
+    return () => gsap.killTweensOf(cards)
   }, [])
 
   function onEnter(e) {
-    gsap.to(e.currentTarget, { scale: 1.03, y: -6, duration: 0.35, ease: 'power2.out', overwrite: 'auto' })
+    const card = e.currentTarget
+    const info = card.querySelector('.fan-card__info')
+    gsap.to(card, { scale: 1.04, y: -6, duration: 0.35, ease: 'power2.out', overwrite: 'auto' })
+    gsap.to(info, { opacity: 1, duration: 0.25, ease: 'power2.out' })
   }
+
   function onLeave(e) {
-    gsap.to(e.currentTarget, { scale: 1, y: 0, duration: 0.4, ease: 'power2.out', overwrite: 'auto' })
+    const card = e.currentTarget
+    const info = card.querySelector('.fan-card__info')
+    gsap.to(card, { scale: 1, y: 0, duration: 0.4, ease: 'power2.out', overwrite: 'auto' })
+    gsap.to(info, { opacity: 0, duration: 0.25, ease: 'power2.out' })
   }
 
   return (
@@ -42,31 +51,45 @@ export default function WorkHero() {
 
       <div className="work-hero__eyebrow">
         <span className="work-hero__tag">Selected Work</span>
-        <span className="work-hero__count">{TILES.length} Projects</span>
+        <span className="work-hero__count">2024 — 2025</span>
       </div>
 
-      <div ref={gridRef} className="work-hero__grid">
-        {TILES.map((tile, i) => (
-          <div
-            key={tile.id}
-            ref={el => tileRefs.current[i] = el}
-            className="work-tile"
-            style={{ gridColumn: tile.col, gridRow: tile.row }}
-            onMouseEnter={onEnter}
-            onMouseLeave={onLeave}
-          >
-            <img
-              src={`https://picsum.photos/seed/${tile.seed}/800/600`}
-              alt={tile.label}
-              className="work-tile__img"
-              draggable="false"
-            />
-            <div className="work-tile__overlay">
-              <span className="work-tile__label">{tile.label}</span>
-              <span className="work-tile__year">{tile.year}</span>
+      <div className="work-hero__intro">
+        <p className="work-hero__services">
+          Digital Promotions, Portfolio Design, Presentation Slides,{' '}
+          Marketing Campaign Assets, Promo Graphics,{' '}
+          Branding Assets <strong>And More.</strong>
+        </p>
+      </div>
+
+      <div className="work-hero__stage">
+        <div className="work-hero__fan">
+          {CARDS.map((card, i) => (
+            <div
+              key={card.id}
+              className="fan-wrap"
+              style={{ '--i': i }}
+            >
+              <div
+                ref={el => cardRefs.current[i] = el}
+                className="fan-card"
+                onMouseEnter={onEnter}
+                onMouseLeave={onLeave}
+              >
+                <img
+                  src={`https://picsum.photos/seed/${card.seed}/520/350`}
+                  alt={card.label}
+                  className="fan-card__img"
+                  draggable="false"
+                />
+                <div className="fan-card__info">
+                  <span className="fan-card__label">{card.label}</span>
+                  <span className="fan-card__cat">{card.category}</span>
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       <h1 className="work-hero__title">

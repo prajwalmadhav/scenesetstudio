@@ -4,85 +4,113 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const PANELS = [
-  {
-    num: '01', service: 'Brand Strategy',
-    body: 'Visual language, positioning, and story.',
-    tag: 'Identity / Positioning',
-    imgs: [
-      { role: 'hero',  top: '8%',  left: '32%', w: '58%', h: '72%', rotate: 0,  src: 'https://picsum.photos/seed/brand-hero/700/900',
-        overlay: { eyebrow: 'Campaign — 2024', headline: 'The\nArt of\nDistinction.' } },
-      { role: 'small', top: '68%', left: '22%', w: '22%', h: '28%', rotate: -2, src: 'https://picsum.photos/seed/brand-sm/400/520'    },
-    ],
-  },
-  {
-    num: '02', service: 'Content Production',
-    body: 'Photo, video, motion — content people feel.',
-    tag: 'Photo / Video / Motion',
-    imgs: [
-      { role: 'hero',  top: '5%',  left: '28%', w: '44%', h: '62%', rotate: 1,  src: 'https://picsum.photos/seed/content-hero/600/800' },
-      { role: 'mid',   top: '52%', left: '60%', w: '32%', h: '42%', rotate: -1, src: 'https://picsum.photos/seed/content-mid/500/640'  },
-      { role: 'small', top: '70%', left: '18%', w: '20%', h: '24%', rotate: 2,  src: 'https://picsum.photos/seed/content-sm/360/440'   },
-    ],
-  },
-  {
-    num: '03', service: 'Paid Advertising',
-    body: 'Precision targeting. Campaigns that scale.',
-    tag: 'Meta / Google / Performance',
-    imgs: [
-      { role: 'hero',  top: '6%',  left: '36%', w: '52%', h: '58%', rotate: -1, src: 'https://picsum.photos/seed/ads-hero/660/760'   },
-      { role: 'mid',   top: '55%', left: '20%', w: '36%', h: '38%', rotate: 1,  src: 'https://picsum.photos/seed/ads-mid/520/580'    },
-    ],
-  },
-  /* Social Media, Web Design, Video Production hidden for now
-  {
-    num: '04', service: 'Social Media',
-    body: 'Followers become fans. Platforms become revenue.',
-    tag: 'Management / Growth',
-    imgs: [
-      { role: 'hero',  top: '4%',  left: '24%', w: '48%', h: '68%', rotate: 0   },
-      { role: 'small', top: '62%', left: '64%', w: '26%', h: '32%', rotate: -2  },
-      { role: 'small', top: '72%', left: '14%', w: '18%', h: '22%', rotate: 1   },
-    ],
-  },
-  {
-    num: '05', service: 'Web Design',
-    body: 'Interfaces that convert and advocate.',
-    tag: 'UI / UX / Conversion',
-    imgs: [
-      { role: 'hero',  top: '8%',  left: '30%', w: '62%', h: '60%', rotate: 1   },
-      { role: 'mid',   top: '58%', left: '18%', w: '40%', h: '36%', rotate: -1  },
-    ],
-  },
-  {
-    num: '06', service: 'Video Production',
-    body: 'Films and reels that move people and product.',
-    tag: 'Film / Reels / Commercial',
-    imgs: [
-      { role: 'hero',  top: '5%',  left: '22%', w: '54%', h: '74%', rotate: -1  },
-      { role: 'small', top: '65%', left: '68%', w: '22%', h: '28%', rotate: 2   },
-    ],
-  },
-  */
-]
+const CANVAS_VW = 150
 
-function lerp(a, b, t) { return a + (b - a) * t }
+// w/h can be px numbers or vw strings e.g. '35vw'
+const ITEMS = [
+  // Large square — top left
+  { type: 'img', id: 'i1', src: 'https://picsum.photos/seed/scrap-a/800/800',
+    w: '35vw', h: '35vw', top: '7%', left: '8%', rotate: -1.5, z: 2 },
+
+  // Text — below i1
+  { type: 'text', id: 't1',
+    lines: [
+      { text: 'Brand',       accent: false },
+      { text: 'Strategy',    accent: false },
+      { text: '& Identity',  accent: true  },
+      { text: '— 2024',      accent: true  },
+    ],
+    top: '48%', left: '4%', rotate: 0, z: 4, size: 'lg' },
+
+  // Text — right of i1
+  { type: 'text', id: 't2',
+    lines: [
+      { text: 'We craft',    accent: true  },
+      { text: 'stories that',accent: false },
+      { text: 'move',        accent: false },
+      { text: 'people.',     accent: true  },
+    ],
+    top: '14%', left: '28%', rotate: -1, z: 3, size: 'sm' },
+
+  // Small square — bottom, right of i1
+  { type: 'img', id: 'i2', src: 'https://picsum.photos/seed/scrap-b/500/500',
+    w: '14vw', h: '14vw', top: '52%', left: '24%', rotate: 2, z: 2 },
+
+  // Taller image — centre
+  { type: 'img', id: 'i3', src: 'https://picsum.photos/seed/scrap-c/600/900',
+    w: '20vw', h: '44vh', top: '8%', left: '42%', rotate: 1, z: 2 },
+
+  // Text title — on i3
+  { type: 'text', id: 't3a',
+    lines: [
+      { text: 'Content',    accent: false },
+      { text: 'Production', accent: true  },
+    ],
+    top: '10%', left: '43%', rotate: 1, z: 5, size: 'sm', dark: true },
+
+  // Text — bottom right of i3
+  { type: 'text', id: 't3',
+    lines: [
+      { text: 'Frames that feel real.',          accent: false },
+      { text: 'Stories that outlast',            accent: true  },
+      { text: 'the moment they were made.',      accent: false },
+      { text: 'Built to move people',            accent: true  },
+      { text: '— and product.',                  accent: false },
+    ],
+    top: '62%', left: '43%', rotate: 1.5, z: 3, size: 'sm' },
+
+  // Text — right of i3, big title
+  { type: 'text', id: 't4',
+    lines: [
+      { text: 'Reach',    accent: false },
+      { text: 'the right',accent: true  },
+      { text: 'people.',  accent: false },
+      { text: 'Always.',  accent: true  },
+    ],
+    top: '12%', left: '64%', rotate: -1.5, z: 3, size: 'lg' },
+
+  // Small square — below-right
+  { type: 'img', id: 'i4', src: 'https://picsum.photos/seed/scrap-d/500/500',
+    w: '13vw', h: '13vw', top: '58%', left: '67%', rotate: 2.5, z: 2 },
+
+  // Text title — over i4
+  { type: 'text', id: 't4b',
+    lines: [
+      { text: 'Social',  accent: true  },
+      { text: 'Media &', accent: false },
+      { text: 'Growth',  accent: true  },
+    ],
+    top: '60%', left: '68%', rotate: 2.5, z: 5, size: 'sm', dark: true },
+
+  // Big tall rectangle — further right
+  { type: 'img', id: 'i5', src: 'https://picsum.photos/seed/scrap-e/600/960',
+    w: '18vw', h: '52vh', top: '5%', left: '82%', rotate: -1.5, z: 2 },
+
+  // Text — below last image
+  { type: 'text', id: 't5',
+    lines: [
+      { text: 'Video',      accent: false },
+      { text: 'Production', accent: true  },
+      { text: '& Creative', accent: true  },
+      { text: 'Direction',  accent: false },
+    ],
+    top: '68%', left: '83%', rotate: 1, z: 3, size: 'sm' },
+
+]
 
 export default function Features() {
   const sectionRef = useRef(null)
-  const trackRef   = useRef(null)
-  const bgRef      = useRef(null)
+  const canvasRef  = useRef(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const track   = trackRef.current
+      const canvas  = canvasRef.current
       const section = sectionRef.current
-      const bg      = bgRef.current
-      if (!track || !section || !bg) return
+      if (!canvas || !section) return
 
-      const getDistance = () => track.scrollWidth - window.innerWidth
+      const getDistance = () => canvas.scrollWidth - window.innerWidth
 
-      const hTween = gsap.to(track, {
+      const hTween = gsap.to(canvas, {
         x: () => -getDistance(),
         ease: 'none',
         scrollTrigger: {
@@ -93,30 +121,22 @@ export default function Features() {
           scrub: 1.2,
           anticipatePin: 1,
           invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            bg.style.backgroundColor = `rgba(8,8,8,${self.progress})`
-          },
         },
       })
 
-      // Per-panel staggered reveals
-      track.querySelectorAll('.feat-panel--service').forEach((panel) => {
-        panel.querySelectorAll('.feat-img-abs').forEach((img, ii) => {
-          gsap.fromTo(img,
-            { opacity: 0, y: ii % 2 === 0 ? 32 : -24, scale: 0.94, rotate: parseFloat(img.dataset.rot || 0) - 2 },
-            {
-              opacity: 1, y: 0, scale: 1, rotate: parseFloat(img.dataset.rot || 0),
-              duration: 1.0, ease: 'power3.out', delay: ii * 0.12,
-              scrollTrigger: { trigger: panel, containerAnimation: hTween, start: 'left 82%', toggleActions: 'play none none reverse' },
-            }
-          )
-        })
-        gsap.fromTo(
-          panel.querySelectorAll('.feat-text-reveal'),
-          { opacity: 0, y: 18 },
+      canvas.querySelectorAll('.scrap-item').forEach((el) => {
+        const rot = parseFloat(el.dataset.rot || 0)
+        gsap.fromTo(el,
+          { opacity: 0, scale: 0.88, rotate: rot - 4, y: 24 },
           {
-            opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.08,
-            scrollTrigger: { trigger: panel, containerAnimation: hTween, start: 'left 78%', toggleActions: 'play none none reverse' },
+            opacity: 1, scale: 1, rotate: rot, y: 0,
+            duration: 0.85, ease: 'power3.out',
+            scrollTrigger: {
+              trigger: el,
+              containerAnimation: hTween,
+              start: 'left 92%',
+              toggleActions: 'play none none reverse',
+            },
           }
         )
       })
@@ -125,91 +145,50 @@ export default function Features() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="feat-section" id="features">
-      <div ref={bgRef} className="feat-bg" />
-
+    <section ref={sectionRef} className="feat-section scrap-section" id="features">
       <div className="feat-header">
         <span className="feat-header__label">Selected Work</span>
         <span className="feat-header__hint">Scroll →</span>
       </div>
 
-      <div ref={trackRef} className="feat-track">
-
-        {/* Intro — heading overlaid on large image */}
-        <div className="feat-panel feat-panel--intro">
-          <div className="feat-intro-bg">
-            <img
-              className="feat-intro-bg__img"
-              src="https://picsum.photos/seed/editorial-intro/800/1000"
-              alt=""
-              draggable="false"
-            />
-            <div className="feat-intro-bg__editorial">
-              <span className="feat-intro-bg__editorial-label">Editorial</span>
-              <div className="feat-intro-bg__editorial-body">
-                <p className="feat-intro-bg__editorial-text">
-                  Where craft<br />meets intent.
-                </p>
-                <p className="feat-intro-bg__editorial-para">
-                  Every frame is a decision. Every campaign a deliberate act of storytelling — built to move people, shift perception, and leave something behind.
-                </p>
-              </div>
+      <div ref={canvasRef} className="scrap-canvas" style={{ width: `${CANVAS_VW}vw` }}>
+        {ITEMS.map((item) =>
+          item.type === 'img' ? (
+            <div
+              key={item.id}
+              className="scrap-item scrap-img-wrap"
+              data-rot={item.rotate}
+              style={{
+                top: item.top,
+                left: item.left,
+                width: item.w,
+                height: item.h,
+                transform: `rotate(${item.rotate}deg)`,
+                zIndex: item.z,
+              }}
+            >
+              <img src={item.src} alt="" draggable="false" className="scrap-img" loading="eager" fetchPriority="high" />
             </div>
-          </div>
-          <div className="feat-intro-overlay">
-            <p className="feat-text-reveal feat-intro__eyebrow">Our Work</p>
-            <h2 className="feat-text-reveal feat-intro__title">Selected<br />Work.</h2>
-            <p className="feat-text-reveal feat-intro__sub">A curated look at what we've built.</p>
-          </div>
-        </div>
-
-        {/* Services — abstract mixed layout */}
-        {PANELS.map((p) => (
-          <div key={p.num} className="feat-panel feat-panel--service">
-
-            {/* Scattered images */}
-            {p.imgs.map((img, ii) => (
-              <div
-                key={ii}
-                className={`feat-img-abs feat-img-abs--${img.role}`}
-                data-rot={img.rotate}
-                style={{
-                  top: img.top, left: img.left,
-                  width: img.w, height: img.h,
-                  transform: `rotate(${img.rotate}deg)`,
-                }}
-              >
-                {img.src
-                  ? <img className="feat-img-fill feat-img-fill--photo" src={img.src} alt="" draggable="false" />
-                  : <div className="feat-img-fill" />
-                }
-                {img.overlay && (
-                  <div className="feat-img-editorial">
-                    <span className="feat-img-editorial__eyebrow">{img.overlay.eyebrow}</span>
-                    <p className="feat-img-editorial__headline">
-                      {img.overlay.headline.split('\n').map((line, i) => (
-                        <span key={i}>{line}<br /></span>
-                      ))}
-                    </p>
-                  </div>
-                )}
-                {img.role === 'hero' && (
-                  <div className="feat-img-tag">{p.tag}</div>
-                )}
-              </div>
-            ))}
-
-            {/* Text — bottom-left, overlaid */}
-            <div className="feat-text-block">
-              <span className="feat-text-reveal feat-svc-num">{p.num} /</span>
-              <h3 className="feat-text-reveal feat-svc-name">{p.service}</h3>
-              <p className="feat-text-reveal feat-svc-body">{p.body}</p>
+          ) : (
+            <div
+              key={item.id}
+              className={`scrap-item scrap-text scrap-text--${item.size}${item.dark ? ' scrap-text--dark' : ''}`}
+              data-rot={item.rotate}
+              style={{
+                top: item.top,
+                left: item.left,
+                transform: `rotate(${item.rotate}deg)`,
+                zIndex: item.z,
+              }}
+            >
+              {item.lines.map((line, i) => (
+                <span key={i} className={`scrap-text__line${line.accent ? ' scrap-text__line--accent' : ''}`}>
+                  {line.text}
+                </span>
+              ))}
             </div>
-
-          </div>
-        ))}
-
-        <div className="feat-panel feat-panel--spacer" />
+          )
+        )}
       </div>
     </section>
   )

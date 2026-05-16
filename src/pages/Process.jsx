@@ -1,5 +1,6 @@
 import SEO from '../components/SEO'
 import ProcessDiagram from '../components/Process'
+import FrameScroll from '../components/FrameScroll'
 
 export default function ProcessPage() {
   return (
@@ -10,6 +11,7 @@ export default function ProcessPage() {
       />
       <div style={{ paddingTop: '80px' }}>
         <ProcessDiagram />
+        <FrameScroll />
       </div>
     </>
   )

@@ -34,29 +34,14 @@ function PhotoCard({ post }) {
 }
 
 /* ── Logo Grid ── */
-const LogoBrson = () => (
-  <svg viewBox="0 0 120 36" fill="white" xmlns="http://www.w3.org/2000/svg" style={{ width: 110, height: 34 }}>
-    <text x="0" y="28" fontFamily="Georgia, serif" fontSize="30" fontWeight="700" letterSpacing="-1">br</text>
-    <text x="44" y="28" fontFamily="Georgia, serif" fontSize="22" fontWeight="400">&amp;</text>
-    <text x="60" y="28" fontFamily="Georgia, serif" fontSize="30" fontWeight="700" letterSpacing="-1">son</text>
-  </svg>
-)
-
-const LogoOpenAI = () => (
-  <svg viewBox="0 0 160 36" fill="white" xmlns="http://www.w3.org/2000/svg" style={{ width: 148, height: 34 }}>
-    <g transform="translate(11,18)">
-      <circle r="8" fill="none" stroke="white" strokeWidth="1.2" />
-      <line x1="-8" y1="0" x2="8" y2="0" stroke="white" strokeWidth="1" />
-      <line x1="0" y1="-8" x2="0" y2="8" stroke="white" strokeWidth="1" />
-      <line x1="-5.6" y1="-5.6" x2="5.6" y2="5.6" stroke="white" strokeWidth="1" />
-      <line x1="5.6" y1="-5.6" x2="-5.6" y2="5.6" stroke="white" strokeWidth="1" />
-    </g>
-    <text x="26" y="26" fontFamily="-apple-system, sans-serif" fontSize="22" fontWeight="600" letterSpacing="-0.5">OpenAI</text>
+const LogoPremierePro = () => (
+  <svg viewBox="0 0 110 36" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: 110, height: 34 }}>
+    <text x="2" y="26" fontFamily="-apple-system, sans-serif" fontSize="17" fontWeight="400" fill="white" letterSpacing="-0.3">Premiere</text>
   </svg>
 )
 
 const LogoPerplexity = () => (
-  <svg viewBox="0 0 190 36" fill="white" xmlns="http://www.w3.org/2000/svg" style={{ width: 160, height: 34 }}>
+  <svg viewBox="0 0 170 36" fill="white" xmlns="http://www.w3.org/2000/svg" style={{ width: 150, height: 34 }}>
     <g transform="translate(11,18)">
       {[0, 30, 60, 90, 120, 150].map((a, i) => (
         <line key={i}
@@ -65,47 +50,41 @@ const LogoPerplexity = () => (
           stroke="white" strokeWidth="1.8" strokeLinecap="round" />
       ))}
     </g>
-    <text x="28" y="26" fontFamily="-apple-system, sans-serif" fontSize="21" fontWeight="500" letterSpacing="-0.3">perplexity</text>
+    <text x="28" y="26" fontFamily="-apple-system, sans-serif" fontSize="19" fontWeight="400" fill="white" letterSpacing="-0.3">perplexity</text>
   </svg>
 )
 
-const LogoMike = () => (
-  <svg viewBox="0 0 90 42" fill="white" xmlns="http://www.w3.org/2000/svg" style={{ width: 88, height: 40 }}>
-    <text x="4" y="33" fontFamily="Palatino Linotype, Palatino, Georgia, serif" fontSize="34" fontStyle="italic" fontWeight="700" letterSpacing="-1">mike</text>
+const LogoIllustrator = () => (
+  <svg viewBox="0 0 110 36" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: 110, height: 34 }}>
+    <text x="2" y="26" fontFamily="-apple-system, sans-serif" fontSize="17" fontWeight="400" fill="white" letterSpacing="-0.3">Illustrator</text>
   </svg>
 )
 
-const LogoClaude = () => (
-  <svg viewBox="0 0 170 36" fill="white" xmlns="http://www.w3.org/2000/svg" style={{ width: 148, height: 34 }}>
-    <g transform="translate(11,18)">
-      {[0, 45, 90, 135].map((a, i) => (
-        <line key={i}
-          x1={Math.cos(a * Math.PI / 180) * -9} y1={Math.sin(a * Math.PI / 180) * -9}
-          x2={Math.cos(a * Math.PI / 180) * 9}  y2={Math.sin(a * Math.PI / 180) * 9}
-          stroke="white" strokeWidth="2" strokeLinecap="round" />
-      ))}
-    </g>
-    <text x="28" y="26" fontFamily="-apple-system, sans-serif" fontSize="22" fontWeight="600" letterSpacing="-0.5">Claude</text>
+const LogoAfterEffects = () => (
+  <svg viewBox="0 0 125 36" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: 120, height: 34 }}>
+    <text x="2" y="26" fontFamily="-apple-system, sans-serif" fontSize="17" fontWeight="400" fill="white" letterSpacing="-0.3">After Effects</text>
   </svg>
 )
 
-const LogoGrok = () => (
-  <svg viewBox="0 0 140 36" fill="white" xmlns="http://www.w3.org/2000/svg" style={{ width: 120, height: 34 }}>
-    <g transform="translate(11,18)">
-      <circle r="9" fill="none" stroke="white" strokeWidth="1.8" />
-      <line x1="-5.5" y1="7" x2="5.5" y2="-7" stroke="white" strokeWidth="2" strokeLinecap="round" />
-    </g>
-    <text x="28" y="26" fontFamily="-apple-system, sans-serif" fontSize="22" fontWeight="600" letterSpacing="-0.5">Grok</text>
+const LogoDJI = () => (
+  <svg viewBox="0 0 72 36" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: 64, height: 34 }}>
+    <text x="2" y="27" fontFamily="-apple-system, sans-serif" fontSize="26" fontWeight="800" letterSpacing="1" fill="white">DJI</text>
+  </svg>
+)
+
+const LogoSony = () => (
+  <svg viewBox="0 0 88 36" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: 80, height: 34 }}>
+    <text x="2" y="27" fontFamily="-apple-system, sans-serif" fontSize="22" fontWeight="600" letterSpacing="3" fill="white">SONY</text>
   </svg>
 )
 
 const LOGOS = [
-  { id: 'brson',      El: LogoBrson,      label: 'br&son' },
-  { id: 'openai',     El: LogoOpenAI,     label: 'OpenAI' },
-  { id: 'perplexity', El: LogoPerplexity, label: 'Perplexity' },
-  { id: 'mike',       El: LogoMike,       label: 'mike' },
-  { id: 'claude',     El: LogoClaude,     label: 'Claude' },
-  { id: 'grok',       El: LogoGrok,       label: 'Grok' },
+  { id: 'premiere',     El: LogoPremierePro,   label: 'Adobe Premiere Pro' },
+  { id: 'perplexity',   El: LogoPerplexity,    label: 'Perplexity' },
+  { id: 'illustrator',  El: LogoIllustrator,   label: 'Adobe Illustrator' },
+  { id: 'aftereffects', El: LogoAfterEffects,  label: 'After Effects' },
+  { id: 'dji',          El: LogoDJI,           label: 'DJI' },
+  { id: 'sony',         El: LogoSony,          label: 'Sony' },
 ]
 
 function CornerTicks() {

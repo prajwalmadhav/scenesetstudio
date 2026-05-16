@@ -1,6 +1,11 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
+import Lenis from 'lenis'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import useButtonRipple from './hooks/useButtonRipple'
+
+gsap.registerPlugin(ScrollTrigger)
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -33,7 +38,6 @@ function HomePage() {
       <About />
       <Features />
       <Process />
-      <FrameScroll />
       <Testimonials />
       <div className="light-zone">
         <CTA />
@@ -41,7 +45,7 @@ function HomePage() {
         <div className="footer-brand-bg" aria-hidden="true">
           <div className="footer-brand-bg__vert-row">
             <span className="footer-brand-bg__vert footer-brand-bg__vert--neon footer-brand-bg__vert--scene">SCENE</span>
-            <span className="footer-brand-bg__vert footer-brand-bg__vert--neon footer-brand-bg__vert--delay1 footer-brand-bg__vert--set"><span style={{textTransform:'uppercase'}}>S</span>et</span>
+            <span className="footer-brand-bg__vert footer-brand-bg__vert--neon footer-brand-bg__vert--delay1 footer-brand-bg__vert--set" style={{fontFamily:"'Playfair Display', Georgia, serif"}}>SET</span>
           </div>
           <span className="footer-brand-bg__horizontal footer-brand-bg__horiz--neon footer-brand-bg__horiz--studio">STUDIO</span>
         </div>
@@ -67,6 +71,29 @@ function BrandWatermark() {
 
 function App() {
   useButtonRipple()
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.4,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      wheelMultiplier: 0.9,
+    })
+
+    // Sync Lenis scroll position to GSAP ScrollTrigger
+    lenis.on('scroll', ScrollTrigger.update)
+
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000)
+    })
+    gsap.ticker.lagSmoothing(0)
+
+    return () => {
+      lenis.destroy()
+      gsap.ticker.remove(lenis.raf)
+    }
+  }, [])
+
   const base = import.meta.env.BASE_URL.replace(/\/$/, '') || '/'
   return (
     <BrowserRouter basename={base}>

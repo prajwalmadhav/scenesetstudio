@@ -7,7 +7,7 @@
   --bg: #080808;
   --surface: #0f0f0f;
   --border: #1a1a1a;
-  --lime: #C8F535;
+  --accent: #D4001E;
   --gold: #F5C842;
   --cream: #F2F0EB;
   --muted: #555550;
@@ -183,7 +183,7 @@ body::after {
 
 /* Cycling word in hero subtext */
 .hero-cycle-word {
-  color: #C8F535;
+  color: #D4001E;
   font-style: italic;
   transition: opacity 0.3s ease;
 }
@@ -781,7 +781,7 @@ body::after {
 
 .mobile-link:hover,
 .mobile-link--active {
-  color: var(--lime);
+  color: var(--accent);
 }
 
 .mobile-link--cta {
@@ -1759,14 +1759,18 @@ body::after {
 }
 
 .scrap-text__line--accent {
-  font-family: var(--font-heading);
-  font-weight: 700;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 200;
   font-style: italic;
   text-transform: none;
   letter-spacing: -0.02em;
   color: #a8a8a8 !important;
 }
 
+
+.scrap-text--right {
+  text-align: right;
+}
 
 .scrap-text--dark .scrap-text__line {
   color: rgba(18, 16, 14, 0.88);
@@ -2269,8 +2273,7 @@ body::after {
 }
 
 .proc-section::before {
-  top: 120px;
-  background: linear-gradient(to bottom, #050505 0%, transparent 100%);
+  display: none;
 }
 
 .proc-section::after {
@@ -4146,6 +4149,13 @@ body::after {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: 60px;
+}
+
+@media (max-width: 768px) {
+  .work-hero__eyebrow {
+    margin-top: 0;
+  }
 }
 
 .work-hero__tag {
@@ -4808,7 +4818,7 @@ body::after {
   .cta-section {
     position: relative;
     padding-top: 30px;
-    padding-bottom: 120px;
+    padding-bottom: 80px;
   }
   .cta-text, .cta-action {
     position: relative;
@@ -5055,6 +5065,151 @@ body::after {
 }
 
 /* ═══════════════════════════════════════
+   CTA — desktop trust strip
+═══════════════════════════════════════ */
+
+.cta-desktop-trust {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-top: 8px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  width: 100%;
+  max-width: 560px;
+  justify-content: center;
+}
+
+.cta-desktop-trust__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.cta-desktop-trust__num {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: -0.02em;
+  color: rgba(242, 240, 235, 0.9);
+}
+
+.cta-desktop-trust__label {
+  font-family: var(--font-body, sans-serif);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: rgba(242, 240, 235, 0.35);
+  white-space: nowrap;
+}
+
+.cta-desktop-trust__sep {
+  width: 1px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .cta-desktop-trust {
+    display: none;
+  }
+}
+
+/* ═══════════════════════════════════════
+   CTA — mobile trust extension
+═══════════════════════════════════════ */
+
+.cta-mobile-trust {
+  display: none; /* hidden on desktop */
+}
+
+@media (max-width: 768px) {
+  .cta-mobile-trust {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    width: 100%;
+    padding-top: 8px;
+  }
+
+  .cta-mobile-trust__sub {
+    font-family: var(--font-body, sans-serif);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.6px;
+    color: rgba(242, 240, 235, 0.45);
+    text-transform: none;
+    text-align: center;
+  }
+
+  .cta-mobile-trust__pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .cta-trust-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-body, sans-serif);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: rgba(242, 240, 235, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .cta-mobile-trust__divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 240px;
+  }
+
+  .cta-mobile-trust__divider-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .cta-mobile-trust__divider-text {
+    font-family: var(--font-body, sans-serif);
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(242, 240, 235, 0.3);
+  }
+
+  .cta-mobile-trust__email {
+    font-family: var(--font-body, sans-serif);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    color: rgba(212, 0, 30, 0.85);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(212, 0, 30, 0.3);
+    padding-bottom: 2px;
+    transition: color 0.25s ease, border-color 0.25s ease;
+  }
+
+  .cta-mobile-trust__email:active {
+    color: rgba(212, 0, 30, 1);
+    border-color: rgba(212, 0, 30, 0.7);
+  }
+}
+
+/* ═══════════════════════════════════════
    FOOTER — updated with dock
 ═══════════════════════════════════════ */
 
@@ -5259,13 +5414,21 @@ body::after {
 /* Asterisk star — floats to the right of the accent line */
 .cta-asterisk-svg {
   position: absolute;
-  right: -54px;
+  right: -76px;
   top: 50%;
   transform: translateY(-60%);
-  width: 44px;
-  height: 44px;
+  width: 72px;
+  height: 72px;
   pointer-events: none;
-  opacity: 0.9;
+  opacity: 0.95;
+}
+
+@media (max-width: 768px) {
+  .cta-asterisk-svg {
+    right: -48px;
+    width: 48px;
+    height: 48px;
+  }
 }
 
 /* Rough circle scribble — floats top-left of line 1 */

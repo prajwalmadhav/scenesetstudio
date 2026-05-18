@@ -14,7 +14,7 @@ export default function Work() {
     <>
       <SEO
         title="Selected Work | Scene Set Studio"
-        description="Case studies and project work from Scene Set Studio — brand strategy, content production, and paid advertising."
+        description="Case studies and project work from Scene Set Studio - brand strategy, content production, and paid advertising."
       />
 
       <div style={{ background: '#080808' }}>
@@ -28,7 +28,7 @@ export default function Work() {
               key={c.slug}
               to={`/work/${c.slug}`}
               style={{ textDecoration: 'none', display: 'block', background: i % 2 === 0 ? '#0a0a0a' : '#080808', padding: '48px', border: '1px solid #1a1a1a', transition: 'border-color 0.2s' }}
-              onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(200,245,53,0.3)'}
+              onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(212,0,30,0.3)'}
               onMouseLeave={e => e.currentTarget.style.borderColor = '#1a1a1a'}
             >
               {/* Placeholder image */}
@@ -47,8 +47,8 @@ export default function Work() {
                     {c.name}
                   </h2>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#C8F535', fontSize: '13px', fontFamily: 'var(--font-body)' }}>
-                  View  →
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#D4001E', fontSize: '13px', fontFamily: 'var(--font-body)' }}>
+                  View &rarr;
                 </div>
               </div>
             </Link>

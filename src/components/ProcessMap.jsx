@@ -4,9 +4,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-/* ─────────────────────────────────────────
+/* â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
    SVG coordinate system
-   ───────────────────────────────────────── */
+   â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€ */
 const VW = 1000
 const VH = 480
 const NR = 36   // node radius
@@ -75,7 +75,7 @@ const SPINE = [
   `M ${712+NR},142  C 800,142 808,230 ${900-NR},230`,
 ]
 
-// Branch lines: node cx/cy → pill centre
+// Branch lines: node cx/cy -> pill centre
 function branchPath(node, pill) {
   const px = pill.bx + PW / 2
   const py = pill.by + PH / 2
@@ -195,7 +195,7 @@ export default function ProcessMap() {
         </h2>
       </div>
 
-      {/* ── DESKTOP DIAGRAM ── */}
+      {/* â"€â"€ DESKTOP DIAGRAM â"€â"€ */}
       <div style={{
         width: '100%',
         maxWidth: '1200px',
@@ -226,7 +226,7 @@ export default function ProcessMap() {
             </marker>
           </defs>
 
-          {/* ── Spine connections ── */}
+          {/* â"€â"€ Spine connections â"€â"€ */}
           {SPINE.map((d, i) => (
             <path
               key={i}
@@ -240,7 +240,7 @@ export default function ProcessMap() {
             />
           ))}
 
-          {/* ── Service branch lines + pills ── */}
+          {/* â"€â"€ Service branch lines + pills â"€â"€ */}
           {NODES.map((node, ni) => (
             node.services.map((svc, si) => {
               const idx     = ni * 3 + si
@@ -257,7 +257,7 @@ export default function ProcessMap() {
                     ref={el => branchRefs.current[idx] = el}
                     x1={node.cx} y1={node.cy}
                     x2={pcx}     y2={pcy}
-                    stroke={active ? 'rgba(200,245,53,0.2)' : '#161616'}
+                    stroke={active ? 'rgba(212,0,30,0.2)' : '#161616'}
                     strokeWidth="1"
                     strokeDasharray="3 4"
                     style={{ transition: 'stroke 0.3s' }}
@@ -270,7 +270,7 @@ export default function ProcessMap() {
                       width={PW} height={PH}
                       rx={PR}
                       fill="transparent"
-                      stroke={active ? 'rgba(200,245,53,0.4)' : '#1e1e1e'}
+                      stroke={active ? 'rgba(212,0,30,0.4)' : '#1e1e1e'}
                       strokeWidth="1"
                       style={{ transition: 'stroke 0.3s' }}
                     />
@@ -293,7 +293,7 @@ export default function ProcessMap() {
             })
           ))}
 
-          {/* ── Main nodes (rendered last so they sit on top) ── */}
+          {/* â"€â"€ Main nodes (rendered last so they sit on top) â"€â"€ */}
           {NODES.map((node, i) => (
             <g
               key={i}
@@ -306,7 +306,7 @@ export default function ProcessMap() {
               <circle
                 cx={node.cx} cy={node.cy} r={NR + 14}
                 fill="none"
-                stroke="rgba(200,245,53,0.08)"
+                stroke="rgba(212,0,30,0.08)"
                 strokeWidth="1"
                 style={{ opacity: isActive(i) ? 1 : 0, transition: 'opacity 0.3s' }}
               />
@@ -315,7 +315,7 @@ export default function ProcessMap() {
               <circle
                 cx={node.cx} cy={node.cy} r={NR}
                 fill="#0f0f0f"
-                stroke={isActive(i) ? '#C8F535' : '#2a2a2a'}
+                stroke={isActive(i) ? '#D4001E' : '#2a2a2a'}
                 strokeWidth="1.5"
                 style={{ transition: 'stroke 0.3s' }}
               />
@@ -329,7 +329,7 @@ export default function ProcessMap() {
                 fontSize="10"
                 fontWeight="800"
                 letterSpacing="1"
-                fill={isActive(i) ? '#C8F535' : '#555550'}
+                fill={isActive(i) ? '#D4001E' : '#555550'}
                 style={{ transition: 'fill 0.3s', userSelect: 'none' }}
               >
                 {node.id}
@@ -339,7 +339,7 @@ export default function ProcessMap() {
               <line
                 x1={node.cx - 10} y1={node.cy + 8}
                 x2={node.cx + 10} y2={node.cy + 8}
-                stroke={isActive(i) ? 'rgba(200,245,53,0.35)' : 'rgba(255,255,255,0.07)'}
+                stroke={isActive(i) ? 'rgba(212,0,30,0.35)' : 'rgba(255,255,255,0.07)'}
                 strokeWidth="0.8"
                 style={{ transition: 'stroke 0.3s' }}
               />
@@ -357,7 +357,7 @@ export default function ProcessMap() {
                 {node.label}
               </text>
 
-              {/* ── Tooltip ── */}
+              {/* â"€â"€ Tooltip â"€â"€ */}
               {isActive(i) && (() => {
                 const TW = 230
                 const TH = 36
@@ -404,7 +404,7 @@ export default function ProcessMap() {
         </svg>
       </div>
 
-      {/* ── MOBILE fallback ── */}
+      {/* â"€â"€ MOBILE fallback â"€â"€ */}
       <div className="proc-map-mobile" style={{ width: '100%', maxWidth: '600px', display: 'flex', flexDirection: 'column', gap: '2px' }}>
         {MOBILE_STEPS.map((step, i) => (
           <div key={i} style={{

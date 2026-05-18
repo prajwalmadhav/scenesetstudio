@@ -24,10 +24,16 @@ import ContactPage from './pages/Contact'
 import NotFoundPage from './pages/NotFound'
 import './index.css'
 
-// Scroll to top on every route change
+// Scroll to top and refresh ScrollTrigger on every route change
 function ScrollToTop() {
   const { pathname } = useLocation()
-  useEffect(() => { window.scrollTo(0, 0) }, [pathname])
+  useEffect(() => {
+    window.scrollTo(0, 0)
+    // Kill all ScrollTriggers from previous page, then refresh so new ones
+    // calculate from a clean scroll-position-zero baseline
+    ScrollTrigger.getAll().forEach(t => t.kill())
+    ScrollTrigger.refresh()
+  }, [pathname])
   return null
 }
 

@@ -67,7 +67,7 @@ const ITEMS = [
       { text: 'people.',  accent: false },
       { text: 'Always.',  accent: true  },
     ],
-    top: '17%', left: '64%', rotate: -1.5, z: 3, size: 'lg' },
+    top: '17%', left: '64%', rotate: -1.5, z: 3, size: 'lg', align: 'right' },
 
   // Small square — below-right
   { type: 'img', id: 'i4', src: 'https://picsum.photos/seed/scrap-d/500/500',
@@ -94,7 +94,7 @@ const ITEMS = [
       { text: '& Creative', accent: true  },
       { text: 'Direction',  accent: false },
     ],
-    top: '68%', left: '83%', rotate: 1, z: 3, size: 'sm' },
+    top: '68%', left: '83%', rotate: 1, z: 3, size: 'sm', align: 'right' },
 
 ]
 
@@ -193,7 +193,7 @@ export default function Features() {
           ) : (
             <div
               key={item.id}
-              className={`scrap-item scrap-text scrap-text--${item.size}${item.dark ? ' scrap-text--dark' : ''}`}
+              className={`scrap-item scrap-text scrap-text--${item.size}${item.dark ? ' scrap-text--dark' : ''}${item.align === 'right' ? ' scrap-text--right' : ''}`}
               data-rot={item.rotate}
               style={{
                 top: item.top,

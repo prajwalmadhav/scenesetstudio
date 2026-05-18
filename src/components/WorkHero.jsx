@@ -17,19 +17,19 @@ export default function WorkHero() {
   const infoRefs = useRef([])
 
   useEffect(() => {
-    const cards = cardRefs.current.filter(Boolean)
-
-    gsap.set(cards, { opacity: 0, y: 28 })
-    gsap.to(cards, {
-      opacity: 1,
-      y: 0,
-      duration: 0.72,
-      ease: 'power3.out',
-      stagger: 0.065,
-      delay: 0.2,
+    const ctx = gsap.context(() => {
+      const cards = cardRefs.current.filter(Boolean)
+      gsap.set(cards, { opacity: 0, y: 28 })
+      gsap.to(cards, {
+        opacity: 1,
+        y: 0,
+        duration: 0.72,
+        ease: 'power3.out',
+        stagger: 0.065,
+        delay: 0.15,
+      })
     })
-
-    return () => gsap.killTweensOf(cards)
+    return () => ctx.revert()
   }, [])
 
   function onEnter(e) {

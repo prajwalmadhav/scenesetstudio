@@ -6,8 +6,8 @@ gsap.registerPlugin(ScrollTrigger)
 
 const WORDS = ['legendary']
 
-/* ── Animated SVG underline on hover ── */
-function AnimatedUnderline({ children, color = '#C8F535', wave = false }) {
+/* â"€â"€ Animated SVG underline on hover â"€â"€ */
+function AnimatedUnderline({ children, color = '#D4001E', wave = false }) {
   const pathRef = useRef(null)
 
   function onEnter() {
@@ -76,6 +76,24 @@ export default function CTA() {
         { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out', delay: 0.35,
           scrollTrigger: { trigger: sectionRef.current, start: 'top 70%' } }
       )
+
+      gsap.fromTo('.cta-desktop-trust',
+        { y: 18, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out', delay: 0.55,
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 70%' } }
+      )
+
+      gsap.fromTo('.cta-mobile-trust',
+        { y: 22, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.85, ease: 'power3.out', delay: 0.6,
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 70%' } }
+      )
+
+      gsap.fromTo('.cta-trust-pill',
+        { y: 10, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.55, ease: 'power2.out', stagger: 0.1, delay: 0.75,
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 70%' } }
+      )
     }, sectionRef)
     return () => ctx.revert()
   }, [])
@@ -94,7 +112,7 @@ export default function CTA() {
 
       <div className="cta-text">
 
-        {/* ── Line 1: Let's build something ── */}
+        {/* â"€â"€ Line 1: Let's build something â"€â"€ */}
         <div className="cta-line cta-line--left">
           Let's build something
 
@@ -113,18 +131,18 @@ export default function CTA() {
             />
           </svg>
 
-          {/* Rough circle scribble — floats top-left */}
+          {/* Rough circle scribble - floats top-left */}
           <svg className="cta-doodle-svg cta-circle-svg" viewBox="0 0 130 110"
             fill="none" aria-hidden="true">
             <path
               d="M65 90 C25 88, 2 65, 4 40 C6 15, 32 2, 62 4 C92 6, 118 22, 120 48 C122 74, 100 92, 72 94 C48 96, 30 84, 26 68 C22 52, 36 40, 54 40 C72 40, 84 52, 82 64"
-              stroke="rgba(200,245,53,0.45)" strokeWidth="2" strokeLinecap="round"
+              stroke="rgba(212,0,30,0.45)" strokeWidth="2" strokeLinecap="round"
               pathLength="100"
             />
           </svg>
         </div>
 
-        {/* ── Line 2: rotating glitch word ── */}
+        {/* â"€â"€ Line 2: rotating glitch word â"€â"€ */}
         <div className="cta-line cta-line--right cta-line--accent">
           <span ref={wordRef} className="cta-slide-word" data-text="legendary">
             {WORDS[0]}
@@ -144,9 +162,60 @@ export default function CTA() {
 
       <div className="cta-action">
         <button className="cta-btn">
-          <span className="cta-btn__main">Start Your Project →</span>
-          <span className="cta-btn__sub cta-btn__sub--hide-mobile">Free discovery call · No commitment</span>
+          <span className="cta-btn__main">Start Your Project &rarr;</span>
+          <span className="cta-btn__sub cta-btn__sub--hide-mobile">Free discovery call &middot; No commitment</span>
         </button>
+
+        {/* Desktop trust strip */}
+        <div className="cta-desktop-trust">
+          <div className="cta-desktop-trust__stat">
+            <span className="cta-desktop-trust__num">48h</span>
+            <span className="cta-desktop-trust__label">average response time</span>
+          </div>
+          <span className="cta-desktop-trust__sep" aria-hidden="true" />
+          <div className="cta-desktop-trust__stat">
+            <span className="cta-desktop-trust__num">100%</span>
+            <span className="cta-desktop-trust__label">Canada-wide &amp; remote</span>
+          </div>
+          <span className="cta-desktop-trust__sep" aria-hidden="true" />
+          <div className="cta-desktop-trust__stat">
+            <span className="cta-desktop-trust__num">No contracts</span>
+            <span className="cta-desktop-trust__label">start &amp; stop anytime</span>
+          </div>
+        </div>
+
+        {/* Mobile-only trust extension */}
+        <div className="cta-mobile-trust" aria-hidden="false">
+
+          <p className="cta-mobile-trust__sub">
+            Free discovery call &middot; No commitment
+          </p>
+
+          <div className="cta-mobile-trust__pills">
+            <span className="cta-trust-pill">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <circle cx="6" cy="6" r="5" stroke="rgba(212,0,30,0.7)" strokeWidth="1.2"/>
+                <path d="M3.5 6 L5.2 7.7 L8.5 4.5" stroke="rgba(212,0,30,0.9)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              Response within 24h
+            </span>
+            <span className="cta-trust-pill">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <circle cx="6" cy="6" r="5" stroke="rgba(212,0,30,0.7)" strokeWidth="1.2"/>
+                <path d="M3.5 6 L5.2 7.7 L8.5 4.5" stroke="rgba(212,0,30,0.9)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              No contracts
+            </span>
+            <span className="cta-trust-pill">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <circle cx="6" cy="6" r="5" stroke="rgba(212,0,30,0.7)" strokeWidth="1.2"/>
+                <path d="M3.5 6 L5.2 7.7 L8.5 4.5" stroke="rgba(212,0,30,0.9)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              Canada-wide
+            </span>
+          </div>
+
+        </div>
       </div>
 
     </section>

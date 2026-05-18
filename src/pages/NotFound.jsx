@@ -6,7 +6,7 @@ export default function NotFound() {
     <>
       <SEO
         title="404 | Scene Set Studio"
-        description="Page not found — Scene Set Studio"
+        description="Page not found - Scene Set Studio"
       />
 
       <div style={{ minHeight: '100dvh', background: '#080808', paddingTop: '120px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '120px 64px' }}>
@@ -26,7 +26,7 @@ export default function NotFound() {
         <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', justifyContent: 'center' }}>
           <Link
             to="/"
-            style={{ fontFamily: 'var(--font-body)', fontSize: '13px', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#0a0a0a', background: '#C8F535', padding: '14px 28px', textDecoration: 'none', fontWeight: 500, transition: 'opacity 0.2s' }}
+            style={{ fontFamily: 'var(--font-body)', fontSize: '13px', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#0a0a0a', background: '#D4001E', padding: '14px 28px', textDecoration: 'none', fontWeight: 500, transition: 'opacity 0.2s' }}
             onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
             onMouseLeave={e => e.currentTarget.style.opacity = '1'}
           >
@@ -35,7 +35,7 @@ export default function NotFound() {
           <Link
             to="/work"
             style={{ fontFamily: 'var(--font-body)', fontSize: '13px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(242,240,235,0.6)', background: 'transparent', padding: '14px 28px', textDecoration: 'none', fontWeight: 500, border: '1px solid #1a1a1a', transition: 'border-color 0.2s, color 0.2s' }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(200,245,53,0.4)'; e.currentTarget.style.color = '#F2F0EB' }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(212,0,30,0.4)'; e.currentTarget.style.color = '#F2F0EB' }}
             onMouseLeave={e => { e.currentTarget.style.borderColor = '#1a1a1a'; e.currentTarget.style.color = 'rgba(242,240,235,0.6)' }}
           >
             View Work

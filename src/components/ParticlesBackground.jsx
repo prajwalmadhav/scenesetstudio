@@ -1,7 +1,7 @@
 import { useEffect, useRef, useCallback } from 'react'
 
 /**
- * ParticlesBackground — ported from Framer FloatingParticlesBackground
+ * ParticlesBackground "" ported from Framer FloatingParticlesBackground
  * Canvas-based floating dust particles with mouse repel + glow.
  * Sits fixed behind all page content as a full-viewport layer.
  */
@@ -12,7 +12,7 @@ export default function ParticlesBackground({
   glowIntensity = 8,
   movementSpeed = 0.35,
   mouseInfluence = 120,
-  particleColor = '#C8F535',   // lime — ties to brand
+  particleColor = '#D4001E',   // lime "" ties to brand
   mouseGravity = 'repel',
   gravityStrength = 40,
 }) {

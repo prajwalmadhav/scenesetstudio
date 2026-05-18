@@ -1219,10 +1219,10 @@ body::after {
   height: 100dvh;
   margin-top: -4px;
   background:
-    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,0.10) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.10) 1px, transparent 1px),
     linear-gradient(to bottom, #858585 0%, #6a6a6a 18%, #525252 38%, #3a3a3a 58%, #242424 80%, #1a1a1a 100%);
-  background-size: 60px 60px, 60px 60px, 100% 100%;
+  background-size: 28px 28px, 28px 28px, 100% 100%;
   overflow: hidden;
 }
 
@@ -1573,6 +1573,29 @@ body::after {
 
 .scrap-section {
   overflow: hidden;
+}
+
+.scrap-overlay {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+  will-change: opacity;
+}
+
+/* Grid stays visible on top of the dark overlay */
+.scrap-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .scrap-canvas {
@@ -3481,7 +3504,7 @@ body::after {
 .deck-section {
   position: relative;
   width: 100%;
-  height: 100dvh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -3489,6 +3512,15 @@ body::after {
   overflow: hidden;
   gap: 0;
   padding: 32px 0;
+}
+
+@media (max-width: 600px) {
+  .deck-section {
+    height: auto;
+    min-height: unset;
+    overflow: visible;
+    padding: 60px 0;
+  }
 }
 
 .deck-header {
@@ -3528,6 +3560,20 @@ body::after {
   height: 500px;
   margin-top: -4px;
   overflow: visible;
+}
+
+@media (max-width: 768px) {
+  .mob-deck__stage {
+    width: 240px;
+    height: 320px;
+  }
+
+  .mob-deck__card .scard,
+  .mob-deck__card {
+    width: 240px;
+    height: 320px;
+    border-radius: 16px;
+  }
 }
 
 /* ── Mobile deck carousel ── */
@@ -4808,7 +4854,6 @@ body::after {
     position: absolute;
     bottom: 0;
     left: 0;
-    overflow: hidden;
     pointer-events: none;
     user-select: none;
     z-index: 0;
@@ -4817,6 +4862,7 @@ body::after {
   /* Ensure CTA content sits above stamp */
   .cta-section {
     position: relative;
+    overflow: hidden;
     padding-top: 30px;
     padding-bottom: 80px;
   }
@@ -4888,41 +4934,24 @@ body::after {
     filter: none;
   }
 
-  /* Mobile CTA stamp: subtle tube-light on SCENE + SET */
+  /* SCENE SET: match STUDIO subtle outline */
   .mobile-brand-stamp__vert--neon {
-    animation: mob-neon-vert 9s infinite;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.18);
+    filter: none;
   }
 
   .mobile-brand-stamp__vert--delay1 {
-    animation: mob-neon-vert 9s infinite;
-    animation-delay: 3s;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.18);
+    filter: none;
   }
 
-  /* STUDIO: clean outline only, no shadow */
+  /* STUDIO: subtle outline, barely there */
   .mobile-brand-stamp__horiz {
     text-shadow: none;
-    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.9);
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.18);
   }
 }
 
-@keyframes mob-neon-vert {
-  0%, 10% {
-    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.08);
-    filter: none;
-  }
-  14%, 20%, 26% {
-    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.4);
-    filter: drop-shadow(0 0 6px rgba(255,255,255,0.2)) drop-shadow(0 0 18px rgba(255,255,255,0.1));
-  }
-  32% {
-    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.08);
-    filter: none;
-  }
-  100% {
-    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.08);
-    filter: none;
-  }
-}
 
 /* ═══════════════════════════════════════
    CTA SECTION

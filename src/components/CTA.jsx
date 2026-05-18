@@ -184,38 +184,6 @@ export default function CTA() {
           </div>
         </div>
 
-        {/* Mobile-only trust extension */}
-        <div className="cta-mobile-trust" aria-hidden="false">
-
-          <p className="cta-mobile-trust__sub">
-            Free discovery call &middot; No commitment
-          </p>
-
-          <div className="cta-mobile-trust__pills">
-            <span className="cta-trust-pill">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                <circle cx="6" cy="6" r="5" stroke="rgba(212,0,30,0.7)" strokeWidth="1.2"/>
-                <path d="M3.5 6 L5.2 7.7 L8.5 4.5" stroke="rgba(212,0,30,0.9)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              Response within 24h
-            </span>
-            <span className="cta-trust-pill">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                <circle cx="6" cy="6" r="5" stroke="rgba(212,0,30,0.7)" strokeWidth="1.2"/>
-                <path d="M3.5 6 L5.2 7.7 L8.5 4.5" stroke="rgba(212,0,30,0.9)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              No contracts
-            </span>
-            <span className="cta-trust-pill">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                <circle cx="6" cy="6" r="5" stroke="rgba(212,0,30,0.7)" strokeWidth="1.2"/>
-                <path d="M3.5 6 L5.2 7.7 L8.5 4.5" stroke="rgba(212,0,30,0.9)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              Canada-wide
-            </span>
-          </div>
-
-        </div>
       </div>
 
     </section>

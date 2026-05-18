@@ -386,8 +386,8 @@ export default function Testimonials() {
     <section className="deck-section" id="testimonials">
 
       <div className="deck-header">
-        <span className="deck-eyebrow">What clients say</span>
-        <h2 className="deck-title">Real results.<br />Real people.</h2>
+        <span className="deck-eyebrow">Case Studies</span>
+        <h2 className="deck-title">Work that<br />speaks for itself.</h2>
       </div>
 
       <MobileCarousel />

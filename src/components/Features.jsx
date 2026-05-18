@@ -83,8 +83,8 @@ const ITEMS = [
     top: '60%', left: '68%', rotate: 2.5, z: 5, size: 'sm', dark: true },
 
   // Big tall rectangle — further right
-  { type: 'img', id: 'i5', src: 'https://picsum.photos/seed/scrap-e/600/960',
-    w: '18vw', h: '52vh', top: '10%', left: '82%', rotate: -1.5, z: 2 },
+  { type: 'img', id: 'i5', src: 'https://picsum.photos/seed/scrap-e/800/800',
+    w: '26vw', h: '26vw', top: '10%', left: '80%', rotate: -1.5, z: 2 },
 
   // Text — below last image
   { type: 'text', id: 't5',
@@ -103,8 +103,9 @@ const IMG_SRCS = ITEMS.filter(i => i.type === 'img').map(i => i.src)
 IMG_SRCS.forEach(src => { const img = new Image(); img.src = src })
 
 export default function Features() {
-  const sectionRef = useRef(null)
-  const canvasRef  = useRef(null)
+  const sectionRef  = useRef(null)
+  const canvasRef   = useRef(null)
+  const overlayRef  = useRef(null)
 
   useEffect(() => {
     const isMobile = window.innerWidth <= 768
@@ -126,6 +127,21 @@ export default function Features() {
             }
           )
         })
+
+        // Mobile: darken overlay as section scrolls past vertically
+        gsap.fromTo(overlayRef.current,
+          { opacity: 0 },
+          {
+            opacity: 1,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top top',
+              end: 'bottom bottom',
+              scrub: 1,
+            },
+          }
+        )
         return
       }
 
@@ -144,6 +160,21 @@ export default function Features() {
           invalidateOnRefresh: true,
         },
       })
+
+      // Desktop: darken overlay as horizontal scroll progresses
+      gsap.fromTo(overlayRef.current,
+        { opacity: 0 },
+        {
+          opacity: 1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top top',
+            end: () => `+=${getDistance()}`,
+            scrub: 1.2,
+          },
+        }
+      )
 
       canvas.querySelectorAll('.scrap-item').forEach((el) => {
         const rot = parseFloat(el.dataset.rot || 0)
@@ -171,6 +202,8 @@ export default function Features() {
         <span className="feat-header__label">Selected Work</span>
         <span className="feat-header__hint">Scroll →</span>
       </div>
+
+      <div ref={overlayRef} className="scrap-overlay" aria-hidden="true" />
 
       <div ref={canvasRef} className="scrap-canvas" style={{ width: `${CANVAS_VW}vw` }}>
         {ITEMS.map((item) =>

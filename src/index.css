@@ -1217,6 +1217,7 @@ body::after {
   position: relative;
   height: 100vh;
   height: 100dvh;
+  margin-top: -4px;
   background:
     linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px),
@@ -1256,17 +1257,17 @@ body::after {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 26px 60px;
+  padding: 4px 60px 48px;
   pointer-events: none;
 }
 
 .feat-header__label {
   font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 700;
   letter-spacing: 4px;
   text-transform: uppercase;
-  color: rgba(196, 32, 135, 0.85);
+  color: rgba(210, 205, 198, 0.9);
 }
 
 .feat-header__hint {
@@ -1593,7 +1594,7 @@ body::after {
 
   .scrap-canvas {
     width: 100vw !important;
-    height: 380vw !important;
+    height: 300vw !important;
     transform: none !important;
   }
 
@@ -1607,7 +1608,7 @@ body::after {
 
   /* t1 — brand strategy lg */
   .scrap-canvas > .scrap-item:nth-child(2) {
-    top: 38% !important;
+    top: 26% !important;
     left: 4% !important;
   }
 
@@ -1621,7 +1622,7 @@ body::after {
   .scrap-canvas > .scrap-item:nth-child(4) {
     width: 34vw !important;
     height: 34vw !important;
-    top: 26% !important;
+    top: 18% !important;
     left: 54% !important;
   }
 
@@ -1629,25 +1630,25 @@ body::after {
   .scrap-canvas > .scrap-item:nth-child(5) {
     width: 52vw !important;
     height: 62vw !important;
-    top: 52% !important;
+    top: 42% !important;
     left: 5% !important;
   }
 
   /* t3a — content production */
   .scrap-canvas > .scrap-item:nth-child(6) {
-    top: 53% !important;
+    top: 43% !important;
     left: 6% !important;
   }
 
   /* t3 — frames that feel */
   .scrap-canvas > .scrap-item:nth-child(7) {
-    top: 72% !important;
+    top: 64% !important;
     left: 4% !important;
   }
 
   /* t4 — reach right people lg */
   .scrap-canvas > .scrap-item:nth-child(8) {
-    top: 55% !important;
+    top: 44% !important;
     left: 48% !important;
   }
 
@@ -1655,13 +1656,13 @@ body::after {
   .scrap-canvas > .scrap-item:nth-child(9) {
     width: 32vw !important;
     height: 32vw !important;
-    top: 78% !important;
+    top: 73% !important;
     left: 56% !important;
   }
 
   /* t4b — social media */
   .scrap-canvas > .scrap-item:nth-child(10) {
-    top: 79% !important;
+    top: 75% !important;
     left: 57% !important;
   }
 
@@ -1669,13 +1670,13 @@ body::after {
   .scrap-canvas > .scrap-item:nth-child(11) {
     width: 55vw !important;
     height: 72vw !important;
-    top: 84% !important;
+    top: 80% !important;
     left: 8% !important;
   }
 
   /* t5 — video production */
   .scrap-canvas > .scrap-item:nth-child(12) {
-    top: 91% !important;
+    top: 88% !important;
     left: 52% !important;
   }
 
@@ -1689,6 +1690,15 @@ body::after {
 
   .feat-header__hint {
     display: none;
+  }
+
+  .feat-header {
+    padding: 4px 20px 36px;
+  }
+
+  .feat-header__label {
+    font-size: 14px;
+    letter-spacing: 3px;
   }
 }
 
@@ -1749,17 +1759,22 @@ body::after {
 }
 
 .scrap-text__line--accent {
-  font-family: 'Bodoni Moda', Georgia, serif;
-  font-weight: 400;
+  font-family: var(--font-heading);
+  font-weight: 700;
   font-style: italic;
   text-transform: none;
-  letter-spacing: 0;
+  letter-spacing: -0.02em;
+  color: #a8a8a8 !important;
 }
 
 
 .scrap-text--dark .scrap-text__line {
   color: rgba(18, 16, 14, 0.88);
   text-shadow: none;
+}
+
+.scrap-text--dark .scrap-text__line--accent {
+  color: #888 !important;
 }
 
 .scrap-text--sm .scrap-text__line {

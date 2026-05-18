@@ -10,7 +10,7 @@ const CANVAS_VW = 150
 const ITEMS = [
   // Large square — top left
   { type: 'img', id: 'i1', src: 'https://picsum.photos/seed/scrap-a/800/800',
-    w: '35vw', h: '35vw', top: '7%', left: '8%', rotate: -1.5, z: 2 },
+    w: '35vw', h: '35vw', top: '18%', left: '8%', rotate: -1.5, z: 2 },
 
   // Text — below i1
   { type: 'text', id: 't1',
@@ -38,7 +38,7 @@ const ITEMS = [
 
   // Taller image — centre
   { type: 'img', id: 'i3', src: 'https://picsum.photos/seed/scrap-c/600/900',
-    w: '20vw', h: '44vh', top: '8%', left: '42%', rotate: 1, z: 2 },
+    w: '20vw', h: '44vh', top: '13%', left: '42%', rotate: 1, z: 2 },
 
   // Text title — on i3
   { type: 'text', id: 't3a',
@@ -46,7 +46,7 @@ const ITEMS = [
       { text: 'Content',    accent: false },
       { text: 'Production', accent: true  },
     ],
-    top: '10%', left: '43%', rotate: 1, z: 5, size: 'sm', dark: true },
+    top: '15%', left: '43%', rotate: 1, z: 5, size: 'sm', dark: true },
 
   // Text — bottom right of i3
   { type: 'text', id: 't3',
@@ -67,7 +67,7 @@ const ITEMS = [
       { text: 'people.',  accent: false },
       { text: 'Always.',  accent: true  },
     ],
-    top: '12%', left: '64%', rotate: -1.5, z: 3, size: 'lg' },
+    top: '17%', left: '64%', rotate: -1.5, z: 3, size: 'lg' },
 
   // Small square — below-right
   { type: 'img', id: 'i4', src: 'https://picsum.photos/seed/scrap-d/500/500',
@@ -84,7 +84,7 @@ const ITEMS = [
 
   // Big tall rectangle — further right
   { type: 'img', id: 'i5', src: 'https://picsum.photos/seed/scrap-e/600/960',
-    w: '18vw', h: '52vh', top: '5%', left: '82%', rotate: -1.5, z: 2 },
+    w: '18vw', h: '52vh', top: '10%', left: '82%', rotate: -1.5, z: 2 },
 
   // Text — below last image
   { type: 'text', id: 't5',

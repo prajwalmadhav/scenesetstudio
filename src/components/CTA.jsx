@@ -145,7 +145,7 @@ export default function CTA() {
       <div className="cta-action">
         <button className="cta-btn">
           <span className="cta-btn__main">Start Your Project →</span>
-          <span className="cta-btn__sub">Free discovery call · No commitment</span>
+          <span className="cta-btn__sub cta-btn__sub--hide-mobile">Free discovery call · No commitment</span>
         </button>
       </div>
 

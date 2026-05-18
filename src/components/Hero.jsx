@@ -155,7 +155,7 @@ export default function Hero() {
             Start Your Project →
           </button>
           <button className="hero-btn hero-btn--ghost" style={{ opacity: 0 }}>
-            See Our Work
+            See Our Work <span className="hero-btn__arrow">↓</span>
           </button>
         </div>
       </div>

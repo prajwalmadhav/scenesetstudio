@@ -170,6 +170,7 @@ export default function Footer() {
             <span className="footer-nav__heading">Contact</span>
             <a href="mailto:team@scenesetstudio.com">team@scenesetstudio.com</a>
             <a href="tel:+16138702919">+1 613 870 2919</a>
+            <a href="https://x.com/Scenesetstudio" target="_blank" rel="noopener noreferrer">X - @Scenesetstudio</a>
             <a href="#">Book a Call</a>
             <a
               href="https://g.page/r/review"

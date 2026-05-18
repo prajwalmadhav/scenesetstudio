@@ -98,15 +98,36 @@ const ITEMS = [
 
 ]
 
+// Kick off image downloads immediately — before any scroll
+const IMG_SRCS = ITEMS.filter(i => i.type === 'img').map(i => i.src)
+IMG_SRCS.forEach(src => { const img = new Image(); img.src = src })
+
 export default function Features() {
   const sectionRef = useRef(null)
   const canvasRef  = useRef(null)
 
   useEffect(() => {
+    const isMobile = window.innerWidth <= 768
+
     const ctx = gsap.context(() => {
       const canvas  = canvasRef.current
       const section = sectionRef.current
       if (!canvas || !section) return
+
+      if (isMobile) {
+        // Simple fade-up reveal on mobile, no horizontal scroll
+        canvas.querySelectorAll('.scrap-item').forEach((el) => {
+          gsap.fromTo(el,
+            { opacity: 0, y: 32 },
+            {
+              opacity: 1, y: 0,
+              duration: 0.7, ease: 'power3.out',
+              scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none reverse' },
+            }
+          )
+        })
+        return
+      }
 
       const getDistance = () => canvas.scrollWidth - window.innerWidth
 

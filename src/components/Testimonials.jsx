@@ -16,21 +16,174 @@ const FAN = [
 ]
 
 const POSTS = [
-  { img: 'https://picsum.photos/seed/sss-card1/400/530' },
-  { img: 'https://picsum.photos/seed/sss-card2/400/530' },
-  { img: 'https://picsum.photos/seed/sss-card3/400/530' },
-  { img: 'https://picsum.photos/seed/sss-card4/400/530' },
-  { img: 'https://picsum.photos/seed/sss-card5/400/530' },
-  { img: 'https://picsum.photos/seed/sss-card6/400/530' },
-  { img: 'https://picsum.photos/seed/sss-card7/400/530' },
+  {
+    type: 'instagram',
+    name: 'Ava Moretti',
+    handle: 'avamoretti.co',
+    initials: 'AM',
+    accent: '#E1306C',
+    stat: '2,418',
+    art: 'brand',
+    text: 'SceneSet made our launch feel premium before we even opened. The reels looked cinematic and the inquiries came in fast.',
+  },
+  {
+    type: 'x',
+    name: 'Noah Bennett',
+    handle: '@noahbennett',
+    initials: 'NB',
+    accent: '#111111',
+    stat: '138',
+    text: 'We booked SceneSet for content and ads. Clean process, sharp edits, and the campaign finally looked like the brand we had in our heads.',
+  },
+  {
+    type: 'instagram',
+    name: 'Mira Stone',
+    handle: 'mirastone.studio',
+    initials: 'MS',
+    accent: '#F58529',
+    stat: '1,982',
+    art: 'studio',
+    text: 'They turned our rough ideas into posts people actually saved. Best creative partner we have worked with.',
+  },
+  {
+    type: 'x',
+    name: 'Ethan Rhodes',
+    handle: '@ethanrhodes',
+    initials: 'ER',
+    accent: '#0F1419',
+    stat: '96',
+    text: 'The new video package paid for itself in the first week. SceneSet knows how to make a small business look serious online.',
+  },
+  {
+    type: 'instagram',
+    name: 'Lena Hart',
+    handle: 'lenahartbeauty',
+    initials: 'LH',
+    accent: '#C13584',
+    stat: '3,104',
+    art: 'beauty',
+    text: 'Our feed finally feels cohesive. The comments from customers have been nonstop since SceneSet took over.',
+  },
+  {
+    type: 'x',
+    name: 'Kai Mercer',
+    handle: '@kaimercer',
+    initials: 'KM',
+    accent: '#151515',
+    stat: '211',
+    text: 'SceneSet gave us brand direction, content, and a site that all speak the same language. Huge upgrade.',
+  },
+  {
+    type: 'instagram',
+    name: 'Sofia Grant',
+    handle: 'sofiagrant.events',
+    initials: 'SG',
+    accent: '#833AB4',
+    stat: '4,726',
+    art: 'events',
+    text: 'The event recap looked like a film trailer. We had three new bookings come from that post alone.',
+  },
 ]
 
-function PhotoCard({ post }) {
+function StatusBar() {
   return (
-    <div className="scard scard--photo">
-      <img src={post.img} alt="" loading="lazy" draggable="false" />
+    <div className="scard__statusbar">
+      <span>9:41</span>
+      <div className="scard__statusbar-icons" aria-hidden="true">
+        <span>5G</span>
+        <span className="scard__battery" />
+      </div>
     </div>
   )
+}
+
+function XIcon({ size = 17 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  )
+}
+
+function TinyIcon({ children }) {
+  return <button type="button" aria-hidden="true" tabIndex={-1}>{children}</button>
+}
+
+function XCard({ post }) {
+  return (
+    <article className="scard scard--tweet" aria-label={`X testimonial from ${post.name}`}>
+      <StatusBar />
+      <div className="scard__xheader"><XIcon /></div>
+      <div className="scard__profile">
+        <div className="scard__avatar" style={{ background: post.accent }}>{post.initials}</div>
+        <div className="scard__userinfo">
+          <span className="scard__name">{post.name}</span>
+          <span className="scard__handle">{post.handle}</span>
+        </div>
+        <button className="scard__follow" type="button">Follow</button>
+      </div>
+      <p className="scard__text">{post.text}</p>
+      <span className="scard__time tweet-time">10:28 AM - Client Post</span>
+      <div className="scard__divider" />
+      <div className="scard__metrics">
+        <span><b>{post.stat}</b> Views</span>
+        <span><b>42</b> Likes</span>
+        <span><b>11</b> Replies</span>
+      </div>
+      <div className="scard__divider" />
+      <div className="scard__actions tweet-actions">
+        <TinyIcon>Reply</TinyIcon>
+        <TinyIcon>Repost</TinyIcon>
+        <TinyIcon>Like</TinyIcon>
+        <TinyIcon>Share</TinyIcon>
+      </div>
+    </article>
+  )
+}
+
+function InstagramIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17" cy="7" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}
+
+function InstagramCard({ post }) {
+  return (
+    <article className="scard scard--instagram" aria-label={`Instagram testimonial from ${post.name}`}>
+      <StatusBar />
+      <div className="scard__igheader">
+        <InstagramIcon />
+        <span className="scard__ig-title">Instagram</span>
+        <span aria-hidden="true">...</span>
+      </div>
+      <div className="scard__postheader">
+        <div className="scard__avatar scard__avatar--ig" style={{ background: post.accent }}>{post.initials}</div>
+        <div className="scard__userinfo">
+          <span className="scard__name ig-name">{post.handle}</span>
+          <span className="scard__handle">Client story</span>
+        </div>
+      </div>
+      <div className={`scard__photo-art scard__photo-art--${post.art}`}>
+        <span>SceneSet</span>
+        <b>Studio</b>
+      </div>
+      <div className="scard__actions ig-actions">
+        <span>Like  Comment  Share</span>
+        <span>Save</span>
+      </div>
+      <div className="scard__likes">{post.stat} likes</div>
+      <p className="scard__caption"><b>{post.handle}</b> {post.text}</p>
+      <span className="scard__time ig-time">2 days ago</span>
+    </article>
+  )
+}
+
+function PhotoCard({ post }) {
+  return post.type === 'x' ? <XCard post={post} /> : <InstagramCard post={post} />
 }
 
 /* ── Logo Grid ── */

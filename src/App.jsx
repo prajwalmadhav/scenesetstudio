@@ -45,7 +45,7 @@ function HomePage() {
         <div className="footer-brand-bg" aria-hidden="true">
           <div className="footer-brand-bg__vert-row">
             <span className="footer-brand-bg__vert footer-brand-bg__vert--neon footer-brand-bg__vert--scene">SCENE</span>
-            <span className="footer-brand-bg__vert footer-brand-bg__vert--neon footer-brand-bg__vert--delay1 footer-brand-bg__vert--set" style={{fontFamily:"'Playfair Display', Georgia, serif"}}>SET</span>
+            <span className="footer-brand-bg__vert footer-brand-bg__vert--neon footer-brand-bg__vert--delay1 footer-brand-bg__vert--set">SET</span>
           </div>
           <span className="footer-brand-bg__horizontal footer-brand-bg__horiz--neon footer-brand-bg__horiz--studio">STUDIO</span>
         </div>

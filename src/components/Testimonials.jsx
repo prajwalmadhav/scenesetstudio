@@ -17,173 +17,146 @@ const FAN = [
 
 const POSTS = [
   {
-    type: 'instagram',
-    name: 'Ava Moretti',
-    handle: 'avamoretti.co',
-    initials: 'AM',
-    accent: '#E1306C',
-    stat: '2,418',
-    art: 'brand',
-    text: 'SceneSet made our launch feel premium before we even opened. The reels looked cinematic and the inquiries came in fast.',
+    brand: 'SceneSet Studio',
+    title: 'Website Case Study',
+    category: 'Brand System / Web Experience',
+    year: '2026',
+    stat: '01',
+    art: 'sceneset',
+    mark: 'SS',
+    outcome: 'Full brand site',
+    deliverables: ['UX', 'Identity', 'Motion'],
+    palette: ['#F2F0EB', '#D4001E', '#080808'],
   },
   {
-    type: 'x',
-    name: 'Noah Bennett',
-    handle: '@noahbennett',
-    initials: 'NB',
-    accent: '#111111',
-    stat: '138',
-    text: 'We booked SceneSet for content and ads. Clean process, sharp edits, and the campaign finally looked like the brand we had in our heads.',
+    brand: 'Ava Moretti',
+    title: 'Launch Identity',
+    category: 'Hospitality Brand / Social Campaign',
+    year: '2026',
+    stat: '02',
+    art: 'hospitality',
+    mark: 'AM',
+    outcome: '+38% launch inquiries',
+    deliverables: ['Launch', 'Reels', 'Ads'],
+    palette: ['#F7D9C7', '#7A2E2E', '#1B1412'],
   },
   {
-    type: 'instagram',
-    name: 'Mira Stone',
-    handle: 'mirastone.studio',
-    initials: 'MS',
-    accent: '#F58529',
-    stat: '1,982',
+    brand: 'Mira Stone',
+    title: 'Studio Rebrand',
+    category: 'Creative Direction / Content Suite',
+    year: '2025',
+    stat: '03',
     art: 'studio',
-    text: 'They turned our rough ideas into posts people actually saved. Best creative partner we have worked with.',
+    mark: 'MS',
+    outcome: '3-week content system',
+    deliverables: ['Brand', 'Social', 'Photo'],
+    palette: ['#DDE6EA', '#384B5A', '#C6A56B'],
   },
   {
-    type: 'x',
-    name: 'Ethan Rhodes',
-    handle: '@ethanrhodes',
-    initials: 'ER',
-    accent: '#0F1419',
-    stat: '96',
-    text: 'The new video package paid for itself in the first week. SceneSet knows how to make a small business look serious online.',
+    brand: 'Rhodes & Co.',
+    title: 'Retail Relaunch',
+    category: 'Photo / Paid Ads / Landing Page',
+    year: '2025',
+    stat: '04',
+    art: 'retail',
+    mark: 'R&',
+    outcome: 'Paid campaign refresh',
+    deliverables: ['Ecom', 'Ads', 'Shoot'],
+    palette: ['#F0E2B6', '#1F3A34', '#0B0B0B'],
   },
   {
-    type: 'instagram',
-    name: 'Lena Hart',
-    handle: 'lenahartbeauty',
-    initials: 'LH',
-    accent: '#C13584',
-    stat: '3,104',
+    brand: 'Lena Hart',
+    title: 'Beauty Campaign',
+    category: 'Visual Identity / Reel System',
+    year: '2025',
+    stat: '05',
     art: 'beauty',
-    text: 'Our feed finally feels cohesive. The comments from customers have been nonstop since SceneSet took over.',
+    mark: 'LH',
+    outcome: 'Premium feed system',
+    deliverables: ['Reels', 'UGC', 'Design'],
+    palette: ['#F4C7D8', '#7C2946', '#25141D'],
   },
   {
-    type: 'x',
-    name: 'Kai Mercer',
-    handle: '@kaimercer',
-    initials: 'KM',
-    accent: '#151515',
-    stat: '211',
-    text: 'SceneSet gave us brand direction, content, and a site that all speak the same language. Huge upgrade.',
+    brand: 'Kai Mercer',
+    title: 'Founder Brand',
+    category: 'Personal Brand / Website / Content',
+    year: '2026',
+    stat: '06',
+    art: 'founder',
+    mark: 'KM',
+    outcome: 'Founder-led funnel',
+    deliverables: ['Web', 'Copy', 'Content'],
+    palette: ['#C9D7FF', '#27326C', '#101018'],
   },
   {
-    type: 'instagram',
-    name: 'Sofia Grant',
-    handle: 'sofiagrant.events',
-    initials: 'SG',
-    accent: '#833AB4',
-    stat: '4,726',
+    brand: 'Sofia Grant',
+    title: 'Event Film Kit',
+    category: 'Event Branding / Recap Campaign',
+    year: '2025',
+    stat: '07',
     art: 'events',
-    text: 'The event recap looked like a film trailer. We had three new bookings come from that post alone.',
+    mark: 'SG',
+    outcome: 'Event recap suite',
+    deliverables: ['Film', 'Photo', 'Social'],
+    palette: ['#E9C16E', '#483114', '#111111'],
   },
 ]
 
-function StatusBar() {
+function CaseStudyCover({ post }) {
   return (
-    <div className="scard__statusbar">
-      <span>9:41</span>
-      <div className="scard__statusbar-icons" aria-hidden="true">
-        <span>5G</span>
-        <span className="scard__battery" />
+    <article className={`scard scard--case scard--case-${post.art}`} aria-label={`${post.brand} case study cover`}>
+      <div className="case-cover__top">
+        <span>{post.stat}</span>
+        <span>{post.year}</span>
       </div>
-    </div>
-  )
-}
-
-function XIcon({ size = 17 }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-    </svg>
-  )
-}
-
-function TinyIcon({ children }) {
-  return <button type="button" aria-hidden="true" tabIndex={-1}>{children}</button>
-}
-
-function XCard({ post }) {
-  return (
-    <article className="scard scard--tweet" aria-label={`X testimonial from ${post.name}`}>
-      <StatusBar />
-      <div className="scard__xheader"><XIcon /></div>
-      <div className="scard__profile">
-        <div className="scard__avatar" style={{ background: post.accent }}>{post.initials}</div>
-        <div className="scard__userinfo">
-          <span className="scard__name">{post.name}</span>
-          <span className="scard__handle">{post.handle}</span>
+      <div className="case-cover__art" aria-hidden="true">
+        <div className="case-cover__mark">{post.mark}</div>
+        <div className="case-cover__device">
+          <div className="case-cover__browser">
+            <i />
+            <i />
+            <i />
+            <strong>{post.brand.toLowerCase().replaceAll(' ', '')}.com</strong>
+          </div>
+          <div className="case-cover__screen">
+            <span>{post.category.split(' / ')[0]}</span>
+            <b>{post.brand}</b>
+            <em>{post.title}</em>
+            <div className="case-cover__screen-grid">
+              <i />
+              <i />
+              <i />
+            </div>
+          </div>
         </div>
-        <button className="scard__follow" type="button">Follow</button>
+        <div className="case-cover__phone">
+          <span />
+          <b />
+          <i />
+        </div>
+        <div className="case-cover__poster case-cover__poster--one" />
+        <div className="case-cover__poster case-cover__poster--two" />
       </div>
-      <p className="scard__text">{post.text}</p>
-      <span className="scard__time tweet-time">10:28 AM - Client Post</span>
-      <div className="scard__divider" />
-      <div className="scard__metrics">
-        <span><b>{post.stat}</b> Views</span>
-        <span><b>42</b> Likes</span>
-        <span><b>11</b> Replies</span>
+      <div className="case-cover__deliverables">
+        {post.deliverables.map(item => <span key={item}>{item}</span>)}
       </div>
-      <div className="scard__divider" />
-      <div className="scard__actions tweet-actions">
-        <TinyIcon>Reply</TinyIcon>
-        <TinyIcon>Repost</TinyIcon>
-        <TinyIcon>Like</TinyIcon>
-        <TinyIcon>Share</TinyIcon>
-      </div>
-    </article>
-  )
-}
-
-function InstagramIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <rect x="3" y="3" width="18" height="18" rx="5" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="17" cy="7" r="1" fill="currentColor" stroke="none" />
-    </svg>
-  )
-}
-
-function InstagramCard({ post }) {
-  return (
-    <article className="scard scard--instagram" aria-label={`Instagram testimonial from ${post.name}`}>
-      <StatusBar />
-      <div className="scard__igheader">
-        <InstagramIcon />
-        <span className="scard__ig-title">Instagram</span>
-        <span aria-hidden="true">...</span>
-      </div>
-      <div className="scard__postheader">
-        <div className="scard__avatar scard__avatar--ig" style={{ background: post.accent }}>{post.initials}</div>
-        <div className="scard__userinfo">
-          <span className="scard__name ig-name">{post.handle}</span>
-          <span className="scard__handle">Client story</span>
+      <div className="case-cover__footer">
+        <div>
+          <span className="case-cover__label">Case Study</span>
+          <h3>{post.brand}</h3>
+          <p>{post.outcome}</p>
+        </div>
+        <div className="case-cover__palette" aria-hidden="true">
+          {post.palette.map(color => <span key={color} style={{ background: color }} />)}
         </div>
       </div>
-      <div className={`scard__photo-art scard__photo-art--${post.art}`}>
-        <span>SceneSet</span>
-        <b>Studio</b>
-      </div>
-      <div className="scard__actions ig-actions">
-        <span>Like  Comment  Share</span>
-        <span>Save</span>
-      </div>
-      <div className="scard__likes">{post.stat} likes</div>
-      <p className="scard__caption"><b>{post.handle}</b> {post.text}</p>
-      <span className="scard__time ig-time">2 days ago</span>
+      <span className="case-cover__category">{post.category}</span>
     </article>
   )
 }
 
 function PhotoCard({ post }) {
-  return post.type === 'x' ? <XCard post={post} /> : <InstagramCard post={post} />
+  return <CaseStudyCover post={post} />
 }
 
 /* ── Logo Grid ── */

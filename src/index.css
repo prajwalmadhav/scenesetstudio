@@ -313,13 +313,70 @@ body::after {
 /* Hero 3D table carousel */
 .hero-table {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  transform: perspective(900px) rotateX(15deg) scale(1.35);
+  transform-origin: 50% 60%;
+  will-change: transform;
+}
+
+/* Desktop columns */
+.hero-table-cols {
+  display: flex;
   gap: 10px;
   width: 100%;
   height: 100%;
   padding: 0 8px;
-  transform: perspective(900px) rotateX(15deg) scale(1.35);
-  transform-origin: 50% 60%;
-  will-change: transform;
+}
+
+.hero-table-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hero-table-card {
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #020202;
+  border: 1px solid rgba(242, 240, 235, 0.55);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* Mobile single card — hidden on desktop */
+.hero-single-card {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: clamp(140px, 52vw, 220px);
+  aspect-ratio: 1;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  backdrop-filter: blur(12px);
+}
+
+.hero-single-card__icon {
+  width: clamp(48px, 10vw, 72px);
+  height: auto;
+}
+
+.hero-single-card__label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
 }
 
 .hero-table-col {
@@ -470,19 +527,16 @@ body::after {
   }
 
   .hero-table {
-    gap: 6px;
-    padding: 0 4px;
     transform: perspective(600px) rotateX(18deg) scale(1.15);
     transform-origin: 50% 55%;
   }
 
-  /* show only first column */
-  .hero-table-col:nth-child(n+2) {
+  .hero-table-cols {
     display: none;
   }
 
-  .hero-table-card {
-    height: 200px !important;
+  .hero-single-card {
+    display: flex;
   }
 }
 

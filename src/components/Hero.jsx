@@ -9,31 +9,10 @@ const HERO_WORDS = ['convert', 'captivate', 'perform', 'resonate', 'scale']
 gsap.registerPlugin(ScrollTrigger)
 
 const BASE_COLS = [
-  [{ h: 320, c: 0 }, { h: 380, c: 1 }, { h: 300, c: 2 }, { h: 360, c: 3 }, { h: 340, c: 4 }, { h: 290, c: 5 }],
-  [{ h: 360, c: 6 }, { h: 300, c: 7 }, { h: 380, c: 0 }, { h: 320, c: 1 }, { h: 290, c: 2 }, { h: 350, c: 3 }],
-  [{ h: 300, c: 4 }, { h: 350, c: 5 }, { h: 320, c: 6 }, { h: 380, c: 7 }, { h: 340, c: 0 }, { h: 310, c: 1 }],
-  [{ h: 380, c: 2 }, { h: 310, c: 3 }, { h: 360, c: 4 }, { h: 300, c: 5 }, { h: 350, c: 6 }, { h: 320, c: 7 }],
-  [{ h: 340, c: 1 }, { h: 290, c: 0 }, { h: 350, c: 3 }, { h: 320, c: 2 }, { h: 380, c: 5 }, { h: 300, c: 4 }],
+  [{ h: 320, c: 0 }, { h: 380, c: 1 }, { h: 300, c: 2 }, { h: 360, c: 3 }, { h: 340, c: 4 }],
+  [{ h: 360, c: 5 }, { h: 300, c: 6 }, { h: 380, c: 7 }, { h: 320, c: 0 }, { h: 290, c: 1 }],
+  [{ h: 300, c: 2 }, { h: 350, c: 3 }, { h: 320, c: 4 }, { h: 380, c: 5 }, { h: 340, c: 6 }],
 ]
-
-const TABLE_COLS = BASE_COLS.map(col => [...col, ...col])
-
-const HERO_POSTER_SLOTS = {
-  // Replace these src values later with files in /public, for example:
-  // src: `${import.meta.env.BASE_URL}assets/hero-posters/brand-campaign-01.jpg`
-  'hero-0-0': { label: 'Column 1 / Card 1', src: '' },
-  'hero-0-1': { label: 'Column 1 / Card 2', src: '' },
-  'hero-0-2': { label: 'Column 1 / Card 3', src: '' },
-  'hero-0-3': { label: 'Column 1 / Card 4', src: '' },
-  'hero-1-0': { label: 'Column 2 / Card 1', src: '' },
-  'hero-1-1': { label: 'Column 2 / Card 2', src: '' },
-  'hero-1-2': { label: 'Column 2 / Card 3', src: '' },
-  'hero-1-3': { label: 'Column 2 / Card 4', src: '' },
-  'hero-2-0': { label: 'Column 3 / Card 1', src: '' },
-  'hero-2-1': { label: 'Column 3 / Card 2', src: '' },
-  'hero-2-2': { label: 'Column 3 / Card 3', src: '' },
-  'hero-2-3': { label: 'Column 3 / Card 4', src: '' },
-}
 
 export default function Hero() {
   const [wordIdx, setWordIdx] = useState(0)
@@ -57,7 +36,6 @@ export default function Hero() {
   const visualWrapperRef = useRef(null)
   const visualRef       = useRef(null)
   const tableRef        = useRef(null)
-  const colRefs         = useRef([])
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -75,22 +53,6 @@ export default function Hero() {
       tl.fromTo(btns, { opacity: 0, y: 20 }, { opacity: 1, y: 0, stagger: 0.1 }, 0.8)
 
       tl.fromTo(visualWrapperRef.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0 }, 1.0)
-
-      // ── Infinite column scroll ──
-      colRefs.current.forEach((col, i) => {
-        if (!col) return
-        const totalH = col.scrollHeight / 2
-        const dir    = i % 2 === 0 ? -1 : 1
-        const speed  = 22 + i * 4
-
-        gsap.set(col, { y: dir === -1 ? 0 : -totalH })
-        gsap.to(col, {
-          y: dir === -1 ? -totalH : 0,
-          duration: speed,
-          ease: 'none',
-          repeat: -1,
-        })
-      })
 
       // ── Scroll zoom — pin hero, expand to fullscreen ──
       const isMobile = window.matchMedia('(max-width: 768px)').matches
@@ -172,40 +134,27 @@ export default function Hero() {
 
           {/* 3D tilt stage */}
           <div ref={tableRef} className="hero-table">
-            {TABLE_COLS.map((col, ci) => (
-              <div
-                key={ci}
-                className="hero-table-col"
-                ref={el => colRefs.current[ci] = el}
-              >
-                {col.map((card, idx) => (
-                  (() => {
-                    const slotId = `hero-${ci}-${idx}`
-                    const poster = HERO_POSTER_SLOTS[slotId]
-                    const hasPoster = Boolean(poster?.src)
-
-                    return (
-                      <div
-                        key={idx}
-                        className={`hero-table-card${hasPoster ? ' hero-table-card--has-media' : ''}`}
-                        style={{ height: card.h }}
-                        data-slot={poster ? slotId : undefined}
-                      >
-                        {hasPoster ? (
-                          <img
-                            className="hero-table-card__media"
-                            src={poster.src}
-                            alt={poster.label}
-                          />
-                        ) : (
-                          <PosterPlaceholderIcon variant={card.c + ci + idx} />
-                        )}
-                      </div>
-                    )
-                  })()
-                ))}
-              </div>
-            ))}
+            {/* Desktop: 3 static columns */}
+            <div className="hero-table-cols">
+              {BASE_COLS.map((col, ci) => (
+                <div key={ci} className="hero-table-col">
+                  {col.map((card, idx) => (
+                    <div key={idx} className="hero-table-card" style={{ height: card.h }}>
+                      <PosterPlaceholderIcon variant={card.c + ci + idx} />
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+            {/* Mobile: single centered card */}
+            <div className="hero-single-card">
+              <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="hero-single-card__icon">
+                <rect x="1" y="1" width="78" height="78" rx="16" stroke="rgba(255,255,255,0.12)" strokeWidth="1.5"/>
+                <path d="M24 30c0-3.314 2.686-6 6-6h9c3.314 0 6 2.686 6 6s-2.686 6-6 6H30c-3.314 0-6 2.686-6 6s2.686 6 6 6h9c3.314 0 6-2.686 6-6" stroke="rgba(255,255,255,0.7)" strokeWidth="3" strokeLinecap="round"/>
+                <path d="M38 30c0-3.314 2.686-6 6-6h1c3.314 0 6 2.686 6 6s-2.686 6-6 6H38c-3.314 0-6 2.686-6 6s2.686 6 6 6h1c3.314 0 6-2.686 6-6" stroke="rgba(255,255,255,0.35)" strokeWidth="3" strokeLinecap="round"/>
+              </svg>
+              <span className="hero-single-card__label">SceneSet Studio</span>
+            </div>
           </div>
 
           {/* Fade masks top + bottom */}

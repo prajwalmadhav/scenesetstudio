@@ -176,22 +176,7 @@ export default function Features() {
         }
       )
 
-      canvas.querySelectorAll('.scrap-item').forEach((el) => {
-        const rot = parseFloat(el.dataset.rot || 0)
-        gsap.fromTo(el,
-          { opacity: 0, scale: 0.88, rotate: rot - 4, y: 24 },
-          {
-            opacity: 1, scale: 1, rotate: rot, y: 0,
-            duration: 0.85, ease: 'power3.out',
-            scrollTrigger: {
-              trigger: el,
-              containerAnimation: hTween,
-              start: 'left 92%',
-              toggleActions: 'play none none reverse',
-            },
-          }
-        )
-      })
+      // No per-item reveal on desktop — items are visible from the start
     }, sectionRef)
     return () => ctx.revert()
   }, [])

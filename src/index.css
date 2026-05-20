@@ -175,7 +175,7 @@ body::after {
   font-family: var(--font-body);
   font-weight: 400;
   font-size: 15px;
-  color: rgba(242, 240, 235, 0.75);
+  color: rgba(242, 240, 235, 0.38);
   line-height: 1.5;
   max-width: 380px;
   margin: 0 auto 24px;

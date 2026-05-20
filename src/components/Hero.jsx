@@ -92,37 +92,40 @@ export default function Hero() {
         })
       })
 
-      // ── Scroll zoom — pin hero, expand to fullscreen (desktop only) ──
+      // ── Scroll zoom — pin hero, expand to fullscreen ──
       const isMobile = window.matchMedia('(max-width: 768px)').matches
-      if (!isMobile) {
-        gsap.timeline({
-          scrollTrigger: {
-            trigger: '.hero-section',
-            start: 'top top',
-            end: '+=70%',
-            pin: true,
-            scrub: 0.4,
-            anticipatePin: 1,
-          },
-        })
-        .to(visualWrapperRef.current, {
-          top: 0, left: 0, right: 0, bottom: 0,
-          yPercent: 0, borderRadius: 0, padding: 0,
-          ease: 'none',
-        }, 0)
-        .to(visualRef.current, {
-          height: '100dvh',
-          borderRadius: 0,
-          ease: 'none',
-        }, 0)
-        .fromTo(tableRef.current,
-          { rotateX: 15 },
-          { rotateX: 62, ease: 'none' },
-        0)
-        .to(headlineRef.current, { opacity: 0, ease: 'none' }, 0)
-        .to(subtextRef.current,  { opacity: 0, ease: 'none' }, 0)
-        .to(buttonsRef.current,  { opacity: 0, ease: 'none' }, 0)
-      }
+      const vh = window.innerHeight
+
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: '.hero-section',
+          start: 'top top',
+          end: `+=${isMobile ? '50%' : '70%'}`,
+          pin: true,
+          scrub: isMobile ? 1 : 0.4,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          // prevent browser chrome show/hide from triggering refresh on mobile
+          ...(isMobile && { refreshPriority: -1 }),
+        },
+      })
+      .to(visualWrapperRef.current, {
+        top: 0, left: 0, right: 0, bottom: 0,
+        yPercent: 0, borderRadius: 0, padding: 0,
+        ease: 'none',
+      }, 0)
+      .to(visualRef.current, {
+        // use px snapshot instead of dvh to avoid mobile chrome resize glitch
+        height: vh,
+        borderRadius: 0,
+        ease: 'none',
+      }, 0)
+      .fromTo(tableRef.current,
+        { rotateX: isMobile ? 18 : 15 },
+        { rotateX: isMobile ? 55 : 62, ease: 'none' },
+      0)
+      .to(headlineRef.current, { opacity: 0, ease: 'none' }, 0)
+      .to(buttonsRef.current,  { opacity: 0, ease: 'none' }, 0)
     })
 
     return () => ctx.revert()

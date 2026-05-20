@@ -92,34 +92,37 @@ export default function Hero() {
         })
       })
 
-      // ── Scroll zoom — pin hero, expand to fullscreen ──
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: '.hero-section',
-          start: 'top top',
-          end: '+=70%',
-          pin: true,
-          scrub: 0.4,
-          anticipatePin: 1,
-        },
-      })
-      .to(visualWrapperRef.current, {
-        top: 0, left: 0, right: 0, bottom: 0,
-        yPercent: 0, borderRadius: 0, padding: 0,
-        ease: 'none',
-      }, 0)
-      .to(visualRef.current, {
-        height: '100dvh',
-        borderRadius: 0,
-        ease: 'none',
-      }, 0)
-      .fromTo(tableRef.current,
-        { rotateX: 15 },
-        { rotateX: 62, ease: 'none' },
-      0)
-      .to(headlineRef.current, { opacity: 0, ease: 'none' }, 0)
-      .to(subtextRef.current,  { opacity: 0, ease: 'none' }, 0)
-      .to(buttonsRef.current,  { opacity: 0, ease: 'none' }, 0)
+      // ── Scroll zoom — pin hero, expand to fullscreen (desktop only) ──
+      const isMobile = window.matchMedia('(max-width: 768px)').matches
+      if (!isMobile) {
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: '.hero-section',
+            start: 'top top',
+            end: '+=70%',
+            pin: true,
+            scrub: 0.4,
+            anticipatePin: 1,
+          },
+        })
+        .to(visualWrapperRef.current, {
+          top: 0, left: 0, right: 0, bottom: 0,
+          yPercent: 0, borderRadius: 0, padding: 0,
+          ease: 'none',
+        }, 0)
+        .to(visualRef.current, {
+          height: '100dvh',
+          borderRadius: 0,
+          ease: 'none',
+        }, 0)
+        .fromTo(tableRef.current,
+          { rotateX: 15 },
+          { rotateX: 62, ease: 'none' },
+        0)
+        .to(headlineRef.current, { opacity: 0, ease: 'none' }, 0)
+        .to(subtextRef.current,  { opacity: 0, ease: 'none' }, 0)
+        .to(buttonsRef.current,  { opacity: 0, ease: 'none' }, 0)
+      }
     })
 
     return () => ctx.revert()

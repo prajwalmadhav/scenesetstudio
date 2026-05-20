@@ -5,7 +5,7 @@ import WorkHero from '../components/WorkHero'
 const CASES = [
   { slug: 'fawill-cleaning',  name: 'Fawill Cleaning',   category: 'Brand Strategy / Content', year: '2024' },
   { slug: 'fawill-bike-pub',  name: 'Fawill Bike & Pub', category: 'Paid Advertising / Social', year: '2024' },
-  { slug: 'bhumis-couture',   name: "Bhumi's Couture",   category: 'Identity / Web Design',     year: '2024' },
+  { slug: 'prajwal-personal-brand', name: "Prajwal's Personal Brand", category: 'Identity / Web Design', year: '2024' },
   { slug: 'tierx-dcs',        name: 'TierX DCS',         category: 'Content Production / Ads',  year: '2025' },
 ]
 

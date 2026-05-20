@@ -2,7 +2,7 @@ import { useState } from 'react'
 import SEO from '../components/SEO'
 
 const SERVICES = ['Brand Strategy', 'Content Production', 'Paid Advertising', 'Social Media', 'Web Design', 'Not sure yet']
-const BUDGETS  = ['Under £2k', '£2k - £5k', '£5k - £15k', '£15k+', 'Ongoing retainer']
+const BUDGETS  = ['Under $2k', '$2k - $5k', '$5k - $15k', '$15k+', 'Ongoing retainer']
 
 const inputStyle = {
   width: '100%',
@@ -12,7 +12,7 @@ const inputStyle = {
   fontFamily: 'var(--font-body)',
   fontSize: '15px',
   fontWeight: 300,
-  padding: '16px 20px',
+  padding: '14px 18px',
   outline: 'none',
   boxSizing: 'border-box',
   transition: 'border-color 0.2s',
@@ -50,23 +50,24 @@ export default function Contact() {
         description="Start a project with Scene Set Studio - brand strategy, content, advertising, and web design."
       />
 
-      <div style={{ minHeight: '100dvh', background: '#080808', paddingTop: '120px' }}>
+      <div className="contact-page">
 
         {/* Header */}
-        <div style={{ padding: '0 64px 80px', borderBottom: '1px solid #1a1a1a' }}>
-          <p style={{ fontFamily: 'var(--font-body)', fontSize: '11px', letterSpacing: '0.16em', color: 'rgba(242,240,235,0.4)', textTransform: 'uppercase', marginBottom: '24px' }}>
+        <div className="contact-hero">
+          <p className="contact-eyebrow">
             Get In Touch
           </p>
-          <h1 style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: 'clamp(48px, 7vw, 96px)', color: '#F2F0EB', lineHeight: 0.92, letterSpacing: '-0.03em', margin: 0 }}>
-            Let's start<br />something.
+          <h1 className="contact-title">
+            Let's start something.
           </h1>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', padding: '80px 64px 120px', gap: '80px' }}>
+        <div className="contact-shell">
+          <div className="contact-card">
 
           {/* Left "" info */}
-          <div>
-            <p style={{ fontFamily: 'var(--font-body)', fontSize: '16px', fontWeight: 300, color: 'rgba(242,240,235,0.55)', lineHeight: 1.8, marginBottom: '64px', maxWidth: '360px' }}>
+          <div className="contact-info">
+            <p className="contact-intro">
               Fill in the form and we will get back to you within one business day. Alternatively, drop us an email directly.
             </p>
 
@@ -102,9 +103,9 @@ export default function Contact() {
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+            <form onSubmit={handleSubmit} className="contact-form">
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+              <div className="contact-form-row">
                 <div>
                   <label style={labelStyle} htmlFor="name">Name</label>
                   <input
@@ -187,10 +188,10 @@ export default function Contact() {
               <div>
                 <label style={labelStyle} htmlFor="message">Message</label>
                 <textarea
-                  id="message" name="message" rows={5} required
+                  id="message" name="message" rows={4} required
                   placeholder="Tell us about your project..."
                   value={form.message} onChange={handleChange}
-                  style={{ ...inputStyle, resize: 'vertical', minHeight: '120px' }}
+                  style={{ ...inputStyle, resize: 'vertical', minHeight: '104px' }}
                   onFocus={e => e.target.style.borderColor = 'rgba(212,0,30,0.4)'}
                   onBlur={e => e.target.style.borderColor = '#1a1a1a'}
                 />
@@ -201,7 +202,7 @@ export default function Contact() {
                 style={{
                   fontFamily: 'var(--font-body)', fontSize: '13px', letterSpacing: '0.1em',
                   textTransform: 'uppercase', color: '#0a0a0a', background: '#D4001E',
-                  padding: '16px 32px', border: 'none', cursor: 'pointer',
+                  padding: '14px 28px', border: 'none', cursor: 'pointer',
                   fontWeight: 500, alignSelf: 'flex-start', transition: 'opacity 0.2s',
                 }}
                 onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
@@ -213,6 +214,7 @@ export default function Contact() {
             </form>
           )}
 
+          </div>
         </div>
 
       </div>

@@ -6038,3 +6038,170 @@ body::after {
     height: 0;
   }
 }
+
+/* ═══════════════════════════════════════
+   Contact page
+═══════════════════════════════════════ */
+.contact-page {
+  min-height: 100dvh;
+  background: #080808;
+  padding-top: 120px;
+}
+
+.contact-hero {
+  padding: 0 64px 44px;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.contact-eyebrow {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: rgba(242, 240, 235, 0.4);
+  text-transform: uppercase;
+  margin: 0 0 16px;
+}
+
+.contact-title {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: clamp(42px, 6vw, 82px);
+  color: #F2F0EB;
+  line-height: 0.95;
+  letter-spacing: 0;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.contact-shell {
+  padding: 40px 64px 96px;
+}
+
+.contact-card {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.85fr) minmax(420px, 1.15fr);
+  align-items: center;
+  gap: 48px;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 48px;
+  background: rgba(14, 14, 14, 0.58);
+  border: 1px solid rgba(242, 240, 235, 0.08);
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.contact-info {
+  justify-self: center;
+  width: 100%;
+  max-width: 360px;
+}
+
+.contact-intro {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 300;
+  color: rgba(242, 240, 235, 0.55);
+  line-height: 1.8;
+  margin: 0 0 48px;
+  max-width: 360px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 680px;
+  justify-self: center;
+}
+
+.contact-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  .contact-page {
+    padding-top: 96px;
+  }
+
+  .contact-hero {
+    padding: 0 28px 30px;
+  }
+
+  .contact-title {
+    font-size: clamp(32px, 8.8vw, 64px);
+  }
+
+  .contact-shell {
+    padding: 28px 24px 72px;
+  }
+
+  .contact-card {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 32px;
+  }
+
+  .contact-info,
+  .contact-form {
+    justify-self: stretch;
+    max-width: none;
+  }
+
+  .contact-intro {
+    max-width: 620px;
+    margin-bottom: 28px;
+  }
+}
+
+@media (max-width: 560px) {
+  .contact-page {
+    padding-top: 86px;
+  }
+
+  .contact-hero {
+    padding: 0 18px 22px;
+  }
+
+  .contact-eyebrow {
+    margin-bottom: 12px;
+  }
+
+  .contact-title {
+    font-size: clamp(25px, 7.8vw, 36px);
+  }
+
+  .contact-shell {
+    padding: 20px 14px 56px;
+  }
+
+  .contact-card {
+    gap: 28px;
+    padding: 22px;
+  }
+
+  .contact-intro {
+    font-size: 15px;
+    line-height: 1.65;
+    margin-bottom: 24px;
+  }
+
+  .contact-form-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 360px) {
+  .contact-title {
+    font-size: 24px;
+  }
+
+  .contact-card {
+    padding: 18px;
+  }
+}

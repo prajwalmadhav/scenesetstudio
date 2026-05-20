@@ -4,7 +4,7 @@ import SEO from '../components/SEO'
 const CASES = [
   { slug: 'fawill-cleaning',  name: 'Fawill Cleaning',   category: 'Brand Strategy / Content' },
   { slug: 'fawill-bike-pub',  name: 'Fawill Bike & Pub', category: 'Paid Advertising / Social' },
-  { slug: 'bhumis-couture',   name: "Bhumi's Couture",   category: 'Identity / Web Design'     },
+  { slug: 'prajwal-personal-brand', name: "Prajwal's Personal Brand", category: 'Identity / Web Design' },
   { slug: 'tierx-dcs',        name: 'TierX DCS',         category: 'Content Production / Ads'  },
 ]
 

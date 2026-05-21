@@ -63,7 +63,7 @@ export default function Navbar() {
         <div className="navbar__inner">
           <button className="navbar__logo" aria-label="Scene Set Studio home" onClick={handleLogo}>
             <span className="navbar__logo-main">Scene</span>
-            <span className="navbar__logo-accent"> Set</span>
+            <span className="navbar__logo-accent" style={{ marginLeft: '6px' }}>Set</span>
             <span className="navbar__logo-main"> Studio</span>
           </button>
 
@@ -77,12 +77,18 @@ export default function Navbar() {
             <Link to="/work"     className={`navbar__link${pathname === '/work'     ? ' navbar__link--active' : ''}`}>Work</Link>
             <Link to="/services" className={`navbar__link${pathname === '/services' ? ' navbar__link--active' : ''}`}>Services</Link>
             <Link to="/about"    className={`navbar__link${pathname === '/about'    ? ' navbar__link--active' : ''}`}>About</Link>
-            <Link to="/process"  className={`navbar__link${pathname === '/process'  ? ' navbar__link--active' : ''}`}>Process</Link>
-            <Link to="/contact"  className={`navbar__link${pathname === '/contact'  ? ' navbar__link--active' : ''}`}>Contact</Link>
           </nav>
 
           <div className="navbar__actions">
-            <Link to="/contact" className="navbar__cta">Start a Project</Link>
+            <Link
+              to="/contact"
+              className="navbar__cta"
+              onMouseMove={e => {
+                const r = e.currentTarget.getBoundingClientRect()
+                e.currentTarget.style.setProperty('--rx', `${e.clientX - r.left}px`)
+                e.currentTarget.style.setProperty('--ry', `${e.clientY - r.top}px`)
+              }}
+            >Start a Project</Link>
             {!isHome && (
               <button className="navbar__home-btn navbar__home-btn--mobile" onClick={() => navigate('/')} aria-label="Go to home">
                 <HomeIcon />
@@ -106,8 +112,6 @@ export default function Navbar() {
           <Link to="/work"     className={`mobile-link${active('/work')}`}     onClick={close}>Work</Link>
           <Link to="/services" className={`mobile-link${active('/services')}`} onClick={close}>Services</Link>
           <Link to="/about"    className={`mobile-link${active('/about')}`}    onClick={close}>About</Link>
-          <Link to="/process"  className={`mobile-link${active('/process')}`}  onClick={close}>Process</Link>
-          <Link to="/contact"  className={`mobile-link${active('/contact')}`}  onClick={close}>Contact</Link>
           <Link to="/contact"  className="hero-btn hero-btn--primary mobile-link--cta" onClick={close}>Start a Project →</Link>
         </nav>
       </div>

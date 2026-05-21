@@ -150,12 +150,22 @@ body::after {
 .hero-headline {
   font-family: var(--font-heading);
   font-weight: 800;
-  font-size: clamp(32px, 4.5vw, 60px);
+  font-size: clamp(28px, 5vw, 72px);
   line-height: 0.92;
-  letter-spacing: -2px;
-  color: var(--cream);
+  letter-spacing: -3px;
   margin-bottom: 14px;
-  border-radius: 0;
+  color: #ffffff;
+}
+
+.hero-headline .hero-word--italic {
+  font-family: 'EB Garamond', serif !important;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.05em;
+  line-height: 0.85;
+  display: inline-block;
+  transform: scaleY(1.1) scaleX(0.95) skewX(-8deg);
+  transform-origin: bottom left;
 }
 
 .hero-word {
@@ -163,8 +173,8 @@ body::after {
 }
 
 .hero-word--italic {
-  font-family: var(--font-body);
-  font-weight: 300;
+  font-family: 'EB Garamond', serif;
+  font-weight: 400;
   font-style: italic;
   font-size: clamp(28px, 4vw, 54px);
   /* slightly smaller to sit visually with the Syne weight */
@@ -201,8 +211,8 @@ body::after {
 }
 
 .hero-btn {
-  font-family: var(--font-heading);
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-weight: 500;
   font-size: 12px;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -570,18 +580,19 @@ body::after {
   backdrop-filter: blur(28px) saturate(160%);
   -webkit-backdrop-filter: blur(28px) saturate(160%);
   border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 999px;
-  padding: 10px 14px 10px 24px;
+  border-radius: 18px;
+  padding: 10px 8px 10px 24px;
   box-shadow: 0 4px 32px rgba(0, 0, 0, 0.45), 0 1px 0 rgba(255, 255, 255, 0.05) inset;
   transition: background 0.4s ease, box-shadow 0.4s ease;
   pointer-events: all;
+  overflow: visible;
 }
 
 .navbar--scrolled .navbar__inner {
   background: rgba(8, 8, 8, 0.55);
   backdrop-filter: blur(18px) saturate(160%);
   -webkit-backdrop-filter: blur(18px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(242, 240, 235, 0.18);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.08) inset,
     /* top highlight — gives 3D lift */
@@ -606,19 +617,22 @@ body::after {
 .navbar__logo-main {
   font-family: var(--font-heading);
   font-weight: 800;
-  font-size: 17px;
+  font-size: 22px;
   color: var(--cream);
   letter-spacing: -0.5px;
 }
 
 .navbar__logo-accent {
-  font-family: var(--font-body);
-  font-weight: 300;
+  font-family: 'EB Garamond', serif;
+  font-weight: 400;
   font-style: italic;
-  font-size: 17px;
+  font-size: 22px;
   color: var(--cream);
-  opacity: 0.7;
+  opacity: 0.9;
   letter-spacing: 0;
+  display: inline-block;
+  transform: scaleY(1.1) scaleX(0.95) skewX(8deg);
+  transform-origin: bottom left;
 }
 
 /* Desktop Nav Links */
@@ -633,11 +647,12 @@ body::after {
 .navbar__link {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: 14px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   color: #a1a1a1;
   text-decoration: none;
   padding: 6px 14px;
-  letter-spacing: 0;
   transition: color 0.2s ease;
   white-space: nowrap;
 }
@@ -656,22 +671,24 @@ body::after {
 
 /* CTA Button */
 .navbar__cta {
-  font-family: var(--font-heading);
+  font-family: 'Syne', sans-serif;
   font-weight: 700;
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   text-decoration: none;
-  color: #1a1614;
-  background: linear-gradient(145deg, #ede8e1 0%, #d6cfc6 100%);
-  padding: 10px 22px;
-  border-radius: 999px;
-  border: 2px solid #8a837a;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  color: #F2F0EB;
+  background: transparent;
+  padding: 13px 26px;
+  margin-block: -3px;
+  margin-right: clamp(-48px, -3.5vw, -36px);
+  border-radius: 14px;
+  border: 1.5px solid #F2F0EB;
+  box-shadow: none;
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  transition: color 0.35s ease, border-color 0.35s ease, border-width 0.2s ease, box-shadow 0.35s ease, transform 0.2s ease;
+  transition: color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, transform 0.2s ease;
   white-space: nowrap;
 }
 
@@ -683,7 +700,7 @@ body::after {
   width: 0;
   height: 0;
   border-radius: 50%;
-  background: #1a1614;
+  background: #ede8e1;
   transform: translate(-50%, -50%);
   transition: width 0.55s cubic-bezier(0.4, 0, 0.2, 1),
               height 0.55s cubic-bezier(0.4, 0, 0.2, 1);
@@ -691,10 +708,9 @@ body::after {
 }
 
 .navbar__cta:hover {
-  color: #ede8e1;
-  border-color: rgba(255, 255, 255, 0.9);
-  border-width: 1px;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5), inset 0 0 6px rgba(255, 255, 255, 0.08);
+  color: #1a1614;
+  border-color: #ede8e1;
+  box-shadow: 0 4px 20px rgba(242, 240, 235, 0.12);
   transform: translateY(-1px);
 }
 
@@ -2028,9 +2044,9 @@ body::after {
 /* ── Stamp ── */
 .about-stamp {
   position: absolute;
-  bottom: 6%;
-  left: 5%;
-  top: auto;
+  bottom: auto;
+  top: 25%;
+  left: 12%;
   transform: rotate(-8deg);
   opacity: 0;
   z-index: 10;
@@ -2040,12 +2056,12 @@ body::after {
 .about-stamp__svg {
   width: 148px;
   height: 148px;
-  color: rgba(26, 22, 20, 1);
+  color: rgba(26, 22, 20, 0.9);
   transition: color 0.3s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .about-stamp__bg {
-  fill: transparent;
+  fill: #d8d5cf;
   transition: fill 0.3s ease;
 }
 

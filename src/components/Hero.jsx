@@ -93,8 +93,10 @@ export default function Hero() {
     return () => ctx.revert()
   }, [])
 
+  const sectionRef = useRef(null)
+
   return (
-    <section className="hero-section">
+    <section className="hero-section" ref={sectionRef}>
       <LiquidBackground />
 
       {/* Text + CTA */}
@@ -119,10 +121,10 @@ export default function Hero() {
         </p>
 
         <div ref={buttonsRef} className="hero-buttons">
-          <button className="hero-btn hero-btn--primary" style={{ opacity: 0 }}>
-            Start Your Project →
+          <button className="hero-btn hero-btn--primary" style={{ opacity: 0 }} onClick={() => window.location.href = '/contact'}>
+            Get Started →
           </button>
-          <button className="hero-btn hero-btn--ghost" style={{ opacity: 0 }}>
+          <button className="hero-btn hero-btn--ghost" style={{ opacity: 0 }} onClick={() => document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' })}>
             See Our Work <span className="hero-btn__arrow">↓</span>
           </button>
         </div>

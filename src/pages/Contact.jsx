@@ -7,7 +7,8 @@ const REVENUES   = ['Under $10k/mo', '$10k – $50k/mo', '$50k – $200k/mo', '$
 const CHALLENGES = ['Not enough leads', 'Low brand awareness', 'Poor conversion rate', 'No content strategy', 'Scaling paid ads', 'Other']
 const TARGET_BUDGETS = ['Under $2k', '$2k – $5k', '$5k – $15k', '$15k – $50k', '$50k+']
 
-const FORM_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID'
+const FORM_ENDPOINT = 'https://api.web3forms.com/submit'
+const ACCESS_KEY    = 'b44a455f-02a4-48e4-b5e5-8ec134f81fc3'
 
 const inputStyle = {
   width: '100%',
@@ -55,7 +56,7 @@ export default function Contact() {
       await fetch(FORM_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ type: 'quick-callback', name: form.name, email: form.email, phone: form.phone }),
+        body: JSON.stringify({ access_key: ACCESS_KEY, subject: 'Quick Callback Request — Scene Set Studio', type: 'quick-callback', name: form.name, email: form.email, phone: form.phone }),
       })
     } catch {}
     setCallbackSent(true)
@@ -67,7 +68,7 @@ export default function Contact() {
       const res = await fetch(FORM_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ ...form, service, budget, revenue, challenge, targetBudget }),
+        body: JSON.stringify({ access_key: ACCESS_KEY, subject: 'New Project Inquiry — Scene Set Studio', ...form, service, budget, revenue, challenge, targetBudget }),
       })
       if (res.ok) setSent(true)
     } catch {

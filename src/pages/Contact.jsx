@@ -44,9 +44,21 @@ export default function Contact() {
   const [challenge, setChallenge]   = useState('')
   const [targetBudget, setTargetBudget] = useState('')
   const [sent, setSent] = useState(false)
+  const [callbackSent, setCallbackSent] = useState(false)
 
   function handleChange(e) {
     setForm(f => ({ ...f, [e.target.name]: e.target.value }))
+  }
+
+  async function handleQuickCallback() {
+    try {
+      await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ type: 'quick-callback', name: form.name, email: form.email, phone: form.phone }),
+      })
+    } catch {}
+    setCallbackSent(true)
   }
 
   async function handleSubmit(e) {
@@ -158,6 +170,36 @@ export default function Contact() {
                     />
                   </div>
                 </div>
+
+                {/* Quick callback nudge */}
+                {callbackSent ? (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 18px', background: 'rgba(212,0,30,0.06)', border: '1px solid rgba(212,0,30,0.2)' }}>
+                    <span style={{ color: '#D4001E', fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '16px' }}>Got it.</span>
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '13px', fontWeight: 300, color: 'rgba(242,240,235,0.55)' }}>We'll call you back shortly. Feel free to keep filling in the form below.</span>
+                  </div>
+                ) : (
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px', padding: '14px 18px', border: '1px solid #1a1a1a', flexWrap: 'wrap' }}>
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '13px', fontWeight: 300, color: 'rgba(242,240,235,0.45)' }}>
+                      In a hurry? We'll call you back — no need to fill anything else.
+                    </span>
+                    <button
+                      type="button"
+                      onClick={handleQuickCallback}
+                      style={{
+                        fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 600,
+                        letterSpacing: '0.12em', textTransform: 'uppercase',
+                        color: '#F2F0EB', background: 'transparent',
+                        border: '1px solid rgba(242,240,235,0.35)',
+                        padding: '8px 18px', cursor: 'pointer', whiteSpace: 'nowrap',
+                        transition: 'border-color 0.2s, color 0.2s',
+                      }}
+                      onMouseEnter={e => { e.currentTarget.style.borderColor = '#F2F0EB'; e.currentTarget.style.color = '#fff' }}
+                      onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(242,240,235,0.35)'; e.currentTarget.style.color = '#F2F0EB' }}
+                    >
+                      Quick Callback →
+                    </button>
+                  </div>
+                )}
 
                 {/* Service */}
                 <div>

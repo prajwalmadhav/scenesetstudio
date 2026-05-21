@@ -161,7 +161,7 @@ export default function CTA() {
       </div>
 
       <div className="cta-action">
-        <button className="cta-btn">
+        <button className="cta-btn" onClick={() => window.location.href = '/contact'}>
           <span className="cta-btn__main">Start Your Project &rarr;</span>
           <span className="cta-btn__sub cta-btn__sub--hide-mobile">Free discovery call &middot; No commitment</span>
         </button>

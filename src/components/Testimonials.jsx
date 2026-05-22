@@ -1,18 +1,18 @@
-import { useEffect, useRef, useState } from 'react'
-import gsap from 'gsap'
+import { useState, useRef, useEffect } from 'react'
+import { motion } from 'framer-motion'
 
 /* ─────────────────────────────────────────────────────────────
    FAN TWEAKS
    rotate: degrees · y: px drop · CSS transform-origin in index.css
 ───────────────────────────────────────────────────────────── */
 const FAN = [
-  { rotate: -22, y:  2, scale: 0.88, z: 1 },
-  { rotate: -14, y:  1, scale: 0.93, z: 2 },
-  { rotate:  -6, y:  0, scale: 0.97, z: 3 },
-  { rotate:   0, y:  0, scale: 1.00, z: 7 },
-  { rotate:   6, y:  0, scale: 0.97, z: 3 },
-  { rotate:  14, y:  1, scale: 0.93, z: 2 },
-  { rotate:  22, y:  2, scale: 0.88, z: 1 },
+  { x: -390, rotate: -10, y: 10, scale: 0.82, z: 1 },
+  { x: -260, rotate:  -7, y:  6, scale: 0.88, z: 2 },
+  { x: -130, rotate:  -4, y:  2, scale: 0.93, z: 3 },
+  { x:    0, rotate:   0, y:  0, scale: 1.00, z: 7 },
+  { x:  130, rotate:   4, y:  2, scale: 0.93, z: 3 },
+  { x:  260, rotate:   7, y:  6, scale: 0.88, z: 2 },
+  { x:  390, rotate:  10, y: 10, scale: 0.82, z: 1 },
 ]
 
 const POSTS = [
@@ -306,54 +306,51 @@ function MobileCarousel() {
 /* ══════════════════════════════════════════════════════════════
    MAIN COMPONENT
 ══════════════════════════════════════════════════════════════ */
-export default function Testimonials() {
-  const cardEls  = useRef([])
-  const offsetRef = useRef(0)
-  const animating = useRef(false)
+const CARD_TRANSITION = { type: 'tween', duration: 0.55, ease: [0.33, 1, 0.68, 1] }
+const HOVER_TRANSITION = { type: 'tween', duration: 0.28, ease: [0.25, 1, 0.5, 1] }
 
-  function applyFan(animated = false) {
-    const n = POSTS.length
-    POSTS.forEach((_, i) => {
-      const el = cardEls.current[i]
-      if (!el) return
-      const pos = ((i - offsetRef.current) % n + n) % n
-      const f = FAN[Math.min(pos, FAN.length - 1)]
-      el.style.zIndex = f.z
-      const props = { rotate: f.rotate, y: f.y, scale: f.scale }
-      animated ? gsap.to(el, { ...props, duration: 0.55, ease: 'power3.out' })
-               : gsap.set(el, props)
-    })
+const HOVER_NUDGE = [- 60, -45, -28, 0, 28, 45, 60]
+
+/* Sibling push: cards near a hovered card spread outward */
+const PUSH_BY_DIST = [0, 22, 14, 8]
+function getSiblingPush(pos, hovPos) {
+  if (hovPos === null) return 0
+  const dist = Math.abs(pos - hovPos)
+  const amount = PUSH_BY_DIST[Math.min(dist, PUSH_BY_DIST.length - 1)]
+  return pos < hovPos ? -amount : pos > hovPos ? amount : 0
+}
+
+export default function Testimonials() {
+  const [offset, setOffset] = useState(0)
+  const [busy, setBusy] = useState(false)
+  const [hoveredPos, setHoveredPos] = useState(null)
+  const n = POSTS.length
+
+  function lock() {
+    setBusy(true)
+    setTimeout(() => setBusy(false), 600)
+  }
+
+  function goPrev() {
+    if (busy) return
+    lock()
+    setOffset(o => (o - 1 + n) % n)
+  }
+
+  function goNext() {
+    if (busy) return
+    lock()
+    setOffset(o => (o + 1) % n)
   }
 
   function handleCardClick(clickedIdx) {
-    if (animating.current) return
-    const n = POSTS.length
-    const currentPos = ((clickedIdx - offsetRef.current) % n + n) % n
+    if (busy) return
+    const pos = ((clickedIdx - offset) % n + n) % n
     const centerPos = 3
-    if (currentPos === centerPos) return
-    animating.current = true
-    offsetRef.current = ((offsetRef.current + (currentPos - centerPos)) % n + n) % n
-    applyFan(true)
-    setTimeout(() => { animating.current = false }, 600)
+    if (pos === centerPos) return
+    lock()
+    setOffset(o => ((o + (pos - centerPos)) % n + n) % n)
   }
-
-  function handleHoverEnter(i) {
-    const el = cardEls.current[i]
-    if (!el) return
-    const pos = ((i - offsetRef.current) % POSTS.length + POSTS.length) % POSTS.length
-    const xShift = pos < 3 ? -100 : pos > 3 ? 100 : 0
-    gsap.to(el, { x: xShift, y: '-=0', scale: 1.03, duration: 0.35, ease: 'power2.out', overwrite: 'auto' })
-  }
-
-  function handleHoverLeave(i) {
-    const el = cardEls.current[i]
-    if (!el) return
-    const pos = ((i - offsetRef.current) % POSTS.length + POSTS.length) % POSTS.length
-    const f = FAN[Math.min(pos, FAN.length - 1)]
-    gsap.to(el, { y: f.y, x: 0, scale: f.scale, duration: 0.4, ease: 'power2.out', overwrite: 'auto' })
-  }
-
-  useEffect(() => { applyFan(false) }, [])
 
   return (
     <section className="deck-section" id="testimonials">
@@ -366,20 +363,39 @@ export default function Testimonials() {
       <MobileCarousel />
 
       <div className="fan-stage">
-        {POSTS.map((post, i) => (
-          <div
-            key={i}
-            ref={el => cardEls.current[i] = el}
-            className="fan-card-wrap"
-            onClick={() => handleCardClick(i)}
-            onMouseEnter={() => handleHoverEnter(i)}
-            onMouseLeave={() => handleHoverLeave(i)}
-            style={{ cursor: 'pointer' }}
-          >
-            <PhotoCard post={post} />
-          </div>
-        ))}
-        <p className="fan-hint">tap any card to bring it forward</p>
+        {POSTS.map((post, i) => {
+          const pos = ((i - offset) % n + n) % n
+          const f = FAN[Math.min(pos, FAN.length - 1)]
+          const nudge = HOVER_NUDGE[pos] ?? 0
+          const push = getSiblingPush(pos, hoveredPos)
+
+          return (
+            <motion.div
+              key={i}
+              className="fan-card-wrap"
+              style={{ zIndex: f.z, cursor: 'pointer' }}
+              animate={{ x: f.x + push, rotate: f.rotate, y: f.y, scale: f.scale, transition: CARD_TRANSITION }}
+              whileHover={{ x: f.x + nudge, y: f.y - 8, scale: Math.min(f.scale + 0.05, 1.05), transition: HOVER_TRANSITION }}
+              onHoverStart={() => setHoveredPos(pos)}
+              onHoverEnd={() => setHoveredPos(null)}
+              onClick={() => handleCardClick(i)}
+            >
+              <PhotoCard post={post} />
+            </motion.div>
+          )
+        })}
+        <div className="fan-arrows">
+          <button className="fan-arrow" onClick={goPrev} aria-label="Previous">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+          </button>
+          <button className="fan-arrow" onClick={goNext} aria-label="Next">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </button>
+        </div>
       </div>
 
       <LogoGrid />

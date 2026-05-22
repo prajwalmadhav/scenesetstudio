@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, lazy, Suspense } from 'react'
+const AdminPage = lazy(() => import('./pages/Admin'))
 import Lenis from 'lenis'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -19,6 +20,7 @@ import WorkPage from './pages/Work'
 import ProcessPage from './pages/Process'
 import CaseStudyPage from './pages/CaseStudy'
 import ServicesPage from './pages/Services'
+import StandardServicesPage from './pages/StandardServices'
 import AboutPage from './pages/About'
 import ContactPage from './pages/Contact'
 import NotFoundPage from './pages/NotFound'
@@ -103,20 +105,32 @@ function App() {
   const base = import.meta.env.BASE_URL.replace(/\/$/, '') || '/'
   return (
     <BrowserRouter basename={base}>
+      <AppContent />
+    </BrowserRouter>
+  )
+}
+
+function AppContent() {
+  const { pathname } = useLocation()
+  const isAdmin = pathname.startsWith('/admin')
+  return (
+    <>
       <BrandWatermark />
       <ScrollToTop />
-      <Navbar />
+      {!isAdmin && <Navbar />}
       <Routes>
-        <Route path="/"         element={<HomePage />} />
-        <Route path="/work"     element={<WorkPage />} />
+        <Route path="/"             element={<HomePage />} />
+        <Route path="/work"         element={<WorkPage />} />
         <Route path="/work/:client" element={<CaseStudyPage />} />
-        <Route path="/services" element={<ServicesPage />} />
-        <Route path="/about"    element={<AboutPage />} />
-        <Route path="/contact"  element={<ContactPage />} />
-        <Route path="/process"  element={<ProcessPage />} />
-        <Route path="*"         element={<NotFoundPage />} />
+        <Route path="/services"          element={<ServicesPage />} />
+        <Route path="/standard-services" element={<StandardServicesPage />} />
+        <Route path="/about"        element={<AboutPage />} />
+        <Route path="/contact"      element={<ContactPage />} />
+        <Route path="/process"      element={<ProcessPage />} />
+        <Route path="/admin"        element={<Suspense fallback={null}><AdminPage /></Suspense>} />
+        <Route path="*"             element={<NotFoundPage />} />
       </Routes>
-    </BrowserRouter>
+    </>
   )
 }
 

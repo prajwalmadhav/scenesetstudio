@@ -145,24 +145,23 @@ export default function Footer() {
             <span className="footer-nav__heading">Services</span>
             <a href="#services">Brand Strategy</a>
             <a href="#services">Content Production</a>
-            <a href="#services">Paid Advertising</a>
+            <a href="#services">Advertising</a>
             <a href="#services">Social Media</a>
             <a href="#services">Web Design</a>
             <a href="#services">Video Production</a>
-            <Link to="/standard-services">Standard Services</Link>
           </div>
           <div className="footer-nav__col">
             <span className="footer-nav__heading">Company</span>
             <a href="#about">About</a>
             <a href="#process">Process</a>
-            <a href="#ourwork">Our Work</a>
             <a href="#testimonials">Testimonials</a>
+            <Link to="/standard-services">Standard Services</Link>
           </div>
           <div className="footer-nav__col">
             <span className="footer-nav__heading">Contact</span>
             <a href="mailto:team@scenesetstudio.com">team@scenesetstudio.com</a>
             <a href="tel:+16138702919">+1 613 870 2919</a>
-            <a href="#">Book a Call</a>
+            <Link to="/contact">Book a Call</Link>
             <a
               href="https://g.page/r/review"
               target="_blank"

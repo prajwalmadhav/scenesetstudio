@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -47,6 +47,25 @@ function AnimatedUnderline({ children, color = '#D4001E', wave = false }) {
 export default function CTA() {
   const sectionRef = useRef(null)
   const wordRef = useRef(null)
+  const [contact, setContact] = useState('')
+  const [sent, setSent] = useState(false)
+
+  async function handleQuickSubmit(e) {
+    e.preventDefault()
+    if (!contact.trim()) return
+    try {
+      await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: 'b44a455f-02a4-48e4-b5e5-8ec134f81fc3',
+          subject: 'Quick Consult Request — Scene Set Studio',
+          contact,
+        }),
+      })
+    } catch {}
+    setSent(true)
+  }
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -182,6 +201,29 @@ export default function CTA() {
             <span className="cta-desktop-trust__num">No contracts</span>
             <span className="cta-desktop-trust__label">start &amp; stop anytime</span>
           </div>
+        </div>
+
+        {/* Quick consult mini-form */}
+        <hr className="cta-quick-consult-divider" aria-hidden="true" />
+        <div className="cta-quick-consult">
+          <span className="cta-quick-consult__headline">
+            Not ready yet?&nbsp;<span className="cta-quick-consult__accent">Drop your contact — we'll reach out.</span>
+          </span>
+          {sent ? (
+            <span className="cta-quick-consult__thanks">Got it. We'll be in touch shortly.</span>
+          ) : (
+            <form className="cta-quick-consult__form" onSubmit={handleQuickSubmit}>
+              <input
+                className="cta-quick-consult__input"
+                type="text"
+                placeholder="Email or phone number"
+                value={contact}
+                onChange={e => setContact(e.target.value)}
+                aria-label="Email or phone number"
+              />
+              <button className="cta-quick-consult__btn" type="submit">Send</button>
+            </form>
+          )}
         </div>
 
       </div>

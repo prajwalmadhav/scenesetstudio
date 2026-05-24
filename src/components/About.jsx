@@ -202,7 +202,7 @@ export default function About() {
       if (stampRef.current) {
         const tl = gsap.timeline({
           scrollTrigger: { trigger: sectionRef.current, start: 'top 55%' },
-          delay: 1.4,
+          delay: 0.3,
         })
         tl.fromTo(stampRef.current,
           { y: -60, scale: 1.15, opacity: 0, rotate: -8 },

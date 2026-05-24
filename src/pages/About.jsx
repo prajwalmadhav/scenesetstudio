@@ -1,23 +1,63 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import SEO from '../components/SEO'
 
+const FORM_ENDPOINT = 'https://api.web3forms.com/submit'
+const ACCESS_KEY    = 'b44a455f-02a4-48e4-b5e5-8ec134f81fc3'
+
 const TEAM = [
-  { initials: 'PS', name: 'Prajwal S.', role: 'Founder / Creative Director' },
-  { initials: 'RK', name: 'Rohan K.',   role: 'Head of Strategy'             },
-  { initials: 'AM', name: 'Anya M.',    role: 'Lead Producer'                },
-  { initials: 'TD', name: 'Tej D.',     role: 'Paid Media Lead'              },
+  { initials: 'P',  name: 'Prajwal',   role: 'Founder / Creative Director'      },
+  { initials: 'A',  name: 'Avik',      role: 'Head of Sales & Marketing'        },
+  { initials: 'Pr', name: 'Prarthana', role: 'Head of Operations & Strategy'    },
+  { initials: 'S',  name: 'Sam',       role: 'Motion Graphics / Video Editor'   },
+  { initials: 'M',  name: 'Madhav',    role: 'Application / Web Developer'      },
+  { initials: 'Mv', name: 'Madhav',    role: 'Video Producer'                   },
+  { initials: 'Se', name: 'Sethu',     role: 'Graphics Designer'                },
 ]
 
 const VALUES = [
-  { label: 'Craft over output',   body: 'We would rather produce one piece that genuinely lands than ten that scroll past.' },
+  { label: 'Craft over output',    body: 'We would rather produce one piece that genuinely lands than ten that scroll past.' },
   { label: 'Outcomes, not optics', body: 'Beautiful work that does not convert is just decoration. Every brief starts with the result.' },
-  { label: 'No black boxes',      body: 'You see the thinking, the data, the reasoning. No agency mystique "" just transparent collaboration.' },
-  { label: 'Built to scale',      body: 'The systems we build for you keep working after the engagement ends. We hand over the playbook.' },
+  { label: 'No black boxes',       body: 'You see the thinking, the data, the reasoning. No agency mystique — just transparent collaboration.' },
+  { label: 'Built to scale',       body: 'The systems we build for you keep working after the engagement ends. We hand over the playbook.' },
 ]
 
-const label = { fontFamily: 'var(--font-body)', fontSize: '11px', letterSpacing: '0.14em', color: 'rgba(242,240,235,0.35)', textTransform: 'uppercase', margin: 0 }
+const ROLE_TYPES = [
+  'Creative Director',
+  'Video Editor',
+  'Motion Designer',
+  'Paid Media Specialist',
+  'Copywriter / Strategist',
+  'Social Media Manager',
+  'Web Designer / Developer',
+  'Other',
+]
 
-export default function About() {
+export default function AboutPage() {
+  const [form, setForm] = useState({ name: '', email: '', phone: '', role: '', message: '' })
+  const [sent, setSent] = useState(false)
+
+  function handleChange(e) {
+    setForm(f => ({ ...f, [e.target.name]: e.target.value }))
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+    if (!form.name || !form.email) return
+    try {
+      await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: ACCESS_KEY,
+          subject: `Hiring Inquiry — ${form.role || 'General'} — Scene Set Studio`,
+          ...form,
+        }),
+      })
+    } catch {}
+    setSent(true)
+  }
+
   return (
     <>
       <SEO
@@ -25,100 +65,244 @@ export default function About() {
         description="Scene Set Studio is a full-service creative agency. We build brands, produce content, and run campaigns that move the needle."
       />
 
-      <div style={{ minHeight: '100dvh', background: '#080808', paddingTop: '120px' }}>
+      <div className="about-pg">
 
-        {/* Hero */}
-        <div style={{ padding: '0 64px 80px', borderBottom: '1px solid #1a1a1a' }}>
-          <p style={{ fontFamily: 'var(--font-body)', fontSize: '11px', letterSpacing: '0.16em', color: 'rgba(242,240,235,0.4)', textTransform: 'uppercase', marginBottom: '24px' }}>
-            Our Story
-          </p>
-          <h1 style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: 'clamp(48px, 7vw, 96px)', color: '#F2F0EB', lineHeight: 0.92, letterSpacing: '-0.03em', margin: 0 }}>
-            We make brands<br />impossible to ignore.
-          </h1>
+        {/* ── Hero ── */}
+        <div className="about-pg__hero">
+          <div className="about-pg__hero-bg" aria-hidden="true">
+            <svg className="about-pg__hero-shape" viewBox="0 0 900 600" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect
+                x="40" y="40"
+                width="820" height="520"
+                rx="4"
+                fill="rgba(255,255,255,0.025)"
+                stroke="rgba(255,255,255,0.08)"
+                strokeWidth="1"
+              />
+              <rect
+                x="80" y="80"
+                width="740" height="440"
+                rx="2"
+                fill="none"
+                stroke="rgba(255,255,255,0.04)"
+                strokeWidth="1"
+              />
+              <line x1="40" y1="40" x2="880" y2="560" stroke="rgba(255,255,255,0.025)" strokeWidth="1" />
+              <line x1="880" y1="40" x2="40" y2="560" stroke="rgba(255,255,255,0.025)" strokeWidth="1" />
+            </svg>
+          </div>
+          <div className="about-pg__hero-content">
+            <div className="about-pg__hero-text">
+              <span className="about-pg__eyebrow">Our Story</span>
+              <h1 className="about-pg__title">
+                We make brands<br />impossible to ignore.
+              </h1>
+              <p className="about-pg__hero-sub">
+                Full-service creative agency. Ottawa · Montreal · Toronto &amp; across Canada.
+              </p>
+            </div>
+            <div className="about-pg__hero-icon" aria-hidden="true">
+              <svg viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                {/* Top bar */}
+                <rect x="17" y="7"  width="66" height="14" />
+                {/* Left connector */}
+                <rect x="17" y="21" width="14" height="22" />
+                {/* Middle bar */}
+                <rect x="17" y="43" width="66" height="14" />
+                {/* Right connector */}
+                <rect x="69" y="57" width="14" height="22" />
+                {/* Bottom bar */}
+                <rect x="17" y="79" width="66" height="14" />
+              </svg>
+            </div>
+          </div>
+          <div className="about-pg__hero-stat-row">
+            <div className="about-pg__hero-stat">
+              <span className="about-pg__hero-stat-num">40+</span>
+              <span className="about-pg__hero-stat-label">Brands served</span>
+            </div>
+            <div className="about-pg__hero-stat">
+              <span className="about-pg__hero-stat-num">3×</span>
+              <span className="about-pg__hero-stat-label">Avg. ROAS improvement</span>
+            </div>
+            <div className="about-pg__hero-stat">
+              <span className="about-pg__hero-stat-num">2 yrs</span>
+              <span className="about-pg__hero-stat-label">Operating</span>
+            </div>
+          </div>
         </div>
 
-        {/* Mission */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', padding: '80px 64px', borderBottom: '1px solid #1a1a1a', gap: '80px' }}>
-          <div>
-            <p style={{ ...label, marginBottom: '24px' }}>Who We Are</p>
-            <p style={{ fontFamily: 'var(--font-body)', fontSize: '18px', fontWeight: 300, color: 'rgba(242,240,235,0.65)', lineHeight: 1.8, margin: 0 }}>
+        {/* ── Mission ── */}
+        <div className="about-pg__mission">
+          <div className="about-pg__mission-left">
+            <span className="about-pg__label">Who We Are</span>
+            <p className="about-pg__mission-lead">
               Scene Set Studio is a full-service creative agency founded on a simple conviction: the best-looking work and the best-performing work should be the same work.
             </p>
           </div>
-          <div>
-            <p style={{ fontFamily: 'var(--font-body)', fontSize: '16px', fontWeight: 300, color: 'rgba(242,240,235,0.5)', lineHeight: 1.8, margin: 0 }}>
-              We partner with ambitious brands at every stage "" from early-stage startups finding their voice to established businesses ready to scale. Our team brings together strategy, creative production, and performance marketing under one roof, so nothing gets lost in translation between the brief and the result.
-            </p>
+          <div className="about-pg__mission-right">
+            {[
+              'We partner with ambitious brands at every stage — from early-stage startups finding their voice to established businesses ready to scale.',
+              'Strategy, creative production, and performance marketing under one roof.',
+              'Nothing gets lost in translation between the brief and the result.',
+              'Canada-wide reach. Ottawa-Gatineau based. Remote-first.',
+            ].map((point, i) => (
+              <div key={i} className="about-pg__mission-point">
+                <span className="about-pg__mission-point-num">0{i + 1}</span>
+                <p className="about-pg__mission-point-text">{point}</p>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Values */}
-        <div style={{ padding: '80px 64px', borderBottom: '1px solid #1a1a1a' }}>
-          <p style={{ ...label, marginBottom: '48px' }}>What We Stand For</p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2px' }}>
+        {/* ── Values ── */}
+        <div className="about-pg__values">
+          <span className="about-pg__label">What We Stand For</span>
+          <div className="about-pg__values-grid">
             {VALUES.map((v, i) => (
-              <div key={v.label} style={{ padding: '48px', background: i % 2 === 0 ? '#0a0a0a' : '#080808', border: '1px solid #1a1a1a' }}>
-                <h3 style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: 'clamp(20px, 2vw, 28px)', color: '#F2F0EB', letterSpacing: '-0.02em', margin: '0 0 16px' }}>
-                  {v.label}
-                </h3>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: '15px', fontWeight: 300, color: 'rgba(242,240,235,0.5)', lineHeight: 1.75, margin: 0 }}>
-                  {v.body}
-                </p>
+              <div key={v.label} className="about-pg__value-card">
+                <span className="about-pg__value-index">0{i + 1}</span>
+                <h3 className="about-pg__value-title">{v.label}</h3>
+                <p className="about-pg__value-body">{v.body}</p>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Team */}
-        <div style={{ padding: '80px 64px', borderBottom: '1px solid #1a1a1a' }}>
-          <p style={{ ...label, marginBottom: '48px' }}>The Team</p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '2px' }}>
+        {/* ── Team ── */}
+        <div className="about-pg__team">
+          <span className="about-pg__label">The Team</span>
+          <div className="about-pg__team-grid">
             {TEAM.map(member => (
-              <div key={member.name} style={{ padding: '40px 32px', border: '1px solid #1a1a1a', background: '#0a0a0a' }}>
-                <div style={{ width: '52px', height: '52px', borderRadius: '50%', background: '#1a1a1a', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px' }}>
-                  <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '16px', color: '#D4001E', letterSpacing: '-0.02em' }}>{member.initials}</span>
+              <div key={member.name} className="about-pg__team-card">
+                <div className="about-pg__team-avatar">
+                  <span>{member.initials}</span>
                 </div>
-                <p style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '17px', color: '#F2F0EB', margin: '0 0 6px', letterSpacing: '-0.01em' }}>{member.name}</p>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'rgba(242,240,235,0.4)', margin: 0, letterSpacing: '0.05em' }}>{member.role}</p>
+                <p className="about-pg__team-name">{member.name}</p>
+                <p className="about-pg__team-role">{member.role}</p>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Stats */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', border: '1px solid #1a1a1a', margin: '0 64px 0' }}>
-          {[
-            { value: '40+', label: 'Brands served' },
-            { value: '3Ã—',  label: 'Average ROAS improvement' },
-            { value: '2yrs', label: 'Operating' },
-          ].map(s => (
-            <div key={s.label} style={{ padding: '48px 40px', background: '#0a0a0a' }}>
-              <p style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: 'clamp(48px, 6vw, 72px)', color: '#D4001E', letterSpacing: '-0.04em', margin: '0 0 12px', lineHeight: 1 }}>
-                {s.value}
-              </p>
-              <p style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'rgba(242,240,235,0.45)', margin: 0 }}>
-                {s.label}
+        {/* ── Bottom CTA ── */}
+        <div className="about-pg__cta">
+          <div>
+            <span className="about-pg__label">Start a Project</span>
+            <p className="about-pg__cta-title">Ready to grow your brand?</p>
+          </div>
+          <Link to="/contact" className="about-pg__cta-btn">Get in Touch</Link>
+        </div>
+
+        {/* ── Hiring Form ── */}
+        <div className="about-pg__hire">
+          <div className="about-pg__hire-bg" aria-hidden="true">
+            <svg className="about-pg__hero-shape" viewBox="0 0 900 600" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="40" y="40" width="820" height="520" rx="4" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.07)" strokeWidth="1" />
+              <rect x="80" y="80" width="740" height="440" rx="2" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
+              <line x1="40" y1="40" x2="880" y2="560" stroke="rgba(255,255,255,0.02)" strokeWidth="1" />
+              <line x1="880" y1="40" x2="40" y2="560" stroke="rgba(255,255,255,0.02)" strokeWidth="1" />
+            </svg>
+          </div>
+          <div className="about-pg__hire-top">
+            <div className="about-pg__hire-header">
+              <span className="about-pg__label">Careers</span>
+              <h2 className="about-pg__hire-title">Join the team.</h2>
+              <p className="about-pg__hire-sub">
+                We're always looking for sharp, passionate people. Drop your details and we'll be in touch.
               </p>
             </div>
-          ))}
-        </div>
-
-        {/* CTA */}
-        <div style={{ padding: '80px 64px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div>
-            <p style={{ ...label, marginBottom: '16px' }}>Work With Us</p>
-            <p style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: 'clamp(24px, 3vw, 40px)', color: '#F2F0EB', letterSpacing: '-0.03em', margin: 0 }}>
-              Ready to build something real?
-            </p>
+            <div className="about-pg__hire-logo" aria-hidden="true">
+              <span className="about-pg__hire-wordmark">
+                <span className="about-pg__hire-wordmark-main">Scene</span>
+                <span className="about-pg__hire-wordmark-accent"> Set </span>
+                <span className="about-pg__hire-wordmark-main">Studio</span>
+              </span>
+            </div>
           </div>
-          <Link
-            to="/contact"
-            style={{ fontFamily: 'var(--font-body)', fontSize: '13px', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#0a0a0a', background: '#D4001E', padding: '14px 28px', textDecoration: 'none', fontWeight: 500, transition: 'opacity 0.2s' }}
-            onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
-            onMouseLeave={e => e.currentTarget.style.opacity = '1'}
-          >
-            Start a Project
-          </Link>
+
+          {sent ? (
+            <div className="about-pg__hire-thanks">
+              <span className="about-pg__hire-thanks-mark">✓</span>
+              <p>Got it. We'll review your info and reach out if there's a fit.</p>
+            </div>
+          ) : (
+            <form className="about-pg__hire-form" onSubmit={handleSubmit}>
+              <div className="about-pg__hire-row">
+                <div className="about-pg__hire-field">
+                  <label className="about-pg__hire-label" htmlFor="hire-name">Full Name *</label>
+                  <input
+                    id="hire-name"
+                    className="about-pg__hire-input"
+                    type="text"
+                    name="name"
+                    placeholder="Your name"
+                    value={form.name}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="about-pg__hire-field">
+                  <label className="about-pg__hire-label" htmlFor="hire-email">Email *</label>
+                  <input
+                    id="hire-email"
+                    className="about-pg__hire-input"
+                    type="email"
+                    name="email"
+                    placeholder="you@example.com"
+                    value={form.email}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="about-pg__hire-row">
+                <div className="about-pg__hire-field">
+                  <label className="about-pg__hire-label" htmlFor="hire-phone">Phone Number</label>
+                  <input
+                    id="hire-phone"
+                    className="about-pg__hire-input"
+                    type="tel"
+                    name="phone"
+                    placeholder="+1 (___) ___-____"
+                    value={form.phone}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="about-pg__hire-field">
+                  <label className="about-pg__hire-label" htmlFor="hire-role">Type of Role</label>
+                  <select
+                    id="hire-role"
+                    className="about-pg__hire-input about-pg__hire-select"
+                    name="role"
+                    value={form.role}
+                    onChange={handleChange}
+                  >
+                    <option value="" disabled>Select a role…</option>
+                    {ROLE_TYPES.map(r => <option key={r} value={r}>{r}</option>)}
+                  </select>
+                </div>
+              </div>
+
+              <div className="about-pg__hire-field about-pg__hire-field--full">
+                <label className="about-pg__hire-label" htmlFor="hire-message">Tell us about yourself</label>
+                <textarea
+                  id="hire-message"
+                  className="about-pg__hire-input about-pg__hire-textarea"
+                  name="message"
+                  placeholder="Your background, what you bring to the table, links to work…"
+                  value={form.message}
+                  onChange={handleChange}
+                  rows={5}
+                />
+              </div>
+
+              <button className="about-pg__hire-btn" type="submit">
+                Send Application →
+              </button>
+            </form>
+          )}
         </div>
 
       </div>

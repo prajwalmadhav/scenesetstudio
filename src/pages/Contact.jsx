@@ -39,10 +39,10 @@ const blurReset = e => e.target.style.borderColor = '#1a1a1a'
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', company: '', message: '' })
-  const [service, setService]       = useState('')
+  const [services, setServices]     = useState(new Set())
   const [budget, setBudget]         = useState('')
   const [revenue, setRevenue]       = useState('')
-  const [challenge, setChallenge]   = useState('')
+  const [challenges, setChallenges] = useState(new Set())
   const [targetBudget, setTargetBudget] = useState('')
   const [sent, setSent] = useState(false)
   const [callbackSent, setCallbackSent] = useState(false)
@@ -68,7 +68,7 @@ export default function Contact() {
       const res = await fetch(FORM_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ access_key: ACCESS_KEY, subject: 'New Project Inquiry — Scene Set Studio', ...form, service, budget, revenue, challenge, targetBudget }),
+        body: JSON.stringify({ access_key: ACCESS_KEY, subject: 'New Project Inquiry — Scene Set Studio', ...form, service: [...services].join(', '), budget, revenue, challenge: [...challenges].join(', '), targetBudget }),
       })
       if (res.ok) setSent(true)
     } catch {
@@ -94,6 +94,8 @@ export default function Contact() {
           <div className="contact-card">
 
             <div className="contact-info">
+              <img src="/SSS LOGO ICON.svg" alt="Scene Set Studio" className="contact-info__logo" />
+              <span className="contact-info__wordmark">SceneSet<br /><strong>Studio</strong></span>
               <p className="contact-intro">
                 Fill in the form and we will get back to you within one business day. Alternatively, drop us an email directly.
               </p>
@@ -101,12 +103,12 @@ export default function Contact() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
                 <div>
                   <p style={{ ...labelStyle, marginBottom: '8px' }}>Email</p>
-                  <a href="mailto:hello@scenesetstudio.com"
+                  <a href="mailto:team@scenesetstudio.com"
                     style={{ fontFamily: 'var(--font-body)', fontSize: '16px', fontWeight: 300, color: '#F2F0EB', textDecoration: 'none', transition: 'color 0.2s' }}
                     onMouseEnter={e => e.currentTarget.style.color = '#D4001E'}
                     onMouseLeave={e => e.currentTarget.style.color = '#F2F0EB'}
                   >
-                    hello@scenesetstudio.com
+                    team@scenesetstudio.com
                   </a>
                 </div>
                 <div>
@@ -202,18 +204,28 @@ export default function Contact() {
                   </div>
                 )}
 
+                {/* Form nudge */}
+                <div style={{ paddingTop: '4px' }}>
+                  <p style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: 'clamp(18px, 2vw, 24px)', color: '#F2F0EB', letterSpacing: '-0.03em', margin: '0 0 4px' }}>
+                    Got 60 seconds?
+                  </p>
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '13px', fontWeight: 300, color: 'rgba(242,240,235,0.4)', margin: 0 }}>
+                    Tell us what you need — it helps us show up ready.
+                  </p>
+                </div>
+
                 {/* Service */}
                 <div>
                   <p style={labelStyle}>Service</p>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                     {SERVICES.map(s => (
-                      <button key={s} type="button" onClick={() => setService(sv => sv === s ? '' : s)}
+                      <button key={s} type="button" onClick={() => setServices(prev => { const n = new Set(prev); n.has(s) ? n.delete(s) : n.add(s); return n })}
                         style={{
                           fontFamily: 'var(--font-body)', fontSize: '12px', letterSpacing: '0.08em',
                           padding: '8px 16px', border: '1px solid',
-                          borderColor: service === s ? '#D4001E' : '#1a1a1a',
-                          background: service === s ? 'rgba(212,0,30,0.08)' : 'transparent',
-                          color: service === s ? '#D4001E' : 'rgba(242,240,235,0.5)',
+                          borderColor: services.has(s) ? '#D4001E' : '#1a1a1a',
+                          background: services.has(s) ? 'rgba(212,0,30,0.08)' : 'transparent',
+                          color: services.has(s) ? '#D4001E' : 'rgba(242,240,235,0.5)',
                           cursor: 'pointer', transition: 'all 0.15s',
                         }}
                       >{s}</button>
@@ -264,35 +276,16 @@ export default function Contact() {
                   <p style={labelStyle}>Main marketing challenge <span style={{ opacity: 0.4, fontSize: '10px' }}>— optional</span></p>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                     {CHALLENGES.map(c => (
-                      <button key={c} type="button" onClick={() => setChallenge(cv => cv === c ? '' : c)}
+                      <button key={c} type="button" onClick={() => setChallenges(prev => { const n = new Set(prev); n.has(c) ? n.delete(c) : n.add(c); return n })}
                         style={{
                           fontFamily: 'var(--font-body)', fontSize: '12px', letterSpacing: '0.08em',
                           padding: '8px 16px', border: '1px solid',
-                          borderColor: challenge === c ? '#D4001E' : '#1a1a1a',
-                          background: challenge === c ? 'rgba(212,0,30,0.08)' : 'transparent',
-                          color: challenge === c ? '#D4001E' : 'rgba(242,240,235,0.5)',
+                          borderColor: challenges.has(c) ? '#D4001E' : '#1a1a1a',
+                          background: challenges.has(c) ? 'rgba(212,0,30,0.08)' : 'transparent',
+                          color: challenges.has(c) ? '#D4001E' : 'rgba(242,240,235,0.5)',
                           cursor: 'pointer', transition: 'all 0.15s',
                         }}
                       >{c}</button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Target budget */}
-                <div>
-                  <p style={labelStyle}>Target budget for this project <span style={{ opacity: 0.4, fontSize: '10px' }}>— optional</span></p>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                    {TARGET_BUDGETS.map(b => (
-                      <button key={b} type="button" onClick={() => setTargetBudget(tv => tv === b ? '' : b)}
-                        style={{
-                          fontFamily: 'var(--font-body)', fontSize: '12px', letterSpacing: '0.08em',
-                          padding: '8px 16px', border: '1px solid',
-                          borderColor: targetBudget === b ? '#D4001E' : '#1a1a1a',
-                          background: targetBudget === b ? 'rgba(212,0,30,0.08)' : 'transparent',
-                          color: targetBudget === b ? '#D4001E' : 'rgba(242,240,235,0.5)',
-                          cursor: 'pointer', transition: 'all 0.15s',
-                        }}
-                      >{b}</button>
                     ))}
                   </div>
                 </div>

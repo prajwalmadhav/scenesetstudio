@@ -124,12 +124,7 @@ export default function Footer() {
         <div className="footer-brand">
           <div className="footer-brand__info">
             <div className="footer-logo">
-              {/* SS mark */}
-              <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-                <rect x="1" y="1" width="34" height="34" rx="4" stroke="currentColor" strokeWidth="1.2" strokeOpacity="0.4"/>
-                <path d="M10 13c0-1.657 1.343-3 3-3h4.5c1.657 0 3 1.343 3 3s-1.343 3-3 3H13c-1.657 0-3 1.343-3 3s1.343 3 3 3h4.5c1.657 0 3-1.343 3-3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-                <path d="M19 13c0-1.657 1.343-3 3-3h.5c1.657 0 3 1.343 3 3s-1.343 3-3 3H19c-1.657 0-3 1.343-3 3s1.343 3 3 3h.5c1.657 0 3-1.343 3-3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-              </svg>
+              <img src="/SSS LOGO ICON.svg" alt="" className="footer-logo__icon" aria-hidden="true" />
               <span className="footer-logo__text">SceneSet<strong>Studio</strong></span>
             </div>
             <p className="footer-tagline">Cinematic storytelling meets<br />performance marketing.</p>

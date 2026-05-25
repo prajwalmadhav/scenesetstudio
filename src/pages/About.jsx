@@ -10,7 +10,7 @@ const TEAM = [
   { initials: 'A',  name: 'Avik',      role: 'Head of Sales & Marketing'        },
   { initials: 'Pr', name: 'Prarthana', role: 'Head of Operations & Strategy'    },
   { initials: 'S',  name: 'Sam',       role: 'Motion Graphics / Video Editor'   },
-  { initials: 'M',  name: 'Madhav',    role: 'Application / Web Developer'      },
+  { initials: 'D',  name: 'Dan',       role: 'Application / Web Developer'      },
   { initials: 'Mv', name: 'Madhav',    role: 'Video Producer'                   },
   { initials: 'Se', name: 'Sethu',     role: 'Graphics Designer'                },
 ]
@@ -69,28 +69,6 @@ export default function AboutPage() {
 
         {/* ── Hero ── */}
         <div className="about-pg__hero">
-          <div className="about-pg__hero-bg" aria-hidden="true">
-            <svg className="about-pg__hero-shape" viewBox="0 0 900 600" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect
-                x="40" y="40"
-                width="820" height="520"
-                rx="4"
-                fill="rgba(255,255,255,0.025)"
-                stroke="rgba(255,255,255,0.08)"
-                strokeWidth="1"
-              />
-              <rect
-                x="80" y="80"
-                width="740" height="440"
-                rx="2"
-                fill="none"
-                stroke="rgba(255,255,255,0.04)"
-                strokeWidth="1"
-              />
-              <line x1="40" y1="40" x2="880" y2="560" stroke="rgba(255,255,255,0.025)" strokeWidth="1" />
-              <line x1="880" y1="40" x2="40" y2="560" stroke="rgba(255,255,255,0.025)" strokeWidth="1" />
-            </svg>
-          </div>
           <div className="about-pg__hero-content">
             <div className="about-pg__hero-text">
               <span className="about-pg__eyebrow">Our Story</span>
@@ -101,24 +79,14 @@ export default function AboutPage() {
                 Full-service creative agency. Ottawa · Montreal · Toronto &amp; across Canada.
               </p>
             </div>
-            <div className="about-pg__hero-icon" aria-hidden="true">
-              <svg viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                {/* Top bar */}
-                <rect x="17" y="7"  width="66" height="14" />
-                {/* Left connector */}
-                <rect x="17" y="21" width="14" height="22" />
-                {/* Middle bar */}
-                <rect x="17" y="43" width="66" height="14" />
-                {/* Right connector */}
-                <rect x="69" y="57" width="14" height="22" />
-                {/* Bottom bar */}
-                <rect x="17" y="79" width="66" height="14" />
-              </svg>
+            <div className="about-pg__hero-icon">
+              <img src="/SSS LOGO ICON.svg" alt="" className="about-pg__hero-logo" />
+              <span className="about-pg__hero-wordmark">SceneSet<br /><strong>Studio</strong></span>
             </div>
           </div>
           <div className="about-pg__hero-stat-row">
             <div className="about-pg__hero-stat">
-              <span className="about-pg__hero-stat-num">40+</span>
+              <span className="about-pg__hero-stat-num">6</span>
               <span className="about-pg__hero-stat-label">Brands served</span>
             </div>
             <div className="about-pg__hero-stat">
@@ -126,7 +94,7 @@ export default function AboutPage() {
               <span className="about-pg__hero-stat-label">Avg. ROAS improvement</span>
             </div>
             <div className="about-pg__hero-stat">
-              <span className="about-pg__hero-stat-num">2 yrs</span>
+              <span className="about-pg__hero-stat-num">4 yrs</span>
               <span className="about-pg__hero-stat-label">Operating</span>
             </div>
           </div>
@@ -196,14 +164,6 @@ export default function AboutPage() {
 
         {/* ── Hiring Form ── */}
         <div className="about-pg__hire">
-          <div className="about-pg__hire-bg" aria-hidden="true">
-            <svg className="about-pg__hero-shape" viewBox="0 0 900 600" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="40" y="40" width="820" height="520" rx="4" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.07)" strokeWidth="1" />
-              <rect x="80" y="80" width="740" height="440" rx="2" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
-              <line x1="40" y1="40" x2="880" y2="560" stroke="rgba(255,255,255,0.02)" strokeWidth="1" />
-              <line x1="880" y1="40" x2="40" y2="560" stroke="rgba(255,255,255,0.02)" strokeWidth="1" />
-            </svg>
-          </div>
           <div className="about-pg__hire-top">
             <div className="about-pg__hire-header">
               <span className="about-pg__label">Careers</span>

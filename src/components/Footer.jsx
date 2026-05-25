@@ -124,7 +124,7 @@ export default function Footer() {
         <div className="footer-brand">
           <div className="footer-brand__info">
             <div className="footer-logo">
-              <img src="/SSS LOGO ICON.svg" alt="" className="footer-logo__icon" aria-hidden="true" />
+              <img src="/sss logo2.svg" alt="" className="footer-logo__icon" aria-hidden="true" />
               <span className="footer-logo__text">SceneSet<strong>Studio</strong></span>
             </div>
             <p className="footer-tagline">Cinematic storytelling meets<br />performance marketing.</p>

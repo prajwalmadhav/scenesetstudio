@@ -1,6 +1,11 @@
 import { useRef, useEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+const w1 = '/brand identity logo blueprint.png'
+const w2 = '/2d image.png'
+import w3 from '../assets/work/w3.jpg'
+import w4 from '../assets/work/w4.jpg'
+import w5 from '../assets/work/w5.jpg'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -9,7 +14,7 @@ const CANVAS_VW = 150
 // w/h can be px numbers or vw strings e.g. '35vw'
 const ITEMS = [
   // Large square — top left
-  { type: 'img', id: 'i1', src: 'https://picsum.photos/seed/scrap-a/800/800',
+  { type: 'img', id: 'i1', index: 1, src: w1,
     w: '35vw', h: '35vw', top: '18%', left: '8%', rotate: -1.5, z: 2 },
 
   // Text — below i1
@@ -18,26 +23,24 @@ const ITEMS = [
       { text: 'Brand',       accent: false },
       { text: 'Strategy',    accent: false },
       { text: '& Identity',  accent: true  },
-      { text: '— 2024',      accent: true  },
     ],
-    top: '48%', left: '4%', rotate: 0, z: 4, size: 'lg' },
+    top: '60%', left: '4%', rotate: 0, z: 4, size: 'lg', glow: true },
 
   // Text — right of i1
   { type: 'text', id: 't2',
     lines: [
       { text: 'We craft',    accent: true  },
       { text: 'stories that',accent: false },
-      { text: 'move',        accent: false },
-      { text: 'people.',     accent: true  },
+      { text: 'Move people.',accent: true  },
     ],
-    top: '14%', left: '28%', rotate: -1, z: 3, size: 'sm' },
+    top: '14%', left: '29%', rotate: -1, z: 3, size: 'md', align: 'right' },
 
   // Small square — bottom, right of i1
-  { type: 'img', id: 'i2', src: 'https://picsum.photos/seed/scrap-b/500/500',
-    w: '14vw', h: '14vw', top: '52%', left: '24%', rotate: 2, z: 2 },
+  { type: 'img', id: 'i2', index: 2, src: w2,
+    w: '14vw', h: '14vw', top: '68%', left: '24%', rotate: 2, z: 2 },
 
   // Taller image — centre
-  { type: 'img', id: 'i3', src: 'https://picsum.photos/seed/scrap-c/600/900',
+  { type: 'img', id: 'i3', index: 3, src: w3,
     w: '20vw', h: '44vh', top: '13%', left: '42%', rotate: 1, z: 2 },
 
   // Text title — on i3
@@ -46,7 +49,7 @@ const ITEMS = [
       { text: 'Content',    accent: false },
       { text: 'Production', accent: true  },
     ],
-    top: '15%', left: '43%', rotate: 1, z: 5, size: 'sm', dark: true },
+    top: '15%', left: '48%', rotate: 1, z: 5, size: 'md' },
 
   // Text — bottom right of i3
   { type: 'text', id: 't3',
@@ -70,7 +73,7 @@ const ITEMS = [
     top: '17%', left: '64%', rotate: -1.5, z: 3, size: 'lg', align: 'right' },
 
   // Small square — below-right
-  { type: 'img', id: 'i4', src: 'https://picsum.photos/seed/scrap-d/500/500',
+  { type: 'img', id: 'i4', index: 4, src: w4,
     w: '13vw', h: '13vw', top: '58%', left: '67%', rotate: 2.5, z: 2 },
 
   // Text title — over i4
@@ -80,10 +83,10 @@ const ITEMS = [
       { text: 'Media &', accent: false },
       { text: 'Growth',  accent: true  },
     ],
-    top: '60%', left: '68%', rotate: 2.5, z: 5, size: 'sm', dark: true },
+    top: '60%', left: '68%', rotate: 2.5, z: 5, size: 'sm', bold: true },
 
   // Big tall rectangle — further right
-  { type: 'img', id: 'i5', src: 'https://picsum.photos/seed/scrap-e/800/800',
+  { type: 'img', id: 'i5', index: 5, src: w5,
     w: '26vw', h: '26vw', top: '10%', left: '80%', rotate: -1.5, z: 2 },
 
   // Text — below last image
@@ -94,7 +97,7 @@ const ITEMS = [
       { text: '& Creative', accent: true  },
       { text: 'Direction',  accent: false },
     ],
-    top: '68%', left: '83%', rotate: 1, z: 3, size: 'sm', align: 'right' },
+    top: '68%', left: '83%', rotate: 1, z: 3, size: 'md', align: 'right' },
 
 ]
 
@@ -207,11 +210,14 @@ export default function Features() {
               }}
             >
               <img src={item.src} alt="" draggable="false" className="scrap-img" loading="eager" fetchPriority="high" />
+              {item.index && (
+                <span className="scrap-img__index">{String(item.index).padStart(2, '0')}</span>
+              )}
             </div>
           ) : (
             <div
               key={item.id}
-              className={`scrap-item scrap-text scrap-text--${item.size}${item.dark ? ' scrap-text--dark' : ''}${item.align === 'right' ? ' scrap-text--right' : ''}`}
+              className={`scrap-item scrap-text scrap-text--${item.size}${item.dark ? ' scrap-text--dark' : ''}${item.bold ? ' scrap-text--bold' : ''}${item.glow ? ' scrap-text--glow' : ''}${item.align === 'right' ? ' scrap-text--right' : ''}`}
               data-rot={item.rotate}
               style={{
                 top: item.top,

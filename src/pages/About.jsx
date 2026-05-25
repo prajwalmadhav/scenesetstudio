@@ -80,7 +80,7 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="about-pg__hero-icon">
-              <img src="/SSS LOGO ICON.svg" alt="" className="about-pg__hero-logo" />
+              <img src="/sss logo2.svg" alt="" className="about-pg__hero-logo" />
               <span className="about-pg__hero-wordmark">SceneSet<br /><strong>Studio</strong></span>
             </div>
           </div>

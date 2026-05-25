@@ -62,7 +62,7 @@ export default function Navbar() {
       <header ref={navRef} className={`navbar${scrolled ? ' navbar--scrolled' : ''}`} style={{ opacity: 0 }}>
         <div className="navbar__inner">
           <button className="navbar__logo" aria-label="Scene Set Studio home" onClick={handleLogo}>
-            <img src="/SSS LOGO ICON.svg" alt="" className="navbar__logo-icon" aria-hidden="true" />
+            <img src="/sss logo2.svg" alt="" className="navbar__logo-icon" aria-hidden="true" />
             <span className="navbar__logo-text">SceneSet<strong>Studio</strong></span>
           </button>
 

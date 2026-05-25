@@ -94,7 +94,7 @@ export default function Contact() {
           <div className="contact-card">
 
             <div className="contact-info">
-              <img src="/SSS LOGO ICON.svg" alt="Scene Set Studio" className="contact-info__logo" />
+              <img src="/sss logo2.svg" alt="Scene Set Studio" className="contact-info__logo" />
               <span className="contact-info__wordmark">SceneSet<br /><strong>Studio</strong></span>
               <p className="contact-intro">
                 Fill in the form and we will get back to you within one business day. Alternatively, drop us an email directly.

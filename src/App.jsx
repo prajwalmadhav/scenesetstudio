@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
-import { useEffect, useRef, lazy, Suspense } from 'react'
+import { useEffect, useRef, useState, lazy, Suspense } from 'react'
+import Preloader from './components/Preloader'
 const AdminPage = lazy(() => import('./pages/Admin'))
 import Lenis from 'lenis'
 import gsap from 'gsap'
@@ -80,6 +81,15 @@ function BrandWatermark() {
 function App() {
   useButtonRipple()
 
+  const [preloaderDone, setPreloaderDone] = useState(
+    () => sessionStorage.getItem('sss_loaded') === '1'
+  )
+
+  const handlePreloaderDone = () => {
+    sessionStorage.setItem('sss_loaded', '1')
+    setPreloaderDone(true)
+  }
+
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.4,
@@ -104,9 +114,12 @@ function App() {
 
   const base = import.meta.env.BASE_URL.replace(/\/$/, '') || '/'
   return (
-    <BrowserRouter basename={base}>
-      <AppContent />
-    </BrowserRouter>
+    <>
+      {!preloaderDone && <Preloader onDone={handlePreloaderDone} />}
+      <BrowserRouter basename={base}>
+        <AppContent />
+      </BrowserRouter>
+    </>
   )
 }
 

@@ -106,7 +106,14 @@ function App() {
     })
     gsap.ticker.lagSmoothing(0)
 
+    const pause  = () => lenis.stop()
+    const resume = () => lenis.start()
+    window.addEventListener('sss:lenis-pause',  pause)
+    window.addEventListener('sss:lenis-resume', resume)
+
     return () => {
+      window.removeEventListener('sss:lenis-pause',  pause)
+      window.removeEventListener('sss:lenis-resume', resume)
       lenis.destroy()
       gsap.ticker.remove(lenis.raf)
     }

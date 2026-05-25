@@ -74,7 +74,7 @@ export default function Navbar() {
 
           <nav className="navbar__links" aria-label="Primary navigation">
             <Link to="/work"     className={`navbar__link${pathname === '/work'     ? ' navbar__link--active' : ''}`}>Work</Link>
-            <Link to="/services" className={`navbar__link${pathname === '/services' ? ' navbar__link--active' : ''}`}>Services</Link>
+            <Link to="/services" className={`navbar__link${pathname === '/services' || pathname === '/standard-services' ? ' navbar__link--active' : ''}`}>Services</Link>
             <Link to="/about"    className={`navbar__link${pathname === '/about'    ? ' navbar__link--active' : ''}`}>About</Link>
           </nav>
 

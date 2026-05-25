@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import SEO from '../components/SEO'
+import ScrollExpandMedia from '../components/ui/ScrollExpandMedia'
 
 const FORM_ENDPOINT = 'https://api.web3forms.com/submit'
 const ACCESS_KEY    = 'b44a455f-02a4-48e4-b5e5-8ec134f81fc3'
@@ -65,7 +66,16 @@ export default function AboutPage() {
         description="Scene Set Studio is a full-service creative agency. We build brands, produce content, and run campaigns that move the needle."
       />
 
-      <div className="about-pg">
+      <ScrollExpandMedia
+        mediaType="image"
+        mediaSrc="/frames/ezgif-frame-030.jpg"
+        bgImageSrc="/frames/ezgif-frame-001.jpg"
+        title="Scene Set Studio"
+        date="Ottawa · Canada"
+        scrollToExpand="Scroll to explore"
+        textBlend
+      >
+        <div className="about-pg">
 
         {/* ── Hero ── */}
         <div className="about-pg__hero">
@@ -173,10 +183,10 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="about-pg__hire-logo" aria-hidden="true">
+              <img src="/sss logo2.svg" alt="" className="about-pg__hire-logo-img" />
               <span className="about-pg__hire-wordmark">
-                <span className="about-pg__hire-wordmark-main">Scene</span>
-                <span className="about-pg__hire-wordmark-accent"> Set </span>
-                <span className="about-pg__hire-wordmark-main">Studio</span>
+                <span className="about-pg__hire-wordmark-main">SceneSet</span>
+                <strong className="about-pg__hire-wordmark-bold">Studio</strong>
               </span>
             </div>
           </div>
@@ -265,7 +275,8 @@ export default function AboutPage() {
           )}
         </div>
 
-      </div>
+        </div>
+      </ScrollExpandMedia>
     </>
   )
 }

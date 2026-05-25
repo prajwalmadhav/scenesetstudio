@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import SEO from '../components/SEO'
+import StandardServicesSection from '../components/StandardServicesSection'
 
 const S = 22, R = 1.8 // square size & radius shorthand
 
@@ -200,6 +201,8 @@ export default function Services() {
 
         </div>
       </section>
+
+      <StandardServicesSection showBg={false} />
     </>
   )
 }

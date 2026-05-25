@@ -9,7 +9,7 @@ import w5 from '../assets/work/w5.jpg'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const CANVAS_VW = 150
+const CANVAS_VW = 162
 
 // w/h can be px numbers or vw strings e.g. '35vw'
 const ITEMS = [
@@ -148,7 +148,7 @@ export default function Features() {
         return
       }
 
-      const getDistance = () => canvas.scrollWidth - window.innerWidth
+      const getDistance = () => window.innerWidth * (CANVAS_VW / 100 - 1)
 
       const hTween = gsap.to(canvas, {
         x: () => -getDistance(),

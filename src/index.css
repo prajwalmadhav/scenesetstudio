@@ -2391,33 +2391,21 @@ body {
   height: 100vh;
   height: 100dvh;
   margin-top: -4px;
-  background:
-    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, #858585 0%, #6a6a6a 18%, #525252 38%, #3a3a3a 58%, #242424 80%, #1a1a1a 100%);
-  background-size: 80px 80px, 80px 80px, 100% 100%;
+  background: linear-gradient(to bottom, #858585 0%, #6a6a6a 18%, #525252 38%, #3a3a3a 58%, #242424 80%, #1a1a1a 100%);
   overflow: hidden;
 }
-
-
-.feat-bg {
-  position: absolute;
-  inset: 0;
-  background: transparent;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.feat-bg::after {
+.feat-section::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 80px 80px;
-  mix-blend-mode: screen;
+  background:
+    linear-gradient(rgba(255,255,255,1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mix-blend-mode: difference;
+  opacity: 0.18;
   pointer-events: none;
+  z-index: 0;
 }
 
 /* Pinned header bar */
@@ -2760,24 +2748,12 @@ body {
 }
 
 
-/* Grid overlay for horizontal scroll section */
-.scrap-section::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px);
-  background-size: 44px 44px;
-  pointer-events: none;
-  z-index: 1;
-}
 
 .scrap-canvas {
   position: relative;
   height: 100dvh;
   will-change: transform;
-  z-index: 2;
+  overflow: hidden;
 }
 
 .scrap-item {
@@ -3265,7 +3241,7 @@ body {
 }
 
 .about-stamp__bg {
-  fill: #d8d5cf;
+  fill: #a8a49e;
   transition: fill 0.3s ease;
 }
 
@@ -3319,7 +3295,7 @@ body {
 
 .about-stamp__word--kannada {
   font-family: 'Noto Sans Kannada', 'Kohinoor Kannada', 'Nirmala UI', serif;
-  font-size: 22px;
+  font-size: 16px;
   font-weight: 700;
   letter-spacing: 0.5px;
   text-transform: none;
@@ -3329,7 +3305,7 @@ body {
 
 .about-stamp__english {
   font-family: 'Syne', sans-serif;
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;

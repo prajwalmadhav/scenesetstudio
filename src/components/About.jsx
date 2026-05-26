@@ -10,10 +10,10 @@ const TITLE_LINES = ['We build', 'brands', 'that people', 'remember.', 'stories 
 
 const HANDLE_POS = ['tl', 'tm', 'tr', 'mr', 'br', 'bm', 'bl', 'ml']
 
-const C = 'rgba(0,0,0,0.25)'         // black main
-const CD = 'rgba(0,0,0,0.12)'         // black dim
-const W = 'rgba(255, 253, 253, 0.45)'   // white main
-const WD = 'rgba(255,255,255,0.2)'    // white dim
+const C = 'rgba(0,0,0,0.25)'
+const CD = 'rgba(0,0,0,0.12)'
+const W = 'rgba(255, 253, 253, 0.45)'
+const WD = 'rgba(255,255,255,0.2)'
 
 function AboutSVGBg() {
   return (
@@ -51,34 +51,25 @@ function AboutSVGBg() {
       ))}
 
       {/* ── Arrows ── */}
-      {/* Right-pointing arrow — bottom left */}
       <g stroke={C} strokeWidth="1" fill="none" strokeLinecap="round">
         <line x1="60" y1="580" x2="120" y2="580" />
         <polyline points="108,572 120,580 108,588" />
       </g>
-      {/* Up-right diagonal arrow — top right */}
       <g stroke={C} strokeWidth="1" fill="none" strokeLinecap="round">
         <line x1="1080" y1="90" x2="1130" y2="48" />
         <polyline points="1114,48 1130,48 1130,64" />
       </g>
-      {/* Down arrow — right side */}
       <g stroke={CD} strokeWidth="1" fill="none" strokeLinecap="round">
         <line x1="1100" y1="380" x2="1100" y2="440" />
         <polyline points="1092,428 1100,440 1108,428" />
       </g>
 
       {/* ── L-shapes (corner brackets) ── */}
-      {/* Top-left */}
       <path d="M 48 120 L 48 60 L 108 60" fill="none" stroke={C} strokeWidth="1.5" strokeLinecap="square" />
-      {/* Top-right */}
       <path d="M 1152 120 L 1152 60 L 1092 60" fill="none" stroke={C} strokeWidth="1.5" strokeLinecap="square" />
-      {/* Bottom-left */}
       <path d="M 48 580 L 48 640 L 108 640" fill="none" stroke={C} strokeWidth="1.5" strokeLinecap="square" />
-      {/* Bottom-right */}
       <path d="M 1152 580 L 1152 640 L 1092 640" fill="none" stroke={C} strokeWidth="1.5" strokeLinecap="square" />
-      {/* Inner L — mid left */}
       <path d="M 200 290 L 200 340 L 250 340" fill="none" stroke={CD} strokeWidth="1" strokeLinecap="square" />
-      {/* Inner L — mid right */}
       <path d="M 1000 360 L 1000 410 L 950 410" fill="none" stroke={CD} strokeWidth="1" strokeLinecap="square" />
 
       {/* ── Arcs ── */}
@@ -99,24 +90,15 @@ function AboutSVGBg() {
       </g>
 
       {/* ══ WHITE ELEMENTS ══ */}
-
-      {/* Large arc — top left quarter */}
       <path d="M 0 300 A 340 340 0 0 1 340 0" fill="none" stroke={W} strokeWidth="1" />
-
-      {/* Diagonal rule — bottom center */}
       <line x1="450" y1="700" x2="700" y2="500" stroke={W} strokeWidth="0.8" strokeOpacity="0.35" />
-
-      {/* White circles */}
       <circle cx="350" cy="580" r="42" fill="none" stroke={W} strokeWidth="1" />
       <circle cx="350" cy="580" r="22" fill="none" stroke={WD} strokeWidth="0.6" strokeDasharray="4 6" />
       <circle cx="900" cy="200" r="60" fill="none" stroke={WD} strokeWidth="0.8" strokeDasharray="2 8" />
       <circle cx="70" cy="200" r="30" fill="none" stroke={W} strokeWidth="0.8" />
-
-      {/* White corner brackets — inner */}
       <path d="M 320 60 L 320 110 L 370 110" fill="none" stroke={W} strokeWidth="1.2" strokeLinecap="square" />
       <path d="M 880 640 L 880 590 L 830 590" fill="none" stroke={WD} strokeWidth="1" strokeLinecap="square" />
 
-      {/* White cross markers */}
       {[
         [520, 180], [700, 520], [140, 420], [1050, 280], [820, 80], [440, 480],
       ].map(([x, y], i) => (
@@ -126,7 +108,6 @@ function AboutSVGBg() {
         </g>
       ))}
 
-      {/* White arrows */}
       <g stroke={W} strokeWidth="1" fill="none" strokeLinecap="round">
         <line x1="200" y1="180" x2="200" y2="240" />
         <polyline points="192,228 200,240 208,228" />
@@ -135,15 +116,11 @@ function AboutSVGBg() {
         <line x1="960" y1="600" x2="1020" y2="560" />
         <polyline points="1008,554 1020,560 1014,572" />
       </g>
-
-      {/* White dimension line — horizontal bottom */}
       <g stroke={WD} strokeWidth="0.7">
         <line x1="80" y1="670" x2="400" y2="670" />
         <line x1="80" y1="664" x2="80" y2="676" />
         <line x1="400" y1="664" x2="400" y2="676" />
       </g>
-
-      {/* White dotted arc — right side */}
       <path d="M 1100 400 A 80 80 0 0 1 1180 480" fill="none" stroke={W} strokeWidth="0.8" strokeDasharray="3 6" />
     </svg>
   )

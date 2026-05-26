@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import LiquidBackground from './LiquidBackground'
-import PosterPlaceholderIcon from './PosterPlaceholderIcon'
 
 const HERO_WORDS = ['convert', 'captivate', 'perform', 'resonate', 'scale']
 
@@ -83,8 +82,8 @@ export default function Hero() {
         ease: 'none',
       }, 0)
       .fromTo(tableRef.current,
-        { rotateX: isMobile ? 18 : 15 },
-        { rotateX: isMobile ? 55 : 62, ease: 'none' },
+        { rotateX: 0 },
+        { rotateX: isMobile ? 38 : 42, ease: 'none' },
       0)
       .to(headlineRef.current, { opacity: 0, ease: 'none' }, 0)
       .to(buttonsRef.current,  { opacity: 0, ease: 'none' }, 0)
@@ -136,27 +135,7 @@ export default function Hero() {
 
           {/* 3D tilt stage */}
           <div ref={tableRef} className="hero-table">
-            {/* Desktop: 3 static columns */}
-            <div className="hero-table-cols">
-              {BASE_COLS.map((col, ci) => (
-                <div key={ci} className="hero-table-col">
-                  {col.map((card, idx) => (
-                    <div key={idx} className="hero-table-card" style={{ height: card.h }}>
-                      <PosterPlaceholderIcon variant={card.c + ci + idx} />
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </div>
-            {/* Mobile: single centered card */}
-            <div className="hero-single-card">
-              <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="hero-single-card__icon">
-                <rect x="1" y="1" width="78" height="78" rx="16" stroke="rgba(255,255,255,0.12)" strokeWidth="1.5"/>
-                <path d="M24 30c0-3.314 2.686-6 6-6h9c3.314 0 6 2.686 6 6s-2.686 6-6 6H30c-3.314 0-6 2.686-6 6s2.686 6 6 6h9c3.314 0 6-2.686 6-6" stroke="rgba(255,255,255,0.7)" strokeWidth="3" strokeLinecap="round"/>
-                <path d="M38 30c0-3.314 2.686-6 6-6h1c3.314 0 6 2.686 6 6s-2.686 6-6 6H38c-3.314 0-6 2.686-6 6s2.686 6 6 6h1c3.314 0 6-2.686 6-6" stroke="rgba(255,255,255,0.35)" strokeWidth="3" strokeLinecap="round"/>
-              </svg>
-              <span className="hero-single-card__label">SceneSet Studio</span>
-            </div>
+            <img src="/landing-second-section.jpg" alt="" className="hero-table-single-img" />
           </div>
 
           {/* Fade masks top + bottom */}

@@ -9,9 +9,10 @@ const FORM_ENDPOINT = 'https://api.web3forms.com/submit'
 const ACCESS_KEY    = 'b44a455f-02a4-48e4-b5e5-8ec134f81fc3'
 
 const TEAM = [
+  { initials: 'Pr', name: 'Prarthana', role: 'Head of Operations & Strategy'    },
   { initials: 'P',  name: 'Prajwal',   role: 'Founder / Creative Director'      },
   { initials: 'A',  name: 'Avik',      role: 'Head of Sales & Marketing'        },
-  { initials: 'Pr', name: 'Prarthana', role: 'Head of Operations & Strategy'    },
+  { initials: 'V',  name: 'Vidya',     role: 'Brand / Creative Strategist'      },
   { initials: 'S',  name: 'Sam',       role: 'Motion Graphics / Video Editor'   },
   { initials: 'D',  name: 'Dan',       role: 'Application / Web Developer'      },
   { initials: 'Mv', name: 'Madhav',    role: 'Video Producer'                   },
@@ -152,14 +153,18 @@ export default function AboutPage() {
         {/* ── Team ── */}
         <div className="about-pg__team">
           <span className="about-pg__label">The Team</span>
-          <div className="about-pg__team-grid">
-            {TEAM.map(member => (
-              <div key={member.name} className="about-pg__team-card">
-                <div className="about-pg__team-avatar">
-                  <span>{member.initials}</span>
-                </div>
-                <p className="about-pg__team-name">{member.name}</p>
-                <p className="about-pg__team-role">{member.role}</p>
+          <div className="about-pg__team-halves">
+            {[TEAM.slice(0, Math.ceil(TEAM.length / 2)), TEAM.slice(Math.ceil(TEAM.length / 2))].map((half, h) => (
+              <div key={h} className="about-pg__team-half">
+                {half.map((member, i) => (
+                  <div key={member.name} className="about-pg__team-row">
+                    <span className="about-pg__team-row-num">{String(h * Math.ceil(TEAM.length / 2) + i + 1).padStart(2, '0')}</span>
+                    <div className="about-pg__team-row-info">
+                      <p className="about-pg__team-name">{member.name}</p>
+                      <p className="about-pg__team-role">{member.role}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             ))}
           </div>

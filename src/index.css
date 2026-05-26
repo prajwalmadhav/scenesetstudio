@@ -360,7 +360,7 @@ body {
 
 .hero-visual {
   width: 100%;
-  height: 160dvh;
+  height: 55dvh;
   background: #0a0a0a;
   border-radius: 19px;
   overflow: hidden;
@@ -493,6 +493,24 @@ body {
   z-index: 1;
 }
 
+.hero-table-card__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.hero-table-single-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
 .poster-placeholder-icon {
   position: relative;
   z-index: 2;
@@ -599,7 +617,7 @@ body {
   }
 
   .hero-table {
-    transform: perspective(600px) rotateX(18deg) scale(1.15);
+    transform: perspective(600px) rotateX(0deg);
     transform-origin: 50% 55%;
   }
 
@@ -1975,58 +1993,62 @@ body {
   border-bottom: 1px solid #1e2124;
 }
 
-.about-pg__team-grid {
-  display: flex;
-  justify-content: center;
-  gap: 72px;
-  margin-top: 8px;
-  flex-wrap: wrap;
+.about-pg__team-halves {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 4vw;
+  margin-top: 40px;
 }
 
-.about-pg__team-card {
+.about-pg__team-half {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 16px;
 }
 
-.about-pg__team-avatar {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: #111;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.about-pg__team-row {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.about-pg__team-avatar span {
+.about-pg__team-half:first-child .about-pg__team-row {
+  border-right: none;
+}
+
+.about-pg__team-row-num {
   font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: 17px;
+  font-size: 11px;
+  font-weight: 700;
   color: #D4001E;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+  width: 24px;
+}
+
+.about-pg__team-row-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
 .about-pg__team-name {
   font-family: var(--font-heading);
   font-weight: 700;
-  font-size: 17px;
+  font-size: 16px;
   color: #F2F0EB;
   margin: 0;
   letter-spacing: -0.01em;
-  text-align: center;
 }
 
 .about-pg__team-role {
   font-family: var(--font-body);
   font-size: 10px;
-  color: rgba(242, 240, 235, 0.3);
+  color: rgba(242, 240, 235, 0.35);
   margin: 0;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
-  text-align: center;
 }
 
 /* Hiring Form */
@@ -2342,8 +2364,8 @@ body {
     padding: 56px 6vw;
   }
 
-  .about-pg__team-grid {
-    gap: 40px;
+  .about-pg__team-halves {
+    grid-template-columns: 1fr;
   }
 
   .about-pg__hire {

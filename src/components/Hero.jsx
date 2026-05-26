@@ -57,7 +57,7 @@ export default function Hero() {
       const isMobile = window.matchMedia('(max-width: 768px)').matches
       const vh = window.innerHeight
 
-      gsap.timeline({
+      const scrollTl = gsap.timeline({
         scrollTrigger: {
           trigger: '.hero-section',
           start: 'top top',
@@ -66,7 +66,6 @@ export default function Hero() {
           scrub: isMobile ? 1 : 0.4,
           anticipatePin: 1,
           invalidateOnRefresh: true,
-          // prevent browser chrome show/hide from triggering refresh on mobile
           ...(isMobile && { refreshPriority: -1 }),
         },
       })
@@ -76,17 +75,19 @@ export default function Hero() {
         ease: 'none',
       }, 0)
       .to(visualRef.current, {
-        // use px snapshot instead of dvh to avoid mobile chrome resize glitch
         height: vh,
         borderRadius: 0,
         ease: 'none',
       }, 0)
-      .fromTo(tableRef.current,
-        { rotateX: 0 },
-        { rotateX: isMobile ? 38 : 42, ease: 'none' },
-      0)
       .to(headlineRef.current, { opacity: 0, ease: 'none' }, 0)
       .to(buttonsRef.current,  { opacity: 0, ease: 'none' }, 0)
+
+      if (!isMobile) {
+        scrollTl.fromTo(tableRef.current,
+          { rotateX: 0 },
+          { rotateX: 42, ease: 'none' },
+        0)
+      }
     })
 
     return () => ctx.revert()

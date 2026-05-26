@@ -153,20 +153,38 @@ export default function AboutPage() {
         {/* ── Team ── */}
         <div className="about-pg__team">
           <span className="about-pg__label">The Team</span>
-          <div className="about-pg__team-halves">
-            {[TEAM.slice(0, Math.ceil(TEAM.length / 2)), TEAM.slice(Math.ceil(TEAM.length / 2))].map((half, h) => (
-              <div key={h} className="about-pg__team-half">
-                {half.map((member, i) => (
-                  <div key={member.name} className="about-pg__team-row">
-                    <span className="about-pg__team-row-num">{String(h * Math.ceil(TEAM.length / 2) + i + 1).padStart(2, '0')}</span>
-                    <div className="about-pg__team-row-info">
-                      <p className="about-pg__team-name">{member.name}</p>
-                      <p className="about-pg__team-role">{member.role}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ))}
+          <div className="about-pg__team-htl">
+            {/* Top labels (even indices) */}
+            <div className="about-pg__team-htl-labels about-pg__team-htl-labels--top">
+              {TEAM.map((member, i) => (
+                <div key={member.name} className="about-pg__team-htl-label">
+                  {i % 2 === 0 && <>
+                    <p className="about-pg__team-name">{member.name}</p>
+                    <p className="about-pg__team-role">{member.role}</p>
+                  </>}
+                </div>
+              ))}
+            </div>
+            {/* Centre line + avatars */}
+            <div className="about-pg__team-htl-track">
+              <div className="about-pg__team-htl-line" />
+              {TEAM.map((member) => (
+                <div key={member.name} className="about-pg__team-htl-node">
+                  <span>{member.initials}</span>
+                </div>
+              ))}
+            </div>
+            {/* Bottom labels (odd indices) */}
+            <div className="about-pg__team-htl-labels about-pg__team-htl-labels--bottom">
+              {TEAM.map((member, i) => (
+                <div key={member.name} className="about-pg__team-htl-label">
+                  {i % 2 !== 0 && <>
+                    <p className="about-pg__team-name">{member.name}</p>
+                    <p className="about-pg__team-role">{member.role}</p>
+                  </>}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

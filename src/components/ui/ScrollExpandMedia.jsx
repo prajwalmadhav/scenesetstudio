@@ -147,19 +147,19 @@ const ScrollExpandMedia = ({
       <section className="relative flex flex-col items-center justify-start min-h-[100dvh]">
         <div className="relative w-full flex flex-col items-center min-h-[100dvh]">
 
-          {/* Background image fades out as media expands */}
+          {/* Background image — stays fixed, lighter overlay */}
           <motion.div
             className="absolute inset-0 z-0 h-full"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 - smoothProgress }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.1 }}
           >
             <img
               src={bgImageSrc}
               alt=""
               className="w-screen h-screen object-cover object-center"
+              style={{ filter: 'brightness(1.35)' }}
             />
-            <div className="absolute inset-0 bg-black/40" />
           </motion.div>
 
           <div className="mx-auto flex flex-col items-center justify-start relative z-10 w-full">
@@ -173,7 +173,8 @@ const ScrollExpandMedia = ({
                   height: `${mediaHeight}px`,
                   maxWidth: '95vw',
                   maxHeight: '85vh',
-                  boxShadow: '0px 0px 50px rgba(0,0,0,0.4)',
+                  boxShadow: '0 8px 40px 8px rgba(0,0,0,0.7)',
+                  border: '1px solid rgba(255,255,255,0.3)',
                   transition: 'none',
                 }}
               >
@@ -202,57 +203,51 @@ const ScrollExpandMedia = ({
                       src={mediaSrc}
                       alt={title || ''}
                       className="w-full h-full object-cover"
-                    />
-                    <motion.div
-                      className="absolute inset-0 bg-black/50"
-                      initial={{ opacity: 0.7 }}
-                      animate={{ opacity: 0.7 - smoothProgress * 0.3 }}
-                      transition={{ duration: 0.2 }}
+                      style={{ filter: 'brightness(1.35)' }}
                     />
                   </div>
                 )}
               </div>
 
-              {/* Date / scroll hint — split apart as media expands */}
-              <div className="flex flex-col items-center text-center relative z-10 mt-4" style={{ transition: 'none' }}>
+              {/* Title + date block — pushed down */}
+              <div className="flex flex-col items-center relative z-10 w-full mt-40" style={{ transition: 'none' }}>
+
+                {/* Title split */}
+                <div className="flex items-center justify-center text-center gap-4 w-full flex-col">
+                  <h1
+                    className="text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-tight leading-none"
+                    style={{ transform: `translateX(-${textTranslateX}vw)`, textShadow: '0 2px 24px rgba(0,0,0,0.7)' }}
+                  >
+                    {firstWord}
+                  </h1>
+                  <h1
+                    className="text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-tight leading-none"
+                    style={{ transform: `translateX(${textTranslateX}vw)`, textShadow: '0 2px 24px rgba(0,0,0,0.7)' }}
+                  >
+                    {restOfTitle}
+                  </h1>
+                </div>
+
+                {/* Date / scroll hint */}
+                <div className="flex flex-col items-center text-center mt-20" style={{ transition: 'none' }}>
                 {date && (
                   <p
-                    className="text-sm tracking-widest uppercase text-white/60 font-light"
-                    style={{ transform: `translateX(-${textTranslateX}vw)` }}
+                    className="text-sm tracking-widest uppercase text-white font-light"
+                    style={{ transform: `translateX(-${textTranslateX}vw)`, textShadow: '0 2px 16px rgba(0,0,0,0.7)' }}
                   >
                     {date}
                   </p>
                 )}
                 {scrollToExpand && (
                   <p
-                    className="text-white/50 text-sm font-medium text-center mt-1"
-                    style={{ transform: `translateX(${textTranslateX}vw)` }}
+                    className="text-white text-sm font-medium text-center mt-1"
+                    style={{ transform: `translateX(${textTranslateX}vw)`, textShadow: '0 2px 16px rgba(0,0,0,0.7)' }}
                   >
                     {scrollToExpand}
                   </p>
                 )}
-              </div>
-
-              {/* Title split */}
-              <div
-                className={`flex items-center justify-center text-center gap-4 w-full relative z-10 flex-col ${
-                  textBlend ? 'mix-blend-difference' : ''
-                }`}
-                style={{ transition: 'none' }}
-              >
-                <h1
-                  className="text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-tight leading-none"
-                  style={{ transform: `translateX(-${textTranslateX}vw)` }}
-                >
-                  {firstWord}
-                </h1>
-                <h1
-                  className="text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-tight leading-none"
-                  style={{ transform: `translateX(${textTranslateX}vw)` }}
-                >
-                  {restOfTitle}
-                </h1>
-              </div>
+                </div>
+              </div>{/* end title+date block */}
 
             </div>
 

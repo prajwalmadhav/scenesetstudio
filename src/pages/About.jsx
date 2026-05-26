@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import SEO from '../components/SEO'
 import ScrollExpandMedia from '../components/ui/ScrollExpandMedia'
 import aboutBrandPackage from '../assets/about/scene-set-brand-package.jpg'
+import aboutBrandPackageZoom from '../assets/about/scene-set-brand-package-zoom.jpg'
 
 const FORM_ENDPOINT = 'https://api.web3forms.com/submit'
 const ACCESS_KEY    = 'b44a455f-02a4-48e4-b5e5-8ec134f81fc3'
@@ -69,10 +70,10 @@ export default function AboutPage() {
 
       <ScrollExpandMedia
         mediaType="image"
-        mediaSrc={aboutBrandPackage}
+        mediaSrc={aboutBrandPackageZoom}
         bgImageSrc={aboutBrandPackage}
         title="Scene Set Studio"
-        date="Ottawa · Canada"
+        date="Toronto · Ottawa · Montreal · Canada"
         scrollToExpand="Scroll to explore"
         textBlend
       >

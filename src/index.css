@@ -6002,8 +6002,7 @@ body {
 
 .work-hero {
   background: #080808;
-  min-height: 100dvh;
-  padding: 100px 40px 60px;
+  padding: 100px 40px 40px;
   display: flex;
   flex-direction: column;
   gap: 28px;
@@ -6057,54 +6056,84 @@ body {
   font-weight: 600;
 }
 
-/* ── Stage: perspective parent ── */
+/* ── Stage: perspective parent for 3D folder depth ── */
 .work-hero__stage {
-  flex: 1;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+  scrollbar-width: none;
   display: flex;
   align-items: center;
-  justify-content: center;
-  perspective: 1600px;
-  perspective-origin: 50% 55%;
-  min-height: 380px;
-  overflow: hidden;
+  padding: 24px 0 52px;
+  perspective: 900px;
+  perspective-origin: 50% 60%;
 }
 
-/* ── Fan: 3D rotated group ── */
+.work-hero__stage::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Fan: flat horizontal strip ── */
 .work-hero__fan {
-  position: relative;
-  width: 930px;
-  height: 320px;
-  transform-style: preserve-3d;
-  transform: rotateX(18deg) rotateY(-35deg);
+  display: flex;
+  gap: 20px;
+  padding: 0 clamp(24px, 6vw, 80px);
+  width: max-content;
+  height: auto;
+  transform: none;
+  transform-style: flat;
 }
 
-/* ── Wrap: positions each card in 3D space via CSS custom prop ── */
+/* ── Wrap: each card slot ── */
 .fan-wrap {
-  position: absolute;
-  top: 72px;
-  left: 0;
-  width: 260px;
-  height: 175px;
-  transform:
-    translateX(calc(var(--i) * 90px))
-    translateY(calc(var(--i) * -14px))
-    translateZ(calc(var(--i) * -10px));
+  position: relative;
+  top: auto;
+  left: auto;
+  width: 340px;
+  height: 210px;
+  transform: none !important;
+  flex-shrink: 0;
+  overflow: visible;
+  /* room below so stacked layers are visible */
+  margin-bottom: 16px;
 }
 
-/* ── Card: GSAP target for entrance + hover ── */
+/* ── Stack layers — positive z-index so they never go behind fan-wrap ── */
+.fan-stack {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+.fan-stack--2 {
+  background: #181818;
+  transform: translate(10px, 14px);
+  z-index: 1;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.fan-stack--1 {
+  background: #222222;
+  transform: translate(5px, 7px);
+  z-index: 2;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* ── Card: front layer ── */
 .fan-card {
-  width: 100%;
-  height: 100%;
-  border-radius: 12px;
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
   overflow: hidden;
-  position: relative;
+  z-index: 3;
   cursor: pointer;
   will-change: transform, opacity;
+  transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.38s ease;
   box-shadow:
-    0 6px 24px rgba(0, 0, 0, 0.55),
-    0 2px 6px rgba(0, 0, 0, 0.35),
+    0 8px 28px rgba(0, 0, 0, 0.6),
+    0 2px 6px rgba(0, 0, 0, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.07);
-  transition: box-shadow 0.35s ease;
 }
 
 .fan-card__img {
@@ -6112,6 +6141,7 @@ body {
   height: 100%;
   object-fit: cover;
   display: block;
+  border-radius: 10px;
   transition: transform 0.55s ease;
 }
 
@@ -6161,47 +6191,11 @@ body {
   border-top: 1px solid #1a1a1a;
 }
 
-/* ── Tablet: scale fan down ── */
-@media (max-width: 1100px) and (min-width: 769px) {
-  .work-hero__fan {
-    transform: rotateX(18deg) rotateY(-35deg) scale(0.76);
-  }
-}
-
-/* ── Mobile: flat horizontal scroll strip ── */
+/* ── Mobile: smaller cards ── */
 @media (max-width: 768px) {
-  .work-hero__stage {
-    perspective: none;
-    min-height: 170px;
-  }
-
-  .work-hero__fan {
-    width: 100%;
-    height: 150px;
-    transform: none;
-    transform-style: flat;
-    display: flex;
-    align-items: stretch;
-    overflow-x: auto;
-    overflow-y: visible;
-    scrollbar-width: none;
-    gap: 10px;
-    padding: 0 4px;
-  }
-
-  .work-hero__fan::-webkit-scrollbar {
-    display: none;
-  }
-
   .fan-wrap {
-    position: relative;
-    top: auto;
-    left: auto;
-    min-width: 190px;
-    width: 190px;
-    height: 130px;
-    transform: none !important;
-    flex-shrink: 0;
+    width: 220px;
+    height: 140px;
   }
 
   .fan-card__info {
@@ -6210,6 +6204,224 @@ body {
 
   .work-hero__title {
     font-size: clamp(28px, 8vw, 48px);
+  }
+}
+
+/* ─────────────────────────────────────────
+   Work Page — Grain Background
+   ───────────────────────────────────────── */
+
+.work-page {
+  background: #080808;
+  position: relative;
+  min-height: 100dvh;
+}
+
+.work-page-headline {
+  font-family: 'Syne', sans-serif;
+  font-weight: 900;
+  font-size: clamp(36px, 5vw, 72px);
+  color: #F2F0EB;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  padding: 100px clamp(24px, 6vw, 80px) 0;
+  border-bottom: 1px solid #1a1a1a;
+  padding-bottom: 48px;
+}
+
+.work-page::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 300px 300px;
+  background-repeat: repeat;
+}
+
+.work-page > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─────────────────────────────────────────
+   Work Page — Case Study List
+   ───────────────────────────────────────── */
+
+.work-list {
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
+  padding: 40px clamp(24px, 6vw, 80px) clamp(80px, 10vw, 120px);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.work-list-item {
+  display: block;
+  text-decoration: none;
+  position: relative;
+  padding-left: 28px;
+}
+
+/* ── Timeline track ── */
+.wl-track {
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: -72px; /* bridge the gap to the next card */
+  width: 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Last card — don't extend past the end */
+.work-list-item:last-child .wl-track {
+  bottom: 0;
+}
+
+.wl-dot-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.wl-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.wl-ring {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+  z-index: 0;
+}
+
+.wl-line {
+  width: 1px;
+  flex: 1;
+  background: rgba(242, 240, 235, 0.09);
+  transform-origin: top center;
+  margin-top: 7px;
+}
+
+.work-list-item__num {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(242, 240, 235, 0.22);
+  margin-bottom: 14px;
+}
+
+.work-list-item__img {
+  width: 100%;
+  aspect-ratio: 16 / 8;
+  overflow: hidden;
+  background: #111;
+  border-radius: 3px;
+}
+
+.work-list-item__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(1);
+  transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.work-list-item:hover .work-list-item__photo {
+  transform: scale(1.04);
+  filter: grayscale(0);
+}
+
+.work-list-item__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 20px 0 22px;
+  border-bottom: 1px solid var(--border);
+  transition: border-color 0.25s ease;
+}
+
+.work-list-item:hover .work-list-item__meta {
+  border-color: rgba(212, 0, 30, 0.3);
+}
+
+.work-list-item__cat {
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(242, 240, 235, 0.32);
+  margin-bottom: 7px;
+}
+
+.work-list-item__name {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(22px, 3.2vw, 42px);
+  color: var(--cream);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin: 0;
+}
+
+.work-list-item__right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.work-list-item__year {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: rgba(242, 240, 235, 0.28);
+}
+
+.work-list-item__arrow {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 640px) {
+  .work-list {
+    gap: 52px;
+  }
+
+  .work-list-item__meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .work-list-item__right {
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
   }
 }
 
@@ -6833,6 +7045,7 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 16px;
+  margin-top: 48px;
 }
 
 .cta-btn {
@@ -6842,10 +7055,10 @@ body {
   gap: 4px;
   font-family: var(--font-heading);
   font-weight: 700;
-  font-size: 14px;
+  font-size: 12px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  padding: 18px 52px 14px;
+  padding: 14px 36px 11px;
   border-radius: 999px;
   border: 1.5px solid rgba(255, 255, 255, 0.55);
   background: transparent;
@@ -6976,23 +7189,49 @@ body {
 }
 
 /* ═══════════════════════════════════════
-   CTA — quick consult mini-form
+   CTA — action row (button + form side by side)
 ═══════════════════════════════════════ */
 
-.cta-quick-consult-divider {
+.cta-action__row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 48px;
   width: 100%;
-  max-width: 480px;
-  border: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  margin: 52px 0 0;
+  max-width: 860px;
 }
+
+.cta-action__left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cta-action__divider {
+  width: 1px;
+  align-self: stretch;
+  background: rgba(255, 255, 255, 0.12);
+  flex-shrink: 0;
+}
+
+.cta-action__right {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* ═══════════════════════════════════════
+   CTA — quick callback form
+═══════════════════════════════════════ */
 
 .cta-quick-consult {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
   gap: 12px;
   margin-top: 24px;
 }
@@ -7011,50 +7250,52 @@ body {
 
 .cta-quick-consult__form {
   display: flex;
-  align-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 4px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.04);
-  transition: border-color 0.25s ease;
-}
-
-.cta-quick-consult__form:focus-within {
-  border-color: rgba(255, 255, 255, 0.35);
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 360px;
 }
 
 .cta-quick-consult__input {
-  background: transparent;
-  border: none;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 4px;
   outline: none;
   color: #fff;
   font-family: var(--font-body, sans-serif);
   font-size: 12px;
-  padding: 8px 14px;
-  width: 200px;
+  padding: 10px 14px;
+  width: 100%;
+  transition: border-color 0.2s ease;
+}
+
+.cta-quick-consult__input:focus {
+  border-color: rgba(255, 255, 255, 0.35);
 }
 
 .cta-quick-consult__input::placeholder {
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.45);
 }
 
 .cta-quick-consult__btn {
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
   color: #fff;
   font-family: var(--font-heading);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 8px 14px;
+  padding: 11px 14px;
   cursor: pointer;
   transition: background 0.2s ease;
+  margin-top: 2px;
 }
 
 .cta-quick-consult__btn:hover {
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.24);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 .cta-quick-consult__thanks {
@@ -7065,16 +7306,20 @@ body {
 }
 
 @media (max-width: 768px) {
-  .cta-quick-consult {
+  .cta-action__row {
     flex-direction: column;
-    gap: 10px;
+    gap: 32px;
+  }
+  .cta-action__divider {
+    width: 100%;
+    height: 1px;
+    align-self: auto;
   }
   .cta-quick-consult__headline {
     white-space: normal;
-    text-align: center;
   }
-  .cta-quick-consult__input {
-    width: 160px;
+  .cta-quick-consult__form {
+    max-width: 100%;
   }
 }
 

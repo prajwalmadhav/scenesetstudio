@@ -47,20 +47,20 @@ function AnimatedUnderline({ children, color = '#D4001E', wave = false }) {
 export default function CTA() {
   const sectionRef = useRef(null)
   const wordRef = useRef(null)
-  const [contact, setContact] = useState('')
+  const [form, setForm] = useState({ name: '', email: '', phone: '' })
   const [sent, setSent] = useState(false)
 
   async function handleQuickSubmit(e) {
     e.preventDefault()
-    if (!contact.trim()) return
+    if (!form.name.trim() || !form.email.trim()) return
     try {
       await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
           access_key: 'b44a455f-02a4-48e4-b5e5-8ec134f81fc3',
-          subject: 'Quick Consult Request — Scene Set Studio',
-          contact,
+          subject: 'Quick Callback Request — Scene Set Studio',
+          ...form,
         }),
       })
     } catch {}
@@ -180,10 +180,62 @@ export default function CTA() {
       </div>
 
       <div className="cta-action">
-        <button className="cta-btn" onClick={() => window.location.href = '/contact'}>
-          <span className="cta-btn__main">Start Your Project &rarr;</span>
-          <span className="cta-btn__sub cta-btn__sub--hide-mobile">Free discovery call &middot; No commitment</span>
-        </button>
+
+        {/* Side-by-side: CTA button + callback form */}
+        <div className="cta-action__row">
+
+          {/* Left: Start Your Project */}
+          <div className="cta-action__left">
+            <button className="cta-btn" onClick={() => window.location.href = '/contact'}>
+              <span className="cta-btn__main">Start Your Project &rarr;</span>
+              <span className="cta-btn__sub cta-btn__sub--hide-mobile">Free discovery call &middot; No commitment</span>
+            </button>
+          </div>
+
+          {/* Divider */}
+          <div className="cta-action__divider" aria-hidden="true" />
+
+          {/* Right: Quick callback form */}
+          <div className="cta-action__right">
+            <span className="cta-quick-consult__headline">
+              Quick callback —&nbsp;<span className="cta-quick-consult__accent">we'll reach out within 24h.</span>
+            </span>
+            {sent ? (
+              <span className="cta-quick-consult__thanks">Got it. We'll be in touch shortly.</span>
+            ) : (
+              <form className="cta-quick-consult__form" onSubmit={handleQuickSubmit}>
+                <input
+                  className="cta-quick-consult__input"
+                  type="text"
+                  placeholder="Your name"
+                  value={form.name}
+                  onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+                  required
+                  aria-label="Name"
+                />
+                <input
+                  className="cta-quick-consult__input"
+                  type="email"
+                  placeholder="Email address"
+                  value={form.email}
+                  onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+                  required
+                  aria-label="Email"
+                />
+                <input
+                  className="cta-quick-consult__input"
+                  type="tel"
+                  placeholder="Phone number"
+                  value={form.phone}
+                  onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
+                  aria-label="Phone number"
+                />
+                <button className="cta-quick-consult__btn" type="submit">Request Callback &rarr;</button>
+              </form>
+            )}
+          </div>
+
+        </div>
 
         {/* Desktop trust strip */}
         <div className="cta-desktop-trust">
@@ -201,29 +253,6 @@ export default function CTA() {
             <span className="cta-desktop-trust__num">No contracts</span>
             <span className="cta-desktop-trust__label">start &amp; stop anytime</span>
           </div>
-        </div>
-
-        {/* Quick consult mini-form */}
-        <hr className="cta-quick-consult-divider" aria-hidden="true" />
-        <div className="cta-quick-consult">
-          <span className="cta-quick-consult__headline">
-            Not ready yet?&nbsp;<span className="cta-quick-consult__accent">Drop your contact — we'll reach out.</span>
-          </span>
-          {sent ? (
-            <span className="cta-quick-consult__thanks">Got it. We'll be in touch shortly.</span>
-          ) : (
-            <form className="cta-quick-consult__form" onSubmit={handleQuickSubmit}>
-              <input
-                className="cta-quick-consult__input"
-                type="text"
-                placeholder="Email or phone number"
-                value={contact}
-                onChange={e => setContact(e.target.value)}
-                aria-label="Email or phone number"
-              />
-              <button className="cta-quick-consult__btn" type="submit">Send</button>
-            </form>
-          )}
         </div>
 
       </div>

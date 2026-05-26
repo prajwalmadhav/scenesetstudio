@@ -1,54 +1,119 @@
+import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import SEO from '../components/SEO'
-import WorkHero from '../components/WorkHero'
+import sceneSetImg from '../assets/about/scene-set-brand-package.jpg'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const CASES = [
-  { slug: 'fawill-cleaning',  name: 'Fawill Cleaning',   category: 'Brand Strategy / Content', year: '2024' },
-  { slug: 'fawill-bike-pub',  name: 'Fawill Bike & Pub', category: 'Paid Advertising / Social', year: '2024' },
-  { slug: 'prajwal-personal-brand', name: "Prajwal's Personal Brand", category: 'Identity / Web Design', year: '2024' },
-  { slug: 'tierx-dcs',        name: 'TierX DCS',         category: 'Content Production / Ads',  year: '2025' },
+  {
+    slug: 'tierx-dcs',
+    name: 'TierX DCS',
+    category: 'Content Production / Ads',
+    year: '2025',
+    seed: 'sss-tx1-case',
+  },
+  {
+    slug: 'sceneset-branding',
+    name: 'Scene Set Studio',
+    category: 'Brand Identity / Design',
+    year: '2024',
+    img: sceneSetImg,
+  },
+  {
+    slug: 'fawill-bike-pub',
+    name: 'Fawill Bike & Pub',
+    category: 'Paid Advertising / Social',
+    year: '2024',
+    seed: 'sss-fw2-case',
+  },
+  {
+    slug: 'fawill-cleaning',
+    name: 'Fawill Cleaning Company',
+    category: 'Brand Strategy / Content',
+    year: '2024',
+    seed: 'sss-fw1-case',
+  },
 ]
 
 export default function Work() {
+  const listRef = useRef(null)
+
+  useEffect(() => {
+    if (!listRef.current) return
+
+    const ctx = gsap.context(() => {
+      listRef.current.querySelectorAll('.work-list-item').forEach(item => {
+        const dot = item.querySelector('.wl-dot')
+        const ring = item.querySelector('.wl-ring')
+        const line = item.querySelector('.wl-line')
+
+        gsap.set(dot, { scale: 0 })
+        gsap.set(ring, { scale: 0, opacity: 0 })
+        gsap.set(line, { scaleY: 0, transformOrigin: 'top center' })
+
+        gsap.timeline({
+          scrollTrigger: { trigger: item, start: 'top 85%', once: true },
+        })
+          .to(dot, { scale: 1, duration: 0.45, ease: 'back.out(2.5)' }, 0)
+          .to(ring, { scale: 2.6, opacity: 0, duration: 0.7, ease: 'power2.out' }, 0.1)
+          .to(line, { scaleY: 1, backgroundColor: '#D4001E', duration: 0.85, ease: 'power3.out' }, 0.12)
+          .to(line, { backgroundColor: 'rgba(242,240,235,0.09)', duration: 1.1, ease: 'power2.out' }, 0.72)
+      })
+    }, listRef)
+
+    return () => ctx.revert()
+  }, [])
+
   return (
     <>
       <SEO
         title="Selected Work | Scene Set Studio"
-        description="Case studies and project work from Scene Set Studio - brand strategy, content production, and paid advertising."
+        description="Case studies from Scene Set Studio — brand strategy, content production, paid advertising, and brand identity."
       />
 
-      <div style={{ background: '#080808' }}>
+      <div className="work-page">
 
-        <WorkHero />
+        <h1 className="work-page-headline">
+          Every project is a<br />story worth telling.
+        </h1>
 
-        {/* Grid */}
-        <div style={{ padding: '64px', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2px' }}>
+        <div className="work-list" ref={listRef}>
           {CASES.map((c, i) => (
             <Link
               key={c.slug}
               to={`/work/${c.slug}`}
-              style={{ textDecoration: 'none', display: 'block', background: i % 2 === 0 ? '#0a0a0a' : '#080808', padding: '48px', border: '1px solid #1a1a1a', transition: 'border-color 0.2s' }}
-              onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(212,0,30,0.3)'}
-              onMouseLeave={e => e.currentTarget.style.borderColor = '#1a1a1a'}
+              className="work-list-item"
             >
-              {/* Placeholder image */}
-              <div style={{ width: '100%', aspectRatio: '16/9', background: '#111', borderRadius: '4px', marginBottom: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: '48px', color: 'rgba(242,240,235,0.04)', letterSpacing: '-0.04em', textTransform: 'uppercase' }}>
-                  {c.name.split(' ')[0]}
-                </span>
+              {/* Timeline track */}
+              <div className="wl-track">
+                <div className="wl-dot-wrap">
+                  <div className="wl-ring" />
+                  <div className="wl-dot" />
+                </div>
+                <div className="wl-line" />
               </div>
 
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+              <span className="work-list-item__num">0{i + 1}</span>
+
+              <div className="work-list-item__img">
+                <img
+                  src={c.img ?? `https://picsum.photos/seed/${c.seed}/1200/675`}
+                  alt={c.name}
+                  className="work-list-item__photo"
+                />
+              </div>
+
+              <div className="work-list-item__meta">
                 <div>
-                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '11px', letterSpacing: '0.12em', color: 'rgba(242,240,235,0.35)', textTransform: 'uppercase', marginBottom: '8px' }}>
-                    {c.category}
-                  </p>
-                  <h2 style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: 'clamp(20px, 2.5vw, 30px)', color: '#F2F0EB', margin: 0, letterSpacing: '-0.02em' }}>
-                    {c.name}
-                  </h2>
+                  <p className="work-list-item__cat">{c.category}</p>
+                  <h2 className="work-list-item__name">{c.name}</h2>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#D4001E', fontSize: '13px', fontFamily: 'var(--font-body)' }}>
-                  View &rarr;
+                <div className="work-list-item__right">
+                  <span className="work-list-item__year">{c.year}</span>
+                  <span className="work-list-item__arrow">View case study &rarr;</span>
                 </div>
               </div>
             </Link>

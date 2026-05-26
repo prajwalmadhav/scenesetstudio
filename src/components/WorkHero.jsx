@@ -35,32 +35,19 @@ export default function WorkHero() {
   function onEnter(e) {
     const card = e.currentTarget
     const info = card.querySelector('.fan-card__info')
-    gsap.to(card, { scale: 1.04, y: -6, duration: 0.35, ease: 'power2.out', overwrite: 'auto' })
+    gsap.to(card, { y: -12, scale: 1.03, boxShadow: '0 24px 48px rgba(0,0,0,0.72), 0 4px 12px rgba(0,0,0,0.4)', duration: 0.38, ease: 'power2.out', overwrite: 'auto' })
     gsap.to(info, { opacity: 1, duration: 0.25, ease: 'power2.out' })
   }
 
   function onLeave(e) {
     const card = e.currentTarget
     const info = card.querySelector('.fan-card__info')
-    gsap.to(card, { scale: 1, y: 0, duration: 0.4, ease: 'power2.out', overwrite: 'auto' })
+    gsap.to(card, { y: 0, scale: 1, boxShadow: '0 8px 28px rgba(0,0,0,0.6), 0 2px 6px rgba(0,0,0,0.4)', duration: 0.45, ease: 'power2.out', overwrite: 'auto' })
     gsap.to(info, { opacity: 0, duration: 0.25, ease: 'power2.out' })
   }
 
   return (
     <section className="work-hero">
-
-      <div className="work-hero__eyebrow">
-        <span className="work-hero__tag">Selected Work</span>
-        <span className="work-hero__count">2024 — 2025</span>
-      </div>
-
-      <div className="work-hero__intro">
-        <p className="work-hero__services">
-          Digital Promotions, Portfolio Design, Presentation Slides,{' '}
-          Marketing Campaign Assets, Promo Graphics,{' '}
-          Branding Assets <strong>And More.</strong>
-        </p>
-      </div>
 
       <div className="work-hero__stage">
         <div className="work-hero__fan">
@@ -70,6 +57,8 @@ export default function WorkHero() {
               className="fan-wrap"
               style={{ '--i': i }}
             >
+              <div className="fan-stack fan-stack--2" aria-hidden="true" />
+              <div className="fan-stack fan-stack--1" aria-hidden="true" />
               <div
                 ref={el => cardRefs.current[i] = el}
                 className="fan-card"

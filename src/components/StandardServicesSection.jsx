@@ -1,5 +1,13 @@
 import { useState, useEffect, useRef } from 'react'
 import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import brandDesignArt from '../assets/standard-services/brand-design.jpg'
+import socialMediaArt from '../assets/standard-services/social-media.jpg'
+import metaAdvertisingArt from '../assets/standard-services/meta-advertising.jpg'
+import videoProductionArt from '../assets/standard-services/video-production.jpg'
+import webDesignArt from '../assets/standard-services/web-design.jpg'
+import contentProductionArt from '../assets/standard-services/content-production.jpg'
+gsap.registerPlugin(ScrollTrigger)
 
 const SERVICES = [
   {
@@ -7,58 +15,78 @@ const SERVICES = [
     tagline: 'Identity that commands attention.',
     description: 'We build the strategic foundation your brand stands on — from positioning and messaging to visual language that makes you unmistakable in any market.',
     deliverables: ['Brand Positioning', 'Messaging Framework', 'Visual Identity', 'Brand Guidelines', 'Competitive Analysis'],
-    frame: '#7A1515', corner: '#3D0808', img: '#4A0D0D',
+    frame: '#7A1515', corner: '#3D0808', img: '#4A0D0D', art: brandDesignArt,
   },
   {
     index: '02', label: 'Social Media', bg: 'SOCIAL',
     tagline: 'Presence that builds equity.',
     description: 'We manage your social presence end-to-end — turning followers into fans and platforms into revenue channels through consistent, on-brand storytelling.',
     deliverables: ['Channel Strategy', 'Content Creation', 'Community Management', 'Influencer Partnerships', 'Monthly Analytics'],
-    frame: '#601080', corner: '#350848', img: '#480C60',
+    frame: '#601080', corner: '#350848', img: '#480C60', art: socialMediaArt,
   },
   {
-    index: '03', label: 'Paid Advertising', bg: 'PAID',
+    index: '03', label: 'Meta Advertising', bg: 'META',
     tagline: 'Every dollar working harder.',
     description: 'Data-driven ad campaigns across Meta, Google, and beyond. We build, test, and scale paid systems that consistently beat your cost-per-acquisition targets.',
     deliverables: ['Media Buying', 'Ad Creative', 'Audience Strategy', 'A/B Testing', 'Performance Reporting'],
-    frame: '#10285A', corner: '#071540', img: '#0D1E48',
+    frame: '#10285A', corner: '#071540', img: '#0D1E48', art: metaAdvertisingArt,
   },
   {
     index: '04', label: 'Video Production', bg: 'VIDEO',
     tagline: 'Cinematic. Commercial. Compelling.',
     description: 'Full-service video production from pre-production through final delivery — brand films, reels, product videos and everything in between.',
     deliverables: ['Concept Development', 'Scripting & Storyboard', 'On-Location Shoot', 'Edit & Colour Grade', 'Motion Graphics'],
-    frame: '#6A2808', corner: '#3A1404', img: '#501E06',
+    frame: '#6A2808', corner: '#3A1404', img: '#501E06', art: videoProductionArt,
   },
   {
     index: '05', label: 'Web Design', bg: 'WEB',
     tagline: 'Interfaces that earn trust.',
     description: "Conversion-focused web experiences designed and developed to match your brand's ambition — fast, beautiful, and built to perform.",
     deliverables: ['UX Strategy', 'UI Design', 'Framer / Webflow Dev', 'Motion Design', 'CRO Optimisation'],
-    frame: '#0A6040', corner: '#053828', img: '#084830',
+    frame: '#0A6040', corner: '#053828', img: '#084830', art: webDesignArt,
   },
   {
     index: '06', label: 'Content Production', bg: 'CONTENT',
     tagline: 'Stories that stop the scroll.',
     description: 'From concept to final cut, we produce high-impact content built for the platforms your audience lives on — crafted to convert, not just impress.',
     deliverables: ['Campaign Concepts', 'Copywriting', 'Photography Direction', 'Short-Form Content', 'Content Calendar'],
-    frame: '#6B5010', corner: '#3A2C08', img: '#4A3810',
+    frame: '#6B5010', corner: '#3A2C08', img: '#4A3810', art: contentProductionArt,
   },
 ]
 
 export { SERVICES }
 
-export default function StandardServicesSection({ paddingTop = '120px', showBg = true }) {
+export default function StandardServicesSection({ paddingTop = '0px', showBg = true }) {
   const [active, setActive] = useState(0)
   const cardRef         = useRef(null)
   const deliverablesRef = useRef(null)
+  const sectionRef      = useRef(null)
 
   const goTo = (i) => { if (i !== active) setActive(i) }
+
+  // Scroll-triggered entrance — slides up and fades in
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return
+    gsap.fromTo(el,
+      { opacity: 0, y: 60 },
+      {
+        opacity: 1, y: 0,
+        duration: 0.9,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+          once: true,
+        },
+      }
+    )
+    return () => ScrollTrigger.getAll().forEach(t => t.kill())
+  }, [])
 
   useEffect(() => {
     const targets = [cardRef.current, deliverablesRef.current].filter(Boolean)
     gsap.killTweensOf(targets)
-    // Z-axis: containers come forward out of depth
     gsap.fromTo(targets,
       { opacity: 0, scale: 0.94, z: -60 },
       { opacity: 1, scale: 1,    z: 0, duration: 0.55, ease: 'power3.out', stagger: 0.07, force3D: true }
@@ -69,21 +97,21 @@ export default function StandardServicesSection({ paddingTop = '120px', showBg =
 
   return (
     <div
+      ref={sectionRef}
       id="standard-services"
       style={{
         position: 'relative',
-        background: '#080808',
+        zIndex: 4,
+        background: 'transparent',
+        display: 'flex',
+        justifyContent: 'flex-start',
         paddingTop,
         paddingBottom: '80px',
-        paddingLeft: '64px',
-        paddingRight: '64px',
-        // perspective so Z-axis animation has depth
-        perspective: '1200px',
-        perspectiveOrigin: '50% 40%',
+        paddingLeft: '200px',
       }}
     >
 
-      {/* ── Background layer — absolutely pinned, never touched by GSAP ── */}
+      {/* Background watermarks — standalone /standard-services page only */}
       {showBg && (
         <div
           aria-hidden="true"
@@ -92,10 +120,7 @@ export default function StandardServicesSection({ paddingTop = '120px', showBg =
             inset: 0,
             zIndex: 0,
             pointerEvents: 'none',
-            // own compositor layer — isolated from child transforms
-            transform: 'translateZ(0)',
-            willChange: 'transform',
-            contain: 'strict',
+            overflow: 'hidden',
           }}
         >
           <span style={{
@@ -129,8 +154,16 @@ export default function StandardServicesSection({ paddingTop = '120px', showBg =
         </div>
       )}
 
-      {/* ── Foreground — z-index above bg, perspective container ── */}
-      <div style={{ position: 'relative', zIndex: 1, transformStyle: 'preserve-3d' }}>
+      {/* Right-aligned content — as far right as the padding allows */}
+      <div style={{
+        position: 'relative',
+        zIndex: 1,
+        width: '65vw',
+        minWidth: '600px',
+        perspective: '1200px',
+        perspectiveOrigin: '50% 40%',
+        transformStyle: 'preserve-3d',
+      }}>
 
         <div className="svc-top-row">
           <span className="svc-eyebrow">Standard Packages</span>
@@ -139,13 +172,12 @@ export default function StandardServicesSection({ paddingTop = '120px', showBg =
 
         <div className="svc-body svc-body--std">
 
-          {/* Tab nav — static, no animation */}
+          {/* Tab nav */}
           <nav className="svc-nav svc-nav--top">
             {SERVICES.map((s, i) => (
               <button
                 key={s.index}
                 className={`svc-nav-btn${i === active ? ' is-active' : ''}`}
-                style={{ padding: '22px 52px 18px' }}
                 onMouseEnter={() => goTo(i)}
                 onClick={() => goTo(i)}
                 aria-label={s.label}
@@ -158,19 +190,15 @@ export default function StandardServicesSection({ paddingTop = '120px', showBg =
           </nav>
           <div />
 
-          {/* Card — moves forward on Z */}
+          {/* Card */}
           <div
             ref={cardRef}
             className="svc-left svc-left--sq"
             style={{ '--fc': svc.frame, '--fco': svc.corner, '--fi': svc.img }}
           >
             <div className="svc-img-placeholder">
-              <span className="svc-img-bg-label">{svc.bg}</span>
-            </div>
-            <div className="svc-frame-overlay">
-              <div className="svc-fob svc-fob--corner" /><div className="svc-fob" /><div className="svc-fob svc-fob--corner" />
-              <div className="svc-fob" /><div className="svc-fob svc-fob--empty" /><div className="svc-fob" />
-              <div className="svc-fob svc-fob--corner" /><div className="svc-fob" /><div className="svc-fob svc-fob--corner" />
+              {svc.art && <img src={svc.art} alt="" className="svc-img-art" draggable="false" />}
+              {!svc.art && <span className="svc-img-bg-label">{svc.bg}</span>}
             </div>
             <div className="svc-img-overlay">
               <p className="svc-index">{svc.index}</p>
@@ -180,7 +208,7 @@ export default function StandardServicesSection({ paddingTop = '120px', showBg =
             </div>
           </div>
 
-          {/* Deliverables — moves forward on Z */}
+          {/* Deliverables */}
           <div ref={deliverablesRef} className="svc-right">
             <p className="svc-deliverables-label">Deliverables</p>
             <ul className="svc-deliverables">

@@ -1,6 +1,11 @@
 import { useState, useRef, useEffect } from 'react'
 import SEO from '../components/SEO'
 import StandardServicesSection from '../components/StandardServicesSection'
+import strategyThatSetsDirection from '../assets/services/strategy-that-sets-direction.jpg'
+import contentThatHoldsAttention from '../assets/services/content-that-holds-attention.jpg'
+import executionThatCompounds from '../assets/services/execution-that-compounds.jpg'
+import narrativeThatCloses from '../assets/services/narrative-that-closes.jpg'
+import experienceThatConverts from '../assets/services/experience-that-converts.jpg'
 
 const S = 22, R = 1.8 // square size & radius shorthand
 
@@ -58,31 +63,31 @@ const SERVICES = [
     label: 'Strategy that sets the direction.',
     sub: 'Creative strategy and direction.',
     sticker: 'PLAN',
-    img: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=900&auto=format&fit=crop&q=80',
+    img: strategyThatSetsDirection,
   },
   {
     label: 'Content that holds attention.',
     sub: 'Content marketing and video production.',
     sticker: 'STORY',
-    img: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=900&auto=format&fit=crop&q=80',
+    img: contentThatHoldsAttention,
   },
   {
     label: 'Execution that compounds.',
     sub: 'Social media and performance marketing.',
     sticker: 'REACH',
-    img: 'https://images.unsplash.com/photo-1611926653458-09294b3142bf?w=900&auto=format&fit=crop&q=80',
+    img: executionThatCompounds,
   },
   {
     label: 'Narrative that closes.',
     sub: 'Brand identity and storytelling.',
     sticker: 'CLOSE',
-    img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&auto=format&fit=crop&q=80',
+    img: narrativeThatCloses,
   },
   {
     label: 'Experience that converts.',
     sub: 'Web design, UI & UX.',
     sticker: 'BUILD',
-    img: 'https://images.unsplash.com/photo-1547658719-da2b51169166?w=900&auto=format&fit=crop&q=80',
+    img: experienceThatConverts,
   },
 ]
 
@@ -129,6 +134,22 @@ export default function Services() {
         description="Brand strategy, content production, paid advertising, social media, web design, and video production — Scene Set Studio."
       />
 
+      {/* Fixed BRAND / IDENTITY watermarks — stay pinned to viewport while content scrolls */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 3,
+          pointerEvents: 'none',
+          userSelect: 'none',
+          overflow: 'hidden',
+        }}
+      >
+        <span className="svc-bg-text svc-bg-text--h">BRAND</span>
+        <span className="svc-bg-text svc-bg-text--v">IDENTITY</span>
+      </div>
+
       {/* Custom cursor — arrow + label */}
       <div
         ref={stickerRef}
@@ -141,21 +162,39 @@ export default function Services() {
         <span>{sticker}</span>
       </div>
 
-      <section className="svc-section" id="services" onMouseMove={onMouseMove}>
+      {/* ── Section 1: standard packages ── */}
+      {/* z-index 4 ensures it covers the fixed BRAND/IDENTITY text as it scrolls into view */}
+      <div style={{ position: 'relative', zIndex: 4, marginTop: '210px', paddingBottom: '120px' }}>
+        <StandardServicesSection showBg={false} />
+      </div>
 
-        {/* Background watermarks */}
-        <div className="svc-bg-text-wrap">
-          <span className="svc-bg-text svc-bg-text--h">BRAND</span>
-          <span className="svc-bg-text svc-bg-text--v">IDENTITY</span>
-        </div>
-
-        {/* Section headline */}
-        <div className="svc-headline">
-<h2 className="svc-headline__title"><span className="svc-headline__accent">W</span>e build brands that<br /><span style={{ display: 'block', paddingLeft: '6ch' }}>move people to act.</span></h2>
-        </div>
-
-        {/* Main content over watermarks */}
+      {/* ── Section 2: hover list ── */}
+      {/* Transparent bg so fixed BRAND/IDENTITY shows through; height auto so page can scroll */}
+      <section
+        className="svc-section"
+        id="services"
+        onMouseMove={onMouseMove}
+        style={{
+          height: 'auto',
+          maxHeight: 'none',
+          overflow: 'visible',
+          minHeight: '90svh',
+          background: 'transparent',
+          position: 'relative',
+          zIndex: 1,
+          paddingTop: 'clamp(150px, 22vw, 270px)',
+        }}
+      >
+        {/* Main content */}
         <div className="svc-hover-layout">
+
+          {/* Left col: headline + image stacked */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', paddingLeft: '180px' }}>
+
+            {/* Section headline — sits right above the image, offset slightly left */}
+            <div className="svc-headline" style={{ marginLeft: '-40px' }}>
+              <h2 className="svc-headline__title"><span className="svc-headline__accent">W</span>e build brands that<br /><span style={{ display: 'block', paddingLeft: '6ch' }}>move people to act.</span></h2>
+            </div>
 
           {/* Square image */}
           <div className="svc-hover-img">
@@ -180,6 +219,7 @@ export default function Services() {
               {PIXEL_PATTERNS[active]}
             </svg>
           </div>
+          </div>{/* end left col */}
 
           {/* Service text list */}
           <nav className="svc-hover-list">
@@ -201,8 +241,6 @@ export default function Services() {
 
         </div>
       </section>
-
-      <StandardServicesSection showBg={false} />
     </>
   )
 }

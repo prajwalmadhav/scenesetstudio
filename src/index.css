@@ -1049,7 +1049,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 40px 64px 48px;
+  padding: 0 64px 48px;
   overflow: hidden;
 }
 
@@ -1095,9 +1095,9 @@ body {
 .svc-headline {
   position: relative;
   z-index: 1;
-  margin-bottom: 48px;
-  margin-top: 200px;
-  padding-left: 120px;
+  margin-bottom: 0;
+  margin-top: 0;
+  padding-left: 0;
 }
 
 .svc-headline__eyebrow {
@@ -1139,7 +1139,7 @@ body {
   flex: 1;
   width: 100%;
   min-height: 0;
-  margin-top: -80px;
+  margin-top: 0;
   margin-left: -32px;
 }
 
@@ -1197,12 +1197,12 @@ body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.18);
   cursor: pointer;
   font-family: var(--font-heading);
-  font-size: clamp(18px, 2.2vw, 34px);
+  font-size: clamp(13px, 1.4vw, 22px);
   font-weight: 400;
   font-style: normal;
   color: rgba(242, 240, 235, 0.85);
   letter-spacing: -0.01em;
-  padding: 18px 0;
+  padding: 12px 0;
   transition: color 0.3s ease, font-style 0.3s ease, font-weight 0.3s ease;
   line-height: 1.1;
   perspective: 600px;
@@ -1402,6 +1402,7 @@ body {
   height: 420px;
   overflow: hidden;
   z-index: 1;
+  border: 2px solid var(--fc, #1e1e1e);
 }
 
 .svc-img-placeholder {
@@ -1414,7 +1415,18 @@ body {
   transition: background 0.5s ease;
 }
 
+.svc-img-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(0.86) contrast(1.08) brightness(0.9);
+}
+
 .svc-img-bg-label {
+  position: relative;
   font-family: 'Syne', sans-serif;
   font-weight: 900;
   font-size: clamp(50px, 8vw, 110px);
@@ -1422,31 +1434,6 @@ body {
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05);
   letter-spacing: -3px;
   user-select: none;
-}
-
-/* Puzzle frame overlay — 3×3 grid, center cell is transparent */
-.svc-frame-overlay {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  grid-template-columns: 60px 1fr 60px;
-  grid-template-rows: 48px 1fr 48px;
-  gap: 5px;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.svc-fob {
-  background: var(--fc, #1e1e1e);
-  transition: background 0.45s ease;
-}
-
-.svc-fob--corner {
-  background: var(--fco, #111);
-}
-
-.svc-fob--empty {
-  background: transparent;
 }
 
 /* Text overlay — above frame blocks */
@@ -1460,7 +1447,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  z-index: 3;
+  z-index: 2;
 }
 
 .svc-img-overlay .svc-title {
@@ -1516,6 +1503,7 @@ body {
   flex-direction: column;
   gap: 20px;
   padding-bottom: 8px;
+  margin-top: 48px;
 }
 
 .svc-deliverables-label {
@@ -1541,11 +1529,12 @@ body {
   gap: 14px;
   font-family: var(--font-heading);
   font-weight: 700;
-  font-size: clamp(20px, 2.5vw, 30px);
+  font-size: clamp(14px, 1.6vw, 22px);
   letter-spacing: -0.5px;
   color: var(--cream);
   padding: 18px 0;
   border-bottom: 1px solid var(--border);
+  white-space: nowrap;
   transition: color 0.2s ease, padding-left 0.2s ease;
 }
 
@@ -1577,8 +1566,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 4px;
-  padding: 20px 24px 16px;
+  gap: 6px;
+  padding: 28px 28px 22px;
   background: none;
   border: none;
   border-right: 1px solid var(--border);
@@ -1603,7 +1592,7 @@ body {
 
 .svc-nav-btn__num {
   font-family: var(--font-heading);
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 2px;
   color: var(--muted);
@@ -1616,7 +1605,7 @@ body {
 
 .svc-nav-btn__label {
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 400;
   color: rgba(242, 240, 235, 0.4);
   transition: color 0.2s ease;
@@ -1684,12 +1673,6 @@ body {
 
   .svc-left {
     height: 280px;
-  }
-
-  .svc-frame-overlay {
-    grid-template-columns: 40px 1fr 40px;
-    grid-template-rows: 34px 1fr 34px;
-    gap: 4px;
   }
 
   .svc-bg-text--h {

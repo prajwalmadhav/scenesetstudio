@@ -237,23 +237,6 @@ export default function CTA() {
 
         </div>
 
-        {/* Desktop trust strip */}
-        <div className="cta-desktop-trust">
-          <div className="cta-desktop-trust__stat">
-            <span className="cta-desktop-trust__num">48h</span>
-            <span className="cta-desktop-trust__label">average response time</span>
-          </div>
-          <span className="cta-desktop-trust__sep" aria-hidden="true" />
-          <div className="cta-desktop-trust__stat">
-            <span className="cta-desktop-trust__num">100%</span>
-            <span className="cta-desktop-trust__label">Canada-wide &amp; remote</span>
-          </div>
-          <span className="cta-desktop-trust__sep" aria-hidden="true" />
-          <div className="cta-desktop-trust__stat">
-            <span className="cta-desktop-trust__num">No contracts</span>
-            <span className="cta-desktop-trust__label">start &amp; stop anytime</span>
-          </div>
-        </div>
 
       </div>
 

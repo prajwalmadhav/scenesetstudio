@@ -142,8 +142,10 @@ export default function AboutPage() {
           <div className="about-pg__values-grid">
             {VALUES.map((v, i) => (
               <div key={v.label} className="about-pg__value-card">
-                <span className="about-pg__value-index">0{i + 1}</span>
-                <h3 className="about-pg__value-title">{v.label}</h3>
+                <div className="about-pg__value-title-row">
+                  <span className="about-pg__value-index">0{i + 1}</span>
+                  <h3 className="about-pg__value-title">{v.label}</h3>
+                </div>
                 <p className="about-pg__value-body">{v.body}</p>
               </div>
             ))}

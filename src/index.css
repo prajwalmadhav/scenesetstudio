@@ -561,6 +561,7 @@ body {
 /* ─── Mobile Hero ─── */
 @media (max-width: 640px) {
   .hero-headline {
+    font-size: clamp(36px, 10vw, 56px);
     letter-spacing: -1.5px;
   }
 
@@ -2170,14 +2171,14 @@ body {
 
 /* Values */
 .about-pg__values {
-  padding: 80px 8vw;
+  padding: 48px 8vw;
   border-bottom: 1px solid #1e2124;
 }
 
 .about-pg__values-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: 8px;
   margin-top: 8px;
 }
 
@@ -2187,7 +2188,7 @@ body {
 }
 
 .about-pg__value-card {
-  padding: 48px 44px;
+  padding: 12px 14px;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.18);
   backdrop-filter: blur(12px);
@@ -2200,30 +2201,36 @@ body {
   border-color: rgba(255, 255, 255, 0.28);
 }
 
+.about-pg__value-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
 .about-pg__value-index {
-  display: block;
   font-family: var(--font-heading);
-  font-size: 11px;
-  letter-spacing: 0.12em;
+  font-size: 9px;
+  letter-spacing: 0.1em;
   color: #D4001E;
-  margin-bottom: 20px;
+  flex-shrink: 0;
 }
 
 .about-pg__value-title {
   font-family: var(--font-heading);
   font-weight: 800;
-  font-size: clamp(20px, 2vw, 28px);
+  font-size: clamp(13px, 1.2vw, 17px);
   color: #F2F0EB;
   letter-spacing: -0.02em;
-  margin: 0 0 16px;
+  margin: 0;
 }
 
 .about-pg__value-body {
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 10px;
   font-weight: 300;
   color: rgba(242, 240, 235, 0.45);
-  line-height: 1.8;
+  line-height: 1.5;
   margin: 0;
 }
 

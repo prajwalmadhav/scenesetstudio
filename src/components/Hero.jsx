@@ -115,9 +115,9 @@ export default function Hero() {
         </h1>
 
         <p ref={subtextRef} className="hero-subtext" style={{ opacity: 0 }}>
-          Cinematic storytelling meets performance marketing.
+          Brands built to convert.
           <br />
-          We build brands that resonate.
+          Content built to last.
         </p>
 
         <div ref={buttonsRef} className="hero-buttons">

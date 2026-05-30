@@ -2,11 +2,11 @@ import { useState, useRef, useEffect } from 'react'
 import SEO from '../components/SEO'
 import Footer from '../components/Footer'
 import StandardServicesSection from '../components/StandardServicesSection'
-import strategyThatSetsDirection from '../assets/services/strategy-that-sets-direction.jpg'
-import contentThatHoldsAttention from '../assets/services/content-that-holds-attention.jpg'
-import executionThatCompounds from '../assets/services/execution-that-compounds.jpg'
-import narrativeThatCloses from '../assets/services/narrative-that-closes.jpg'
-import experienceThatConverts from '../assets/services/experience-that-converts.jpg'
+import strategyThatSetsDirection from '../assets/services/strategy-that-sets-direction.webp'
+import contentThatHoldsAttention from '../assets/services/content-that-holds-attention.webp'
+import executionThatCompounds from '../assets/services/execution-that-compounds.webp'
+import narrativeThatCloses from '../assets/services/narrative-that-closes.webp'
+import experienceThatConverts from '../assets/services/experience-that-converts.webp'
 
 const S = 22, R = 1.8 // square size & radius shorthand
 

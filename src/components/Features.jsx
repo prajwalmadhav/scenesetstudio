@@ -1,11 +1,11 @@
 import { useRef, useEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-const w1 = '/brand identity logo blueprint.png'
-const w2 = '/2d image.png'
-import w3 from '../assets/work/w3.jpg'
-import w4 from '../assets/work/w4.jpg'
-import w5 from '../assets/work/w5.jpg'
+const w1 = '/brand identity logo blueprint.webp'
+const w2 = '/2d image.webp'
+import w3 from '../assets/work/w3.webp'
+import w4 from '../assets/work/w4.webp'
+import w5 from '../assets/work/w5.webp'
 
 gsap.registerPlugin(ScrollTrigger)
 

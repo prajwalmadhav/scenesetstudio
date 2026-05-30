@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import brandDesignArt from '../assets/standard-services/brand-design.jpg'
-import socialMediaArt from '../assets/standard-services/social-media.jpg'
-import metaAdvertisingArt from '../assets/standard-services/meta-advertising.jpg'
-import videoProductionArt from '../assets/standard-services/video-production.jpg'
-import webDesignArt from '../assets/standard-services/web-design.jpg'
-import contentProductionArt from '../assets/standard-services/content-production.jpg'
+import brandDesignArt from '../assets/standard-services/brand-design.webp'
+import socialMediaArt from '../assets/standard-services/social-media.webp'
+import metaAdvertisingArt from '../assets/standard-services/meta-advertising.webp'
+import videoProductionArt from '../assets/standard-services/video-production.webp'
+import webDesignArt from '../assets/standard-services/web-design.webp'
+import contentProductionArt from '../assets/standard-services/content-production.webp'
 gsap.registerPlugin(ScrollTrigger)
 
 const SERVICES = [

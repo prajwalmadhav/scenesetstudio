@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import SEO from '../components/SEO'
-import sceneSetImg from '../assets/about/scene-set-brand-package.jpg'
+import sceneSetImg from '../assets/about/scene-set-brand-package.webp'
 
 gsap.registerPlugin(ScrollTrigger)
 

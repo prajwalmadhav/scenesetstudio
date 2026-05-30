@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 const w1 = '/brand identity logo blueprint.webp'
@@ -33,7 +33,7 @@ const ITEMS = [
       { text: 'stories that',accent: false },
       { text: 'Move people.',accent: true  },
     ],
-    top: '14%', left: '29%', mobileLeft: '44%', rotate: -1, z: 3, size: 'md', align: 'right' },
+    top: '14%', left: '29%', rotate: -1, z: 3, size: 'md', align: 'right' },
 
   // Small square — bottom, right of i1
   { type: 'img', id: 'i2', index: 2, src: w2,
@@ -109,13 +109,6 @@ export default function Features() {
   const sectionRef  = useRef(null)
   const canvasRef   = useRef(null)
   const overlayRef  = useRef(null)
-  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768)
-
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth <= 768)
-    window.addEventListener('resize', check)
-    return () => window.removeEventListener('resize', check)
-  }, [])
 
   useEffect(() => {
     const isMobile = window.innerWidth <= 768
@@ -228,7 +221,7 @@ export default function Features() {
               data-rot={item.rotate}
               style={{
                 top: item.top,
-                left: isMobile && item.mobileLeft ? item.mobileLeft : item.left,
+                left: item.left,
                 transform: `rotate(${item.rotate}deg)`,
                 zIndex: item.z,
               }}
@@ -241,6 +234,8 @@ export default function Features() {
             </div>
           )
         )}
+        <div className="scrap-divider scrap-divider--1" />
+        <div className="scrap-divider scrap-divider--2" />
       </div>
     </section>
   )

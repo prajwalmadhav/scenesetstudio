@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -40,6 +40,36 @@ const CASES = [
 
 export default function Work() {
   const listRef = useRef(null)
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768)
+  const [activeIdx, setActiveIdx] = useState(-1)
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
+  // Mobile: highlight the item whose centre is closest to viewport centre
+  useEffect(() => {
+    if (!isMobile || !listRef.current) return
+
+    const items = listRef.current.querySelectorAll('.work-list-item')
+
+    const handleScroll = () => {
+      const mid = window.innerHeight / 2
+      let best = -1, bestDist = Infinity
+      items.forEach((el, i) => {
+        const rect = el.getBoundingClientRect()
+        const dist = Math.abs(rect.top + rect.height / 2 - mid)
+        if (dist < bestDist) { bestDist = dist; best = i }
+      })
+      setActiveIdx(best)
+    }
+
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [isMobile])
 
   useEffect(() => {
     if (!listRef.current) return
@@ -85,7 +115,7 @@ export default function Work() {
             <Link
               key={c.slug}
               to={`/work/${c.slug}`}
-              className="work-list-item"
+              className={`work-list-item${isMobile && i === activeIdx ? ' is-active' : ''}`}
             >
               {/* Timeline track */}
               <div className="wl-track">

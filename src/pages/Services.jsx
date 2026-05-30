@@ -177,6 +177,30 @@ export default function Services() {
         id="services"
         onMouseMove={onMouseMove}
       >
+
+        {/* Mobile stacking image cards — hidden on desktop */}
+        <div className="svc-mobile-cards">
+          <div className="svc-mobile-intro">
+            <h2 className="svc-mobile-intro__title">
+              <span className="svc-headline__accent">W</span>e build brands<br />that move<br />people to act.
+            </h2>
+          </div>
+          {SERVICES.map((svc, i) => (
+            <div
+              key={i}
+              className="svc-mobile-card"
+              style={{ backgroundImage: `url(${svc.img})`, zIndex: i + 1 }}
+            >
+              <div className="svc-mobile-card__overlay" />
+              <div className="svc-mobile-card__content">
+                <span className="svc-mobile-card__tag">{svc.sticker}</span>
+                <h3 className="svc-mobile-card__label">{svc.label}</h3>
+                <p className="svc-mobile-card__sub">{svc.sub}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
         {/* Main content */}
         <div className="svc-hover-layout">
 

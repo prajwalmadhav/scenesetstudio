@@ -51,7 +51,11 @@ export default function Hero() {
       const btns = buttonsRef.current.querySelectorAll('button')
       tl.fromTo(btns, { opacity: 0, y: 20 }, { opacity: 1, y: 0, stagger: 0.1 }, 0.8)
 
-      tl.fromTo(visualWrapperRef.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0 }, 1.0)
+      tl.fromTo(visualWrapperRef.current,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, onComplete: () => gsap.set(visualWrapperRef.current, { clearProps: 'transform' }) },
+        1.0
+      )
 
       // ── Scroll zoom — pin hero, expand to fullscreen ──
       const isMobile = window.matchMedia('(max-width: 768px)').matches
@@ -63,7 +67,7 @@ export default function Hero() {
           start: 'top top',
           end: `+=${isMobile ? '50%' : '70%'}`,
           pin: true,
-          scrub: isMobile ? 1 : 0.4,
+          scrub: isMobile ? 0.4 : 0.4,
           anticipatePin: 1,
           invalidateOnRefresh: true,
           ...(isMobile && { refreshPriority: -1 }),
@@ -71,7 +75,7 @@ export default function Hero() {
       })
       .to(visualWrapperRef.current, {
         top: 0, left: 0, right: 0, bottom: 0,
-        yPercent: 0, borderRadius: 0, padding: 0,
+        borderRadius: 0, padding: 0,
         ease: 'none',
       }, 0)
       .to(visualRef.current, {

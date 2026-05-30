@@ -22,8 +22,6 @@ const ScrollExpandMedia = ({
   const [isMobile, setIsMobile] = useState(
     () => typeof window !== 'undefined' && window.innerWidth < 768
   )
-  // Mobile-only: 0→1 as user scrolls naturally
-  const [mobileScrollProgress, setMobileScrollProgress] = useState(0)
 
   const sectionRef     = useRef(null)
   const rawProgressRef = useRef(0)
@@ -49,18 +47,11 @@ const ScrollExpandMedia = ({
     return () => cancelAnimationFrame(rafRef.current)
   }, [isMobile])
 
-  // Mobile: show content immediately, track natural scroll for text split
+  // Mobile: show content immediately
   useEffect(() => {
     if (!isMobile) return
     setShowContent(true)
     setMediaFullyExpanded(true)
-
-    const handleScroll = () => {
-      const progress = Math.min(window.scrollY / window.innerHeight, 1)
-      setMobileScrollProgress(progress)
-    }
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
   }, [isMobile])
 
   useEffect(() => {
@@ -158,20 +149,16 @@ const ScrollExpandMedia = ({
   }, [])
 
   // Desktop-only computed values
-  const mediaWidth     = 300 + smoothProgress * 1250
-  const mediaHeight    = 400 + smoothProgress * 400
-  const textTranslateX = smoothProgress * 150
-
-  // Mobile: text splits as user naturally scrolls (max ±30vw at full scroll)
-  const mobileTextX = mobileScrollProgress * 30
+  const mediaWidth  = 300 + smoothProgress * 1250
+  const mediaHeight = 400 + smoothProgress * 400
 
   const firstWord   = title ? title.split(' ')[0] : ''
   const restOfTitle = title ? title.split(' ').slice(1).join(' ') : ''
 
   return (
     <div ref={sectionRef} className="overflow-x-hidden">
-      <section className="relative flex flex-col items-center justify-start min-h-[100dvh]">
-        <div className="relative w-full flex flex-col items-center min-h-[100dvh]">
+      <section className={`relative flex flex-col items-center justify-start ${isMobile ? 'min-h-[65dvh]' : 'min-h-[100dvh]'}`}>
+        <div className={`relative w-full flex flex-col items-center ${isMobile ? 'min-h-[65dvh]' : 'min-h-[100dvh]'}`}>
 
           {/* Background image — static on mobile */}
           <motion.div
@@ -183,13 +170,13 @@ const ScrollExpandMedia = ({
             <img
               src={bgImageSrc}
               alt=""
-              className="w-screen h-screen object-cover object-center"
+              className={`w-screen object-cover object-center ${isMobile ? 'h-[65dvh]' : 'h-screen'}`}
               style={{ filter: 'brightness(1.35)' }}
             />
           </motion.div>
 
           <div className="mx-auto flex flex-col items-center justify-start relative z-10 w-full">
-            <div className="flex flex-col items-center justify-center w-full min-h-[100dvh] relative">
+            <div className={`flex flex-col items-center justify-center w-full ${isMobile ? 'min-h-[65dvh]' : 'min-h-[100dvh]'} relative`}>
 
               {/* Expanding media — desktop only */}
               {!isMobile && (
@@ -238,14 +225,14 @@ const ScrollExpandMedia = ({
               )}
 
               {/* Title + date block */}
-              <div className="flex flex-col items-center relative z-10 w-full mt-40" style={{ transition: 'none' }}>
+              <div className={`flex flex-col items-center relative z-10 w-full ${isMobile ? 'mt-20' : 'mt-40'}`} style={{ transition: 'none' }}>
 
-                {/* Title split */}
+                {/* Title */}
                 <div className="flex items-center justify-center text-center gap-4 w-full flex-col">
                   <h1
                     className="text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-tight leading-none"
                     style={{
-                      transform: `translateX(-${isMobile ? mobileTextX : textTranslateX}vw)`,
+                      transform: isMobile ? 'none' : `translateX(-${smoothProgress * 150}vw)`,
                       textShadow: '0 2px 24px rgba(0,0,0,0.7)',
                     }}
                   >
@@ -261,7 +248,7 @@ const ScrollExpandMedia = ({
                   <h1
                     className="text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-tight leading-none"
                     style={{
-                      transform: `translateX(${isMobile ? mobileTextX : textTranslateX}vw)`,
+                      transform: isMobile ? 'none' : `translateX(${smoothProgress * 150}vw)`,
                       textShadow: '0 2px 24px rgba(0,0,0,0.7)',
                     }}
                   >
@@ -275,7 +262,7 @@ const ScrollExpandMedia = ({
                     <p
                       className="text-sm tracking-widest uppercase text-white font-light"
                       style={{
-                        transform: `translateX(-${isMobile ? mobileTextX : textTranslateX}vw)`,
+                        transform: isMobile ? 'none' : `translateX(-${smoothProgress * 150}vw)`,
                         textShadow: '0 2px 16px rgba(0,0,0,0.7)',
                       }}
                     >
@@ -285,7 +272,7 @@ const ScrollExpandMedia = ({
                   {scrollToExpand && !isMobile && (
                     <p
                       className="text-white text-sm font-medium text-center mt-1"
-                      style={{ transform: `translateX(${textTranslateX}vw)`, textShadow: '0 2px 16px rgba(0,0,0,0.7)' }}
+                      style={{ transform: `translateX(${smoothProgress * 150}vw)`, textShadow: '0 2px 16px rgba(0,0,0,0.7)' }}
                     >
                       {scrollToExpand}
                     </p>

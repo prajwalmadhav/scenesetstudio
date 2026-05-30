@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
 const WA_NUMBER   = '16138702919'
@@ -6,16 +6,37 @@ const WA_MESSAGE  = encodeURIComponent("Hi! I'd like to learn more about Scene S
 const FORM_ENDPOINT = 'https://api.web3forms.com/submit'
 const ACCESS_KEY    = 'b44a455f-02a4-48e4-b5e5-8ec134f81fc3'
 
-const HIDDEN_PATHS = ['/', '/contact', '/admin']
-
 export default function FloatingContact() {
   const { pathname } = useLocation()
-  const [open, setOpen]   = useState(false)
-  const [form, setForm]   = useState({ name: '', phone: '', email: '', message: '' })
-  const [sent, setSent]   = useState(false)
-  const [busy, setBusy]   = useState(false)
+  const [open, setOpen]       = useState(false)
+  const [visible, setVisible] = useState(false)
+  const [form, setForm]       = useState({ name: '', phone: '', email: '', message: '' })
+  const [sent, setSent]       = useState(false)
+  const [busy, setBusy]       = useState(false)
 
-  if (HIDDEN_PATHS.some(p => pathname === p || pathname.startsWith('/admin'))) return null
+  const isHome    = pathname === '/'
+  const isHidden  = pathname === '/contact' || pathname.startsWith('/admin')
+
+  // Visibility logic
+  useEffect(() => {
+    if (isHidden) { setVisible(false); return }
+
+    if (!isHome) { setVisible(true); return }
+
+    // Landing page: show pill once the #process section is about to enter
+    setVisible(false)
+    const target = document.getElementById('process')
+    if (!target) return
+
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setVisible(true) },
+      { rootMargin: '0px 0px 900px 0px', threshold: 0 }
+    )
+    obs.observe(target)
+    return () => obs.disconnect()
+  }, [pathname, isHome, isHidden])
+
+  if (isHidden) return null
 
   function handleChange(e) {
     setForm(f => ({ ...f, [e.target.name]: e.target.value }))
@@ -52,20 +73,20 @@ export default function FloatingContact() {
     <>
       {/* ── Floating trigger button ── */}
       <button
-        className="fc-trigger"
+        className={`fc-trigger${visible ? ' fc-trigger--visible' : ''}`}
         onClick={() => setOpen(true)}
         aria-label="Request a callback"
       >
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.7 13.6 19.79 19.79 0 0 1 1.62 5.08 2 2 0 0 1 3.62 3h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.69 2.81a2 2 0 0 1-.45 2.11L7.91 10.9a16 16 0 0 0 6.09 6.09l.96-.96a2 2 0 0 1 2.11-.45c.91.33 1.85.56 2.81.69A2 2 0 0 1 22 16.92z"/>
         </svg>
-        <span className="fc-trigger__label">Call us</span>
+        <span className="fc-trigger__label">Text us</span>
         <span className="fc-trigger__pulse" aria-hidden="true" />
       </button>
 
       {/* ── Modal overlay ── */}
       {open && (
-        <div className={`fc-overlay${open ? ' fc-overlay--in' : ''}`} onClick={handleClose}>
+        <div className="fc-overlay" onClick={handleClose}>
           <div className="fc-modal" onClick={e => e.stopPropagation()}>
 
             {/* Header */}
@@ -82,7 +103,7 @@ export default function FloatingContact() {
               </button>
             </div>
 
-            {/* WhatsApp button — always visible */}
+            {/* WhatsApp button */}
             <a
               className="fc-wa-btn"
               href={`https://wa.me/${WA_NUMBER}?text=${WA_MESSAGE}`}

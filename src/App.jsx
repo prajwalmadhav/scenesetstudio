@@ -20,7 +20,6 @@ import WorkPage from './pages/Work'
 import ProcessPage from './pages/Process'
 import CaseStudyPage from './pages/CaseStudy'
 import ServicesPage from './pages/Services'
-import StandardServicesPage from './pages/StandardServices'
 import AboutPage from './pages/About'
 import ContactPage from './pages/Contact'
 import NotFoundPage from './pages/NotFound'
@@ -144,7 +143,6 @@ function AppContent() {
         <Route path="/work"         element={<WorkPage />} />
         <Route path="/work/:client" element={<CaseStudyPage />} />
         <Route path="/services"          element={<ServicesPage />} />
-        <Route path="/standard-services" element={<StandardServicesPage />} />
         <Route path="/about"        element={<AboutPage />} />
         <Route path="/contact"      element={<ContactPage />} />
         <Route path="/process"      element={<ProcessPage />} />

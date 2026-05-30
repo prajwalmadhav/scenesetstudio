@@ -24,6 +24,7 @@ import StandardServicesPage from './pages/StandardServices'
 import AboutPage from './pages/About'
 import ContactPage from './pages/Contact'
 import NotFoundPage from './pages/NotFound'
+import FloatingContact from './components/FloatingContact'
 import './index.css'
 
 // Scroll to top and refresh ScrollTrigger on every route change
@@ -137,6 +138,7 @@ function AppContent() {
       <BrandWatermark />
       <ScrollToTop />
       {!isAdmin && <Navbar />}
+      <FloatingContact />
       <Routes>
         <Route path="/"             element={<HomePage />} />
         <Route path="/work"         element={<WorkPage />} />

@@ -8414,6 +8414,12 @@ body {
     padding: 22px;
   }
 
+  .contact-info__logo {
+    width: 100px;
+    height: 100px;
+    margin-top: 24px;
+  }
+
   .contact-intro {
     font-size: 15px;
     line-height: 1.65;

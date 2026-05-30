@@ -223,7 +223,7 @@ export default function Contact() {
                         style={{
                           fontFamily: 'var(--font-body)', fontSize: '12px', letterSpacing: '0.08em',
                           padding: '8px 16px', border: '1px solid',
-                          borderColor: services.has(s) ? '#D4001E' : '#1a1a1a',
+                          borderColor: services.has(s) ? '#D4001E' : 'rgba(242,240,235,0.22)',
                           background: services.has(s) ? 'rgba(212,0,30,0.08)' : 'transparent',
                           color: services.has(s) ? '#D4001E' : 'rgba(242,240,235,0.5)',
                           cursor: 'pointer', transition: 'all 0.15s',
@@ -242,7 +242,7 @@ export default function Contact() {
                         style={{
                           fontFamily: 'var(--font-body)', fontSize: '12px', letterSpacing: '0.08em',
                           padding: '8px 16px', border: '1px solid',
-                          borderColor: budget === b ? '#D4001E' : '#1a1a1a',
+                          borderColor: budget === b ? '#D4001E' : 'rgba(242,240,235,0.22)',
                           background: budget === b ? 'rgba(212,0,30,0.08)' : 'transparent',
                           color: budget === b ? '#D4001E' : 'rgba(242,240,235,0.5)',
                           cursor: 'pointer', transition: 'all 0.15s',
@@ -261,7 +261,7 @@ export default function Contact() {
                         style={{
                           fontFamily: 'var(--font-body)', fontSize: '12px', letterSpacing: '0.08em',
                           padding: '8px 16px', border: '1px solid',
-                          borderColor: revenue === r ? '#D4001E' : '#1a1a1a',
+                          borderColor: revenue === r ? '#D4001E' : 'rgba(242,240,235,0.22)',
                           background: revenue === r ? 'rgba(212,0,30,0.08)' : 'transparent',
                           color: revenue === r ? '#D4001E' : 'rgba(242,240,235,0.5)',
                           cursor: 'pointer', transition: 'all 0.15s',
@@ -280,7 +280,7 @@ export default function Contact() {
                         style={{
                           fontFamily: 'var(--font-body)', fontSize: '12px', letterSpacing: '0.08em',
                           padding: '8px 16px', border: '1px solid',
-                          borderColor: challenges.has(c) ? '#D4001E' : '#1a1a1a',
+                          borderColor: challenges.has(c) ? '#D4001E' : 'rgba(242,240,235,0.22)',
                           background: challenges.has(c) ? 'rgba(212,0,30,0.08)' : 'transparent',
                           color: challenges.has(c) ? '#D4001E' : 'rgba(242,240,235,0.5)',
                           cursor: 'pointer', transition: 'all 0.15s',

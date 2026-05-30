@@ -618,10 +618,6 @@ body {
     margin-left: 4px;
   }
 
-  .hero-visual {
-    height: 100%;
-  }
-
   .hero-word--italic {
     font-size: clamp(36px, 10vw, 56px);
   }
@@ -1580,6 +1576,7 @@ body {
     display: flex;
     align-items: flex-end;
     overflow: hidden;
+    border: 1px solid rgba(242,240,235,0.15);
   }
 
   .svc-mobile-card__overlay {

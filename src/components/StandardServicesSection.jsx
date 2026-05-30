@@ -58,11 +58,25 @@ export { SERVICES }
 
 export default function StandardServicesSection({ paddingTop = '0px', showBg = true }) {
   const [active, setActive] = useState(0)
+  const [mobileOpen, setMobileOpen] = useState(0)
   const cardRef         = useRef(null)
   const deliverablesRef = useRef(null)
   const sectionRef      = useRef(null)
+  const pausedRef       = useRef(false)
+  const activeRef       = useRef(0)
 
-  const goTo = (i) => { if (i !== active) setActive(i) }
+  const goTo = (i) => { if (i !== activeRef.current) { activeRef.current = i; setActive(i) } }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!pausedRef.current) {
+        const next = (activeRef.current + 1) % SERVICES.length
+        activeRef.current = next
+        setActive(next)
+      }
+    }, 3000)
+    return () => clearInterval(interval)
+  }, [])
 
   // Scroll-triggered entrance — slides up and fades in
   useEffect(() => {
@@ -155,7 +169,7 @@ export default function StandardServicesSection({ paddingTop = '0px', showBg = t
       )}
 
       {/* Right-aligned content — as far right as the padding allows */}
-      <div style={{
+      <div className="svc-desktop-content" style={{
         position: 'relative',
         zIndex: 1,
         width: '65vw',
@@ -173,7 +187,11 @@ export default function StandardServicesSection({ paddingTop = '0px', showBg = t
         <div className="svc-body svc-body--std">
 
           {/* Tab nav */}
-          <nav className="svc-nav svc-nav--top">
+          <nav
+            className="svc-nav svc-nav--top"
+            onMouseEnter={() => { pausedRef.current = true }}
+            onMouseLeave={() => { pausedRef.current = false }}
+          >
             {SERVICES.map((s, i) => (
               <button
                 key={s.index}
@@ -188,7 +206,6 @@ export default function StandardServicesSection({ paddingTop = '0px', showBg = t
               </button>
             ))}
           </nav>
-          <div />
 
           {/* Card */}
           <div
@@ -221,6 +238,40 @@ export default function StandardServicesSection({ paddingTop = '0px', showBg = t
           </div>
 
         </div>
+      </div>
+
+      {/* Mobile accordion — hidden on desktop */}
+      <div className="svc-mobile-list">
+        <div className="svc-top-row">
+          <span className="svc-eyebrow">Standard Packages</span>
+        </div>
+        {SERVICES.map((s, i) => (
+          <div key={s.index} className={`svc-mobile-item${mobileOpen === i ? ' is-open' : ''}`}>
+            <button
+              className="svc-mobile-btn"
+              onClick={() => setMobileOpen(mobileOpen === i ? null : i)}
+            >
+              <span className="svc-mobile-btn__num">{s.index}</span>
+              <span className="svc-mobile-btn__label">{s.label}</span>
+              <span className="svc-mobile-btn__chevron">{mobileOpen === i ? '−' : '+'}</span>
+            </button>
+            {mobileOpen === i && (
+              <div className="svc-mobile-body">
+                <img src={s.art} alt={s.label} className="svc-mobile-img" />
+                <div className="svc-mobile-overlay">
+                  <p className="svc-mobile-tagline">{s.tagline}</p>
+                  <ul className="svc-deliverables">
+                    {s.deliverables.map((d) => (
+                      <li key={d} className="svc-deliverable">
+                        <span className="svc-deliverable__dot" />{d}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
       </div>
 
     </div>

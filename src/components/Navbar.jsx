@@ -27,12 +27,10 @@ export default function Navbar() {
   useEffect(() => {
     const overlay = overlayRef.current
     if (menuOpen) {
-      document.body.style.overflow = 'hidden'
-      gsap.fromTo(overlay, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out', pointerEvents: 'all' })
-      gsap.fromTo(overlay.querySelectorAll('.mobile-link, .mobile-link--cta'), { opacity: 0, y: 30 }, { opacity: 1, y: 0, stagger: 0.07, duration: 0.5, ease: 'power3.out', delay: 0.1 })
+      gsap.fromTo(overlay, { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 0.35, ease: 'power3.out', pointerEvents: 'all' })
+      gsap.fromTo(overlay.querySelectorAll('.mobile-link, .mobile-link--cta'), { opacity: 0, y: 10 }, { opacity: 1, y: 0, stagger: 0.06, duration: 0.3, ease: 'power3.out', delay: 0.05 })
     } else {
-      document.body.style.overflow = ''
-      gsap.to(overlay, { opacity: 0, y: -10, duration: 0.3, ease: 'power3.in', onComplete: () => { overlay.style.pointerEvents = 'none' } })
+      gsap.to(overlay, { opacity: 0, y: -8, duration: 0.25, ease: 'power3.in', onComplete: () => { overlay.style.pointerEvents = 'none' } })
     }
   }, [menuOpen])
 
@@ -60,7 +58,7 @@ export default function Navbar() {
   return (
     <>
       <header ref={navRef} className={`navbar${scrolled ? ' navbar--scrolled' : ''}`} style={{ opacity: 0 }}>
-        <div className="navbar__inner">
+        <div className={`navbar__inner${menuOpen ? ' menu-open' : ''}`}>
           <button className="navbar__logo" aria-label="Scene Set Studio home" onClick={handleLogo}>
             <img src="/sss logo2.svg" alt="" className="navbar__logo-icon" aria-hidden="true" />
             <span className="navbar__logo-text">SceneSet<strong>Studio</strong></span>
@@ -103,17 +101,17 @@ export default function Navbar() {
               <span className="navbar__burger-line" />
             </button>
           </div>
+
+          <div ref={overlayRef} className="mobile-menu" aria-hidden={!menuOpen} style={{ opacity: 0, pointerEvents: 'none' }}>
+            <nav className="mobile-menu__links" aria-label="Mobile navigation">
+              <Link to="/work"     className={`mobile-link${active('/work')}`}     onClick={close}>Work</Link>
+              <Link to="/services" className={`mobile-link${active('/services')}`} onClick={close}>Services</Link>
+              <Link to="/about"    className={`mobile-link${active('/about')}`}    onClick={close}>About</Link>
+              <Link to="/contact"  className="hero-btn hero-btn--primary mobile-link--cta" onClick={close}>Start a Project →</Link>
+            </nav>
+          </div>
         </div>
       </header>
-
-      <div ref={overlayRef} className="mobile-menu" aria-hidden={!menuOpen} style={{ opacity: 0, pointerEvents: 'none' }}>
-        <nav className="mobile-menu__links" aria-label="Mobile navigation">
-          <Link to="/work"     className={`mobile-link${active('/work')}`}     onClick={close}>Work</Link>
-          <Link to="/services" className={`mobile-link${active('/services')}`} onClick={close}>Services</Link>
-          <Link to="/about"    className={`mobile-link${active('/about')}`}    onClick={close}>About</Link>
-          <Link to="/contact"  className="hero-btn hero-btn--primary mobile-link--cta" onClick={close}>Start a Project →</Link>
-        </nav>
-      </div>
     </>
   )
 }

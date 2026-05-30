@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import SEO from '../components/SEO'
+import Footer from '../components/Footer'
 import StandardServicesSection from '../components/StandardServicesSection'
 import strategyThatSetsDirection from '../assets/services/strategy-that-sets-direction.jpg'
 import contentThatHoldsAttention from '../assets/services/content-that-holds-attention.jpg'
@@ -133,6 +134,7 @@ export default function Services() {
         title="Services | Scene Set Studio"
         description="Brand strategy, content production, paid advertising, social media, web design, and video production — Scene Set Studio."
       />
+      <div style={{ position: 'fixed', inset: 0, background: '#080808', zIndex: 0, pointerEvents: 'none' }} aria-hidden="true" />
 
       {/* Fixed BRAND / IDENTITY watermarks — stay pinned to viewport while content scrolls */}
       <div
@@ -164,39 +166,29 @@ export default function Services() {
 
       {/* ── Section 1: standard packages ── */}
       {/* z-index 4 ensures it covers the fixed BRAND/IDENTITY text as it scrolls into view */}
-      <div style={{ position: 'relative', zIndex: 4, marginTop: '210px', paddingBottom: '120px' }}>
+      <div className="svc-section1-wrap">
         <StandardServicesSection showBg={false} />
       </div>
 
       {/* ── Section 2: hover list ── */}
       {/* Transparent bg so fixed BRAND/IDENTITY shows through; height auto so page can scroll */}
       <section
-        className="svc-section"
+        className="svc-section svc-section--hover"
         id="services"
         onMouseMove={onMouseMove}
-        style={{
-          height: 'auto',
-          maxHeight: 'none',
-          overflow: 'visible',
-          minHeight: '90svh',
-          background: 'transparent',
-          position: 'relative',
-          zIndex: 1,
-          paddingTop: 'clamp(150px, 22vw, 270px)',
-        }}
       >
         {/* Main content */}
         <div className="svc-hover-layout">
 
           {/* Left col: headline + image stacked */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', paddingLeft: '180px' }}>
+          <div className="svc-left-col">
 
             {/* Section headline — sits right above the image, offset slightly left */}
-            <div className="svc-headline" style={{ marginLeft: '-40px' }}>
-              <h2 className="svc-headline__title"><span className="svc-headline__accent">W</span>e build brands that<br /><span style={{ display: 'block', paddingLeft: '6ch' }}>move people to act.</span></h2>
+            <div className="svc-headline svc-headline--offset">
+              <h2 className="svc-headline__title"><span className="svc-headline__accent">W</span>e build brands that<br />move people to act.</h2>
             </div>
 
-          {/* Square image */}
+          {/* Image */}
           <div className="svc-hover-img">
             {SERVICES.map((svc, i) => (
               <img
@@ -207,15 +199,7 @@ export default function Services() {
                 style={{ opacity: active === i || (active === null && i === 0) ? 1 : 0 }}
               />
             ))}
-
-            {/* Pixel squares overlay — pattern per active image (hidden) */}
-            <svg
-              className="svc-pixel-overlay"
-              style={{ display: 'none' }}
-              viewBox="0 0 100 100"
-              preserveAspectRatio="none"
-              aria-hidden="true"
-            >
+            <svg className="svc-pixel-overlay" style={{ display: 'none' }} viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
               {PIXEL_PATTERNS[active]}
             </svg>
           </div>
@@ -241,6 +225,10 @@ export default function Services() {
 
         </div>
       </section>
+
+      <div style={{ position: 'relative', zIndex: 5 }}>
+        <Footer />
+      </div>
     </>
   )
 }

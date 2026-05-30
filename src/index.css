@@ -576,19 +576,17 @@ body {
   }
 
   .hero-visual-wrapper {
-    left: 4vw;
-    right: 4vw;
-    top: clamp(400px, 64dvh, 520px);
+    left: 15vw;
+    right: 15vw;
+    top: clamp(400px, 50dvh, 470px);
     bottom: unset;
-    border-radius: 14px;
-    will-change: top, left, right, bottom, border-radius;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
+    border-radius: 18px;
+    will-change: left, right, border-radius;
   }
 
   .hero-visual {
-    height: 32dvh;
-    border-radius: 13px;
+    height: 46dvh;
+    border-radius: 17px;
   }
 
   /* Ghost button — minimal label + arrow on mobile */

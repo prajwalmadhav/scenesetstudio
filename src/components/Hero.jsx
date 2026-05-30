@@ -57,20 +57,38 @@ export default function Hero() {
         1.0
       )
 
-      // ── Scroll zoom — pin hero, expand to fullscreen ──
       const isMobile = window.matchMedia('(max-width: 768px)').matches
       const vh = window.innerHeight
 
+      if (isMobile) {
+        // Mobile: expand sideways to screen edges as user scrolls, no vertical change
+        gsap.to(visualWrapperRef.current, {
+          left: 0,
+          right: 0,
+          borderRadius: 0,
+          padding: 0,
+          boxShadow: 'none',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '.hero-section',
+            start: 'top top',
+            end: '+=55%',
+            scrub: 1.2,
+          },
+        })
+        return
+      }
+
+      // ── Desktop: pin hero, expand image to fullscreen ──
       const scrollTl = gsap.timeline({
         scrollTrigger: {
           trigger: '.hero-section',
           start: 'top top',
-          end: `+=${isMobile ? '50%' : '70%'}`,
+          end: '+=70%',
           pin: true,
-          scrub: isMobile ? 0.4 : 0.4,
+          scrub: 0.4,
           anticipatePin: 1,
           invalidateOnRefresh: true,
-          ...(isMobile && { refreshPriority: -1 }),
         },
       })
       .to(visualWrapperRef.current, {
@@ -86,12 +104,10 @@ export default function Hero() {
       .to(headlineRef.current, { opacity: 0, ease: 'none' }, 0)
       .to(buttonsRef.current,  { opacity: 0, ease: 'none' }, 0)
 
-      if (!isMobile) {
-        scrollTl.fromTo(tableRef.current,
-          { rotateX: 0 },
-          { rotateX: 42, ease: 'none' },
-        0)
-      }
+      scrollTl.fromTo(tableRef.current,
+        { rotateX: 0 },
+        { rotateX: 42, ease: 'none' },
+      0)
     })
 
     return () => ctx.revert()

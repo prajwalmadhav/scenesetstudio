@@ -153,6 +153,20 @@ export default function AboutPage() {
         {/* ── Team ── */}
         <div className="about-pg__team">
           <span className="about-pg__label">The Team</span>
+
+          {/* Mobile-only vertical list */}
+          <div className="about-pg__team-vlist">
+            {TEAM.map(member => (
+              <div key={member.name} className="about-pg__team-vlist-item">
+                <div className="about-pg__team-htl-node"><span>{member.initials}</span></div>
+                <div>
+                  <p className="about-pg__team-name">{member.name}</p>
+                  <p className="about-pg__team-role">{member.role}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
           <div className="about-pg__team-htl">
             {/* Top labels (even indices) */}
             <div className="about-pg__team-htl-labels about-pg__team-htl-labels--top">

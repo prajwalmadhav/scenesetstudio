@@ -2234,6 +2234,22 @@ body {
   overflow-x: auto;
 }
 
+.about-pg__team-vlist {
+  display: none;
+}
+
+.about-pg__team-vlist-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid #1e2124;
+}
+
+.about-pg__team-vlist-item:last-child {
+  border-bottom: none;
+}
+
 .about-pg__team-htl {
   display: flex;
   flex-direction: column;
@@ -2599,22 +2615,34 @@ body {
   }
 
   .about-pg__hero-stat-row {
-    flex-direction: column;
-    gap: 24px;
+    flex-direction: row;
+    gap: 0;
     border-top: 1px solid #1a1a1a;
-    padding-top: 32px;
+    padding-top: 24px;
   }
 
   .about-pg__hero-stat {
-    border-right: none;
-    border-bottom: 1px solid #1a1a1a;
-    padding-right: 0;
-    padding-bottom: 24px;
-    margin-right: 0;
+    flex: 1;
+    border-right: 1px solid #1a1a1a;
+    border-bottom: none;
+    padding-right: 12px;
+    padding-bottom: 0;
+    margin-right: 12px;
   }
 
   .about-pg__hero-stat:last-child {
-    border-bottom: none;
+    border-right: none;
+    margin-right: 0;
+    padding-right: 0;
+  }
+
+  .about-pg__hero-stat-num {
+    font-size: 28px;
+    margin-bottom: 4px;
+  }
+
+  .about-pg__hero-stat-label {
+    font-size: 10px;
   }
 
   .about-pg__mission {
@@ -2632,11 +2660,18 @@ body {
   }
 
   .about-pg__team {
-    padding: 56px 6vw;
+    padding: 48px 6vw;
+    overflow-x: hidden;
   }
 
-  .about-pg__team {
-    padding: 48px 4vw;
+  .about-pg__team-vlist {
+    display: flex;
+    flex-direction: column;
+    margin-top: 28px;
+  }
+
+  .about-pg__team-htl {
+    display: none;
   }
 
   .about-pg__hire {

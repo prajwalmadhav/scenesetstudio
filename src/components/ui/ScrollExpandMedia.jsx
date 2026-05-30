@@ -135,8 +135,8 @@ const ScrollExpandMedia = ({
   }, [])
 
   // smoothProgress drives all visuals — scrollProgress drives logic gates
-  const mediaWidth     = 300 + smoothProgress * (isMobile ? 650 : 1250)
-  const mediaHeight    = 400 + smoothProgress * (isMobile ? 200 : 400)
+  const mediaWidth     = (isMobile ? 150 : 300) + smoothProgress * (isMobile ? 650 : 1250)
+  const mediaHeight    = (isMobile ? 200 : 400) + smoothProgress * (isMobile ? 200 : 400)
   const textTranslateX = smoothProgress * (isMobile ? 180 : 150)
 
   const firstWord  = title ? title.split(' ')[0] : ''

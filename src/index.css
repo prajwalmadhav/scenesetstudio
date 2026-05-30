@@ -7537,16 +7537,17 @@ body {
 .footer-back-top {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.15);
+  gap: 6px;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  border: none;
   background: transparent;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.4);
   cursor: pointer;
-  transition: border-color 0.25s, color 0.25s, transform 0.25s;
+  transition: color 0.25s, transform 0.25s;
   flex-shrink: 0;
+  padding: 0;
 }
 
 .footer-back-top:hover {

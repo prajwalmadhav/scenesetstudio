@@ -72,7 +72,7 @@ export default function Hero() {
           scrollTrigger: {
             trigger: '.hero-section',
             start: 'top top',
-            end: '+=55%',
+            end: '+=28%',
             scrub: 1.2,
           },
         })

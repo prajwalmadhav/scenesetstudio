@@ -107,7 +107,7 @@ export default function Work() {
       <div className="work-page">
 
         <h1 className="work-page-headline">
-          Every project is a<br />story worth telling.
+          Every project<br />is a story<br />worth telling.
         </h1>
 
         <div className="work-list" ref={listRef}>

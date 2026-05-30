@@ -7139,7 +7139,7 @@ body {
 
 @media (max-width: 640px) {
   .work-page-headline {
-    padding-top: 72px;
+    padding-top: 110px;
     font-size: clamp(28px, 7vw, 48px);
   }
 

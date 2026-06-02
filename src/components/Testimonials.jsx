@@ -1,10 +1,11 @@
 import { useState, useRef, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { motion as Motion } from 'framer-motion'
-import tierxCard from '../assets/work/case-studies/tierx-dcs.png'
-import fawillBikeCard from '../assets/work/case-studies/fawill-bike-pub.png'
-import fawillCleaningCard from '../assets/work/case-studies/fawill-cleaning.png'
-import sceneSetCard from '../assets/work/case-studies/scene-set-studio.png'
-import comingSoonCard from '../assets/work/case-studies/coming-soon.png'
+import tierxCard from '../assets/work/case-studies/tierx-dcs.webp'
+import fawillBikeCard from '../assets/work/case-studies/fawill-bike-pub.webp'
+import fawillCleaningCard from '../assets/work/case-studies/fawill-cleaning.webp'
+import sceneSetCard from '../assets/work/case-studies/scene-set-studio.webp'
+import comingSoonCard from '../assets/work/case-studies/coming-soon.webp'
 
 /* ─────────────────────────────────────────────────────────────
    FAN TWEAKS
@@ -21,12 +22,14 @@ const FAN = [
 const POSTS = [
   {
     brand: 'TierX DCS',
+    slug: 'tierx-dcs',
     title: 'Brand & Web',
     category: 'Brand Identity / Web Design',
-    year: '2025',
+    year: '2026',
     stat: '01',
     art: 'founder',
     image: tierxCard,
+    logo: '/assets/images/tierx%20logo.png',
     mark: 'TX',
     outcome: 'North American market entry',
     deliverables: ['Brand', 'Web', '3D'],
@@ -34,12 +37,14 @@ const POSTS = [
   },
   {
     brand: 'FaWill Bike Pub',
+    slug: 'fawill-bike-pub',
     title: 'Brand Launch',
     category: 'Brand Identity / Web / Social',
     year: '2026',
     stat: '02',
     art: 'hospitality',
     image: fawillBikeCard,
+    logo: '/assets/images/bikepub%20logo.png',
     mark: 'FB',
     outcome: 'Zero to booked in 8 weeks',
     deliverables: ['Brand', 'Web', 'Social'],
@@ -47,12 +52,14 @@ const POSTS = [
   },
   {
     brand: 'FaWill Cleaning',
+    slug: 'fawill-cleaning',
     title: 'B2B Rebrand',
     category: 'Brand Strategy / Video / Ads',
-    year: '2024',
+    year: '2025',
     stat: '03',
     art: 'studio',
     image: fawillCleaningCard,
+    logo: '/assets/images/fawill%20logo.png',
     mark: 'FC',
     outcome: 'Bilingual market entry',
     deliverables: ['Brand', 'Video', 'Ads'],
@@ -60,12 +67,14 @@ const POSTS = [
   },
   {
     brand: 'Scene Set Studio',
+    slug: 'sceneset-branding',
     title: 'Website Case Study',
     category: 'Brand System / Web Experience',
-    year: '2024',
+    year: '2026',
     stat: '04',
     art: 'sceneset',
     image: sceneSetCard,
+    logo: '/sss%20logo2.svg',
     mark: 'SS',
     outcome: 'Full brand & web build',
     deliverables: ['UX', 'Identity', 'Motion'],
@@ -88,14 +97,26 @@ const POSTS = [
 
 function CaseStudyCover({ post }) {
   return (
-    <article className={`scard scard--case scard--case-${post.art}`} aria-label={`${post.brand} case study cover`}>
-      <img className="case-cover__image" src={post.image} alt="" loading="lazy" aria-hidden="true" />
-      <div className="case-cover__vignette" aria-hidden="true" />
+    <article
+      className={`scard scard--case scard--case-${post.art}`}
+      aria-label={`${post.brand} case study cover`}
+      style={{
+        '--case-accent': post.palette[0],
+        '--case-accent-2': post.palette[1],
+        '--case-base': post.palette[2],
+      }}
+    >
       <div className="case-cover__top">
         <span>{post.stat}</span>
         <span>{post.year}</span>
       </div>
-      <div className="case-cover__spacer" aria-hidden="true" />
+      <div className="case-cover__hero" aria-hidden="true">
+        <img className="case-cover__image" src={post.image} alt="" loading="lazy" />
+        <div className="case-cover__heroShade" />
+        <div className="case-cover__mark">
+          {post.logo ? <img src={post.logo} alt="" /> : <span>{post.brand === 'Coming Soon' ? 'CS' : post.mark}</span>}
+        </div>
+      </div>
       <div className="case-cover__deliverables">
         {post.deliverables.map(item => <span key={item}>{item}</span>)}
       </div>
@@ -271,6 +292,7 @@ export default function Testimonials() {
   const [offset, setOffset] = useState(0)
   const [busy, setBusy] = useState(false)
   const [hoveredPos, setHoveredPos] = useState(null)
+  const navigate = useNavigate()
   const n = POSTS.length
 
   function lock() {
@@ -294,7 +316,11 @@ export default function Testimonials() {
     if (busy) return
     const pos = ((clickedIdx - offset) % n + n) % n
     const centerPos = 2
-    if (pos === centerPos) return
+    if (pos === centerPos) {
+      const post = POSTS[clickedIdx]
+      if (post.slug) navigate(`/work/${post.slug}`)
+      return
+    }
     lock()
     setOffset(o => ((o + (pos - centerPos)) % n + n) % n)
   }
@@ -320,7 +346,7 @@ export default function Testimonials() {
             <Motion.div
               key={i}
               className="fan-card-wrap"
-              style={{ zIndex: f.z, cursor: 'pointer' }}
+              style={{ zIndex: f.z, cursor: pos === 2 && !post.slug ? 'default' : 'pointer' }}
               animate={{ x: f.x + push, rotate: f.rotate, y: f.y, scale: f.scale, transition: CARD_TRANSITION }}
               whileHover={{ x: f.x + nudge, y: f.y - 8, scale: Math.min(f.scale + 0.05, 1.05), transition: HOVER_TRANSITION }}
               onHoverStart={() => setHoveredPos(pos)}
@@ -333,12 +359,12 @@ export default function Testimonials() {
         })}
         <div className="fan-arrows">
           <button className="fan-arrow" onClick={goPrev} aria-label="Previous">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="15 18 9 12 15 6"/>
             </svg>
           </button>
           <button className="fan-arrow" onClick={goNext} aria-label="Next">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="9 18 15 12 9 6"/>
             </svg>
           </button>

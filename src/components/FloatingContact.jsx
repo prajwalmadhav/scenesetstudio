@@ -11,8 +11,25 @@ export default function FloatingContact() {
   const [open, setOpen]       = useState(false)
   const [visible, setVisible] = useState(false)
   const [form, setForm]       = useState({ name: '', phone: '', email: '', message: '' })
+  const [errors, setErrors]   = useState({})
   const [sent, setSent]       = useState(false)
   const [busy, setBusy]       = useState(false)
+
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+  const PHONE_RE = /^[\+]?[(]?[0-9]{1,4}[)]?[-\s.]?[(]?[0-9]{1,3}[)]?[-\s.]?[0-9]{3,4}[-\s.]?[0-9]{3,4}$/
+
+  function validate(field, value) {
+    if (field === 'email' && value && !EMAIL_RE.test(value))
+      return 'Enter a valid email address'
+    if (field === 'phone' && value && !PHONE_RE.test(value.replace(/\s/g, '')))
+      return 'Enter a valid phone number'
+    return ''
+  }
+
+  function handleBlur(e) {
+    const err = validate(e.target.name, e.target.value)
+    setErrors(prev => ({ ...prev, [e.target.name]: err }))
+  }
 
   const isHome    = pathname === '/'
   const isHidden  = pathname === '/contact' || pathname.startsWith('/admin')
@@ -40,10 +57,14 @@ export default function FloatingContact() {
 
   function handleChange(e) {
     setForm(f => ({ ...f, [e.target.name]: e.target.value }))
+    if (errors[e.target.name]) setErrors(prev => ({ ...prev, [e.target.name]: '' }))
   }
 
   async function handleSubmit(e) {
     e.preventDefault()
+    const phoneErr = validate('phone', form.phone)
+    const emailErr = validate('email', form.email)
+    if (phoneErr || emailErr) { setErrors({ phone: phoneErr, email: emailErr }); return }
     if (!form.name || (!form.phone && !form.email)) return
     setBusy(true)
     try {
@@ -66,7 +87,7 @@ export default function FloatingContact() {
 
   function handleClose() {
     setOpen(false)
-    setTimeout(() => { setForm({ name: '', phone: '', email: '', message: '' }); setSent(false) }, 300)
+    setTimeout(() => { setForm({ name: '', phone: '', email: '', message: '' }); setSent(false); setErrors({}) }, 300)
   }
 
   return (
@@ -144,24 +165,28 @@ export default function FloatingContact() {
                   <div className="fc-form__field">
                     <label className="fc-form__label">Phone</label>
                     <input
-                      className="fc-form__input"
+                      className={`fc-form__input${errors.phone ? ' fc-form__input--err' : ''}`}
                       type="tel"
                       name="phone"
                       placeholder="+1 (___) ___-____"
                       value={form.phone}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                     />
+                    {errors.phone && <span className="fc-form__err">{errors.phone}</span>}
                   </div>
                   <div className="fc-form__field">
                     <label className="fc-form__label">Email</label>
                     <input
-                      className="fc-form__input"
+                      className={`fc-form__input${errors.email ? ' fc-form__input--err' : ''}`}
                       type="email"
                       name="email"
                       placeholder="you@example.com"
                       value={form.email}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                     />
+                    {errors.email && <span className="fc-form__err">{errors.email}</span>}
                   </div>
                 </div>
                 <div className="fc-form__field">

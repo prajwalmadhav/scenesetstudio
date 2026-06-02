@@ -11,7 +11,7 @@ const CASES = [
   {
     slug: 'tierx-dcs',
     name: 'TierX DCS',
-    category: 'Content Production / Ads',
+    category: 'Brand Identity / Web Design',
     year: '2025',
     seed: 'sss-tx1-case',
   },
@@ -25,7 +25,7 @@ const CASES = [
   {
     slug: 'fawill-bike-pub',
     name: 'Fawill Bike & Pub',
-    category: 'Paid Advertising / Social',
+    category: 'Brand Identity / Web / Social',
     year: '2024',
     seed: 'sss-fw2-case',
   },

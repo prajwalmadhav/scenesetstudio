@@ -146,14 +146,16 @@ export default function About() {
       const lines = textRef.current?.querySelectorAll('.about-title-line')
       if (!lines?.length) return
 
+      // Simple top-to-bottom line reveal
       gsap.fromTo(
         lines,
-        { clipPath: 'inset(0 100% 0 0)' },
+        { opacity: 0, y: -18 },
         {
-          clipPath: 'inset(0 0% 0 0)',
-          stagger: 0.13,
-          duration: 1.1,
-          ease: 'power3.out',
+          opacity: 1,
+          y: 0,
+          stagger: 0.12,
+          duration: 0.6,
+          ease: 'power2.out',
           scrollTrigger: { trigger: textRef.current, start: 'top 72%' },
         }
       )

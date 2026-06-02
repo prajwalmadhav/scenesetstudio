@@ -1,142 +1,101 @@
 import { useState, useRef, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { motion as Motion } from 'framer-motion'
+import tierxCard from '../assets/work/case-studies/tierx-dcs.png'
+import fawillBikeCard from '../assets/work/case-studies/fawill-bike-pub.png'
+import fawillCleaningCard from '../assets/work/case-studies/fawill-cleaning.png'
+import sceneSetCard from '../assets/work/case-studies/scene-set-studio.png'
+import comingSoonCard from '../assets/work/case-studies/coming-soon.png'
 
 /* ─────────────────────────────────────────────────────────────
    FAN TWEAKS
    rotate: degrees · y: px drop · CSS transform-origin in index.css
 ───────────────────────────────────────────────────────────── */
 const FAN = [
-  { x: -390, rotate: -10, y: 10, scale: 0.82, z: 1 },
-  { x: -260, rotate:  -7, y:  6, scale: 0.88, z: 2 },
-  { x: -130, rotate:  -4, y:  2, scale: 0.93, z: 3 },
+  { x: -260, rotate: -10, y: 10, scale: 0.82, z: 1 },
+  { x: -130, rotate:  -5, y:  4, scale: 0.90, z: 2 },
   { x:    0, rotate:   0, y:  0, scale: 1.00, z: 7 },
-  { x:  130, rotate:   4, y:  2, scale: 0.93, z: 3 },
-  { x:  260, rotate:   7, y:  6, scale: 0.88, z: 2 },
-  { x:  390, rotate:  10, y: 10, scale: 0.82, z: 1 },
+  { x:  130, rotate:   5, y:  4, scale: 0.90, z: 2 },
+  { x:  260, rotate:  10, y: 10, scale: 0.82, z: 1 },
 ]
 
 const POSTS = [
   {
-    brand: 'SceneSet Studio',
+    brand: 'TierX DCS',
+    title: 'Brand & Web',
+    category: 'Brand Identity / Web Design',
+    year: '2025',
+    stat: '01',
+    art: 'founder',
+    image: tierxCard,
+    mark: 'TX',
+    outcome: 'North American market entry',
+    deliverables: ['Brand', 'Web', '3D'],
+    palette: ['#0E9FD8', '#00C48C', '#0A0E1A'],
+  },
+  {
+    brand: 'FaWill Bike Pub',
+    title: 'Brand Launch',
+    category: 'Brand Identity / Web / Social',
+    year: '2026',
+    stat: '02',
+    art: 'hospitality',
+    image: fawillBikeCard,
+    mark: 'FB',
+    outcome: 'Zero to booked in 8 weeks',
+    deliverables: ['Brand', 'Web', 'Social'],
+    palette: ['#35AC8F', '#E9E4D2', '#333433'],
+  },
+  {
+    brand: 'FaWill Cleaning',
+    title: 'B2B Rebrand',
+    category: 'Brand Strategy / Video / Ads',
+    year: '2024',
+    stat: '03',
+    art: 'studio',
+    image: fawillCleaningCard,
+    mark: 'FC',
+    outcome: 'Bilingual market entry',
+    deliverables: ['Brand', 'Video', 'Ads'],
+    palette: ['#1266B0', '#00B4D8', '#1A2332'],
+  },
+  {
+    brand: 'Scene Set Studio',
     title: 'Website Case Study',
     category: 'Brand System / Web Experience',
-    year: '2026',
-    stat: '01',
+    year: '2024',
+    stat: '04',
     art: 'sceneset',
+    image: sceneSetCard,
     mark: 'SS',
-    outcome: 'Full brand site',
+    outcome: 'Full brand & web build',
     deliverables: ['UX', 'Identity', 'Motion'],
     palette: ['#F2F0EB', '#D4001E', '#080808'],
   },
   {
-    brand: 'Ava Moretti',
-    title: 'Launch Identity',
-    category: 'Hospitality Brand / Social Campaign',
+    brand: 'Coming Soon',
+    title: '—',
+    category: 'New Project',
     year: '2026',
-    stat: '02',
-    art: 'hospitality',
-    mark: 'AM',
-    outcome: '+38% launch inquiries',
-    deliverables: ['Launch', 'Reels', 'Ads'],
-    palette: ['#F7D9C7', '#7A2E2E', '#1B1412'],
-  },
-  {
-    brand: 'Mira Stone',
-    title: 'Studio Rebrand',
-    category: 'Creative Direction / Content Suite',
-    year: '2025',
-    stat: '03',
-    art: 'studio',
-    mark: 'MS',
-    outcome: '3-week content system',
-    deliverables: ['Brand', 'Social', 'Photo'],
-    palette: ['#DDE6EA', '#384B5A', '#C6A56B'],
-  },
-  {
-    brand: 'Rhodes & Co.',
-    title: 'Retail Relaunch',
-    category: 'Photo / Paid Ads / Landing Page',
-    year: '2025',
-    stat: '04',
-    art: 'retail',
-    mark: 'R&',
-    outcome: 'Paid campaign refresh',
-    deliverables: ['Ecom', 'Ads', 'Shoot'],
-    palette: ['#F0E2B6', '#1F3A34', '#0B0B0B'],
-  },
-  {
-    brand: 'Lena Hart',
-    title: 'Beauty Campaign',
-    category: 'Visual Identity / Reel System',
-    year: '2025',
     stat: '05',
-    art: 'beauty',
-    mark: 'LH',
-    outcome: 'Premium feed system',
-    deliverables: ['Reels', 'UGC', 'Design'],
-    palette: ['#F4C7D8', '#7C2946', '#25141D'],
-  },
-  {
-    brand: 'Kai Mercer',
-    title: 'Founder Brand',
-    category: 'Personal Brand / Website / Content',
-    year: '2026',
-    stat: '06',
-    art: 'founder',
-    mark: 'KM',
-    outcome: 'Founder-led funnel',
-    deliverables: ['Web', 'Copy', 'Content'],
-    palette: ['#C9D7FF', '#27326C', '#101018'],
-  },
-  {
-    brand: 'Sofia Grant',
-    title: 'Event Film Kit',
-    category: 'Event Branding / Recap Campaign',
-    year: '2025',
-    stat: '07',
-    art: 'events',
-    mark: 'SG',
-    outcome: 'Event recap suite',
-    deliverables: ['Film', 'Photo', 'Social'],
-    palette: ['#E9C16E', '#483114', '#111111'],
+    art: 'retail',
+    image: comingSoonCard,
+    mark: '—',
+    outcome: 'In progress',
+    deliverables: ['TBD'],
+    palette: ['#222222', '#2e2e2e', '#111111'],
   },
 ]
 
 function CaseStudyCover({ post }) {
   return (
     <article className={`scard scard--case scard--case-${post.art}`} aria-label={`${post.brand} case study cover`}>
+      <img className="case-cover__image" src={post.image} alt="" loading="lazy" aria-hidden="true" />
+      <div className="case-cover__vignette" aria-hidden="true" />
       <div className="case-cover__top">
         <span>{post.stat}</span>
         <span>{post.year}</span>
       </div>
-      <div className="case-cover__art" aria-hidden="true">
-        <div className="case-cover__mark">{post.mark}</div>
-        <div className="case-cover__device">
-          <div className="case-cover__browser">
-            <i />
-            <i />
-            <i />
-            <strong>{post.brand.toLowerCase().replaceAll(' ', '')}.com</strong>
-          </div>
-          <div className="case-cover__screen">
-            <span>{post.category.split(' / ')[0]}</span>
-            <b>{post.brand}</b>
-            <em>{post.title}</em>
-            <div className="case-cover__screen-grid">
-              <i />
-              <i />
-              <i />
-            </div>
-          </div>
-        </div>
-        <div className="case-cover__phone">
-          <span />
-          <b />
-          <i />
-        </div>
-        <div className="case-cover__poster case-cover__poster--one" />
-        <div className="case-cover__poster case-cover__poster--two" />
-      </div>
+      <div className="case-cover__spacer" aria-hidden="true" />
       <div className="case-cover__deliverables">
         {post.deliverables.map(item => <span key={item}>{item}</span>)}
       </div>
@@ -297,7 +256,7 @@ function MobileCarousel() {
 const CARD_TRANSITION = { type: 'tween', duration: 0.55, ease: [0.33, 1, 0.68, 1] }
 const HOVER_TRANSITION = { type: 'tween', duration: 0.28, ease: [0.25, 1, 0.5, 1] }
 
-const HOVER_NUDGE = [- 60, -45, -28, 0, 28, 45, 60]
+const HOVER_NUDGE = [-40, -24, 0, 24, 40]
 
 /* Sibling push: cards near a hovered card spread outward */
 const PUSH_BY_DIST = [0, 22, 14, 8]
@@ -334,7 +293,7 @@ export default function Testimonials() {
   function handleCardClick(clickedIdx) {
     if (busy) return
     const pos = ((clickedIdx - offset) % n + n) % n
-    const centerPos = 3
+    const centerPos = 2
     if (pos === centerPos) return
     lock()
     setOffset(o => ((o + (pos - centerPos)) % n + n) % n)
@@ -358,7 +317,7 @@ export default function Testimonials() {
           const push = getSiblingPush(pos, hoveredPos)
 
           return (
-            <motion.div
+            <Motion.div
               key={i}
               className="fan-card-wrap"
               style={{ zIndex: f.z, cursor: 'pointer' }}
@@ -369,7 +328,7 @@ export default function Testimonials() {
               onClick={() => handleCardClick(i)}
             >
               <PhotoCard post={post} />
-            </motion.div>
+            </Motion.div>
           )
         })}
         <div className="fan-arrows">

@@ -1,5 +1,9 @@
 import { useParams, Link } from 'react-router-dom'
 import SEO from '../components/SEO'
+import tierxImg       from '../assets/work/case-studies/tierx-dcs.webp'
+import fawillBikeImg  from '../assets/work/case-studies/fawill-bike-pub.webp'
+import fawillCleanImg from '../assets/work/case-studies/fawill-cleaning.webp'
+import sceneSetImg    from '../assets/work/case-studies/scene-set-studio.webp'
 
 const CASES = [
   { slug: 'tierx-dcs',        name: 'TierX DCS',               category: 'Brand Identity / Web Design', year: '2025' },
@@ -84,6 +88,37 @@ const S = {
     color: C.textFade,
     textTransform: 'uppercase',
   },
+}
+
+/* ── Hero image with logo overlay ── */
+function HeroImg({ src, logo, alt }) {
+  return (
+    <div style={{
+      position: 'relative',
+      width: '100%',
+      aspectRatio: '16/9',
+      borderRadius: '8px',
+      overflow: 'hidden',
+      border: BD,
+    }}>
+      <img src={src} alt={alt} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+      <div style={{
+        position: 'absolute', inset: 0,
+        background: 'linear-gradient(to bottom, rgba(0,0,0,0.08), rgba(0,0,0,0.52))',
+      }} />
+      {logo && (
+        <img src={logo} alt="" aria-hidden="true" style={{
+          position: 'absolute', top: '50%', left: '50%',
+          transform: 'translate(-50%, -50%)',
+          maxWidth: 'clamp(220px, 40%, 380px)', maxHeight: 'clamp(96px, 14%, 160px)',
+          width: 'auto', height: 'auto',
+          objectFit: 'contain',
+          filter: 'brightness(0) invert(1) drop-shadow(0 6px 16px rgba(0,0,0,0.8))',
+          pointerEvents: 'none',
+        }} />
+      )}
+    </div>
+  )
 }
 
 /* ── Pill badge ── */
@@ -265,7 +300,7 @@ function TierXContent() {
           <Badge>3D Visualization</Badge>
           <Badge>2025</Badge>
         </div>
-        <ImgBox label="Hero — website mockup / brand overview" aspect="16/9" />
+        <HeroImg src={tierxImg} logo="/assets/images/tierx%20logo.png" alt="TierX DCS" />
       </section>
 
       {/* At a Glance */}
@@ -707,7 +742,7 @@ function FaWillBikePubContent() {
             <span key={t} style={{ display: 'inline-block', fontFamily: 'var(--font-body)', fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', color: C.textMute, border: BD, borderRadius: '999px', padding: '4px 12px', marginRight: '8px', marginBottom: '8px' }}>{t}</span>
           ))}
         </div>
-        <ImgBox label="Hero — party bike experience in Ottawa / brand overview" aspect="16/9" />
+        <HeroImg src={fawillBikeImg} logo="/assets/images/bikepub%20logo.png" alt="FaWill Bike Pub" />
       </section>
 
       {/* At a Glance */}
@@ -1050,7 +1085,7 @@ function FaWillCleaningContent() {
             <span key={t} style={{ display: 'inline-block', fontFamily: 'var(--font-body)', fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', color: C.textMute, border: BD, borderRadius: '999px', padding: '4px 12px', marginRight: '8px', marginBottom: '8px' }}>{t}</span>
           ))}
         </div>
-        <ImgBox label="Hero — commercial facility transformation / brand overview" aspect="16/9" />
+        <HeroImg src={fawillCleanImg} logo="/assets/images/fawill%20logo.png" alt="FaWill Cleaning Company" />
       </section>
 
       {/* At a Glance */}
@@ -1396,36 +1431,7 @@ function SceneSetContent() {
           Building<br />Our Own<br />Brand
         </h1>
 
-        {/* Self-referential panel */}
-        <div style={{
-          position: 'relative',
-          border: BD,
-          borderRadius: '8px',
-          aspectRatio: '16/9',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          overflow: 'hidden',
-          background: C.surface,
-          gap: '10px',
-        }}>
-          <span style={{
-            position: 'absolute',
-            fontFamily: 'var(--font-heading)',
-            fontWeight: 900,
-            fontSize: 'clamp(80px, 18vw, 180px)',
-            color: 'rgba(212,0,30,0.04)',
-            letterSpacing: '-0.05em',
-            userSelect: 'none',
-            lineHeight: 1,
-            pointerEvents: 'none',
-          }}>SSS</span>
-          <span style={{ ...S.eyebrow, margin: 0, position: 'relative' }}>The Deliverable</span>
-          <p style={{ ...S.para, margin: 0, position: 'relative', fontSize: '14px', color: C.textSub }}>
-            You're reading it.
-          </p>
-        </div>
+        <HeroImg src={sceneSetImg} logo="/sss%20logo2.svg" alt="Scene Set Studio" />
       </section>
 
       {/* The challenge — one paragraph */}

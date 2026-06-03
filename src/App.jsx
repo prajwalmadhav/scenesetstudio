@@ -26,15 +26,24 @@ import NotFoundPage from './pages/NotFound'
 import FloatingContact from './components/FloatingContact'
 import './index.css'
 
+// Prevent browser from restoring scroll position on back/forward
+if (typeof window !== 'undefined') {
+  window.history.scrollRestoration = 'manual'
+}
+
 // Scroll to top and refresh ScrollTrigger on every route change
 function ScrollToTop() {
   const { pathname } = useLocation()
   useEffect(() => {
-    window.scrollTo(0, 0)
-    // Kill all ScrollTriggers from previous page, then refresh so new ones
-    // calculate from a clean scroll-position-zero baseline
+    // Use Lenis directly if available so it doesn't fight window.scrollTo
+    if (window.__lenis) {
+      window.__lenis.scrollTo(0, { immediate: true })
+    } else {
+      window.scrollTo(0, 0)
+    }
     ScrollTrigger.getAll().forEach(t => t.kill())
-    ScrollTrigger.refresh()
+    // Defer refresh until after the new page has painted
+    requestAnimationFrame(() => ScrollTrigger.refresh())
   }, [pathname])
   return null
 }
@@ -97,6 +106,8 @@ function App() {
       wheelMultiplier: 0.9,
     })
 
+    window.__lenis = lenis
+
     // Sync Lenis scroll position to GSAP ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update)
 
@@ -111,6 +122,7 @@ function App() {
     window.addEventListener('sss:lenis-resume', resume)
 
     return () => {
+      window.__lenis = null
       window.removeEventListener('sss:lenis-pause',  pause)
       window.removeEventListener('sss:lenis-resume', resume)
       lenis.destroy()

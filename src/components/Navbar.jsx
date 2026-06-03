@@ -47,11 +47,18 @@ export default function Navbar() {
 
   const active = (path) => pathname === path ? ' mobile-link--active' : ''
   const isHome = pathname === '/'
+  const isDeepPage = pathname.split('/').filter(Boolean).length > 1
 
   const HomeIcon = () => (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
       <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1V9.5z"/>
       <path d="M9 21V12h6v9"/>
+    </svg>
+  )
+
+  const BackIcon = () => (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M19 12H5M5 12l7 7M5 12l7-7"/>
     </svg>
   )
 
@@ -64,10 +71,19 @@ export default function Navbar() {
             <span className="navbar__logo-text">SceneSet<strong>Studio</strong></span>
           </button>
 
-          {!isHome && (
-            <button className="navbar__home-btn" onClick={() => navigate('/')} aria-label="Go to home">
-              <HomeIcon />
-            </button>
+          {(!isHome || isDeepPage) && (
+            <div className="navbar__nav-btns">
+              {!isHome && (
+                <button className="navbar__home-btn" onClick={() => navigate('/')} aria-label="Go to home">
+                  <HomeIcon />
+                </button>
+              )}
+              {isDeepPage && (
+                <button className="navbar__home-btn navbar__back-btn" onClick={() => navigate(-1)} aria-label="Go back">
+                  <BackIcon />
+                </button>
+              )}
+            </div>
           )}
 
           <nav className="navbar__links" aria-label="Primary navigation">

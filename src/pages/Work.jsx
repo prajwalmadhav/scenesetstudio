@@ -3,7 +3,10 @@ import { Link } from 'react-router-dom'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import SEO from '../components/SEO'
-import sceneSetImg from '../assets/about/scene-set-brand-package.webp'
+import tierxImg        from '../assets/work/case-studies/tierx-dcs.webp'
+import fawillBikeImg   from '../assets/work/case-studies/fawill-bike-pub.webp'
+import fawillCleanImg  from '../assets/work/case-studies/fawill-cleaning.webp'
+import sceneSetImg     from '../assets/work/case-studies/scene-set-studio.webp'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -13,7 +16,9 @@ const CASES = [
     name: 'TierX DCS',
     category: 'Brand Identity / Web Design',
     year: '2025',
-    seed: 'sss-tx1-case',
+    img: tierxImg,
+    logo: '/assets/images/tierx%20logo.png',
+    imgPosition: 'center top',
   },
   {
     slug: 'sceneset-branding',
@@ -21,20 +26,23 @@ const CASES = [
     category: 'Brand Identity / Design',
     year: '2024',
     img: sceneSetImg,
+    logo: '/sss%20logo2.svg',
   },
   {
     slug: 'fawill-bike-pub',
     name: 'Fawill Bike & Pub',
     category: 'Brand Identity / Web / Social',
     year: '2024',
-    seed: 'sss-fw2-case',
+    img: fawillBikeImg,
+    logo: '/assets/images/bikepub%20logo.png',
   },
   {
     slug: 'fawill-cleaning',
     name: 'Fawill Cleaning Company',
     category: 'Brand Strategy / Content',
     year: '2024',
-    seed: 'sss-fw1-case',
+    img: fawillCleanImg,
+    logo: '/assets/images/fawill%20logo.png',
   },
 ]
 
@@ -130,10 +138,19 @@ export default function Work() {
 
               <div className="work-list-item__img">
                 <img
-                  src={c.img ?? `https://picsum.photos/seed/${c.seed}/1200/675`}
+                  src={c.img}
                   alt={c.name}
                   className="work-list-item__photo"
+                  style={c.imgPosition ? { objectPosition: c.imgPosition } : undefined}
                 />
+                {c.logo && (
+                  <img
+                    src={c.logo}
+                    alt=""
+                    aria-hidden="true"
+                    className="work-list-item__logo"
+                  />
+                )}
               </div>
 
               <div className="work-list-item__meta">

@@ -1277,6 +1277,18 @@ body {
   background: rgba(255, 255, 255, 0.06);
 }
 
+.navbar__nav-btns {
+  display: flex;
+  align-items: center;
+  gap: 2.5px;
+}
+
+
+.navbar__back-btn {
+  margin-left: 0;
+}
+
+
 /* Mobile variant — hidden on desktop */
 .navbar__home-btn--mobile {
   display: none;
@@ -1337,6 +1349,10 @@ body {
     display: flex;
   }
 
+  .navbar__nav-btns {
+    display: none;
+  }
+
   .navbar__home-btn:not(.navbar__home-btn--mobile) {
     display: none;
   }
@@ -1344,6 +1360,8 @@ body {
   .navbar__home-btn--mobile {
     display: flex;
   }
+
+
 }
 
 /* ═══════════════════════════════════════
@@ -6902,12 +6920,29 @@ body {
 }
 
 .work-list-item__img {
+  position: relative;
   width: 70%;
   height: clamp(200px, 20vw, 300px);
   margin: 0 auto;
   overflow: hidden;
   background: #111;
   border-radius: 3px;
+}
+
+.work-list-item__logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 260px;
+  max-height: 110px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1) drop-shadow(0 4px 12px rgba(0,0,0,0.7));
+  opacity: 1;
+  pointer-events: none;
+  z-index: 2;
 }
 
 .work-list-item__photo {

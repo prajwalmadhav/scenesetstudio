@@ -1,3 +1,4 @@
+import { createContext, useContext } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import SEO from '../components/SEO'
 import tierxImg       from '../assets/work/case-studies/tierx-dcs.webp'
@@ -29,6 +30,42 @@ const C = {
 
 const BD  = `1px solid ${C.border}`   /* standard border */
 const BDD = `1px solid ${C.divider}`  /* subtle divider */
+
+const CaseStudyImageContext = createContext('generic')
+
+const DETAIL_IMG = '/assets/case-study-details/'
+
+function pickDetailImage(caseKey, label) {
+  const l = label.toLowerCase()
+
+  if (caseKey === 'tierx-dcs') {
+    if (l.includes('logo') || l.includes('brand guidelines')) return `${DETAIL_IMG}tierx-brand.webp`
+    if (l.includes('homepage') || l.includes('products page') || l.includes('mobile') || l.includes('contact')) return `${DETAIL_IMG}tierx-website.webp`
+    if (l.includes('edge pod') || l.includes('deployment')) return `${DETAIL_IMG}tierx-deployment.webp`
+    if (l.includes('poweriq') || l.includes('i32') || l.includes('3d') || l.includes('animation')) return `${DETAIL_IMG}tierx-product-viz.webp`
+    return `${DETAIL_IMG}tierx-brand.webp`
+  }
+
+  if (caseKey === 'fawill-bike-pub') {
+    if (l.includes('logo') || l.includes('brand guidelines')) return `${DETAIL_IMG}bikepub-brand.webp`
+    if (l.includes('homepage') || l.includes('occasion') || l.includes('pricing') || l.includes('mobile booking')) return `${DETAIL_IMG}bikepub-website.webp`
+    if (l.includes('booking system') || l.includes('admin dashboard') || l.includes('confirmation') || l.includes('follow-up')) return `${DETAIL_IMG}bikepub-automation-ads.webp`
+    if (l.includes('instagram') || l.includes('content') || l.includes('reels') || l.includes('tiktok')) return `${DETAIL_IMG}bikepub-social.webp`
+    if (l.includes('email') || l.includes('ad creative')) return `${DETAIL_IMG}bikepub-automation-ads.webp`
+    return `${DETAIL_IMG}bikepub-experience.webp`
+  }
+
+  if (caseKey === 'fawill-cleaning') {
+    if (l.includes('logo') || l.includes('brand guidelines')) return `${DETAIL_IMG}cleaning-brand.webp`
+    if (l.includes('homepage') || l.includes('services') || l.includes('case studies') || l.includes('mobile')) return `${DETAIL_IMG}cleaning-website.webp`
+    if (l.includes('video') || l.includes('reel') || l.includes('process')) return `${DETAIL_IMG}cleaning-video.webp`
+    if (l.includes('linkedin ad') || l.includes('facebook') || l.includes('google') || l.includes('campaign')) return `${DETAIL_IMG}cleaning-ads.webp`
+    if (l.includes('linkedin page') || l.includes('email')) return `${DETAIL_IMG}cleaning-social-email.webp`
+    return `${DETAIL_IMG}cleaning-website.webp`
+  }
+
+  return null
+}
 
 /* ── Shared style tokens ── */
 const S = {
@@ -154,6 +191,39 @@ function SectionHead({ num, title }) {
 
 /* ── Image placeholder ── */
 function ImgBox({ label, aspect = '16/9' }) {
+  const caseKey = useContext(CaseStudyImageContext)
+  const src = pickDetailImage(caseKey, label)
+
+  if (src) {
+    return (
+      <figure style={{ ...S.imgPlaceholder, position: 'relative', aspectRatio: aspect, overflow: 'hidden', margin: 0 }}>
+        <img
+          src={src}
+          alt={label}
+          loading="lazy"
+          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+        />
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(to top, rgba(0,0,0,0.72), rgba(0,0,0,0.12) 42%, transparent)',
+          pointerEvents: 'none',
+        }} />
+        <figcaption style={{
+          ...S.imgLabel,
+          position: 'absolute',
+          left: '14px',
+          right: '14px',
+          bottom: '12px',
+          color: 'rgba(242,240,235,0.78)',
+          textShadow: '0 2px 12px rgba(0,0,0,0.75)',
+        }}>
+          {label}
+        </figcaption>
+      </figure>
+    )
+  }
+
   return (
     <div style={{ ...S.imgPlaceholder, aspectRatio: aspect, flexDirection: 'column', gap: '8px' }}>
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -1740,11 +1810,13 @@ export default function CaseStudy() {
           </Link>
 
           {/* Render content based on slug */}
-          {client === 'tierx-dcs'          ? <TierXContent />
-         : client === 'fawill-bike-pub'  ? <FaWillBikePubContent />
-         : client === 'fawill-cleaning'  ? <FaWillCleaningContent />
-         : client === 'sceneset-branding'? <SceneSetContent />
-         : <GenericContent project={project} />}
+          <CaseStudyImageContext.Provider value={client}>
+            {client === 'tierx-dcs'          ? <TierXContent />
+           : client === 'fawill-bike-pub'  ? <FaWillBikePubContent />
+           : client === 'fawill-cleaning'  ? <FaWillCleaningContent />
+           : client === 'sceneset-branding'? <SceneSetContent />
+           : <GenericContent project={project} />}
+          </CaseStudyImageContext.Provider>
 
           </div>{/* end card */}
         </div>{/* end content column */}

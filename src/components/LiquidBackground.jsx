@@ -230,7 +230,10 @@ export default function LiquidBackground({
     resize()
     window.addEventListener('resize', resize)
 
+    const visibleRef = { current: true }
+
     const render = (now) => {
+      if (!visibleRef.current) return
       const elapsed = (now - startRef.current) * 0.001 * speed * 2.0
       gl.useProgram(prog)
       gl.uniform1f(uLocs.time, elapsed)
@@ -259,8 +262,20 @@ export default function LiquidBackground({
     }
     rafRef.current = requestAnimationFrame(render)
 
+    const observer = new IntersectionObserver(([entry]) => {
+      visibleRef.current = entry.isIntersecting
+      if (entry.isIntersecting) {
+        startRef.current = performance.now()
+        rafRef.current = requestAnimationFrame(render)
+      } else {
+        cancelAnimationFrame(rafRef.current)
+      }
+    }, { threshold: 0 })
+    observer.observe(canvas)
+
     return () => {
       cancelAnimationFrame(rafRef.current)
+      observer.disconnect()
       window.removeEventListener('resize', resize)
       gl.deleteProgram(prog)
       gl.deleteShader(vs)

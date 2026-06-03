@@ -99,6 +99,8 @@ function App() {
   }
 
   useEffect(() => {
+    if (window.matchMedia('(max-width: 768px)').matches) return
+
     const lenis = new Lenis({
       duration: 1.4,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -108,7 +110,6 @@ function App() {
 
     window.__lenis = lenis
 
-    // Sync Lenis scroll position to GSAP ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update)
 
     gsap.ticker.add((time) => {

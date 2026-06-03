@@ -191,6 +191,26 @@ function CornerTicks() {
   )
 }
 
+const STATS = [
+  { number: '500+', label: 'Videos Delivered' },
+  { number: '6+',   label: 'Brands Served' },
+  { number: '2M+',  label: 'Views Generated' },
+  { number: '4+',   label: 'Years of Experience' },
+]
+
+function TrustStats() {
+  return (
+    <div className="trust-stats">
+      {STATS.map((s, i) => (
+        <div key={i} className="trust-stats__item">
+          <span className="trust-stats__number">{s.number}</span>
+          <span className="trust-stats__label">{s.label}</span>
+        </div>
+      ))}
+    </div>
+  )
+}
+
 function LogoGrid() {
   return (
     <div className="logo-grid">
@@ -301,6 +321,15 @@ export default function Testimonials() {
   const n = POSTS.length
   const isTouch = typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches
 
+  // Auto-rotate desktop fan — pauses on hover
+  useEffect(() => {
+    if (hoveredPos !== null) return
+    const timer = setInterval(() => {
+      setOffset(o => (o + 1) % n)
+    }, 4500)
+    return () => clearInterval(timer)
+  }, [hoveredPos, n])
+
   function lock() {
     setBusy(true)
     setTimeout(() => setBusy(false), 600)
@@ -377,7 +406,8 @@ export default function Testimonials() {
         </div>
       </div>
 
-      <LogoGrid />
+      <TrustStats />
+      {/* <LogoGrid /> */}
 
     </section>
   )

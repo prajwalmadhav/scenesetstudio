@@ -3,6 +3,8 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import LiquidBackground from './LiquidBackground'
 
+const isMobileDevice = () => typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches
+
 const HERO_WORDS = ['convert', 'captivate', 'perform', 'resonate', 'scale']
 
 gsap.registerPlugin(ScrollTrigger)
@@ -117,7 +119,10 @@ export default function Hero() {
 
   return (
     <section className="hero-section" ref={sectionRef}>
-      <LiquidBackground />
+      {isMobileDevice()
+        ? <div className="hero-bg-static" aria-hidden="true" />
+        : <LiquidBackground />
+      }
 
       {/* Text + CTA */}
       <div className="hero-content">

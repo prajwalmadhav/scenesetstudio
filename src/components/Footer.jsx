@@ -124,7 +124,7 @@ export default function Footer() {
         <div className="footer-brand">
           <div className="footer-brand__info">
             <div className="footer-logo">
-              <img src="/sss logo2.svg" alt="" className="footer-logo__icon" aria-hidden="true" />
+              <img src="/sss-logo2.svg" alt="" className="footer-logo__icon" aria-hidden="true" />
               <span className="footer-logo__text">SceneSet<strong>Studio</strong></span>
             </div>
             <p className="footer-tagline">Cinematic storytelling meets<br />performance marketing.</p>
@@ -155,10 +155,12 @@ export default function Footer() {
           </div>
           <div className="footer-nav__col">
             <span className="footer-nav__heading">Contact</span>
+            <span style={{ color: 'rgba(242,240,235,0.35)', fontSize: '11px', letterSpacing: '0.06em' }}>Based in Ontario, Canada</span>
             <a href="mailto:team@scenesetstudio.com">team@scenesetstudio.com</a>
             <a href="tel:+16138702919">+1 613 870 2919</a>
+            <a href="/card.html" target="_blank" rel="noopener noreferrer">Digital Business Card ↗</a>
             <a
-              href="https://g.page/r/review"
+              href="https://g.page/r/CRRFGxc0hzlMEAE/review"
               target="_blank"
               rel="noopener noreferrer"
               className="footer-review-btn"
@@ -185,10 +187,6 @@ export default function Footer() {
       <div className="footer-bottom">
         <span className="footer-bottom__copy">
           © {new Date().getFullYear()} SceneSet Studio. All rights reserved.
-          <span className="footer-bottom__sep">·</span>
-          <a href="/card.html" target="_blank" rel="noopener noreferrer" className="footer-bottom__link">
-            Digital Business Card ↗
-          </a>
         </span>
       </div>
 

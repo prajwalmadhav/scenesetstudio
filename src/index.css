@@ -170,6 +170,13 @@ body {
   position: relative;
 }
 
+.hero-bg-static {
+  position: absolute;
+  inset: 0;
+  background: url('/bg-hero.webp') center/cover no-repeat;
+  z-index: 0;
+}
+
 /* sits above the liquid canvas (z:0) */
 .hero-content {
   position: relative;
@@ -6484,6 +6491,51 @@ body {
   background: rgba(242, 240, 235, 0.06);
 }
 
+/* ── Trust Stats ── */
+.trust-stats {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin: 0 auto 32px;
+  max-width: 640px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.trust-stats__item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px 8px;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  gap: 3px;
+}
+
+.trust-stats__item:last-child {
+  border-right: none;
+}
+
+.trust-stats__number {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: #fff;
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+.trust-stats__label {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.04em;
+  text-align: center;
+  line-height: 1.3;
+}
+
 /* ── Logo Grid ── */
 .logo-grid {
   margin-top: 160px;
@@ -7455,7 +7507,7 @@ body {
 
 .footer-bottom {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: center;
   gap: 16px;
   font-family: var(--font-body);

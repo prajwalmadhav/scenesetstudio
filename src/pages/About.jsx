@@ -93,7 +93,7 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="about-pg__hero-icon">
-              <img src="/sss logo2.svg" alt="" className="about-pg__hero-logo" />
+              <img src="/sss-logo2.svg" alt="" className="about-pg__hero-logo" />
               <span className="about-pg__hero-wordmark">SceneSet<br /><strong>Studio</strong></span>
             </div>
           </div>
@@ -224,7 +224,7 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="about-pg__hire-logo" aria-hidden="true">
-              <img src="/sss logo2.svg" alt="" className="about-pg__hire-logo-img" />
+              <img src="/sss-logo2.svg" alt="" className="about-pg__hire-logo-img" />
               <span className="about-pg__hire-wordmark">
                 <span className="about-pg__hire-wordmark-main">SceneSet</span>
                 <strong className="about-pg__hire-wordmark-bold">Studio</strong>

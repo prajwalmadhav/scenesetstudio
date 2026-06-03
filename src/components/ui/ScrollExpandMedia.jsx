@@ -240,7 +240,7 @@ const ScrollExpandMedia = ({
                   </h1>
                   {isMobile && (
                     <img
-                      src="/sss logo2.svg"
+                      src="/sss-logo2.svg"
                       alt=""
                       style={{ width: '56px', height: '56px', objectFit: 'contain', flexShrink: 0, filter: 'brightness(0) invert(1)' }}
                     />

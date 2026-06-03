@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion as Motion } from 'framer-motion'
+import TrustedPartners from './TrustedPartners'
 import tierxCard from '../assets/work/case-studies/tierx-dcs.webp'
 import fawillBikeCard from '../assets/work/case-studies/fawill-bike-pub.webp'
 import fawillCleaningCard from '../assets/work/case-studies/fawill-cleaning.webp'
@@ -392,22 +393,26 @@ export default function Testimonials() {
             </Motion.div>
           )
         })}
-        <div className="fan-arrows">
-          <button className="fan-arrow" onClick={goPrev} aria-label="Previous">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="15 18 9 12 15 6"/>
-            </svg>
-          </button>
-          <button className="fan-arrow" onClick={goNext} aria-label="Next">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="9 18 15 12 9 6"/>
-            </svg>
-          </button>
-        </div>
+      </div>
+
+      <div className="fan-arrows">
+        <button className="fan-arrow" onClick={goPrev} aria-label="Previous">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+        </button>
+        <button className="fan-arrow" onClick={goNext} aria-label="Next">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </button>
       </div>
 
       <TrustStats />
+
       {/* <LogoGrid /> */}
+
+      {/* <TrustedPartners /> */}
 
     </section>
   )

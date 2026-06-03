@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import SEO from '../components/SEO'
+import TrustedPartners from '../components/TrustedPartners'
 import tierxImg        from '../assets/work/case-studies/tierx-dcs.webp'
 import fawillBikeImg   from '../assets/work/case-studies/fawill-bike-pub.webp'
 import fawillCleanImg  from '../assets/work/case-studies/fawill-cleaning.webp'
@@ -185,6 +186,8 @@ export default function Work() {
         </div>
 
       </div>
+
+      <TrustedPartners />
     </>
   )
 }

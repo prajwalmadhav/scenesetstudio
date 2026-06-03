@@ -73,7 +73,7 @@ export default function Preloader({ onDone }) {
                 opacity: 0,
               }}
             >
-              <img src="/sss logo2.svg" alt="" draggable="false" className="preloader__logo-img" />
+              <img src="/sss-logo2.svg" alt="" draggable="false" className="preloader__logo-img" />
             </div>
           ))}
         </div>

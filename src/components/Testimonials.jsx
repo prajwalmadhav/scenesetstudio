@@ -213,6 +213,7 @@ function LogoGrid() {
 function MobileCarousel() {
   const [current, setCurrent] = useState(0)
   const touchStart = useRef(null)
+  const navigate = useNavigate()
   const n = POSTS.length
 
   useEffect(() => {
@@ -229,6 +230,10 @@ function MobileCarousel() {
     const dx = e.changedTouches[0].clientX - touchStart.current
     if (dx < -40) goNext()
     else if (dx > 40) goPrev()
+    else {
+      const post = POSTS[current]
+      if (post.slug) navigate(`/work/${post.slug}`)
+    }
     touchStart.current = null
   }
 
@@ -294,6 +299,7 @@ export default function Testimonials() {
   const [hoveredPos, setHoveredPos] = useState(null)
   const navigate = useNavigate()
   const n = POSTS.length
+  const isTouch = typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches
 
   function lock() {
     setBusy(true)
@@ -348,9 +354,9 @@ export default function Testimonials() {
               className="fan-card-wrap"
               style={{ zIndex: f.z, cursor: pos === 2 && !post.slug ? 'default' : 'pointer' }}
               animate={{ x: f.x + push, rotate: f.rotate, y: f.y, scale: f.scale, transition: CARD_TRANSITION }}
-              whileHover={{ x: f.x + nudge, y: f.y - 8, scale: Math.min(f.scale + 0.05, 1.05), transition: HOVER_TRANSITION }}
-              onHoverStart={() => setHoveredPos(pos)}
-              onHoverEnd={() => setHoveredPos(null)}
+              whileHover={isTouch ? undefined : { x: f.x + nudge, y: f.y - 8, scale: Math.min(f.scale + 0.05, 1.05), transition: HOVER_TRANSITION }}
+              onHoverStart={isTouch ? undefined : () => setHoveredPos(pos)}
+              onHoverEnd={isTouch ? undefined : () => setHoveredPos(null)}
               onClick={() => handleCardClick(i)}
             >
               <PhotoCard post={post} />

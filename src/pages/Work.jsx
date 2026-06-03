@@ -118,6 +118,23 @@ export default function Work() {
           Every project<br />is a story<br />worth telling.
         </h1>
 
+        <div className="work-why">
+          <span className="work-why__eyebrow">Why work with us</span>
+          <div className="work-why__grid">
+            {[
+              { num: '01', title: 'Strategy first', body: 'Every project starts with positioning, not pixels. We solve the business problem before we open a design tool.' },
+              { num: '02', title: 'Cinematic standard', body: 'High-end visuals, motion, and brand identity that look like they belong to a company ten times your size.' },
+              { num: '03', title: 'One team, full delivery', body: 'Brand, web, content, and ads — all under one roof. No handoffs. No gaps. No excuses.' },
+            ].map(item => (
+              <div key={item.num} className="work-why__item">
+                <span className="work-why__num">{item.num}</span>
+                <h3 className="work-why__title">{item.title}</h3>
+                <p className="work-why__body">{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
         <div className="work-list" ref={listRef}>
           {CASES.map((c, i) => (
             <Link

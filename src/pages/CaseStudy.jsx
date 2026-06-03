@@ -205,7 +205,7 @@ function BrandKit() {
         marginBottom: '10px',
       }}>
         <span style={{ ...S.eyebrow, marginBottom: '28px' }}>Colour Palette</span>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(68px, 1fr))', gap: '8px' }}>
           {swatches.map(sw => (
             <div key={sw.hex} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '14px' }}>
               <span style={{
@@ -234,7 +234,7 @@ function BrandKit() {
       </div>
 
       {/* Typography cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '10px' }}>
         {fonts.map(f => (
           <div key={f.name} style={{
             background: C.surface,
@@ -291,6 +291,9 @@ function TierXContent() {
         }}>
           TierX DCS
         </h1>
+        <span style={{ display: 'inline-block', fontFamily: 'var(--font-body)', fontSize: '10px', letterSpacing: '0.14em', textTransform: 'uppercase', color: C.textMute, border: `1px solid ${C.border}`, borderRadius: '999px', padding: '4px 14px', marginBottom: '24px' }}>
+          Infrastructure Technology
+        </span>
         <p style={{ ...S.para, fontSize: '17px', color: C.textSub, maxWidth: '600px', margin: '0 0 32px' }}>
           Building a trusted, differentiated brand for a prefabricated data center startup entering the North American market.
         </p>
@@ -383,7 +386,7 @@ function TierXContent() {
         </div>
 
         <h3 style={S.h3}>Strategic Pillars</h3>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>
           {[
             { num: '01', title: 'Brand Trust & Credibility', desc: 'A cohesive visual system that conveys engineering rigor, stability, and forward-thinking innovation.' },
             { num: '02', title: 'Product Clarity Through 3D', desc: 'Complex hardware is confusing in 2D. 3D renders let prospects see the engineering elegance and modularity.' },
@@ -409,7 +412,7 @@ function TierXContent() {
             A cohesive visual language built from the ground up, designed to stand shoulder-to-shoulder with enterprise infrastructure vendors while maintaining a modern, approachable edge.
           </p>
           <BrandKit />
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginBottom: '20px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '8px', marginBottom: '20px' }}>
             {[
               { label: 'Logo variations & usage guidelines' },
               { label: 'Brand guidelines spread' },
@@ -423,7 +426,7 @@ function TierXContent() {
               { label: 'Typography', detail: 'Space Grotesk (headlines — geometric, technical), Inter (body — clean, legible), JetBrains Mono (code/specs — engineering authenticity).' },
               { label: 'Visual Language', detail: 'Clean lines, generous whitespace, geometric shapes echoing modularity. Hardware-in-context imagery paired with real team portraits.' },
             ].map((item, i) => (
-              <div key={item.label} style={{ display: 'grid', gridTemplateColumns: '120px 1fr', borderBottom: i < 2 ? BD : 'none' }}>
+              <div key={item.label} style={{ display: 'grid', gridTemplateColumns: 'minmax(80px, 110px) 1fr', borderBottom: i < 2 ? BD : 'none' }}>
                 <div style={{ padding: '16px 20px', borderRight: BD, background: C.surface }}>
                   <span style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 600, color: C.textMute, letterSpacing: '0.08em', textTransform: 'uppercase' }}>{item.label}</span>
                 </div>
@@ -444,7 +447,7 @@ function TierXContent() {
           <div style={{ marginBottom: '20px' }}>
             <ImgBox label="Homepage hero — value prop + exploded view 3D animation" aspect="16/9" />
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px', marginBottom: '20px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '8px', marginBottom: '20px' }}>
             {[
               { label: 'Products page — POWERiQ i32 + Edge Pod' },
               { label: 'Mobile responsive views' },
@@ -479,7 +482,7 @@ function TierXContent() {
           <p style={S.para}>
             The most technically sophisticated deliverable. High-fidelity 3D renders that bring TierX's hardware to life. The POWERiQ i32 exploded view is a scroll-driven animation — as users scroll, the unit explodes into component layers (power distribution, cooling, modular racks, OCP networking), then reconstructs. It teaches product architecture through sight.
           </p>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '8px' }}>
             {[
               { label: 'POWERiQ i32 exploded view — scroll animation still frames', aspect: '16/9' },
               { label: 'OCP Edge Pod — real-world deployment render', aspect: '16/9' },
@@ -523,7 +526,7 @@ function TierXContent() {
           ].map((step, i) => (
             <div key={step.week} style={{
               display: 'grid',
-              gridTemplateColumns: '120px 1fr',
+              gridTemplateColumns: 'minmax(80px, 110px) 1fr',
               borderBottom: i < 2 ? BDD : 'none',
               paddingBottom: '28px',
               marginBottom: '28px',
@@ -559,7 +562,7 @@ function TierXContent() {
         <p style={{ ...S.para, marginBottom: '32px' }}>
           Fresh launch — we're tracking the foundational metrics that matter for a B2B company entering a new market. Qualitative wins are already visible.
         </p>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px', marginBottom: '40px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '12px', marginBottom: '40px' }}>
           {[
             { title: 'Brand Cohesiveness', desc: 'One unified visual identity across website, pitch deck, and collateral. No more scattered messaging.' },
             { title: 'Sales Enablement', desc: 'The website answers the top 10 questions prospects ask. Sales can confidently send a single link instead of hunting for materials.' },
@@ -586,7 +589,7 @@ function TierXContent() {
           ].map((row, i) => (
             <div key={row.metric} style={{
               display: 'grid',
-              gridTemplateColumns: '160px 1fr',
+              gridTemplateColumns: 'minmax(100px, 140px) 1fr',
               borderBottom: i < 3 ? BDD : 'none',
             }}>
               <div style={{ padding: '14px 20px', borderRight: BD }}>
@@ -618,6 +621,17 @@ function TierXContent() {
             — Nithin, Co-founder &amp; Director, TierX DCS
           </p>
         </div>
+        <a
+          href="#"
+          style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', fontFamily: 'var(--font-body)', fontSize: '12px', fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.textMute, textDecoration: 'none', marginTop: '24px', transition: 'color 0.2s' }}
+          onMouseEnter={e => e.currentTarget.style.color = C.text}
+          onMouseLeave={e => e.currentTarget.style.color = C.textMute}
+        >
+          View live project
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+        </a>
       </section>
 
       {/* CTA */}
@@ -676,7 +690,7 @@ function FaWillBrandKit() {
     <div style={{ marginBottom: '20px' }}>
       <div style={{ background: C.surface, border: BD, borderRadius: '10px', padding: '32px 28px 28px', marginBottom: '10px' }}>
         <span style={{ ...S.eyebrow, marginBottom: '28px' }}>Colour Palette</span>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(68px, 1fr))', gap: '8px' }}>
           {swatches.map(sw => (
             <div key={sw.hex} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '14px' }}>
               <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', letterSpacing: '0.06em', color: C.textMute }}>{sw.hex}</span>
@@ -689,7 +703,7 @@ function FaWillBrandKit() {
           ))}
         </div>
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '10px' }}>
         {fonts.map(f => (
           <div key={f.name} style={{ background: C.surface, border: BD, borderRadius: '10px', padding: '20px', display: 'flex', flexDirection: 'column' }}>
             <div style={{ marginBottom: '16px' }}>
@@ -734,6 +748,9 @@ function FaWillBikePubContent() {
         <h1 style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: 'clamp(44px, 8vw, 88px)', color: C.text, lineHeight: 0.92, letterSpacing: '-0.04em', margin: '0 0 24px' }}>
           FaWill Bike Pub
         </h1>
+        <span style={{ display: 'inline-block', fontFamily: 'var(--font-body)', fontSize: '10px', letterSpacing: '0.14em', textTransform: 'uppercase', color: C.textMute, border: `1px solid ${C.border}`, borderRadius: '999px', padding: '4px 14px', marginBottom: '24px' }}>
+          Hospitality & Entertainment
+        </span>
         <p style={{ ...S.para, fontSize: '17px', color: C.textSub, maxWidth: '600px', margin: '0 0 32px' }}>
           Building a cohesive brand identity, booking system, and social presence for Ottawa's first party bike pub — from concept to thriving community gathering spot in 8 weeks.
         </p>
@@ -748,7 +765,7 @@ function FaWillBikePubContent() {
       {/* At a Glance */}
       <section style={{ marginBottom: '72px' }}>
         <SectionHead num="01 — Client" title="FaWill at a Glance" />
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1px', border: BD, borderRadius: '6px', overflow: 'hidden', marginBottom: '40px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1px', border: BD, borderRadius: '6px', overflow: 'hidden', marginBottom: '40px' }}>
           {[
             { label: 'What They Do', value: 'Party bike pub experience in Ottawa — group social cycling combined with food, drinks, and atmosphere.' },
             { label: 'Market', value: 'Local hospitality & entertainment; targeting Ottawa millennials and groups seeking unique experiences.' },
@@ -799,7 +816,7 @@ function FaWillBikePubContent() {
           </p>
         </div>
         <h3 style={{ ...S.h3, marginBottom: '16px' }}>Strategic Pillars</h3>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '12px' }}>
           {[
             { num: '01', title: 'Visual Identity & Brand Trust',      desc: 'Bold, playful brand that says "we\'re legitimate, we\'re fun, you\'ll have an amazing time." Instant recognition and trust.' },
             { num: '02', title: 'Frictionless Booking Experience',     desc: 'Remove all friction between interest and booking. One-click system handling group sizes, dates, special requests, and payment.' },
@@ -824,7 +841,7 @@ function FaWillBikePubContent() {
           <h3 style={{ ...S.h3, marginBottom: '16px' }}>1. Complete Brand Identity System</h3>
           <p style={S.para}>From zero to a cohesive brand that works across every touchpoint — website, social, email, signage, and merchandise. Built to feel fun and approachable while signalling legitimate, professional operations.</p>
           <FaWillBrandKit />
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginBottom: '20px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '8px', marginBottom: '20px' }}>
             {[
               { label: 'Logo — primary mark, variations & favicon', aspect: '4/3' },
               { label: 'Brand guidelines spread', aspect: '4/3' },
@@ -841,7 +858,7 @@ function FaWillBikePubContent() {
           <div style={{ marginBottom: '12px' }}>
             <ImgBox label="Homepage hero — group experience + CTA to book" aspect="16/9" />
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px', marginBottom: '20px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '8px', marginBottom: '20px' }}>
             {['Occasions page — bachelorette / corporate / birthday', 'Pricing & group sizes table', 'Mobile booking view'].map(l => (
               <ImgBox key={l} label={l} aspect="3/4" />
             ))}
@@ -860,7 +877,7 @@ function FaWillBikePubContent() {
         <div style={{ marginBottom: '52px' }}>
           <h3 style={{ ...S.h3, marginBottom: '16px' }}>3. Custom Booking & Lead Management System</h3>
           <p style={S.para}>Off-the-shelf calendars don't work for group experience businesses. We built a custom system: group size, occasion, special requests, Stripe payment, automated confirmation and reminder emails, real-time calendar to prevent double-bookings, and post-experience follow-up for testimonials and repeat bookings.</p>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '8px' }}>
             {['Booking system workflow & form steps', 'Admin dashboard — calendar + booking management', 'Confirmation email template', 'Post-experience follow-up sequence'].map(l => (
               <ImgBox key={l} label={l} aspect="4/3" />
             ))}
@@ -871,7 +888,7 @@ function FaWillBikePubContent() {
         <div style={{ marginBottom: '52px' }}>
           <h3 style={{ ...S.h3, marginBottom: '16px' }}>4. Social Media Strategy & Content System</h3>
           <p style={S.para}>Instagram and TikTok are where party experiences are discovered. We built the profiles, content pillars, posting cadence, and Reels strategy from scratch.</p>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginBottom: '16px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '8px', marginBottom: '16px' }}>
             {['Instagram profile & highlight stories', 'Sample content grid — 9-post layout', 'Reels / TikTok clip examples', 'Content calendar — first 30 days'].map(l => (
               <ImgBox key={l} label={l} aspect="4/3" />
             ))}
@@ -883,7 +900,7 @@ function FaWillBikePubContent() {
               { label: 'Testimonials',      detail: 'Customer quotes paired with their group photos. Trust-building gold.' },
               { label: 'Promotional',       detail: 'Special offers, seasonal campaigns, referral incentives.' },
             ].map((item, i) => (
-              <div key={item.label} style={{ display: 'grid', gridTemplateColumns: '140px 1fr', borderBottom: i < 3 ? BD : 'none' }}>
+              <div key={item.label} style={{ display: 'grid', gridTemplateColumns: 'minmax(90px, 130px) 1fr', borderBottom: i < 3 ? BD : 'none' }}>
                 <div style={{ padding: '14px 20px', borderRight: BD, background: C.surface }}>
                   <span style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 600, color: C.textMute, letterSpacing: '0.08em', textTransform: 'uppercase' }}>{item.label}</span>
                 </div>
@@ -899,7 +916,7 @@ function FaWillBikePubContent() {
         <div style={{ marginBottom: '0' }}>
           <h3 style={{ ...S.h3, marginBottom: '16px' }}>5. Email Automation & Paid Advertising</h3>
           <p style={S.para}>Welcome sequences, pre-experience reminders, post-experience follow-ups, and seasonal re-engagement campaigns. Paired with Facebook/Instagram ads targeted at bachelorette planners (women 25–40) and corporate event organizers (30–50), plus Google Local Services Ads for high-intent Ottawa searches.</p>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '8px' }}>
             {['Email automation workflow diagram', 'Ad creative samples — bachelorette + corporate'].map(l => (
               <ImgBox key={l} label={l} aspect="16/9" />
             ))}
@@ -918,7 +935,7 @@ function FaWillBikePubContent() {
             { week: 'Weeks 7–8',  title: 'Content & Ads',                 desc: 'Photography/videography of early trial runs. Email templates, ad creative production, content calendar built.' },
             { week: 'Early March', title: 'Launch',                       desc: 'Website live, booking system live, social content calendar running, first paid ads active.' },
           ].map((step, i) => (
-            <div key={step.week} style={{ display: 'grid', gridTemplateColumns: '120px 1fr', borderBottom: i < 4 ? BDD : 'none', paddingBottom: '24px', marginBottom: '24px', gap: '24px' }}>
+            <div key={step.week} style={{ display: 'grid', gridTemplateColumns: 'minmax(80px, 110px) 1fr', borderBottom: i < 4 ? BDD : 'none', paddingBottom: '24px', marginBottom: '24px', gap: '24px' }}>
               <span style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 600, color: '#35AC8F', letterSpacing: '0.08em', textTransform: 'uppercase', paddingTop: '2px' }}>{step.week}</span>
               <div>
                 <h3 style={{ ...S.h3, marginBottom: '6px', fontSize: '15px' }}>{step.title}</h3>
@@ -945,7 +962,7 @@ function FaWillBikePubContent() {
       <section style={{ marginBottom: '72px' }}>
         <SectionHead num="06 — Results" title="Early impact." />
         <p style={{ ...S.para, marginBottom: '32px' }}>Within the first month of launch, FaWill saw measurable traction across every channel. Metrics are being tracked and will be updated.</p>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px', marginBottom: '40px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '12px', marginBottom: '40px' }}>
           {[
             { title: 'Brand Legitimacy',    desc: 'Zero to full brand system in 8 weeks. New visitors immediately see a professional, trustworthy business — not a startup idea.' },
             { title: 'Frictionless Booking', desc: 'Replaced manual email back-and-forth with a one-click booking flow. Immediate lift in inquiry-to-booking conversion.' },
@@ -968,7 +985,7 @@ function FaWillBikePubContent() {
             { metric: 'Social engagement', target: '[ X ]% engagement rate + viral content reach — TBD' },
             { metric: 'Referral rate',    target: '% of new customers from existing customer referrals — TBD' },
           ].map((row, i) => (
-            <div key={row.metric} style={{ display: 'grid', gridTemplateColumns: '160px 1fr', borderBottom: i < 3 ? BDD : 'none' }}>
+            <div key={row.metric} style={{ display: 'grid', gridTemplateColumns: 'minmax(100px, 140px) 1fr', borderBottom: i < 3 ? BDD : 'none' }}>
               <div style={{ padding: '14px 20px', borderRight: BD }}>
                 <span style={{ fontFamily: 'var(--font-body)', fontSize: '12px', fontWeight: 500, color: C.textMute, letterSpacing: '0.04em' }}>{row.metric}</span>
               </div>
@@ -985,6 +1002,17 @@ function FaWillBikePubContent() {
           </blockquote>
           <p style={{ ...S.para, margin: 0, fontSize: '13px', color: C.textFade }}>— Founder, FaWill Bike Pub</p>
         </div>
+        <a
+          href="#"
+          style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', fontFamily: 'var(--font-body)', fontSize: '12px', fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.textMute, textDecoration: 'none', marginTop: '24px', transition: 'color 0.2s' }}
+          onMouseEnter={e => e.currentTarget.style.color = C.text}
+          onMouseLeave={e => e.currentTarget.style.color = C.textMute}
+        >
+          View live project
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+        </a>
       </section>
 
       {/* CTA */}
@@ -1017,7 +1045,7 @@ function FaWillCleaningBrandKit() {
     <div style={{ marginBottom: '20px' }}>
       <div style={{ background: C.surface, border: BD, borderRadius: '10px', padding: '32px 28px 28px', marginBottom: '10px' }}>
         <span style={{ ...S.eyebrow, marginBottom: '28px' }}>Colour Palette</span>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(68px, 1fr))', gap: '8px' }}>
           {swatches.map(sw => (
             <div key={sw.hex} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '14px' }}>
               <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', letterSpacing: '0.06em', color: C.textMute }}>{sw.hex}</span>
@@ -1030,7 +1058,7 @@ function FaWillCleaningBrandKit() {
           ))}
         </div>
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '10px' }}>
         {fonts.map(f => (
           <div key={f.name} style={{ background: C.surface, border: BD, borderRadius: '10px', padding: '20px', display: 'flex', flexDirection: 'column' }}>
             <div style={{ marginBottom: '16px' }}>
@@ -1077,6 +1105,9 @@ function FaWillCleaningContent() {
         <h1 style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: 'clamp(38px, 7vw, 80px)', color: C.text, lineHeight: 0.92, letterSpacing: '-0.04em', margin: '0 0 24px' }}>
           FaWill<br />Cleaning<br />Company
         </h1>
+        <span style={{ display: 'inline-block', fontFamily: 'var(--font-body)', fontSize: '10px', letterSpacing: '0.14em', textTransform: 'uppercase', color: C.textMute, border: `1px solid ${C.border}`, borderRadius: '999px', padding: '4px 14px', marginBottom: '24px' }}>
+          Commercial Services / B2B
+        </span>
         <p style={{ ...S.para, fontSize: '17px', color: C.textSub, maxWidth: '600px', margin: '0 0 32px' }}>
           Building trust and brand authority for a commercial cleaning company — positioning as the premium professional choice through branding, video, and targeted bilingual marketing in Quebec's competitive cleaning market.
         </p>
@@ -1091,7 +1122,7 @@ function FaWillCleaningContent() {
       {/* At a Glance */}
       <section style={{ marginBottom: '72px' }}>
         <SectionHead num="01 — Client" title="FaWill Cleaning at a Glance" />
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1px', border: BD, borderRadius: '6px', overflow: 'hidden', marginBottom: '40px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1px', border: BD, borderRadius: '6px', overflow: 'hidden', marginBottom: '40px' }}>
           {[
             { label: 'What They Do', value: 'Commercial and corporate cleaning services — offices, retail spaces, and facilities management across Quebec.' },
             { label: 'Market', value: 'B2B services; targeting mid-market companies, corporate offices, retail chains, and property management firms.' },
@@ -1151,7 +1182,7 @@ function FaWillCleaningContent() {
         </div>
 
         <h3 style={{ ...S.h3, marginBottom: '16px' }}>Strategic Pillars</h3>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '12px' }}>
           {[
             { num: '01', title: 'Premium Professional Brand',       desc: 'A clean, modern visual identity that competes visually with larger corporations — the brand says "reliable choice," not "cheapest option."' },
             { num: '02', title: 'Proof-Based Marketing',            desc: 'Video case studies, before/after galleries, client testimonials, safety certifications — content as the primary sales tool.' },
@@ -1176,7 +1207,7 @@ function FaWillCleaningContent() {
           <h3 style={{ ...S.h3, marginBottom: '16px' }}>1. Complete Brand Identity System</h3>
           <p style={S.para}>A professional, modern brand that competes with larger corporations at every touchpoint — digital, print, signage, uniforms, and marketing collateral. Every choice reinforces "trustworthy and precise."</p>
           <FaWillCleaningBrandKit />
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginBottom: '20px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '8px', marginBottom: '20px' }}>
             {['Logo variations — EN/FR lockups & usage', 'Brand guidelines spread — bilingual edition'].map(l => (
               <ImgBox key={l} label={l} aspect="4/3" />
             ))}
@@ -1188,7 +1219,7 @@ function FaWillCleaningContent() {
               { label: 'Visual Language', detail: 'Professional photography of pristine commercial spaces. Uniformed team portraits. Safety badges and certification seals. Clean layouts with corporate but approachable tone.' },
               { label: 'Bilingual',   detail: 'Brand voice guide for both English and French — not translation, but native tone. Separate messaging frameworks ensuring proper French voice across all touchpoints.' },
             ].map((item, i) => (
-              <div key={item.label} style={{ display: 'grid', gridTemplateColumns: '120px 1fr', borderBottom: i < 3 ? BD : 'none' }}>
+              <div key={item.label} style={{ display: 'grid', gridTemplateColumns: 'minmax(80px, 110px) 1fr', borderBottom: i < 3 ? BD : 'none' }}>
                 <div style={{ padding: '16px 20px', borderRight: BD, background: C.surface }}>
                   <span style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 600, color: C.textMute, letterSpacing: '0.08em', textTransform: 'uppercase' }}>{item.label}</span>
                 </div>
@@ -1207,7 +1238,7 @@ function FaWillCleaningContent() {
           <div style={{ marginBottom: '12px' }}>
             <ImgBox label="Homepage hero — pristine commercial space + quote CTA" aspect="16/9" />
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px', marginBottom: '20px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '8px', marginBottom: '20px' }}>
             {['Services breakdown — office / retail / facility', 'Case studies — before/after with metrics', 'Mobile bilingual view (EN/FR)'].map(l => (
               <ImgBox key={l} label={l} aspect="3/4" />
             ))}
@@ -1226,7 +1257,7 @@ function FaWillCleaningContent() {
         <div style={{ marginBottom: '52px' }}>
           <h3 style={{ ...S.h3, marginBottom: '16px' }}>3. Cinematic Video Content</h3>
           <p style={S.para}>Video is the most persuasive format for a service business. Seeing a space transform from neglected to pristine builds emotional trust far faster than any written description — especially for corporate buyers making long-term decisions.</p>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginBottom: '16px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '8px', marginBottom: '16px' }}>
             {['Hero transformation reel — dirty to pristine (bilingual)', 'Case study video — client testimonial + before/after B-roll', 'Process video — team in action, safety protocols, quality checks', 'Social media reels — 15-30 sec transformation clips'].map(l => (
               <ImgBox key={l} label={l} aspect="16/9" />
             ))}
@@ -1238,7 +1269,7 @@ function FaWillCleaningContent() {
               { label: 'Process Videos',  detail: 'Behind-the-scenes clips showing safety gear, team professionalism, quality control. Builds service confidence.' },
               { label: 'Social Reels',    detail: 'Short-form 15-30 sec clips optimized for Instagram and TikTok for ongoing discovery.' },
             ].map((item, i) => (
-              <div key={item.label} style={{ display: 'grid', gridTemplateColumns: '120px 1fr', borderBottom: i < 3 ? BD : 'none' }}>
+              <div key={item.label} style={{ display: 'grid', gridTemplateColumns: 'minmax(80px, 110px) 1fr', borderBottom: i < 3 ? BD : 'none' }}>
                 <div style={{ padding: '14px 20px', borderRight: BD, background: C.surface }}>
                   <span style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 600, color: C.textMute, letterSpacing: '0.08em', textTransform: 'uppercase' }}>{item.label}</span>
                 </div>
@@ -1254,7 +1285,7 @@ function FaWillCleaningContent() {
         <div style={{ marginBottom: '52px' }}>
           <h3 style={{ ...S.h3, marginBottom: '16px' }}>4. Targeted Ad Strategy & Lead Generation</h3>
           <p style={S.para}>Content exists — now it reaches the right people. Separate bilingual ad structures for English corporate and French Quebec markets, each with culturally appropriate messaging rather than translated copy.</p>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginBottom: '16px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '8px', marginBottom: '16px' }}>
             {['LinkedIn ad creative — facility manager targeting', 'Facebook/Instagram — before/after video ads', 'Google Local Services — search placement', 'Bilingual campaign structure — EN/FR ad sets'].map(l => (
               <ImgBox key={l} label={l} aspect="4/3" />
             ))}
@@ -1266,7 +1297,7 @@ function FaWillCleaningContent() {
               { label: 'Google LSA',  detail: 'Top-of-results presence for "commercial cleaning Quebec," "office cleaning [city]" high-intent searches.' },
               { label: 'Bilingual',   detail: 'Separate EN/FR ad sets — native French voice, not translation. Culturally appropriate creative for each segment.' },
             ].map((item, i) => (
-              <div key={item.label} style={{ display: 'grid', gridTemplateColumns: '100px 1fr', borderBottom: i < 3 ? BD : 'none' }}>
+              <div key={item.label} style={{ display: 'grid', gridTemplateColumns: 'minmax(70px, 90px) 1fr', borderBottom: i < 3 ? BD : 'none' }}>
                 <div style={{ padding: '14px 20px', borderRight: BD, background: C.surface }}>
                   <span style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 600, color: C.textMute, letterSpacing: '0.08em', textTransform: 'uppercase' }}>{item.label}</span>
                 </div>
@@ -1282,7 +1313,7 @@ function FaWillCleaningContent() {
         <div style={{ marginBottom: '0' }}>
           <h3 style={{ ...S.h3, marginBottom: '16px' }}>5. Social Presence & Email Automation</h3>
           <p style={S.para}>LinkedIn for B2B thought leadership and direct decision-maker outreach. Facebook for community engagement and reviews. Email sequences for lead nurturing, onboarding, renewal reminders, and win-back campaigns — all bilingual.</p>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '8px' }}>
             {['LinkedIn page — thought leadership + company authority', 'Email automation workflow — onboarding to renewal'].map(l => (
               <ImgBox key={l} label={l} aspect="16/9" />
             ))}
@@ -1301,7 +1332,7 @@ function FaWillCleaningContent() {
             { week: 'Weeks 7–8',   title: 'Video Production',           desc: 'On-site filming of team in action and space transformations. Case study selection and client interviews.' },
             { week: 'Week 9+',     title: 'Launch & Ongoing',           desc: 'Content calendar execution, ad campaign launch and optimization, email automation setup, bi-weekly performance reviews.' },
           ].map((step, i) => (
-            <div key={step.week} style={{ display: 'grid', gridTemplateColumns: '120px 1fr', borderBottom: i < 4 ? BDD : 'none', paddingBottom: '24px', marginBottom: '24px', gap: '24px' }}>
+            <div key={step.week} style={{ display: 'grid', gridTemplateColumns: 'minmax(80px, 110px) 1fr', borderBottom: i < 4 ? BDD : 'none', paddingBottom: '24px', marginBottom: '24px', gap: '24px' }}>
               <span style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 600, color: ACCENT, letterSpacing: '0.08em', textTransform: 'uppercase', paddingTop: '2px' }}>{step.week}</span>
               <div>
                 <h3 style={{ ...S.h3, marginBottom: '6px', fontSize: '15px' }}>{step.title}</h3>
@@ -1330,7 +1361,7 @@ function FaWillCleaningContent() {
         <p style={{ ...S.para, marginBottom: '32px' }}>
           Early metrics show meaningful traction across lead volume, brand perception, and bilingual reach. Full results are being tracked and updated as campaigns mature.
         </p>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px', marginBottom: '40px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '12px', marginBottom: '40px' }}>
           {[
             { title: 'Brand Authority',        desc: 'FaWill now presents on par with national chains. Corporate buyers immediately see professional signals — certifications, case studies, safety standards.' },
             { title: 'Bilingual Penetration',  desc: 'French-language leads now represent a significant portion of inbound. Native-voice bilingual content opened a market segment that was previously unreachable.' },
@@ -1353,7 +1384,7 @@ function FaWillCleaningContent() {
             { metric: 'New contracts',  target: '[ X ] new recurring contracts attributed to digital — TBD' },
             { metric: 'Bilingual split', target: 'Target: 40%+ of inbound from French Quebec market' },
           ].map((row, i) => (
-            <div key={row.metric} style={{ display: 'grid', gridTemplateColumns: '160px 1fr', borderBottom: i < 3 ? BDD : 'none' }}>
+            <div key={row.metric} style={{ display: 'grid', gridTemplateColumns: 'minmax(100px, 140px) 1fr', borderBottom: i < 3 ? BDD : 'none' }}>
               <div style={{ padding: '14px 20px', borderRight: BD }}>
                 <span style={{ fontFamily: 'var(--font-body)', fontSize: '12px', fontWeight: 500, color: C.textMute, letterSpacing: '0.04em' }}>{row.metric}</span>
               </div>
@@ -1370,6 +1401,17 @@ function FaWillCleaningContent() {
           </blockquote>
           <p style={{ ...S.para, margin: 0, fontSize: '13px', color: C.textFade }}>— CEO &amp; Founder, FaWill Cleaning Company</p>
         </div>
+        <a
+          href="#"
+          style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', fontFamily: 'var(--font-body)', fontSize: '12px', fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.textMute, textDecoration: 'none', marginTop: '24px', transition: 'color 0.2s' }}
+          onMouseEnter={e => e.currentTarget.style.color = C.text}
+          onMouseLeave={e => e.currentTarget.style.color = C.textMute}
+        >
+          View live project
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+        </a>
       </section>
 
       {/* CTA */}
@@ -1452,7 +1494,7 @@ function SceneSetContent() {
         {/* Colour swatches */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(68px, 1fr))',
           gap: '1px',
           border: BD,
           borderRadius: '8px',
@@ -1616,7 +1658,7 @@ function GenericContent({ project }) {
         <hr style={S.rule} />
         <span style={S.eyebrow}>02 — What We Built</span>
         <h2 style={{ ...S.h2, textAlign: 'center' }}>The work.</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>
           {['Creative Direction', 'Campaign Build', 'Final Delivery'].map(t => (
             <div key={t} style={{ aspectRatio: '4/3', background: C.surface, border: BD, borderRadius: '6px', display: 'flex', alignItems: 'flex-end', padding: '16px' }}>
               <span style={{ fontFamily: 'var(--font-body)', fontSize: '10px', letterSpacing: '0.1em', color: C.textFade, textTransform: 'uppercase' }}>{t}</span>
@@ -1629,7 +1671,7 @@ function GenericContent({ project }) {
         <hr style={S.rule} />
         <span style={S.eyebrow}>03 — The Result</span>
         <h2 style={{ ...S.h2, textAlign: 'center' }}>What moved.</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', border: BD, borderRadius: '6px', overflow: 'hidden' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1px', border: BD, borderRadius: '6px', overflow: 'hidden' }}>
           {STATS.map(stat => (
             <div key={stat.label} style={{ padding: '40px 28px', background: C.surface, textAlign: 'center' }}>
               <p style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: 'clamp(40px, 5vw, 68px)', color: '#D4001E', letterSpacing: '-0.04em', margin: '0 0 10px', lineHeight: 1 }}>

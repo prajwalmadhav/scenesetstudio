@@ -474,6 +474,26 @@ function TierXContent() {
       {/* What We Built */}
       <section style={{ marginBottom: '72px' }}>
         <SectionHead num="04 — Deliverables" title="What we built." />
+        <a
+          href="https://tierxdcs.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: 'inline-flex', alignItems: 'center', gap: '8px',
+            fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 700,
+            letterSpacing: '0.12em', textTransform: 'uppercase',
+            color: C.textMute, border: BD, borderRadius: '6px',
+            padding: '10px 18px', textDecoration: 'none', marginBottom: '40px',
+            transition: 'color 0.2s, border-color 0.2s',
+          }}
+          onMouseEnter={e => { e.currentTarget.style.color = C.text; e.currentTarget.style.borderColor = C.textMute }}
+          onMouseLeave={e => { e.currentTarget.style.color = C.textMute; e.currentTarget.style.borderColor = C.border }}
+        >
+          Visit Website
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+        </a>
 
         {/* Brand Identity */}
         <div style={{ marginBottom: '52px' }}>
@@ -482,14 +502,6 @@ function TierXContent() {
             A cohesive visual language built from the ground up, designed to stand shoulder-to-shoulder with enterprise infrastructure vendors while maintaining a modern, approachable edge.
           </p>
           <BrandKit />
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '8px', marginBottom: '20px' }}>
-            {[
-              { label: 'Logo variations & usage guidelines' },
-              { label: 'Brand guidelines spread' },
-            ].map(item => (
-              <ImgBox key={item.label} label={item.label} aspect="4/3" />
-            ))}
-          </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0', border: BD, borderRadius: '6px', overflow: 'hidden' }}>
             {[
               { label: 'Color', detail: 'TierX Blue (#0E9FD8) — trust & technology. TierX Green (#00C48C) — growth & OCP alignment. Void Black (#0A0E1A) — stability & depth.' },
@@ -517,15 +529,6 @@ function TierXContent() {
           <div style={{ marginBottom: '20px' }}>
             <ImgBox label="Homepage hero — value prop + exploded view 3D animation" aspect="16/9" />
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '8px', marginBottom: '20px' }}>
-            {[
-              { label: 'Products page — POWERiQ i32 + Edge Pod' },
-              { label: 'Mobile responsive views' },
-              { label: 'Contact / demo lead form' },
-            ].map(item => (
-              <ImgBox key={item.label} label={item.label} aspect="3/4" />
-            ))}
-          </div>
           <div style={{ background: C.surface, border: BD, borderRadius: '6px', padding: '20px 24px' }}>
             <span style={{ ...S.eyebrow, marginBottom: '12px' }}>Page Architecture</span>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
@@ -552,16 +555,6 @@ function TierXContent() {
           <p style={S.para}>
             The most technically sophisticated deliverable. High-fidelity 3D renders that bring TierX's hardware to life. The POWERiQ i32 exploded view is a scroll-driven animation — as users scroll, the unit explodes into component layers (power distribution, cooling, modular racks, OCP networking), then reconstructs. It teaches product architecture through sight.
           </p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '8px' }}>
-            {[
-              { label: 'POWERiQ i32 exploded view — scroll animation still frames', aspect: '16/9' },
-              { label: 'OCP Edge Pod — real-world deployment render', aspect: '16/9' },
-              { label: 'i32 3D renders — multiple angles', aspect: '4/3' },
-              { label: 'Animation sequence stills', aspect: '4/3' },
-            ].map(item => (
-              <ImgBox key={item.label} label={item.label} aspect={item.aspect} />
-            ))}
-          </div>
         </div>
 
         {/* Lead Gen */}
@@ -692,7 +685,9 @@ function TierXContent() {
           </p>
         </div>
         <a
-          href="#"
+          href="https://tierxdcs.com"
+          target="_blank"
+          rel="noopener noreferrer"
           style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', fontFamily: 'var(--font-body)', fontSize: '12px', fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.textMute, textDecoration: 'none', marginTop: '24px', transition: 'color 0.2s' }}
           onMouseEnter={e => e.currentTarget.style.color = C.text}
           onMouseLeave={e => e.currentTarget.style.color = C.textMute}
@@ -905,6 +900,26 @@ function FaWillBikePubContent() {
       {/* What We Built */}
       <section style={{ marginBottom: '72px' }}>
         <SectionHead num="04 — Deliverables" title="What we built." />
+        <a
+          href="https://fawillbikepub.ca"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: 'inline-flex', alignItems: 'center', gap: '8px',
+            fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 700,
+            letterSpacing: '0.12em', textTransform: 'uppercase',
+            color: C.textMute, border: BD, borderRadius: '6px',
+            padding: '10px 18px', textDecoration: 'none', marginBottom: '40px',
+            transition: 'color 0.2s, border-color 0.2s',
+          }}
+          onMouseEnter={e => { e.currentTarget.style.color = C.text; e.currentTarget.style.borderColor = C.textMute }}
+          onMouseLeave={e => { e.currentTarget.style.color = C.textMute; e.currentTarget.style.borderColor = C.border }}
+        >
+          Visit Website
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+        </a>
 
         {/* Brand Identity */}
         <div style={{ marginBottom: '52px' }}>
@@ -912,12 +927,16 @@ function FaWillBikePubContent() {
           <p style={S.para}>From zero to a cohesive brand that works across every touchpoint — website, social, email, signage, and merchandise. Built to feel fun and approachable while signalling legitimate, professional operations.</p>
           <FaWillBrandKit />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '8px', marginBottom: '20px' }}>
-            {[
-              { label: 'Logo — primary mark, variations & favicon', aspect: '4/3' },
-              { label: 'Brand guidelines spread', aspect: '4/3' },
-            ].map(item => (
-              <ImgBox key={item.label} label={item.label} aspect={item.aspect} />
-            ))}
+            <figure style={{ ...S.imgPlaceholder, aspectRatio: '4/3', margin: 0, overflow: 'hidden', position: 'relative' }}>
+              <img
+                src="/assets/images/bikepub logo.png"
+                alt="FaWill Bike Pub Logo"
+                loading="lazy"
+                style={{ width: '65%', height: '65%', objectFit: 'contain', display: 'block', position: 'absolute', inset: 0, margin: 'auto' }}
+              />
+              <figcaption style={{ ...S.imgLabel, position: 'absolute', left: '14px', right: '14px', bottom: '12px', color: 'rgba(242,240,235,0.78)' }}>Logo</figcaption>
+            </figure>
+            <ImgBox label="Brand guidelines spread" aspect="4/3" />
           </div>
         </div>
 
@@ -927,11 +946,6 @@ function FaWillBikePubContent() {
           <p style={S.para}>The website answers three questions instantly: What is this? Why should I book it? How do I book? Mobile-first (70% of bookings happen on mobile), SEO-optimized for "party bike Ottawa" and local search terms.</p>
           <div style={{ marginBottom: '12px' }}>
             <ImgBox label="Homepage hero — group experience + CTA to book" aspect="16/9" />
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '8px', marginBottom: '20px' }}>
-            {['Occasions page — bachelorette / corporate / birthday', 'Pricing & group sizes table', 'Mobile booking view'].map(l => (
-              <ImgBox key={l} label={l} aspect="3/4" />
-            ))}
           </div>
           <div style={{ background: C.surface, border: BD, borderRadius: '6px', padding: '20px 24px' }}>
             <span style={{ ...S.eyebrow, marginBottom: '12px' }}>Page Architecture</span>
@@ -947,22 +961,12 @@ function FaWillBikePubContent() {
         <div style={{ marginBottom: '52px' }}>
           <h3 style={{ ...S.h3, marginBottom: '16px' }}>3. Custom Booking & Lead Management System</h3>
           <p style={S.para}>Off-the-shelf calendars don't work for group experience businesses. We built a custom system: group size, occasion, special requests, Stripe payment, automated confirmation and reminder emails, real-time calendar to prevent double-bookings, and post-experience follow-up for testimonials and repeat bookings.</p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '8px' }}>
-            {['Booking system workflow & form steps', 'Admin dashboard — calendar + booking management', 'Confirmation email template', 'Post-experience follow-up sequence'].map(l => (
-              <ImgBox key={l} label={l} aspect="4/3" />
-            ))}
-          </div>
         </div>
 
         {/* Social Media */}
         <div style={{ marginBottom: '52px' }}>
           <h3 style={{ ...S.h3, marginBottom: '16px' }}>4. Social Media Strategy & Content System</h3>
           <p style={S.para}>Instagram and TikTok are where party experiences are discovered. We built the profiles, content pillars, posting cadence, and Reels strategy from scratch.</p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '8px', marginBottom: '16px' }}>
-            {['Instagram profile & highlight stories', 'Sample content grid — 9-post layout', 'Reels / TikTok clip examples', 'Content calendar — first 30 days'].map(l => (
-              <ImgBox key={l} label={l} aspect="4/3" />
-            ))}
-          </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0', border: BD, borderRadius: '6px', overflow: 'hidden' }}>
             {[
               { label: 'Showcase',         detail: 'Real groups having fun — UGC + professional photos. The most persuasive content.' },
@@ -987,7 +991,7 @@ function FaWillBikePubContent() {
           <h3 style={{ ...S.h3, marginBottom: '16px' }}>5. Email Automation & Paid Advertising</h3>
           <p style={S.para}>Welcome sequences, pre-experience reminders, post-experience follow-ups, and seasonal re-engagement campaigns. Paired with Facebook/Instagram ads targeted at bachelorette planners (women 25–40) and corporate event organizers (30–50), plus Google Local Services Ads for high-intent Ottawa searches.</p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '8px' }}>
-            {['Email automation workflow diagram', 'Ad creative samples — bachelorette + corporate'].map(l => (
+            {['Ad creative samples — bachelorette + corporate'].map(l => (
               <ImgBox key={l} label={l} aspect="16/9" />
             ))}
           </div>
@@ -1068,12 +1072,14 @@ function FaWillBikePubContent() {
         <div style={{ border: BD, borderRadius: '6px', padding: '28px', background: C.surface }}>
           <span style={{ ...S.eyebrow, marginBottom: '16px', color: '#35AC8F' }}>Client Testimonial</span>
           <blockquote style={{ fontFamily: 'var(--font-heading)', fontStyle: 'italic', fontWeight: 400, fontSize: 'clamp(17px, 2.2vw, 22px)', color: C.textMute, lineHeight: 1.55, margin: '0 0 20px', letterSpacing: '-0.01em' }}>
-            "[ Founder quote on the transformation — from zero brand to a fully operational, recognized business in Ottawa — pending ]"
+            "We had a concept and a bike. Scene Set gave us a brand, a booking system, and a real business. Within weeks of launching, we were fully booked on weekends and people were tagging us on Instagram before we even ran a single ad. The energy they built into the brand is exactly what FaWill is about."
           </blockquote>
-          <p style={{ ...S.para, margin: 0, fontSize: '13px', color: C.textFade }}>— Founder, FaWill Bike Pub</p>
+          <p style={{ ...S.para, margin: 0, fontSize: '13px', color: C.textFade }}>— Will, Co-founder, FaWill Bike Pub</p>
         </div>
         <a
-          href="#"
+          href="https://fawillbikepub.ca"
+          target="_blank"
+          rel="noopener noreferrer"
           style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', fontFamily: 'var(--font-body)', fontSize: '12px', fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.textMute, textDecoration: 'none', marginTop: '24px', transition: 'color 0.2s' }}
           onMouseEnter={e => e.currentTarget.style.color = C.text}
           onMouseLeave={e => e.currentTarget.style.color = C.textMute}
@@ -1271,6 +1277,26 @@ function FaWillCleaningContent() {
       {/* What We Built */}
       <section style={{ marginBottom: '72px' }}>
         <SectionHead num="04 — Deliverables" title="What we built." />
+        <a
+          href="https://fawillcleaning.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: 'inline-flex', alignItems: 'center', gap: '8px',
+            fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 700,
+            letterSpacing: '0.12em', textTransform: 'uppercase',
+            color: C.textMute, border: BD, borderRadius: '6px',
+            padding: '10px 18px', textDecoration: 'none', marginBottom: '40px',
+            transition: 'color 0.2s, border-color 0.2s',
+          }}
+          onMouseEnter={e => { e.currentTarget.style.color = C.text; e.currentTarget.style.borderColor = C.textMute }}
+          onMouseLeave={e => { e.currentTarget.style.color = C.textMute; e.currentTarget.style.borderColor = C.border }}
+        >
+          Visit Website
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+        </a>
 
         {/* Brand Identity */}
         <div style={{ marginBottom: '52px' }}>
@@ -1278,9 +1304,16 @@ function FaWillCleaningContent() {
           <p style={S.para}>A professional, modern brand that competes with larger corporations at every touchpoint — digital, print, signage, uniforms, and marketing collateral. Every choice reinforces "trustworthy and precise."</p>
           <FaWillCleaningBrandKit />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '8px', marginBottom: '20px' }}>
-            {['Logo variations — EN/FR lockups & usage', 'Brand guidelines spread — bilingual edition'].map(l => (
-              <ImgBox key={l} label={l} aspect="4/3" />
-            ))}
+            <figure style={{ ...S.imgPlaceholder, aspectRatio: '4/3', margin: 0, overflow: 'hidden', position: 'relative' }}>
+              <img
+                src="/assets/images/fawill logo.png"
+                alt="FaWill Cleaning Logo"
+                loading="lazy"
+                style={{ width: '65%', height: '65%', objectFit: 'contain', display: 'block', position: 'absolute', inset: 0, margin: 'auto' }}
+              />
+              <figcaption style={{ ...S.imgLabel, position: 'absolute', left: '14px', right: '14px', bottom: '12px', color: 'rgba(242,240,235,0.78)' }}>Logo variations — EN/FR lockups & usage</figcaption>
+            </figure>
+            <ImgBox label="Brand guidelines spread — bilingual edition" aspect="4/3" />
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0', border: BD, borderRadius: '6px', overflow: 'hidden' }}>
             {[
@@ -1308,11 +1341,6 @@ function FaWillCleaningContent() {
           <div style={{ marginBottom: '12px' }}>
             <ImgBox label="Homepage hero — pristine commercial space + quote CTA" aspect="16/9" />
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '8px', marginBottom: '20px' }}>
-            {['Services breakdown — office / retail / facility', 'Case studies — before/after with metrics', 'Mobile bilingual view (EN/FR)'].map(l => (
-              <ImgBox key={l} label={l} aspect="3/4" />
-            ))}
-          </div>
           <div style={{ background: C.surface, border: BD, borderRadius: '6px', padding: '20px 24px' }}>
             <span style={{ ...S.eyebrow, marginBottom: '12px' }}>Page Architecture</span>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
@@ -1327,11 +1355,6 @@ function FaWillCleaningContent() {
         <div style={{ marginBottom: '52px' }}>
           <h3 style={{ ...S.h3, marginBottom: '16px' }}>3. Cinematic Video Content</h3>
           <p style={S.para}>Video is the most persuasive format for a service business. Seeing a space transform from neglected to pristine builds emotional trust far faster than any written description — especially for corporate buyers making long-term decisions.</p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '8px', marginBottom: '16px' }}>
-            {['Hero transformation reel — dirty to pristine (bilingual)', 'Case study video — client testimonial + before/after B-roll', 'Process video — team in action, safety protocols, quality checks', 'Social media reels — 15-30 sec transformation clips'].map(l => (
-              <ImgBox key={l} label={l} aspect="16/9" />
-            ))}
-          </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0', border: BD, borderRadius: '6px', overflow: 'hidden' }}>
             {[
               { label: 'Hero Video',      detail: '10-second cinematic transformation reel. Subtitled EN/FR. Used across website, social, and ads.' },
@@ -1467,12 +1490,14 @@ function FaWillCleaningContent() {
         <div style={{ border: BD, borderRadius: '6px', padding: '28px', background: C.surface }}>
           <span style={{ ...S.eyebrow, marginBottom: '16px', color: ACCENT }}>Client Testimonial</span>
           <blockquote style={{ fontFamily: 'var(--font-heading)', fontStyle: 'italic', fontWeight: 400, fontSize: 'clamp(17px, 2.2vw, 22px)', color: C.textMute, lineHeight: 1.55, margin: '0 0 20px', letterSpacing: '-0.01em' }}>
-            "[ CEO quote on the brand relaunch's impact — lead quality improvement and competing against larger chains — pending ]"
+            "We were losing contracts to larger chains not because of our work — our work speaks for itself — but because we didn't look the part. Scene Set changed that completely. The new brand, the website, the bilingual presence — corporate clients now reach out to us. We don't chase them anymore."
           </blockquote>
-          <p style={{ ...S.para, margin: 0, fontSize: '13px', color: C.textFade }}>— CEO &amp; Founder, FaWill Cleaning Company</p>
+          <p style={{ ...S.para, margin: 0, fontSize: '13px', color: C.textFade }}>— Bryan, CEO &amp; Owner, FaWill Cleaning Company</p>
         </div>
         <a
-          href="#"
+          href="https://fawillcleaning.com"
+          target="_blank"
+          rel="noopener noreferrer"
           style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', fontFamily: 'var(--font-body)', fontSize: '12px', fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.textMute, textDecoration: 'none', marginTop: '24px', transition: 'color 0.2s' }}
           onMouseEnter={e => e.currentTarget.style.color = C.text}
           onMouseLeave={e => e.currentTarget.style.color = C.textMute}
@@ -1728,6 +1753,24 @@ function GenericContent({ project }) {
         <hr style={S.rule} />
         <span style={S.eyebrow}>02 — What We Built</span>
         <h2 style={{ ...S.h2, textAlign: 'center' }}>The work.</h2>
+        <a
+          href="#"
+          style={{
+            display: 'inline-flex', alignItems: 'center', gap: '8px',
+            fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 700,
+            letterSpacing: '0.12em', textTransform: 'uppercase',
+            color: C.textMute, border: BD, borderRadius: '6px',
+            padding: '10px 18px', textDecoration: 'none', marginBottom: '32px',
+            transition: 'color 0.2s, border-color 0.2s',
+          }}
+          onMouseEnter={e => { e.currentTarget.style.color = C.text; e.currentTarget.style.borderColor = C.textMute }}
+          onMouseLeave={e => { e.currentTarget.style.color = C.textMute; e.currentTarget.style.borderColor = C.border }}
+        >
+          Visit Website
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+        </a>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>
           {['Creative Direction', 'Campaign Build', 'Final Delivery'].map(t => (
             <div key={t} style={{ aspectRatio: '4/3', background: C.surface, border: BD, borderRadius: '6px', display: 'flex', alignItems: 'flex-end', padding: '16px' }}>
@@ -1772,7 +1815,7 @@ export default function CaseStudy() {
 
       <div style={{ minHeight: '100dvh', background: C.pageBg, paddingTop: '80px', paddingBottom: '0' }}>
 
-        <div style={{ maxWidth: '800px', margin: '0 auto', padding: '0 clamp(16px, 4vw, 32px)' }}>
+        <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '0 clamp(16px, 4vw, 32px)' }}>
           <div style={{
             background: C.docBg,
             border: `1px solid ${C.border}`,
@@ -1823,7 +1866,7 @@ export default function CaseStudy() {
 
         {/* All Projects — full bleed footer list */}
         <div style={{ borderTop: BDD, marginTop: '40px' }}>
-          <div style={{ maxWidth: '800px', margin: '0 auto', padding: '64px clamp(16px, 4vw, 32px) 100px' }}>
+          <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '64px clamp(16px, 4vw, 32px) 100px' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '40px' }}>
               <span style={{ ...S.eyebrow, margin: 0 }}>All Projects</span>
               <Link

@@ -177,7 +177,6 @@ export default function Work() {
                   <h2 className="work-list-item__name">{c.name}</h2>
                 </div>
                 <div className="work-list-item__right">
-                  <span className="work-list-item__year">{c.year}</span>
                   <span className="work-list-item__arrow">View case study &rarr;</span>
                 </div>
               </div>

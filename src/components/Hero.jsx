@@ -161,7 +161,7 @@ export default function Hero() {
 
           {/* 3D tilt stage */}
           <div ref={tableRef} className="hero-table">
-            <img src="/landing-second-section.webp" alt="" className="hero-table-single-img" fetchPriority="high" decoding="async" />
+            <img src="/landing-second-final.webp" alt="" className="hero-table-single-img" fetchPriority="high" decoding="async" />
           </div>
 
           {/* Fade masks top + bottom */}

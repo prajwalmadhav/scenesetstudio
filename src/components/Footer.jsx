@@ -188,6 +188,7 @@ export default function Footer() {
         <span className="footer-bottom__copy">
           © {new Date().getFullYear()} SceneSet Studio. All rights reserved.
         </span>
+        <Link to="/privacy" className="footer-bottom__privacy">Privacy Policy</Link>
       </div>
 
     </footer>

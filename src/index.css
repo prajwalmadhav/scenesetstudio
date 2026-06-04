@@ -7600,6 +7600,21 @@ body {
   opacity: 1;
 }
 
+.footer-bottom__privacy {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(242,240,235,0.35);
+  text-decoration: none;
+  transition: color 0.2s;
+  margin-left: auto;
+}
+
+.footer-bottom__privacy:hover {
+  color: rgba(242,240,235,0.75);
+}
+
 @media (max-width: 640px) {
   .footer {
     padding: 40px 24px 24px;

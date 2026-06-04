@@ -70,7 +70,11 @@ export default function Contact() {
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({ access_key: ACCESS_KEY, subject: 'New Project Inquiry — Scene Set Studio', ...form, service: [...services].join(', '), budget, revenue, challenge: [...challenges].join(', '), targetBudget }),
       })
-      if (res.ok) setSent(true)
+      if (res.ok) {
+        if (typeof gtag !== 'undefined') gtag('event', 'generate_lead', { event_category: 'contact', event_label: 'project_inquiry' })
+        if (typeof fbq !== 'undefined') fbq('track', 'Lead')
+        setSent(true)
+      }
     } catch {
       setSent(true)
     }

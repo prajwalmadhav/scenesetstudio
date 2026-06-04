@@ -96,23 +96,6 @@ export default function CTA() {
           scrollTrigger: { trigger: sectionRef.current, start: 'top 70%' } }
       )
 
-      gsap.fromTo('.cta-desktop-trust',
-        { y: 18, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out', delay: 0.55,
-          scrollTrigger: { trigger: sectionRef.current, start: 'top 70%' } }
-      )
-
-      gsap.fromTo('.cta-mobile-trust',
-        { y: 22, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.85, ease: 'power3.out', delay: 0.6,
-          scrollTrigger: { trigger: sectionRef.current, start: 'top 70%' } }
-      )
-
-      gsap.fromTo('.cta-trust-pill',
-        { y: 10, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.55, ease: 'power2.out', stagger: 0.1, delay: 0.75,
-          scrollTrigger: { trigger: sectionRef.current, start: 'top 70%' } }
-      )
     }, sectionRef)
     return () => ctx.revert()
   }, [])

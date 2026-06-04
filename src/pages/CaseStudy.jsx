@@ -1543,7 +1543,7 @@ function SceneSetContent() {
           Building<br />Our Own<br />Brand
         </h1>
 
-        <HeroImg src={sceneSetImg} logo="/sss%20logo2.svg" alt="Scene Set Studio" />
+        <HeroImg src={sceneSetImg} logo="/sss-logo2.svg" alt="Scene Set Studio" />
       </section>
 
       {/* The challenge — one paragraph */}

@@ -23,6 +23,7 @@ import ServicesPage from './pages/Services'
 import AboutPage from './pages/About'
 import ContactPage from './pages/Contact'
 import NotFoundPage from './pages/NotFound'
+import PrivacyPolicyPage from './pages/Legal'
 import FloatingContact from './components/FloatingContact'
 import './index.css'
 
@@ -160,6 +161,7 @@ function AppContent() {
         <Route path="/contact"      element={<ContactPage />} />
         <Route path="/process"      element={<ProcessPage />} />
         <Route path="/admin"        element={<Suspense fallback={null}><AdminPage /></Suspense>} />
+        <Route path="/privacy"        element={<PrivacyPolicyPage />} />
         <Route path="*"             element={<NotFoundPage />} />
       </Routes>
     </>

@@ -27,7 +27,7 @@ const CASES = [
     category: 'Brand Identity / Design',
     year: '2024',
     img: sceneSetImg,
-    logo: '/sss%20logo2.svg',
+    logo: '/sss-logo2.svg',
   },
   {
     slug: 'fawill-bike-pub',

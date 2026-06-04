@@ -75,7 +75,7 @@ const POSTS = [
     stat: '04',
     art: 'sceneset',
     image: sceneSetCard,
-    logo: '/sss%20logo2.svg',
+    logo: '/sss-logo2.svg',
     mark: 'SS',
     outcome: 'Full brand & web build',
     deliverables: ['UX', 'Identity', 'Motion'],

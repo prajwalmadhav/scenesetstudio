@@ -916,7 +916,6 @@ body {
     top: clamp(400px, 50dvh, 470px);
     bottom: unset;
     border-radius: 18px;
-    will-change: left, right, border-radius;
   }
 
   .hero-visual {

@@ -75,7 +75,7 @@ export default function Hero() {
             trigger: '.hero-section',
             start: 'top top',
             end: '+=28%',
-            scrub: 1.2,
+            scrub: 0.4,
           },
         })
         return

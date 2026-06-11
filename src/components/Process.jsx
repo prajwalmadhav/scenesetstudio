@@ -14,7 +14,7 @@ const STEPS = [
         <circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/>
       </svg>
     ),
-    anim: 'proc-icon-pulse',
+    anim: null,
     rotate: -8,
   },
   {
@@ -26,7 +26,7 @@ const STEPS = [
         <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="8"/><line x1="12" y1="16" x2="12" y2="22"/><line x1="2" y1="12" x2="8" y2="12"/><line x1="16" y1="12" x2="22" y2="12"/>
       </svg>
     ),
-    anim: 'proc-icon-spin-slow',
+    anim: null,
     rotate: 6,
   },
   {
@@ -41,7 +41,7 @@ const STEPS = [
         <circle cx="11" cy="11" r="2"/>
       </svg>
     ),
-    anim: 'proc-icon-twinkle',
+    anim: null,
     rotate: -4,
   },
   {
@@ -59,7 +59,7 @@ const STEPS = [
         <polyline points="23 4 23 10 17 10"/><path d="M20.5 15a9 9 0 1 1-2.5-8.4L23 10"/>
       </svg>
     ),
-    anim: 'proc-icon-spin',
+    anim: null,
     rotate: 10,
   },
   {
@@ -71,7 +71,7 @@ const STEPS = [
         <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
       </svg>
     ),
-    anim: 'proc-icon-bar',
+    anim: null,
     rotate: -6,
   },
 ]
@@ -105,6 +105,7 @@ export default function Process() {
   const svgRef = useRef(null)
   const cursorElRef = useRef(null)
   const [cursorVisible, setCursorVisible] = useState(false)
+  const [isMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth <= 640)
 
   // Compute arrow paths after layout renders
   const [arrows, setArrows] = useState([])
@@ -260,7 +261,7 @@ export default function Process() {
         </div>
 
         {/* ── Canvas ── */}
-        <div ref={canvasRef} className="proc-canvas" style={{ cursor: 'none' }}>
+        <div ref={canvasRef} className="proc-canvas" style={{ cursor: isMobile ? 'default' : 'none' }}>
           <div className="proc-grid" />
 
           {/* ── SVG arrow overlay ── */}
@@ -421,14 +422,14 @@ export default function Process() {
                 {/* Number tag */}
                 <span style={{
                   fontFamily: "'Syne', sans-serif",
-                  fontWeight: 700,
-                  fontSize: '9px',
-                  letterSpacing: '2.5px',
+                  fontWeight: 800,
+                  fontSize: '14px',
+                  letterSpacing: '2px',
                   color: s.accent,
-                  border: `1px dashed ${s.accent}`,
-                  borderRadius: 4,
-                  padding: '2px 6px',
-                  opacity: 0.85,
+                  border: `1.5px dashed ${s.accent}`,
+                  borderRadius: 5,
+                  padding: '3px 9px',
+                  opacity: 1,
                 }}>{s.num}</span>
 
                 {/* Title — sticky note for Creative, dashed label for rest */}
@@ -536,7 +537,7 @@ export default function Process() {
             style={{
               position: 'absolute', top: 0, left: 0,
               pointerEvents: 'none',
-              opacity: cursorVisible ? 1 : 0,
+              opacity: cursorVisible && !isMobile ? 1 : 0,
               transition: 'opacity 0.15s',
               zIndex: 20,
               willChange: 'transform',

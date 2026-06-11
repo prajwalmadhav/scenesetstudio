@@ -4995,7 +4995,7 @@ body {
 
 .proc-canvas {
   grid-area: canvas;
-  background: #131316;
+  background: #262626;
   position: relative;
   overflow: hidden;
 }

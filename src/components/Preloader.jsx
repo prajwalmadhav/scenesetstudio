@@ -12,13 +12,11 @@ const QUADS = [
 export default function Preloader({ onDone }) {
   const rootRef  = useRef(null)
   const quadRefs = useRef([])
-  const textRef  = useRef(null)
 
   useEffect(() => {
     document.body.style.overflow = 'hidden'
 
     gsap.set(quadRefs.current, { scale: 0, opacity: 0 })
-    gsap.set(textRef.current,  { opacity: 0, y: 24 })
 
     const tl = gsap.timeline({
       delay: 0,
@@ -28,7 +26,9 @@ export default function Preloader({ onDone }) {
       },
     })
 
-    // 1. Each quadrant pops in one by one, circular order
+    // 1. Logo quadrants pop in one by one. The "SceneSetStudio" wordmark is
+    //    already on screen from the first frame (no entrance animation), so the
+    //    browser paints text immediately — a much faster First Contentful Paint.
     tl.to(quadRefs.current, {
       scale: 1,
       opacity: 1,
@@ -37,18 +37,12 @@ export default function Preloader({ onDone }) {
       stagger: 0.28,
     })
 
-    // 2. Wordmark slides up immediately after logo
-    .fromTo(textRef.current,
-      { y: 28, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out' }
-    )
-
-    // 3. Page swipes up 0.2s after font lands
+    // 2. Hold briefly once the logo lands, then swipe the page up to reveal the site
     .to(rootRef.current, {
       yPercent: -100,
       duration: 0.9,
       ease: 'power3.inOut',
-    }, '+=0.2')
+    }, '+=0.5')
 
     return () => {
       tl.kill()
@@ -78,8 +72,8 @@ export default function Preloader({ onDone }) {
           ))}
         </div>
 
-        {/* Wordmark */}
-        <div ref={textRef} className="preloader__wordmark" style={{ opacity: 0, transform: 'translateY(24px)' }}>
+        {/* Wordmark — visible from the first frame */}
+        <div className="preloader__wordmark">
           <span className="preloader__name">SceneSet</span>
           <strong className="preloader__name preloader__name--bold">Studio</strong>
         </div>

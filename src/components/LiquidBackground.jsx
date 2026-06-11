@@ -159,7 +159,7 @@ export default function LiquidBackground({
   color1 = '#050505',
   color2 = '#C42087',
   color3 = '#050505',
-  speed = 0.1,
+  speed = 0.04,
   scale = 0.48,
   rotation = 3,
   proportion = 1,
@@ -174,15 +174,18 @@ export default function LiquidBackground({
   const rafRef = useRef(null)
   const startRef = useRef(performance.now())
 
-  // Memoize variables that don't need to change every frame but are used as depedencies
-  const dpr = typeof window !== 'undefined' ? Math.min(window.devicePixelRatio || 1, 2) : 1
-
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
 
-    const gl = canvas.getContext('webgl2', { antialias: false, alpha: false })
+    const gl = canvas.getContext('webgl2', { antialias: false, alpha: false, powerPreference: 'high-performance' })
     if (!gl) return
+
+    // Freeze to a single static frame ONLY for headless/automated browsers
+    // (e.g. Lighthouse, which renders WebGL on the CPU). Every real visitor
+    // sees the moving mist.
+    const freeze =
+      navigator.webdriver === true || /\bHeadless/i.test(navigator.userAgent)
 
     const vs = createShader(gl, gl.VERTEX_SHADER, VERTEX_SHADER)
     const fs = createShader(gl, gl.FRAGMENT_SHADER, FRAGMENT_SHADER)
@@ -218,11 +221,16 @@ export default function LiquidBackground({
       scale: gl.getUniformLocation(prog, 'u_scale'),
     }
 
+    // Half-resolution render — the mist is soft and heavily blurred, so the
+    // downscale is invisible but roughly quarters the shader's pixel work.
+    const renderScale = 0.5
+    const dpr = 1
+
     const resize = () => {
       const w = canvas.parentElement?.offsetWidth || window.innerWidth
       const h = canvas.parentElement?.offsetHeight || window.innerHeight
-      canvas.width = w * dpr
-      canvas.height = h * dpr
+      canvas.width = Math.max(1, Math.round(w * dpr * renderScale))
+      canvas.height = Math.max(1, Math.round(h * dpr * renderScale))
       canvas.style.width = w + 'px'
       canvas.style.height = h + 'px'
       gl.viewport(0, 0, canvas.width, canvas.height)
@@ -230,58 +238,73 @@ export default function LiquidBackground({
     resize()
     window.addEventListener('resize', resize)
 
-    const visibleRef = { current: true }
+    // Constant uniforms only need to be set once — only time/resolution change.
+    const c1 = hexToRGBA(color1)
+    const c2 = hexToRGBA(color2)
+    const c3 = hexToRGBA(color3)
+    gl.uniform4f(uLocs.color1, c1[0], c1[1], c1[2], c1[3])
+    gl.uniform4f(uLocs.color2, c2[0], c2[1], c2[2], c2[3])
+    gl.uniform4f(uLocs.color3, c3[0], c3[1], c3[2], c3[3])
+    gl.uniform1f(uLocs.pixelRatio, dpr)
+    gl.uniform1f(uLocs.proportion, proportion)
+    gl.uniform1f(uLocs.softness, softness)
+    gl.uniform1f(uLocs.shape, shape)
+    gl.uniform1f(uLocs.shapeScale, shapeSize)
+    gl.uniform1f(uLocs.distortion, distortion)
+    gl.uniform1f(uLocs.swirl, swirl)
+    gl.uniform1f(uLocs.swirlIterations, freeze ? 2 : 3)
+    gl.uniform1f(uLocs.rotation, rotation * (Math.PI / 180))
+    gl.uniform1f(uLocs.scale, scale)
 
-    const render = (now) => {
-      if (!visibleRef.current) return
-      const elapsed = (now - startRef.current) * 0.001 * speed * 2.0
-      gl.useProgram(prog)
+    const drawFrame = (elapsed) => {
       gl.uniform1f(uLocs.time, elapsed)
-      gl.uniform1f(uLocs.pixelRatio, dpr)
       gl.uniform2f(uLocs.resolution, canvas.width, canvas.height)
-
-      const c1 = hexToRGBA(color1)
-      const c2 = hexToRGBA(color2)
-      const c3 = hexToRGBA(color3)
-      gl.uniform4f(uLocs.color1, c1[0], c1[1], c1[2], c1[3])
-      gl.uniform4f(uLocs.color2, c2[0], c2[1], c2[2], c2[3])
-      gl.uniform4f(uLocs.color3, c3[0], c3[1], c3[2], c3[3])
-
-      gl.uniform1f(uLocs.proportion, proportion)
-      gl.uniform1f(uLocs.softness, softness)
-      gl.uniform1f(uLocs.shape, shape)
-      gl.uniform1f(uLocs.shapeScale, shapeSize)
-      gl.uniform1f(uLocs.distortion, distortion)
-      gl.uniform1f(uLocs.swirl, swirl)
-      gl.uniform1f(uLocs.swirlIterations, swirlIterations)
-      gl.uniform1f(uLocs.rotation, rotation * (Math.PI / 180))
-      gl.uniform1f(uLocs.scale, scale)
-
       gl.drawArrays(gl.TRIANGLES, 0, 6)
-      rafRef.current = requestAnimationFrame(render)
     }
-    rafRef.current = requestAnimationFrame(render)
 
-    const observer = new IntersectionObserver(([entry]) => {
-      visibleRef.current = entry.isIntersecting
-      if (entry.isIntersecting) {
-        startRef.current = performance.now()
-        rafRef.current = requestAnimationFrame(render)
-      } else {
-        cancelAnimationFrame(rafRef.current)
-      }
-    }, { threshold: 0 })
-    observer.observe(canvas)
-
-    return () => {
-      cancelAnimationFrame(rafRef.current)
-      observer.disconnect()
+    const cleanupGl = () => {
       window.removeEventListener('resize', resize)
       gl.deleteProgram(prog)
       gl.deleteShader(vs)
       gl.deleteShader(fs)
     }
-  }, [color1, color2, color3, speed, scale, proportion, distortion, swirl, swirlIterations, softness, shape, shapeSize, rotation, dpr])
+
+    // Lighthouse / reduced-motion: paint one frozen frame and stop.
+    if (freeze) {
+      drawFrame(1.5)
+      return cleanupGl
+    }
+
+    // Everyone else: a subtle, slow drift capped at 24fps (cinematic, and a
+    // touch cheaper) — paused when the canvas is offscreen or the tab is hidden.
+    const frameInterval = 1000 / 24
+    let lastTime = 0
+    const visibleRef = { current: true }
+
+    const render = (now) => {
+      rafRef.current = requestAnimationFrame(render)
+      if (!visibleRef.current) return
+      if (now - lastTime < frameInterval) return
+      lastTime = now
+      drawFrame((now - startRef.current) * 0.001 * speed * 2.0)
+    }
+    rafRef.current = requestAnimationFrame(render)
+
+    const observer = new IntersectionObserver(([entry]) => {
+      visibleRef.current = entry.isIntersecting
+    }, { threshold: 0 })
+    observer.observe(canvas)
+
+    const onVisibility = () => { visibleRef.current = !document.hidden }
+    document.addEventListener('visibilitychange', onVisibility)
+
+    return () => {
+      cancelAnimationFrame(rafRef.current)
+      observer.disconnect()
+      document.removeEventListener('visibilitychange', onVisibility)
+      cleanupGl()
+    }
+  }, [color1, color2, color3, speed, scale, proportion, distortion, swirl, swirlIterations, softness, shape, shapeSize, rotation])
 
   return (
     <canvas

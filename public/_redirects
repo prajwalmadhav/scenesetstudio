@@ -1,1 +1,4 @@
+/book-a-call  https://ops-sceneset.pages.dev/book-a-call  200
+/f/*          https://ops-sceneset.pages.dev/f/:splat      200
+
 /* /index.html 200

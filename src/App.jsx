@@ -8,6 +8,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import useButtonRipple from './hooks/useButtonRipple'
 
 gsap.registerPlugin(ScrollTrigger)
+// Don't re-run every ScrollTrigger on mobile URL-bar show/hide — it causes
+// layout thrash (forced reflows) on scroll for no visual benefit.
+ScrollTrigger.config({ ignoreMobileResize: true })
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -16,15 +19,18 @@ import Process from './components/Process'
 import Testimonials from './components/Testimonials'
 import CTA from './components/CTA'
 import Footer from './components/Footer'
-import WorkPage from './pages/Work'
-import ProcessPage from './pages/Process'
-import CaseStudyPage from './pages/CaseStudy'
-import ServicesPage from './pages/Services'
-import AboutPage from './pages/About'
-import ContactPage from './pages/Contact'
-import NotFoundPage from './pages/NotFound'
-import PrivacyPolicyPage from './pages/Legal'
 import FloatingContact from './components/FloatingContact'
+
+// Route-level code splitting — keep the homepage bundle lean by loading every
+// other page on demand instead of shipping the whole site up front.
+const WorkPage = lazy(() => import('./pages/Work'))
+const ProcessPage = lazy(() => import('./pages/Process'))
+const CaseStudyPage = lazy(() => import('./pages/CaseStudy'))
+const ServicesPage = lazy(() => import('./pages/Services'))
+const AboutPage = lazy(() => import('./pages/About'))
+const ContactPage = lazy(() => import('./pages/Contact'))
+const NotFoundPage = lazy(() => import('./pages/NotFound'))
+const PrivacyPolicyPage = lazy(() => import('./pages/Legal'))
 import './index.css'
 
 // Prevent browser from restoring scroll position on back/forward
@@ -152,18 +158,20 @@ function AppContent() {
       <ScrollToTop />
       {!isAdmin && <Navbar />}
       <FloatingContact />
-      <Routes>
-        <Route path="/"             element={<HomePage />} />
-        <Route path="/work"         element={<WorkPage />} />
-        <Route path="/work/:client" element={<CaseStudyPage />} />
-        <Route path="/services"          element={<ServicesPage />} />
-        <Route path="/about"        element={<AboutPage />} />
-        <Route path="/contact"      element={<ContactPage />} />
-        <Route path="/process"      element={<ProcessPage />} />
-        <Route path="/admin"        element={<Suspense fallback={null}><AdminPage /></Suspense>} />
-        <Route path="/privacy"        element={<PrivacyPolicyPage />} />
-        <Route path="*"             element={<NotFoundPage />} />
-      </Routes>
+      <Suspense fallback={null}>
+        <Routes>
+          <Route path="/"             element={<HomePage />} />
+          <Route path="/work"         element={<WorkPage />} />
+          <Route path="/work/:client" element={<CaseStudyPage />} />
+          <Route path="/services"          element={<ServicesPage />} />
+          <Route path="/about"        element={<AboutPage />} />
+          <Route path="/contact"      element={<ContactPage />} />
+          <Route path="/process"      element={<ProcessPage />} />
+          <Route path="/admin"        element={<AdminPage />} />
+          <Route path="/privacy"        element={<PrivacyPolicyPage />} />
+          <Route path="*"             element={<NotFoundPage />} />
+        </Routes>
+      </Suspense>
     </>
   )
 }

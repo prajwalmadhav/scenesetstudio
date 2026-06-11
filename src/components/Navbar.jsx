@@ -101,7 +101,7 @@ export default function Navbar() {
                 e.currentTarget.style.setProperty('--rx', `${e.clientX - r.left}px`)
                 e.currentTarget.style.setProperty('--ry', `${e.clientY - r.top}px`)
               }}
-            >Start a Project</Link>
+            >Book a Call</Link>
             {!isHome && (
               <button className="navbar__home-btn navbar__home-btn--mobile" onClick={() => navigate('/')} aria-label="Go to home">
                 <HomeIcon />
@@ -123,7 +123,7 @@ export default function Navbar() {
               <Link to="/work"     className={`mobile-link${active('/work')}`}     onClick={close}>Work</Link>
               <Link to="/services" className={`mobile-link${active('/services')}`} onClick={close}>Services</Link>
               <Link to="/about"    className={`mobile-link${active('/about')}`}    onClick={close}>About</Link>
-              <Link to="/contact"  className="hero-btn hero-btn--primary mobile-link--cta" onClick={close}>Start a Project →</Link>
+              <Link to="/contact"  className="hero-btn hero-btn--primary mobile-link--cta" onClick={close}>Book a Call →</Link>
             </nav>
           </div>
         </div>

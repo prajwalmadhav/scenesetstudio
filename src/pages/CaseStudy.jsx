@@ -373,7 +373,7 @@ function TierXContent() {
           <Badge>3D Visualization</Badge>
           <Badge>2025</Badge>
         </div>
-        <HeroImg src={tierxImg} logo="/assets/images/tierx%20logo.png" alt="TierX DCS" />
+        <HeroImg src={tierxImg} logo="/assets/images/tierx%20logo.webp" alt="TierX DCS" />
       </section>
 
       {/* At a Glance */}
@@ -824,7 +824,7 @@ function FaWillBikePubContent() {
             <span key={t} style={{ display: 'inline-block', fontFamily: 'var(--font-body)', fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', color: C.textMute, border: BD, borderRadius: '999px', padding: '4px 12px', marginRight: '8px', marginBottom: '8px' }}>{t}</span>
           ))}
         </div>
-        <HeroImg src={fawillBikeImg} logo="/assets/images/bikepub%20logo.png" alt="FaWill Bike Pub" />
+        <HeroImg src={fawillBikeImg} logo="/assets/images/bikepub%20logo.webp" alt="FaWill Bike Pub" />
       </section>
 
       {/* At a Glance */}
@@ -929,7 +929,7 @@ function FaWillBikePubContent() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '8px', marginBottom: '20px' }}>
             <figure style={{ ...S.imgPlaceholder, aspectRatio: '4/3', margin: 0, overflow: 'hidden', position: 'relative' }}>
               <img
-                src="/assets/images/bikepub logo.png"
+                src="/assets/images/bikepub logo.webp"
                 alt="FaWill Bike Pub Logo"
                 loading="lazy"
                 style={{ width: '65%', height: '65%', objectFit: 'contain', display: 'block', position: 'absolute', inset: 0, margin: 'auto' }}
@@ -1192,7 +1192,7 @@ function FaWillCleaningContent() {
             <span key={t} style={{ display: 'inline-block', fontFamily: 'var(--font-body)', fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', color: C.textMute, border: BD, borderRadius: '999px', padding: '4px 12px', marginRight: '8px', marginBottom: '8px' }}>{t}</span>
           ))}
         </div>
-        <HeroImg src={fawillCleanImg} logo="/assets/images/fawill%20logo.png" alt="FaWill Cleaning Company" />
+        <HeroImg src={fawillCleanImg} logo="/assets/images/fawill%20logo.webp" alt="FaWill Cleaning Company" />
       </section>
 
       {/* At a Glance */}
@@ -1306,7 +1306,7 @@ function FaWillCleaningContent() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '8px', marginBottom: '20px' }}>
             <figure style={{ ...S.imgPlaceholder, aspectRatio: '4/3', margin: 0, overflow: 'hidden', position: 'relative' }}>
               <img
-                src="/assets/images/fawill logo.png"
+                src="/assets/images/fawill logo.webp"
                 alt="FaWill Cleaning Logo"
                 loading="lazy"
                 style={{ width: '65%', height: '65%', objectFit: 'contain', display: 'block', position: 'absolute', inset: 0, margin: 'auto' }}

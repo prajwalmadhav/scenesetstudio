@@ -392,7 +392,7 @@ export default function Process() {
                       display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5,
                     }}>
                       {s.icon && <span className={s.anim} style={{ display: 'flex' }}>{s.icon(s.accent, 16)}</span>}
-                      <h3 style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: '12px', margin: 0, color: '#0a0a0a' }}>{s.title}</h3>
+                      <h3 style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: '12px', margin: 0, color: '#e8e6e1' }}>{s.title}</h3>
                     </div>
                   )}
                 </div>
@@ -522,7 +522,7 @@ export default function Process() {
                     {s.icon && <span className={s.anim} style={{ display: 'flex', transform: `rotate(${s.rotate}deg)` }}>{s.icon(s.accent, 28)}</span>}
                     <h3 style={{
                       fontFamily: "'Syne', sans-serif", fontWeight: 700,
-                      fontSize: 'clamp(16px, 1.4vw, 22px)', color: '#0a0a0a', margin: 0,
+                      fontSize: 'clamp(16px, 1.4vw, 22px)', color: '#e8e6e1', margin: 0,
                     }}>{s.title}</h3>
                   </div>
                 )}

@@ -147,7 +147,7 @@ export default function Hero() {
 
         <div ref={buttonsRef} className="hero-buttons">
           <button className="hero-btn hero-btn--primary" style={{ opacity: 0 }} onClick={() => window.location.href = '/contact'}>
-            Get Started →
+            Book a Call →
           </button>
           <button className="hero-btn hero-btn--ghost" style={{ opacity: 0 }} onClick={() => document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' })}>
             See Our Work <span className="hero-btn__arrow">↓</span>

@@ -30,7 +30,7 @@ const POSTS = [
     stat: '01',
     art: 'founder',
     image: tierxCard,
-    logo: '/assets/images/tierx%20logo.png',
+    logo: '/assets/images/tierx%20logo.webp',
     mark: 'TX',
     outcome: 'North American market entry',
     deliverables: ['Brand', 'Web', '3D'],
@@ -45,7 +45,7 @@ const POSTS = [
     stat: '02',
     art: 'hospitality',
     image: fawillBikeCard,
-    logo: '/assets/images/bikepub%20logo.png',
+    logo: '/assets/images/bikepub%20logo.webp',
     mark: 'FB',
     outcome: 'Zero to booked in 8 weeks',
     deliverables: ['Brand', 'Web', 'Social'],
@@ -60,7 +60,7 @@ const POSTS = [
     stat: '03',
     art: 'studio',
     image: fawillCleaningCard,
-    logo: '/assets/images/fawill%20logo.png',
+    logo: '/assets/images/fawill%20logo.webp',
     mark: 'FC',
     outcome: 'Bilingual market entry',
     deliverables: ['Brand', 'Video', 'Ads'],
@@ -115,7 +115,7 @@ function CaseStudyCover({ post }) {
         <img className="case-cover__image" src={post.image} alt="" loading="lazy" />
         <div className="case-cover__heroShade" />
         <div className="case-cover__mark">
-          {post.logo ? <img src={post.logo} alt="" /> : <span>{post.brand === 'Coming Soon' ? 'CS' : post.mark}</span>}
+          {post.logo ? <img src={post.logo} alt="" loading="lazy" decoding="async" /> : <span>{post.brand === 'Coming Soon' ? 'CS' : post.mark}</span>}
         </div>
       </div>
       <div className="case-cover__deliverables">

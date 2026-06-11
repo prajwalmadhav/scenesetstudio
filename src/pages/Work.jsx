@@ -18,7 +18,7 @@ const CASES = [
     category: 'Brand Identity / Web Design',
     year: '2025',
     img: tierxImg,
-    logo: '/assets/images/tierx%20logo.png',
+    logo: '/assets/images/tierx%20logo.webp',
     imgPosition: 'center top',
   },
   {
@@ -35,7 +35,7 @@ const CASES = [
     category: 'Brand Identity / Web / Social',
     year: '2024',
     img: fawillBikeImg,
-    logo: '/assets/images/bikepub%20logo.png',
+    logo: '/assets/images/bikepub%20logo.webp',
   },
   {
     slug: 'fawill-cleaning',
@@ -43,7 +43,7 @@ const CASES = [
     category: 'Brand Strategy / Content',
     year: '2024',
     img: fawillCleanImg,
-    logo: '/assets/images/fawill%20logo.png',
+    logo: '/assets/images/fawill%20logo.webp',
   },
 ]
 

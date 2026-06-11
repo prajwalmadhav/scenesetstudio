@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, Fragment } from 'react'
 import SEO from '../components/SEO'
 import Footer from '../components/Footer'
 import StandardServicesSection from '../components/StandardServicesSection'
@@ -57,6 +57,62 @@ const PIXEL_PATTERNS = [
     <rect x="8"  y="93" width={S} height={S} rx={R} fill="#000" />
     <rect x="40" y="93" width={S} height={S} rx={R} fill="#000" />
   </>,
+]
+
+const HOW_STEPS = [
+  {
+    num: '01',
+    title: 'Research',
+    desc: 'Audience, market, competitors — all mapped before a single frame is shot.',
+    accent: '#FF3CAC',
+    rot: 'hw-step--tilt-r',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+        <circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/>
+      </svg>
+    ),
+  },
+  {
+    num: '02',
+    title: 'Script & Plan',
+    desc: 'Strategy locked. Creative brief signed off. Everyone knows the play.',
+    accent: '#40C4FF',
+    rot: 'hw-step--tilt-l',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+        <line x1="8" y1="13" x2="16" y2="13"/>
+        <line x1="8" y1="17" x2="12" y2="17"/>
+      </svg>
+    ),
+  },
+  {
+    num: '03',
+    title: 'Shoot, Edit & Post',
+    desc: 'Filmed, cut, and live. Fast, cinematic, on-brand production.',
+    accent: '#FF6B35',
+    rot: 'hw-step--tilt-r',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <polygon points="23 7 16 12 23 17 23 7"/>
+        <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+      </svg>
+    ),
+  },
+  {
+    num: '04',
+    title: 'Optimize & Scale',
+    desc: 'Data in. Performance up. Budget working harder every week.',
+    accent: '#69F0AE',
+    rot: 'hw-step--tilt-l',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+        <polyline points="17 6 23 6 23 12"/>
+      </svg>
+    ),
+  },
 ]
 
 const SERVICES = [
@@ -128,6 +184,14 @@ export default function Services() {
     setActive(null)
   }
 
+  useEffect(() => {
+    if (window.location.hash === '#how-we-work') {
+      setTimeout(() => {
+        document.getElementById('how-we-work')?.scrollIntoView({ behavior: 'smooth' })
+      }, 120)
+    }
+  }, [])
+
   return (
     <>
       <SEO
@@ -163,6 +227,28 @@ export default function Services() {
         </svg>
         <span>{sticker}</span>
       </div>
+
+      {/* ── How We Work ── */}
+      <section id="how-we-work" className="hw-section">
+        <p className="hw-eyebrow">The Process</p>
+        <h2 className="hw-title">Four steps. Every time.</h2>
+        <div className="hw-steps">
+          {HOW_STEPS.map((step, i) => (
+            <Fragment key={step.num}>
+              <div
+                className={`hw-step ${step.rot}`}
+                style={{ '--hw-accent': step.accent, borderColor: `${step.accent}35`, background: `${step.accent}09` }}
+              >
+                <span className="hw-step__num">{step.num}</span>
+                <span className="hw-step__icon">{step.icon}</span>
+                <h3 className="hw-step__title">{step.title}</h3>
+                <p className="hw-step__desc">{step.desc}</p>
+              </div>
+              {i < 3 && <span className="hw-arrow" aria-hidden="true" />}
+            </Fragment>
+          ))}
+        </div>
+      </section>
 
       {/* ── Section 1: standard packages ── */}
       {/* z-index 4 ensures it covers the fixed BRAND/IDENTITY text as it scrolls into view */}

@@ -9,41 +9,80 @@
     <title>Scene Set Studio — Marketing That Actually Works</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Load fonts without blocking render; display=swap keeps text visible in a fallback until they arrive. -->
     <link
       href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@1,400;1,500;1,800&family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,700;1,300;1,700&family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,100;1,200;1,300&family=Instrument+Serif:ital@0;1&family=Noto+Sans+Kannada:wght@400;600&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@1,400;1,500;1,800&family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,700;1,300;1,700&family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,100;1,200;1,300&family=Instrument+Serif:ital@0;1&family=Noto+Sans+Kannada:wght@400;600&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
     <!-- Preload LCP hero image -->
-    <link rel="preload" as="image" href="/landing-second-section.jpg" fetchpriority="high" />
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EPPL079Y8W"></script>
+    <link rel="preload" as="image" href="/landing-second-final.webp" fetchpriority="high" />
+    <!--
+      Analytics & tracking are deferred until the first user interaction (or an
+      idle callback after a few seconds) so they don't block the main thread
+      during initial load. This keeps Total Blocking Time low without losing
+      PageView tracking. gtag/fbq stubs are defined up front so any early calls
+      queue correctly and fire once the real scripts load.
+    -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-EPPL079Y8W');
-    </script>
 
-    <!-- Meta Pixel — replace 4261559950796787 with your actual Pixel ID from Meta Events Manager -->
-    <script>
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '4261559950796787');
-      fbq('track', 'PageView');
-    </script>
-    <!-- Microsoft Clarity -->
-    <script>
-      (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-      })(window, document, "clarity", "script", "x1lm0sc1jm");
+      (function () {
+        var loaded = false;
+        function loadTracking() {
+          if (loaded) return;
+          loaded = true;
+
+          // Google Analytics 4
+          var ga = document.createElement('script');
+          ga.async = true;
+          ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-EPPL079Y8W';
+          document.head.appendChild(ga);
+
+          // Meta Pixel
+          !function(f,b,e,v,n,t,s)
+          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+          n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t,s)}(window, document,'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', '4261559950796787');
+          fbq('track', 'PageView');
+
+          // Microsoft Clarity — temporarily disabled
+          // (function(c,l,a,r,i,t,y){
+          //   c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          //   t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          //   y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          // })(window, document, "clarity", "script", "x1lm0sc1jm");
+        }
+
+        var events = ['scroll', 'mousemove', 'touchstart', 'keydown', 'click'];
+        function onFirstInteraction() {
+          events.forEach(function (ev) { window.removeEventListener(ev, onFirstInteraction, { passive: true }); });
+          loadTracking();
+        }
+        events.forEach(function (ev) { window.addEventListener(ev, onFirstInteraction, { passive: true }); });
+
+        // Fallback so bounce visits (no interaction) still record a PageView.
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(loadTracking, { timeout: 5000 });
+        } else {
+          setTimeout(loadTracking, 5000);
+        }
+      })();
     </script>
   </head>
   <body>

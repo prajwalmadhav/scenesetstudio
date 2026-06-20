@@ -47,6 +47,17 @@
   margin-bottom: 20px;
 }
 
+.off-back-link {
+  color: var(--cream);
+  text-decoration: none;
+  opacity: 0.55;
+  transition: opacity 0.2s;
+}
+
+.off-back-link:hover {
+  opacity: 1;
+}
+
 .off-title {
   font-family: var(--font-heading);
   font-weight: 800;

@@ -28,9 +28,12 @@ const ProcessPage = lazy(() => import('./pages/Process'))
 const CaseStudyPage = lazy(() => import('./pages/CaseStudy'))
 const ServicesPage = lazy(() => import('./pages/Services'))
 const OffersPage = lazy(() => import('./pages/Offers'))
+const VideoEditingPage = lazy(() => import('./pages/VideoEditing'))
 const LinksPage = lazy(() => import('./pages/Links'))
 const AboutPage = lazy(() => import('./pages/About'))
 const ContactPage = lazy(() => import('./pages/Contact'))
+const QuickContactPage = lazy(() => import('./pages/QuickContact'))
+const BookPage = lazy(() => import('./pages/Book'))
 const NotFoundPage = lazy(() => import('./pages/NotFound'))
 const PrivacyPolicyPage = lazy(() => import('./pages/Legal'))
 import './index.css'
@@ -167,9 +170,12 @@ function AppContent() {
           <Route path="/work/:client" element={<CaseStudyPage />} />
           <Route path="/services"          element={<ServicesPage />} />
           <Route path="/offers"            element={<OffersPage />} />
+          <Route path="/offers/videoediting" element={<VideoEditingPage />} />
           <Route path="/links"             element={<LinksPage />} />
           <Route path="/about"        element={<AboutPage />} />
           <Route path="/contact"      element={<ContactPage />} />
+          <Route path="/quick-contact" element={<QuickContactPage />} />
+          <Route path="/book"         element={<BookPage />} />
           <Route path="/process"      element={<ProcessPage />} />
           <Route path="/admin"        element={<AdminPage />} />
           <Route path="/privacy"        element={<PrivacyPolicyPage />} />

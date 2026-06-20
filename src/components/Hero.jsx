@@ -133,7 +133,7 @@ export default function Hero() {
 
         <h1 ref={headlineRef} className="hero-headline">
           <span className="hero-word">Content</span>{' '}
-          <span className="hero-word">Marketing</span>{' '}
+          <span className="hero-word hero-word--thin">Marketing</span>{' '}
           <span className="hero-word">that</span>
           <br />
           <span className="hero-word hero-word--italic">actually</span>{' '}

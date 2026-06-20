@@ -241,6 +241,10 @@ body {
   display: inline-block;
 }
 
+.hero-word--thin {
+  font-weight: 550;
+}
+
 .hero-word--italic {
   font-family: 'EB Garamond', serif;
   font-weight: 400;

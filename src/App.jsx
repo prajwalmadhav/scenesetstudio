@@ -27,6 +27,8 @@ const WorkPage = lazy(() => import('./pages/Work'))
 const ProcessPage = lazy(() => import('./pages/Process'))
 const CaseStudyPage = lazy(() => import('./pages/CaseStudy'))
 const ServicesPage = lazy(() => import('./pages/Services'))
+const OffersPage = lazy(() => import('./pages/Offers'))
+const LinksPage = lazy(() => import('./pages/Links'))
 const AboutPage = lazy(() => import('./pages/About'))
 const ContactPage = lazy(() => import('./pages/Contact'))
 const NotFoundPage = lazy(() => import('./pages/NotFound'))
@@ -164,6 +166,8 @@ function AppContent() {
           <Route path="/work"         element={<WorkPage />} />
           <Route path="/work/:client" element={<CaseStudyPage />} />
           <Route path="/services"          element={<ServicesPage />} />
+          <Route path="/offers"            element={<OffersPage />} />
+          <Route path="/links"             element={<LinksPage />} />
           <Route path="/about"        element={<AboutPage />} />
           <Route path="/contact"      element={<ContactPage />} />
           <Route path="/process"      element={<ProcessPage />} />

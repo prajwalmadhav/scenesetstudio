@@ -132,6 +132,7 @@ export default function Hero() {
         </div>
 
         <h1 ref={headlineRef} className="hero-headline">
+          <span className="hero-word">Content</span>{' '}
           <span className="hero-word">Marketing</span>{' '}
           <span className="hero-word">that</span>
           <br />

@@ -1,19 +1,7 @@
-import { useState, useEffect, useRef } from 'react'
-import gsap from 'gsap'
+import { useState } from 'react'
+import { getLinks, saveLinks, emptyLink } from '../lib/links'
 
 const ADMIN_PASSWORD = 'sss2026'
-
-const STATUSES = ['Lead', 'Pitched', 'Follow-up', 'Won', 'Lost']
-
-const STATUS_COLORS = {
-  Lead:       { bg: 'rgba(245,200,66,0.12)',  border: 'rgba(245,200,66,0.4)',  text: '#F5C842' },
-  Pitched:    { bg: 'rgba(99,130,255,0.12)',  border: 'rgba(99,130,255,0.4)',  text: '#6382FF' },
-  'Follow-up':{ bg: 'rgba(255,160,50,0.12)',  border: 'rgba(255,160,50,0.4)',  text: '#FFA032' },
-  Won:        { bg: 'rgba(34,197,94,0.12)',   border: 'rgba(34,197,94,0.4)',   text: '#22C55E' },
-  Lost:       { bg: 'rgba(212,0,30,0.12)',    border: 'rgba(212,0,30,0.35)',   text: '#D4001E' },
-}
-
-const empty = () => ({ id: Date.now(), client: '', company: '', service: '', budget: '', status: 'Lead', notes: '', date: new Date().toISOString().split('T')[0] })
 
 const inputCls = {
   background: '#0f0f0f',
@@ -96,163 +84,135 @@ function PasswordGate({ onUnlock }) {
   )
 }
 
-/* ── Pitch Form Modal ── */
-function PitchModal({ pitch, onSave, onClose }) {
-  const [form, setForm] = useState(pitch)
+/* ── Link Form Modal ── */
+function LinkModal({ link, onSave, onClose }) {
+  const [form, setForm] = useState(link)
 
-  function change(e) { setForm(f => ({ ...f, [e.target.name]: e.target.value })) }
+  function change(e) {
+    const { name, value, type, checked } = e.target
+    setForm(f => ({ ...f, [name]: type === 'checkbox' ? checked : value }))
+  }
+
+  function submit() {
+    if (!form.label.trim() || !form.href.trim()) return
+    onSave({ ...form, label: form.label.trim(), note: form.note.trim(), href: form.href.trim() })
+  }
 
   return (
     <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.75)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 999, padding: '24px' }}>
-      <div style={{ background: '#111', border: '1px solid #1e1e1e', padding: '36px', width: '100%', maxWidth: '560px', display: 'flex', flexDirection: 'column', gap: '18px', maxHeight: '90dvh', overflowY: 'auto' }}>
+      <div style={{ background: '#111', border: '1px solid #1e1e1e', padding: '36px', width: '100%', maxWidth: '480px', display: 'flex', flexDirection: 'column', gap: '18px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
-          <h2 style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '22px', color: '#F2F0EB', margin: 0 }}>{pitch.id === form.id && !pitch.client ? 'New Pitch' : 'Edit Pitch'}</h2>
+          <h2 style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '22px', color: '#F2F0EB', margin: 0 }}>{link.label ? 'Edit Link' : 'New Link'}</h2>
           <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'rgba(242,240,235,0.4)', cursor: 'pointer', fontSize: '20px', lineHeight: 1 }}>×</button>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
-          <div>
-            <label style={labelCls}>Client Name</label>
-            <input name="client" value={form.client} onChange={change} placeholder="Jane Doe" style={inputCls} onFocus={e => e.target.style.borderColor = 'rgba(212,0,30,0.4)'} onBlur={e => e.target.style.borderColor = '#1e1e1e'} />
-          </div>
-          <div>
-            <label style={labelCls}>Company</label>
-            <input name="company" value={form.company} onChange={change} placeholder="Acme Inc." style={inputCls} onFocus={e => e.target.style.borderColor = 'rgba(212,0,30,0.4)'} onBlur={e => e.target.style.borderColor = '#1e1e1e'} />
-          </div>
-          <div>
-            <label style={labelCls}>Service</label>
-            <input name="service" value={form.service} onChange={change} placeholder="Brand Strategy" style={inputCls} onFocus={e => e.target.style.borderColor = 'rgba(212,0,30,0.4)'} onBlur={e => e.target.style.borderColor = '#1e1e1e'} />
-          </div>
-          <div>
-            <label style={labelCls}>Budget</label>
-            <input name="budget" value={form.budget} onChange={change} placeholder="$5k – $15k" style={inputCls} onFocus={e => e.target.style.borderColor = 'rgba(212,0,30,0.4)'} onBlur={e => e.target.style.borderColor = '#1e1e1e'} />
-          </div>
-          <div>
-            <label style={labelCls}>Status</label>
-            <select name="status" value={form.status} onChange={change} style={{ ...inputCls, cursor: 'pointer' }}>
-              {STATUSES.map(s => <option key={s} value={s}>{s}</option>)}
-            </select>
-          </div>
-          <div>
-            <label style={labelCls}>Date</label>
-            <input name="date" type="date" value={form.date} onChange={change} style={{ ...inputCls, colorScheme: 'dark' }} onFocus={e => e.target.style.borderColor = 'rgba(212,0,30,0.4)'} onBlur={e => e.target.style.borderColor = '#1e1e1e'} />
-          </div>
-        </div>
-
         <div>
-          <label style={labelCls}>Notes</label>
-          <textarea name="notes" value={form.notes} onChange={change} rows={3} placeholder="Key talking points, follow-up actions..." style={{ ...inputCls, resize: 'vertical', minHeight: '80px' }} onFocus={e => e.target.style.borderColor = 'rgba(212,0,30,0.4)'} onBlur={e => e.target.style.borderColor = '#1e1e1e'} />
+          <label style={labelCls}>Button Label</label>
+          <input name="label" value={form.label} onChange={change} placeholder="Book a Call" style={inputCls} onFocus={e => e.target.style.borderColor = 'rgba(212,0,30,0.4)'} onBlur={e => e.target.style.borderColor = '#1e1e1e'} />
         </div>
+        <div>
+          <label style={labelCls}>Subtitle <span style={{ textTransform: 'none', letterSpacing: 0 }}>(optional)</span></label>
+          <input name="note" value={form.note} onChange={change} placeholder="Free 20-min discovery call" style={inputCls} onFocus={e => e.target.style.borderColor = 'rgba(212,0,30,0.4)'} onBlur={e => e.target.style.borderColor = '#1e1e1e'} />
+        </div>
+        <div>
+          <label style={labelCls}>URL</label>
+          <input name="href" value={form.href} onChange={change} placeholder="https://links.scenesetstudio.com/f/..." style={inputCls} onFocus={e => e.target.style.borderColor = 'rgba(212,0,30,0.4)'} onBlur={e => e.target.style.borderColor = '#1e1e1e'} />
+        </div>
+        <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', fontFamily: 'var(--font-body)', fontSize: '13px', color: 'rgba(242,240,235,0.6)' }}>
+          <input name="primary" type="checkbox" checked={form.primary} onChange={change} style={{ accentColor: '#D4001E', width: '16px', height: '16px', cursor: 'pointer' }} />
+          Highlight as primary (red) button
+        </label>
 
-        <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
+        <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end', marginTop: '4px' }}>
           <button onClick={onClose} style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(242,240,235,0.4)', background: 'transparent', border: '1px solid #1e1e1e', padding: '10px 20px', cursor: 'pointer' }}>Cancel</button>
-          <button onClick={() => onSave(form)} style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#0a0a0a', background: '#F2F0EB', border: 'none', padding: '10px 24px', cursor: 'pointer' }}>Save Pitch</button>
+          <button onClick={submit} style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#0a0a0a', background: '#F2F0EB', border: 'none', padding: '10px 24px', cursor: 'pointer' }}>Save Link</button>
         </div>
       </div>
     </div>
   )
 }
 
-/* ── Pitches Page ── */
-function PitchesPage() {
-  const [pitches, setPitches] = useState(() => {
-    try { return JSON.parse(localStorage.getItem('sss_pitches') || '[]') } catch { return [] }
-  })
-  const [modal, setModal]   = useState(null)
-  const [filter, setFilter] = useState('All')
+/* ── Links Manager ── */
+function LinksManager() {
+  const [links, setLinks] = useState(getLinks)
+  const [modal, setModal] = useState(null)
 
-  function save(list) {
-    setPitches(list)
-    localStorage.setItem('sss_pitches', JSON.stringify(list))
+  function persist(list) {
+    setLinks(list)
+    saveLinks(list)
   }
 
-  function savePitch(form) {
-    const exists = pitches.find(p => p.id === form.id)
-    save(exists ? pitches.map(p => p.id === form.id ? form : p) : [form, ...pitches])
+  function save(form) {
+    const exists = links.find(l => l.id === form.id)
+    persist(exists ? links.map(l => l.id === form.id ? form : l) : [...links, form])
     setModal(null)
   }
 
-  function deletePitch(id) {
-    if (confirm('Delete this pitch?')) save(pitches.filter(p => p.id !== id))
+  function remove(id) {
+    if (confirm('Remove this link button?')) persist(links.filter(l => l.id !== id))
   }
 
-  const filtered = filter === 'All' ? pitches : pitches.filter(p => p.status === filter)
-
-  const counts = STATUSES.reduce((acc, s) => ({ ...acc, [s]: pitches.filter(p => p.status === s).length }), {})
+  function move(index, dir) {
+    const next = index + dir
+    if (next < 0 || next >= links.length) return
+    const list = [...links]
+    ;[list[index], list[next]] = [list[next], list[index]]
+    persist(list)
+  }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
-
-      {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
         <div>
-          <h2 style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: 'clamp(22px, 3vw, 32px)', color: '#F2F0EB', letterSpacing: '-0.03em', margin: '0 0 6px' }}>Client Pitches</h2>
-          <p style={{ fontFamily: 'var(--font-body)', fontSize: '13px', fontWeight: 300, color: 'rgba(242,240,235,0.4)', margin: 0 }}>{pitches.length} total · {counts.Won || 0} won</p>
+          <h2 style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: 'clamp(22px, 3vw, 32px)', color: '#F2F0EB', letterSpacing: '-0.03em', margin: '0 0 6px' }}>Links Page</h2>
+          <p style={{ fontFamily: 'var(--font-body)', fontSize: '13px', fontWeight: 300, color: 'rgba(242,240,235,0.4)', margin: 0 }}>
+            {links.length} button{links.length === 1 ? '' : 's'} · live at <a href="/links" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(242,240,235,0.6)' }}>/links ↗</a>
+          </p>
         </div>
-        <button onClick={() => setModal(empty())} style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#0a0a0a', background: '#F2F0EB', border: 'none', padding: '10px 22px', cursor: 'pointer' }}>
-          + New Pitch
+        <button onClick={() => setModal(emptyLink())} style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#0a0a0a', background: '#F2F0EB', border: 'none', padding: '10px 22px', cursor: 'pointer' }}>
+          + New Link
         </button>
       </div>
 
-      {/* Status filter */}
-      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-        {['All', ...STATUSES].map(s => (
-          <button key={s} onClick={() => setFilter(s)} style={{
-            fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase',
-            padding: '6px 14px', border: '1px solid',
-            borderColor: filter === s ? 'rgba(242,240,235,0.5)' : '#1e1e1e',
-            background: filter === s ? 'rgba(242,240,235,0.06)' : 'transparent',
-            color: filter === s ? '#F2F0EB' : 'rgba(242,240,235,0.35)',
-            cursor: 'pointer', transition: 'all 0.15s',
-          }}>
-            {s} {s !== 'All' && counts[s] ? `(${counts[s]})` : s === 'All' ? `(${pitches.length})` : ''}
-          </button>
-        ))}
-      </div>
-
-      {/* Pitch list */}
-      {filtered.length === 0 ? (
+      {links.length === 0 ? (
         <div style={{ padding: '64px', textAlign: 'center', border: '1px dashed #1e1e1e', color: 'rgba(242,240,235,0.2)', fontFamily: 'var(--font-body)', fontSize: '13px' }}>
-          No pitches yet — add your first one
+          No links yet — add your first button
         </div>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-          {filtered.map(p => {
-            const sc = STATUS_COLORS[p.status]
-            return (
-              <div key={p.id} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr auto auto auto', alignItems: 'center', gap: '16px', padding: '16px 20px', background: '#0d0d0d', border: '1px solid #161616', transition: 'border-color 0.15s' }}
-                onMouseEnter={e => e.currentTarget.style.borderColor = '#2a2a2a'}
-                onMouseLeave={e => e.currentTarget.style.borderColor = '#161616'}
-              >
-                <div>
-                  <p style={{ fontFamily: 'var(--font-body)', fontWeight: 500, fontSize: '14px', color: '#F2F0EB', margin: '0 0 2px' }}>{p.client || '—'}</p>
-                  <p style={{ fontFamily: 'var(--font-body)', fontWeight: 300, fontSize: '12px', color: 'rgba(242,240,235,0.35)', margin: 0 }}>{p.company}</p>
-                </div>
-                <div>
-                  <p style={{ fontFamily: 'var(--font-body)', fontWeight: 300, fontSize: '12px', color: 'rgba(242,240,235,0.5)', margin: '0 0 2px' }}>{p.service}</p>
-                  <p style={{ fontFamily: 'var(--font-body)', fontWeight: 300, fontSize: '12px', color: 'rgba(242,240,235,0.3)', margin: 0 }}>{p.budget}</p>
-                </div>
-                <span style={{ fontFamily: 'var(--font-body)', fontSize: '10px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '4px 10px', background: sc.bg, border: `1px solid ${sc.border}`, color: sc.text, whiteSpace: 'nowrap' }}>
-                  {p.status}
-                </span>
-                <span style={{ fontFamily: 'var(--font-body)', fontSize: '11px', color: 'rgba(242,240,235,0.25)', whiteSpace: 'nowrap' }}>{p.date}</span>
-                <div style={{ display: 'flex', gap: '6px' }}>
-                  <button onClick={() => setModal(p)} style={{ background: 'none', border: '1px solid #1e1e1e', color: 'rgba(242,240,235,0.4)', padding: '5px 10px', cursor: 'pointer', fontSize: '11px', fontFamily: 'var(--font-body)', transition: 'color 0.15s, border-color 0.15s' }}
-                    onMouseEnter={e => { e.currentTarget.style.color = '#F2F0EB'; e.currentTarget.style.borderColor = '#333' }}
-                    onMouseLeave={e => { e.currentTarget.style.color = 'rgba(242,240,235,0.4)'; e.currentTarget.style.borderColor = '#1e1e1e' }}
-                  >Edit</button>
-                  <button onClick={() => deletePitch(p.id)} style={{ background: 'none', border: '1px solid #1e1e1e', color: 'rgba(212,0,30,0.5)', padding: '5px 10px', cursor: 'pointer', fontSize: '11px', fontFamily: 'var(--font-body)', transition: 'color 0.15s, border-color 0.15s' }}
-                    onMouseEnter={e => { e.currentTarget.style.color = '#D4001E'; e.currentTarget.style.borderColor = 'rgba(212,0,30,0.3)' }}
-                    onMouseLeave={e => { e.currentTarget.style.color = 'rgba(212,0,30,0.5)'; e.currentTarget.style.borderColor = '#1e1e1e' }}
-                  >Del</button>
-                </div>
+          {links.map((l, i) => (
+            <div key={l.id} style={{ display: 'grid', gridTemplateColumns: 'auto 1fr auto auto', alignItems: 'center', gap: '16px', padding: '16px 20px', background: '#0d0d0d', border: '1px solid #161616', transition: 'border-color 0.15s' }}
+              onMouseEnter={e => e.currentTarget.style.borderColor = '#2a2a2a'}
+              onMouseLeave={e => e.currentTarget.style.borderColor = '#161616'}
+            >
+              {/* reorder */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                <button onClick={() => move(i, -1)} disabled={i === 0} style={{ background: 'none', border: 'none', color: i === 0 ? 'rgba(242,240,235,0.12)' : 'rgba(242,240,235,0.4)', cursor: i === 0 ? 'default' : 'pointer', fontSize: '11px', lineHeight: 1, padding: 0 }}>▲</button>
+                <button onClick={() => move(i, 1)} disabled={i === links.length - 1} style={{ background: 'none', border: 'none', color: i === links.length - 1 ? 'rgba(242,240,235,0.12)' : 'rgba(242,240,235,0.4)', cursor: i === links.length - 1 ? 'default' : 'pointer', fontSize: '11px', lineHeight: 1, padding: 0 }}>▼</button>
               </div>
-            )
-          })}
+
+              <div style={{ minWidth: 0 }}>
+                <p style={{ fontFamily: 'var(--font-body)', fontWeight: 500, fontSize: '14px', color: '#F2F0EB', margin: '0 0 2px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  {l.label || '—'}
+                  {l.primary && <span style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '2px 7px', background: 'rgba(212,0,30,0.12)', border: '1px solid rgba(212,0,30,0.4)', color: '#D4001E' }}>Primary</span>}
+                </p>
+                <a href={l.href} target="_blank" rel="noopener noreferrer" style={{ fontFamily: 'var(--font-body)', fontWeight: 300, fontSize: '12px', color: 'rgba(242,240,235,0.35)', margin: 0, textDecoration: 'none', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block' }}>{l.href}</a>
+              </div>
+
+              <button onClick={() => setModal(l)} style={{ background: 'none', border: '1px solid #1e1e1e', color: 'rgba(242,240,235,0.4)', padding: '5px 12px', cursor: 'pointer', fontSize: '11px', fontFamily: 'var(--font-body)', transition: 'color 0.15s, border-color 0.15s' }}
+                onMouseEnter={e => { e.currentTarget.style.color = '#F2F0EB'; e.currentTarget.style.borderColor = '#333' }}
+                onMouseLeave={e => { e.currentTarget.style.color = 'rgba(242,240,235,0.4)'; e.currentTarget.style.borderColor = '#1e1e1e' }}
+              >Edit</button>
+              <button onClick={() => remove(l.id)} style={{ background: 'none', border: '1px solid #1e1e1e', color: 'rgba(212,0,30,0.5)', padding: '5px 12px', cursor: 'pointer', fontSize: '11px', fontFamily: 'var(--font-body)', transition: 'color 0.15s, border-color 0.15s' }}
+                onMouseEnter={e => { e.currentTarget.style.color = '#D4001E'; e.currentTarget.style.borderColor = 'rgba(212,0,30,0.3)' }}
+                onMouseLeave={e => { e.currentTarget.style.color = 'rgba(212,0,30,0.5)'; e.currentTarget.style.borderColor = '#1e1e1e' }}
+              >Del</button>
+            </div>
+          ))}
         </div>
       )}
 
-      {modal && <PitchModal pitch={modal} onSave={savePitch} onClose={() => setModal(null)} />}
+      {modal && <LinkModal link={modal} onSave={save} onClose={() => setModal(null)} />}
     </div>
   )
 }
@@ -267,116 +227,15 @@ function ComingSoon({ label }) {
   )
 }
 
-const SERVICES = [
-  { index: '01', label: 'Brand Strategy',    bg: 'BRAND',   tagline: 'Identity that commands attention.', description: 'We build the strategic foundation your brand stands on — from positioning and messaging to visual language that makes you unmistakable in any market.', deliverables: ['Brand Positioning', 'Messaging Framework', 'Visual Identity', 'Brand Guidelines', 'Competitive Analysis'] },
-  { index: '02', label: 'Content Production',bg: 'CONTENT', tagline: 'Stories that stop the scroll.',     description: 'From concept to final cut, we produce high-impact content built for the platforms your audience lives on — crafted to convert, not just impress.',     deliverables: ['Campaign Concepts', 'Copywriting', 'Photography Direction', 'Short-Form Content', 'Content Calendar'] },
-  { index: '03', label: 'Paid Advertising',  bg: 'PAID',    tagline: 'Every dollar working harder.',     description: 'Data-driven ad campaigns across Meta, Google, and beyond. We build, test, and scale paid systems that consistently beat your cost-per-acquisition targets.', deliverables: ['Media Buying', 'Ad Creative', 'Audience Strategy', 'A/B Testing', 'Performance Reporting'] },
-  { index: '04', label: 'Social Media',      bg: 'SOCIAL',  tagline: 'Presence that builds equity.',     description: 'We manage your social presence end-to-end — turning followers into fans and platforms into revenue channels through consistent, on-brand storytelling.',  deliverables: ['Channel Strategy', 'Content Creation', 'Community Management', 'Influencer Partnerships', 'Monthly Analytics'] },
-  { index: '05', label: 'Web Design',        bg: 'WEB',     tagline: 'Interfaces that earn trust.',      description: "Conversion-focused web experiences designed and developed to match your brand's ambition — fast, beautiful, and built to perform.",                     deliverables: ['UX Strategy', 'UI Design', 'Framer / Webflow Dev', 'Motion Design', 'CRO Optimisation'] },
-  { index: '06', label: 'Video Production',  bg: 'VIDEO',   tagline: 'Cinematic. Commercial. Compelling.', description: 'Full-service video production from pre-production through final delivery — brand films, reels, product videos and everything in between.',           deliverables: ['Concept Development', 'Scripting & Storyboard', 'On-Location Shoot', 'Edit & Colour Grade', 'Motion Graphics'] },
-]
-
-function ServicesPitch() {
-  const [active, setActive] = useState(0)
-  const contentRef = useRef(null)
-  const bgTextRef  = useRef(null)
-  const svc = SERVICES[active]
-
-  function goTo(index) {
-    if (index === active) return
-    setActive(index)
-  }
-
-  useEffect(() => {
-    if (!contentRef.current) return
-    gsap.fromTo(
-      contentRef.current.querySelectorAll('.svc-animate'),
-      { opacity: 0, y: 24 },
-      { opacity: 1, y: 0, stagger: 0.06, duration: 0.55, ease: 'power3.out' }
-    )
-  }, [active])
-
-  useEffect(() => {
-    if (!bgTextRef.current) return
-    gsap.fromTo(
-      bgTextRef.current,
-      { opacity: 0, x: -30 },
-      { opacity: 1, x: 0, duration: 0.7, ease: 'power3.out' }
-    )
-  }, [active])
-
-  return (
-    <div style={{ paddingTop: 0 }}>
-      <section className="svc-section" id="services-pitch">
-
-        <div className="svc-bg-text-wrap">
-          <span ref={bgTextRef} className="svc-bg-text svc-bg-text--h">{svc.bg}</span>
-          <span className="svc-bg-text svc-bg-text--v">SERVICES</span>
-        </div>
-
-        <div className="svc-top-row">
-          <span className="svc-eyebrow">What we do</span>
-          <span className="svc-counter">{svc.index} <span>/</span> 06</span>
-        </div>
-
-        <div ref={contentRef} className="svc-body">
-          <div className="svc-left">
-            <div className="svc-left-vertical">
-              <span className="svc-vertical-label svc-animate">{svc.label}</span>
-              <span className="svc-vertical-line" />
-            </div>
-            <div className="svc-left-content">
-              <p className="svc-index svc-animate">{svc.index}</p>
-              <h2 className="svc-title svc-animate">{svc.label}</h2>
-              <p className="svc-tagline svc-animate">{svc.tagline}</p>
-              <p className="svc-desc svc-animate">{svc.description}</p>
-            </div>
-          </div>
-
-          <div className="svc-right">
-            <p className="svc-deliverables-label svc-animate">Deliverables</p>
-            <ul className="svc-deliverables">
-              {svc.deliverables.map((d, i) => (
-                <li key={d} className="svc-deliverable svc-animate" style={{ transitionDelay: `${i * 0.04}s` }}>
-                  <span className="svc-deliverable__dot" />
-                  {d}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        <nav className="svc-nav">
-          {SERVICES.map((s, i) => (
-            <button
-              key={s.index}
-              className={`svc-nav-btn${i === active ? ' is-active' : ''}`}
-              onClick={() => goTo(i)}
-              aria-label={s.label}
-            >
-              <span className="svc-nav-btn__num">{s.index}</span>
-              <span className="svc-nav-btn__label">{s.label}</span>
-              <span className="svc-nav-btn__line" />
-            </button>
-          ))}
-        </nav>
-
-      </section>
-    </div>
-  )
-}
-
 const NAV_ITEMS = [
-  { id: 'pitches',  label: 'Client Pitches',  icon: '◈' },
-  { id: 'services', label: 'Services Pitch',  icon: '◇' },
-  { id: 'invoices', label: 'Invoices',         icon: '◉', soon: true },
-  { id: 'assets',   label: 'Assets',           icon: '◻', soon: true },
-  { id: 'tasks',    label: 'Tasks',            icon: '▣', soon: true },
+  { id: 'links',        label: 'Links Page',    icon: '◈' },
+  { id: 'testimonials', label: 'Testimonials',  icon: '◇', soon: true },
+  { id: 'casestudies',  label: 'Case Studies',  icon: '◉', soon: true },
 ]
 
 /* ── Dashboard shell ── */
 function Dashboard({ onLogout }) {
-  const [page, setPage] = useState('pitches')
+  const [page, setPage] = useState('links')
 
   return (
     <div style={{ minHeight: '100dvh', background: '#080808', display: 'flex', fontFamily: 'var(--font-body)' }}>
@@ -422,11 +281,9 @@ function Dashboard({ onLogout }) {
 
       {/* Main */}
       <main style={{ flex: 1, padding: '48px', overflowY: 'auto', maxWidth: '1100px' }}>
-        {page === 'pitches'  && <PitchesPage />}
-        {page === 'services' && <ServicesPitch />}
-        {page === 'invoices' && <ComingSoon label="Invoices" />}
-        {page === 'assets'   && <ComingSoon label="Assets" />}
-        {page === 'tasks'    && <ComingSoon label="Tasks" />}
+        {page === 'links'        && <LinksManager />}
+        {page === 'testimonials' && <ComingSoon label="Testimonials" />}
+        {page === 'casestudies'  && <ComingSoon label="Case Studies" />}
       </main>
     </div>
   )

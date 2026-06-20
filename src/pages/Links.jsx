@@ -1,23 +1,12 @@
+import { useState } from 'react'
 import SEO from '../components/SEO'
 import Footer from '../components/Footer'
+import { getLinks } from '../lib/links'
 import './links.css'
 
-const LINKS = [
-  {
-    label: 'Book a Call',
-    note: 'Free 20-min discovery call',
-    href: 'https://links.scenesetstudio.com/f/book-a-call',
-    primary: true,
-  },
-  {
-    label: 'Pilot Program',
-    note: 'Apply for the founding-client pilot',
-    href: 'https://links.scenesetstudio.com/f/pilotprogram',
-    primary: false,
-  },
-]
-
 export default function Links() {
+  const [links] = useState(getLinks)
+
   return (
     <>
       <SEO
@@ -36,9 +25,9 @@ export default function Links() {
           <p className="links-sub">Two ways to work with us. Pick the one that fits.</p>
 
           <div className="links-list">
-            {LINKS.map((l) => (
+            {links.map((l) => (
               <a
-                key={l.label}
+                key={l.id}
                 href={l.href}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -46,7 +35,7 @@ export default function Links() {
               >
                 <span className="links-btn__main">
                   <span className="links-btn__label">{l.label}</span>
-                  <span className="links-btn__note">{l.note}</span>
+                  {l.note && <span className="links-btn__note">{l.note}</span>}
                 </span>
                 <span className="links-btn__arrow" aria-hidden="true">↗</span>
               </a>

@@ -138,7 +138,6 @@ export default function Footer() {
         <nav className="footer-nav">
           <div className="footer-nav__col">
             <span className="footer-nav__heading">Services</span>
-            <a href="#services">Brand Strategy</a>
             <a href="#services">Content Production</a>
             <a href="#services">Advertising</a>
             <a href="#services">Social Media</a>
@@ -149,8 +148,6 @@ export default function Footer() {
           <div className="footer-nav__col">
             <span className="footer-nav__heading">Company</span>
             <a href="#about">About</a>
-            <a href="#process">Process</a>
-            <a href="#testimonials">Testimonials</a>
             <Link to="/services">Services</Link>
             <Link to="/offers">Offers</Link>
             <Link to="/booking">Booking</Link>

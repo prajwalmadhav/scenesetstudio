@@ -8724,6 +8724,23 @@ body {
   gap: 16px;
 }
 
+/* Quick Contact — form + calendar side-by-side */
+.qc-grid {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.85fr) minmax(380px, 1.15fr);
+  gap: 40px;
+  max-width: 1180px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .qc-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
 @media (max-width: 900px) {
   .contact-page {
     padding-top: 96px;

@@ -126,7 +126,7 @@ export default function AboutPage() {
               'We partner with ambitious brands at every stage — from early-stage startups finding their voice to established businesses ready to scale.',
               'Strategy, creative production, and performance marketing under one roof.',
               'Nothing gets lost in translation between the brief and the result.',
-              'Canada-wide reach. Ottawa-Gatineau based. Remote-first.',
+              'Based in Ontario, Canada — serving Toronto, Montreal, Ottawa and brands across Ontario, Quebec & Canada. Remote-first.',
             ].map((point, i) => (
               <div key={i} className="about-pg__mission-point">
                 <span className="about-pg__mission-point-num">0{i + 1}</span>

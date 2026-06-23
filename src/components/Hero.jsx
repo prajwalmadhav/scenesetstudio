@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import LiquidBackground from './LiquidBackground'
@@ -16,6 +17,7 @@ const BASE_COLS = [
 ]
 
 export default function Hero() {
+  const navigate = useNavigate()
   const [wordIdx, setWordIdx] = useState(0)
   const [fading, setFading] = useState(false)
 
@@ -147,7 +149,7 @@ export default function Hero() {
         </p>
 
         <div ref={buttonsRef} className="hero-buttons">
-          <button className="hero-btn hero-btn--primary" style={{ opacity: 0 }} onClick={() => window.location.href = '/contact'}>
+          <button className="hero-btn hero-btn--primary" style={{ opacity: 0 }} onClick={() => navigate('/booking')}>
             Book a Call →
           </button>
           <button className="hero-btn hero-btn--ghost" style={{ opacity: 0 }} onClick={() => document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' })}>

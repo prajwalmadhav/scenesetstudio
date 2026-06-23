@@ -134,7 +134,7 @@ export default function Offers() {
                   </div>
                   <span className="off-card__cad">CAD</span>
 
-                  <Link to="/contact" className={`off-btn off-btn--sm off-card__cta-top${pkg.featured ? ' off-btn--solid' : ''}`}>
+                  <Link to="/booking" className={`off-btn off-btn--sm off-card__cta-top${pkg.featured ? ' off-btn--solid' : ''}`}>
                     Get started
                   </Link>
 
@@ -157,7 +157,7 @@ export default function Offers() {
                   </div>
 
                   <p className="off-card__addons">Add-ons available</p>
-                  <Link to="/contact" className={`off-btn off-card__cta${pkg.featured ? ' off-btn--solid' : ''}`}>
+                  <Link to="/booking" className={`off-btn off-card__cta${pkg.featured ? ' off-btn--solid' : ''}`}>
                     Get started
                   </Link>
                 </article>
@@ -214,7 +214,7 @@ export default function Offers() {
               <h3 className="off-cta__head">Not sure which package fits?</h3>
               <p className="off-cta__sub">Book a free 20-min discovery call and we'll map it to your goals.</p>
               <div className="off-cta__actions">
-                <Link to="/contact" className="off-btn off-btn--solid">Book a discovery call</Link>
+                <Link to="/booking" className="off-btn off-btn--solid">Book a discovery call</Link>
               </div>
             </div>
 

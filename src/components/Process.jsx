@@ -276,7 +276,7 @@ export default function Process() {
           >
             <defs>
               <marker id="arrowhead" markerWidth="7" markerHeight="6" refX="6" refY="3" orient="auto">
-                <polygon points="0 0, 7 3, 0 6" fill="rgba(80,80,80,0.7)" />
+                <polygon points="0 0, 7 3, 0 6" fill="rgba(190,190,190,0.9)" />
               </marker>
             </defs>
             {arrows.map((d, i) => (
@@ -285,7 +285,7 @@ export default function Process() {
                 ref={el => arrowRefs.current[i] = el}
                 d={d}
                 fill="none"
-                stroke="rgba(80,80,80,0.35)"
+                stroke="rgba(190,190,190,0.6)"
                 strokeWidth="1.5"
                 strokeDasharray="5 4"
                 markerEnd="url(#arrowhead)"
@@ -303,7 +303,7 @@ export default function Process() {
             >
               <defs>
                 <marker id="m-arrow" markerWidth="4" markerHeight="3.5" refX="3.5" refY="1.75" orient="auto">
-                  <polygon points="0 0, 4 1.75, 0 3.5" fill="rgba(80,80,80,0.8)" />
+                  <polygon points="0 0, 4 1.75, 0 3.5" fill="rgba(190,190,190,0.9)" />
                 </marker>
               </defs>
               {/* Card centers (viewBox 0–100):
@@ -311,15 +311,15 @@ export default function Process() {
                   03:(25,50)  04:(75,50)
                   05:(25,83)  06:(75,83)  */}
               {/* 01→02: right across row 1 */}
-              <path d="M 44,17 Q 50,12 56,17" fill="none" stroke="rgba(80,80,80,0.4)" strokeWidth="0.7" strokeDasharray="2.5 2" markerEnd="url(#m-arrow)" />
+              <path d="M 44,17 Q 50,12 56,17" fill="none" stroke="rgba(190,190,190,0.6)" strokeWidth="0.7" strokeDasharray="2.5 2" markerEnd="url(#m-arrow)" />
               {/* 02→03: diagonal down-left */}
-              <path d="M 75,29 Q 58,37 25,38" fill="none" stroke="rgba(80,80,80,0.4)" strokeWidth="0.7" strokeDasharray="2.5 2" markerEnd="url(#m-arrow)" />
+              <path d="M 75,29 Q 58,37 25,38" fill="none" stroke="rgba(190,190,190,0.6)" strokeWidth="0.7" strokeDasharray="2.5 2" markerEnd="url(#m-arrow)" />
               {/* 03→04: right across row 2 */}
-              <path d="M 44,50 Q 50,45 56,50" fill="none" stroke="rgba(80,80,80,0.4)" strokeWidth="0.7" strokeDasharray="2.5 2" markerEnd="url(#m-arrow)" />
+              <path d="M 44,50 Q 50,45 56,50" fill="none" stroke="rgba(190,190,190,0.6)" strokeWidth="0.7" strokeDasharray="2.5 2" markerEnd="url(#m-arrow)" />
               {/* 04→05: diagonal down-left */}
-              <path d="M 75,62 Q 58,70 25,71" fill="none" stroke="rgba(80,80,80,0.4)" strokeWidth="0.7" strokeDasharray="2.5 2" markerEnd="url(#m-arrow)" />
+              <path d="M 75,62 Q 58,70 25,71" fill="none" stroke="rgba(190,190,190,0.6)" strokeWidth="0.7" strokeDasharray="2.5 2" markerEnd="url(#m-arrow)" />
               {/* 05→06: right across row 3 */}
-              <path d="M 44,83 Q 50,78 56,83" fill="none" stroke="rgba(80,80,80,0.4)" strokeWidth="0.7" strokeDasharray="2.5 2" markerEnd="url(#m-arrow)" />
+              <path d="M 44,83 Q 50,78 56,83" fill="none" stroke="rgba(190,190,190,0.6)" strokeWidth="0.7" strokeDasharray="2.5 2" markerEnd="url(#m-arrow)" />
             </svg>
 
             {/* 2-col grid of title cards */}

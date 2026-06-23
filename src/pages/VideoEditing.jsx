@@ -90,7 +90,7 @@ export default function VideoEditing() {
                     <div className="off-edit-card__meta-row"><span>Turnaround</span><span>{c.turnaround}</span></div>
                     <div className="off-edit-card__meta-row"><span>Revisions</span><span>{c.revisions}</span></div>
                   </div>
-                  <Link to="/quick-contact" className={`off-btn off-edit-card__cta${c.featured ? ' off-btn--solid' : ''}`}>
+                  <Link to="/booking" className={`off-btn off-edit-card__cta${c.featured ? ' off-btn--solid' : ''}`}>
                     Get Plan
                   </Link>
                 </article>
@@ -128,7 +128,7 @@ export default function VideoEditing() {
               <h3 className="off-cta__head">Ready to clear your content backlog?</h3>
               <p className="off-cta__sub">Start with 10 videos.</p>
               <div className="off-cta__actions">
-                <Link to="/quick-contact" className="off-btn off-btn--solid">Get Plan</Link>
+                <Link to="/booking" className="off-btn off-btn--solid">Get Plan</Link>
                 <Link to="/work" className="off-btn">See Sample Work</Link>
               </div>
             </div>

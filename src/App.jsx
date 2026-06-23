@@ -32,8 +32,7 @@ const VideoEditingPage = lazy(() => import('./pages/VideoEditing'))
 const LinksPage = lazy(() => import('./pages/Links'))
 const AboutPage = lazy(() => import('./pages/About'))
 const ContactPage = lazy(() => import('./pages/Contact'))
-const QuickContactPage = lazy(() => import('./pages/QuickContact'))
-const BookPage = lazy(() => import('./pages/Book'))
+const BookingPage = lazy(() => import('./pages/Booking'))
 const NotFoundPage = lazy(() => import('./pages/NotFound'))
 const PrivacyPolicyPage = lazy(() => import('./pages/Legal'))
 import './index.css'
@@ -174,8 +173,7 @@ function AppContent() {
           <Route path="/links"             element={<LinksPage />} />
           <Route path="/about"        element={<AboutPage />} />
           <Route path="/contact"      element={<ContactPage />} />
-          <Route path="/quick-contact" element={<QuickContactPage />} />
-          <Route path="/book"         element={<BookPage />} />
+          <Route path="/booking"      element={<BookingPage />} />
           <Route path="/process"      element={<ProcessPage />} />
           <Route path="/admin"        element={<AdminPage />} />
           <Route path="/privacy"        element={<PrivacyPolicyPage />} />

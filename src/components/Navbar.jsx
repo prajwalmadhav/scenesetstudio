@@ -94,7 +94,7 @@ export default function Navbar() {
 
           <div className="navbar__actions">
             <Link
-              to="/contact"
+              to="/booking"
               className="navbar__cta"
               onMouseMove={e => {
                 const r = e.currentTarget.getBoundingClientRect()
@@ -123,7 +123,7 @@ export default function Navbar() {
               <Link to="/work"     className={`mobile-link${active('/work')}`}     onClick={close}>Work</Link>
               <Link to="/services" className={`mobile-link${active('/services')}`} onClick={close}>Services</Link>
               <Link to="/about"    className={`mobile-link${active('/about')}`}    onClick={close}>About</Link>
-              <Link to="/contact"  className="hero-btn hero-btn--primary mobile-link--cta" onClick={close}>Book a Call →</Link>
+              <Link to="/booking"  className="hero-btn hero-btn--primary mobile-link--cta" onClick={close}>Book a Call →</Link>
             </nav>
           </div>
         </div>

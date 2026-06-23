@@ -153,6 +153,7 @@ export default function Footer() {
             <a href="#testimonials">Testimonials</a>
             <Link to="/services">Services</Link>
             <Link to="/offers">Offers</Link>
+            <Link to="/booking">Booking</Link>
             <Link to="/contact">Contact Us</Link>
           </div>
           <div className="footer-nav__col">

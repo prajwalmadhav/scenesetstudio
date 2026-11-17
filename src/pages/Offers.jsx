@@ -13,86 +13,103 @@ const Check = ({ none }) => (
 /* ── Section 1 data ── */
 const SERVICE_PILLS = [
   'Creative Strategy', 'Videography', 'Video Editing', 'Graphic Design',
-  'Social Management', 'Meta Ads', 'Ad Creatives', 'Funnels',
+  'Social Management', 'Ads Management', 'SEO', 'Email Marketing',
 ]
 
 const PACKAGES = [
   {
-    name: 'Standard',
-    tagline: 'Consistent content, handled.',
-    ideal: 'Ideal for restaurants, cafés, salons & local service businesses.',
-    amount: '$1,500',
+    name: 'Video Editing',
+    tagline: 'You shoot it, we edit it.',
+    ideal: 'Ideal for creators & businesses who film their own content and just need it edited — every month.',
+    amount: '$75',
+    per: 'per video',
     featured: false,
     groups: [
-      { label: 'Creative Strategy', items: ['1 strategy call / month'] },
-      { label: 'Videography', items: ['1 shoot day / month'] },
-      { label: 'Video Editing', items: ['8 short-form videos', 'Full edit — cuts, captions, colour, music', '2 revisions'] },
-      { label: 'Graphics & Design', items: ['4 branded static posts', 'Stories graphics'] },
-      { label: 'Social Media Management', items: ['Posting & scheduling on IG + FB', 'Monthly performance report'] },
-      { label: 'Meta Ads', items: ['No ads included'], none: true },
+      { label: 'Videography', items: ['Not included — you shoot, we edit'], none: true },
+      { label: 'Video Editing', items: ['Full edit — cuts, captions, colour, music', 'Matched to your brand\'s editing style', '1 revision round', 'Lower rate at higher monthly volume'] },
+      { label: 'Content Strategy', items: ['Not included'], none: true },
+      { label: 'Social Media Management', items: ['Not included'], none: true },
+      { label: 'Ads Management', items: ['Not included'], none: true },
     ],
   },
   {
-    name: 'Growth',
-    tagline: 'A content + ads engine.',
-    ideal: 'Ideal for businesses ready for a content + ads engine.',
-    amount: '$2,500',
+    name: 'Videography + Editing',
+    tagline: 'One shoot day, fully edited.',
+    ideal: 'Ideal for local businesses starting consistent content — restaurants, cafés, salons.',
+    amount: '$850',
+    per: '/ month',
+    featured: false,
+    groups: [
+      { label: 'Videography', items: ['1 full shoot day / month'] },
+      { label: 'Video Editing', items: ['6 short-form videos', 'Full edit — cuts, captions, colour, music', '1 revision round'] },
+      { label: 'Graphics & Design', items: ['6 branded posts from shoot content'] },
+      { label: 'Content Strategy', items: ['Not included'], none: true },
+      { label: 'Ads Management', items: ['Not included'], none: true },
+    ],
+  },
+  {
+    name: 'Video Production',
+    tagline: 'Content + strategy, planned monthly.',
+    ideal: 'Ideal for businesses ready to stop guessing what to post.',
+    amount: '$1,500',
+    per: '/ month',
     featured: true,
     groups: [
-      { label: 'Creative Strategy', items: ['2 strategy calls / month'] },
-      { label: 'Videography', items: ['2 shoot days'] },
-      { label: 'Video Editing', items: ['16 videos', '3 revisions'] },
-      { label: 'Motion Graphics', items: ['Basic motion graphics'] },
-      { label: 'Graphics & Design', items: ['8 posts', 'Daily stories'] },
-      { label: 'Social Media Management', items: ['Full scheduling on IG + FB + TikTok', 'Community management', 'Bi-weekly reports'] },
-      { label: 'Meta Ads', items: ['Up to 3 campaigns', 'Audience targeting', 'A/B testing', 'Optimization + reporting'] },
-      { label: 'Ad Creatives', items: ['6 ad creatives'] },
+      { label: 'Videography', items: ['1–2 shoot days / month'] },
+      { label: 'Video Editing', items: ['10 videos', '2 revisions'] },
+      { label: 'Content Strategy', items: ['Monthly strategy call', 'Content plan built on performance analysis', 'We tell you what to post & when'] },
+      { label: 'Graphics & Design', items: ['6 branded posts'] },
+      { label: 'Ads Management', items: ['Not included'], none: true },
     ],
   },
   {
-    name: 'Premium',
-    tagline: 'Full-funnel brand growth.',
-    ideal: 'Ideal for professional services & established brands.',
-    amount: '$4,500',
+    name: 'Full-Funnel Marketing',
+    tagline: 'Full-funnel brand growth, end to end.',
+    ideal: 'Ideal for brands ready to hand off content, ads, SEO & email — completely.',
+    amount: '$2,500',
+    per: '/ month',
+    note: '+ custom, based on scope & ad spend',
     featured: false,
     groups: [
-      { label: 'Creative Strategy', items: ['Weekly strategy calls'] },
-      { label: 'Videography', items: ['4 shoot days', 'Quarterly in-person shoot day'] },
-      { label: 'Video Editing', items: ['24+ videos', 'Unlimited revisions'] },
-      { label: 'Motion Graphics', items: ['Full motion graphics'] },
-      { label: 'Graphics & Design', items: ['16+ posts'] },
-      { label: 'Social Media Management', items: ['All platforms', 'Daily community management', 'Weekly reports'] },
-      { label: 'Meta Ads', items: ['Full Meta funnel — unlimited campaigns', 'Awareness → conversion → retargeting'] },
-      { label: 'Ad Creatives', items: ['Full ad creative suite (10+ creatives)'] },
-      { label: 'Funnels', items: ['1 landing page / funnel per quarter'] },
+      { label: 'Videography', items: ['1–2+ shoot days / month'] },
+      { label: 'Video Editing', items: ['10+ videos', 'Unlimited revisions'] },
+      { label: 'Content Strategy', items: ['Monthly strategy call', 'Full content plan & performance analysis'] },
+      { label: 'Social Media Management', items: ['Full account handling — posting, scheduling, community management'] },
+      { label: 'Ads Management', items: ['Google, Meta & TikTok ads', 'Campaign setup, optimization & reporting'] },
+      { label: 'SEO', items: ['Social, Google Business & website SEO'] },
+      { label: 'Email Marketing', items: ['Campaigns & automated flows'] },
     ],
   },
 ]
 
 const COMPARE_ROWS = [
-  { feature: 'Shoot days / month', values: ['1', '2', '4'] },
-  { feature: 'Short-form videos', values: ['8', '16', '24+'] },
-  { feature: 'Revisions', values: ['2', '3', 'Unlimited'] },
-  { feature: 'Motion graphics', values: ['—', 'Basic', 'Full'] },
-  { feature: 'Branded static posts', values: ['4', '8', '16+'] },
-  { feature: 'Stories', values: ['Graphics', 'Daily', 'Daily'] },
-  { feature: 'Platforms', values: ['IG + FB', 'IG + FB + TikTok', 'All platforms'] },
-  { feature: 'Community management', values: ['—', '✓', 'Daily'] },
-  { feature: 'Reporting', values: ['Monthly', 'Bi-weekly', 'Weekly'] },
-  { feature: 'Meta Ads', values: ['—', 'Up to 3 campaigns', 'Unlimited'] },
-  { feature: 'Ad creatives', values: ['—', '6', '10+'] },
-  { feature: 'Funnel / landing page', values: ['—', '—', '1 / quarter'] },
-  { feature: 'Strategy calls', values: ['1 / mo', '2 / mo', 'Weekly'] },
-  { feature: 'In-person shoot', values: ['—', '—', 'Quarterly'] },
+  { feature: 'Shoot days / month', values: ['—', '1', '1–2', '1–2+'] },
+  { feature: 'Videos / month', values: ['Volume-based', '6', '10', '10+'] },
+  { feature: 'Revisions', values: ['1', '1', '2', 'Unlimited'] },
+  { feature: 'Branded posts', values: ['—', '6', '6', '✓'] },
+  { feature: 'Content strategy', values: ['—', '—', 'Monthly call', 'Monthly call'] },
+  { feature: 'Social media management', values: ['—', '—', '—', 'Full handling'] },
+  { feature: 'Ads management', values: ['—', '—', '—', 'Google + Meta + TikTok'] },
+  { feature: 'SEO', values: ['—', '—', '—', 'Social + Google + Website'] },
+  { feature: 'Email marketing', values: ['—', '—', '—', 'Campaigns + flows'] },
 ]
 
-const STANDALONE = [
-  { name: 'Website', price: 'From $1,500' },
-  { name: 'AI Services & Automation', price: 'Custom' },
-  { name: 'Funnel Build', price: 'From $1,200' },
+const ADDONS = [
+  { name: 'Motion Graphics', price: '$40 / video' },
+  { name: 'Bilingual Subtitles EN/FR', price: '$20 / video' },
+  { name: 'Rush Delivery 48h', price: '$30 / video' },
+  { name: 'Additional Shoot Day', price: '$400 flat' },
+  { name: 'Drone Footage', price: '$150 / shoot' },
+  { name: 'Branded Posters & Print', price: 'From $80 each' },
+  { name: 'Single Ad Campaign', price: 'From $350 / month' },
+  { name: 'Email Flow Setup', price: 'From $400' },
+  { name: 'Social Media Audit', price: '$250 one-time' },
+  { name: 'SEO Audit', price: '$300 one-time' },
+  { name: 'Landing Page / Funnel Build', price: 'From $1,200' },
   { name: 'Brand Photography', price: 'From $600' },
   { name: 'Brand Identity', price: 'From $800' },
-  { name: 'Social Media Audit', price: '$250 one-time' },
+  { name: 'Website', price: 'From $1,500' },
+  { name: 'AI Services & Automation', price: 'Custom' },
 ]
 
 export default function Offers() {
@@ -111,10 +128,10 @@ export default function Offers() {
 
             <header className="off-head">
               <p className="off-eyebrow">Packages</p>
-              <h1 className="off-title">Video-First Social Media<br /><em>Packages for Business</em></h1>
+              <h1 className="off-title">Video-First Marketing<br /><em>Packages for Business</em></h1>
               <p className="off-sub">
-                One team for the whole pipeline — creative strategy, shooting, editing, graphics,
-                social management, and ads. You run the business; we run the content engine.
+                From editing-only to full-funnel growth — pick the level of hands-on help you need.
+                You run the business; we run as much of the content + growth engine as you want.
               </p>
               <div className="off-pills">
                 {SERVICE_PILLS.map((p) => <span key={p} className="off-pill">{p}</span>)}
@@ -130,9 +147,10 @@ export default function Offers() {
                   <p className="off-card__ideal">{pkg.ideal}</p>
                   <div className="off-card__price">
                     <span className="off-card__amount">{pkg.amount}</span>
-                    <span className="off-card__per">/ month</span>
+                    <span className="off-card__per">{pkg.per}</span>
                   </div>
                   <span className="off-card__cad">CAD</span>
+                  {pkg.note && <div className="off-card__price-note">{pkg.note}</div>}
 
                   <Link to="/booking" className={`off-btn off-btn--sm off-card__cta-top${pkg.featured ? ' off-btn--solid' : ''}`}>
                     Get started
@@ -171,9 +189,9 @@ export default function Offers() {
                 <thead>
                   <tr>
                     <th />
-                    <th>Standard</th>
-                    <th className="off-table__feat">Growth</th>
-                    <th>Premium</th>
+                    {PACKAGES.map((pkg) => (
+                      <th key={pkg.name} className={pkg.featured ? 'off-table__feat' : undefined}>{pkg.name}</th>
+                    ))}
                   </tr>
                 </thead>
                 <tbody>
@@ -181,7 +199,7 @@ export default function Offers() {
                     <tr key={row.feature}>
                       <th scope="row">{row.feature}</th>
                       {row.values.map((v, i) => (
-                        <td key={i} className={i === 1 ? 'off-cell--feat' : undefined}>
+                        <td key={i} className={PACKAGES[i].featured ? 'off-cell--feat' : undefined}>
                           {v === '—'
                             ? <span className="off-cell-dash">—</span>
                             : v === '✓'
@@ -197,10 +215,10 @@ export default function Offers() {
 
             {/* Add-ons & standalone */}
             <div className="off-addons-block">
-              <h3 className="off-block-title">Add-ons & standalone services</h3>
-              <p className="off-block-sub">Bolt onto any package or book on their own. All prices CAD.</p>
+              <h3 className="off-block-title">Add-ons for any package</h3>
+              <p className="off-block-sub">Bolt onto any of the 4 packages above, or book standalone. All prices CAD.</p>
               <div className="off-addons-grid">
-                {STANDALONE.map((a) => (
+                {ADDONS.map((a) => (
                   <div key={a.name} className="off-addon">
                     <div className="off-addon__name">{a.name}</div>
                     <div className="off-addon__price">{a.price} <span className="off-addon__cad">CAD</span></div>
@@ -221,14 +239,23 @@ export default function Offers() {
           </div>
         </section>
 
-        {/* ───────────── Standalone editing — link out ───────────── */}
-        <div className="off-section-divider"><span>Or just need edits?</span></div>
+        {/* ───────────── Standalone editing & production — link out ───────────── */}
+        <div className="off-section-divider"><span>Want the full rate card?</span></div>
         <div className="off-wrap">
-          <div className="off-cta">
-            <h3 className="off-cta__head">Video Editing — Only</h3>
-            <p className="off-cta__sub">You shoot it, we edit it. Short-form & long-form editing, no strategy or management.</p>
-            <div className="off-cta__actions">
-              <Link to="/offers/videoediting" className="off-btn off-btn--solid">View editing rates →</Link>
+          <div className="off-standalone-grid">
+            <div className="off-cta off-cta--flush">
+              <h3 className="off-cta__head">Video Editing — Only</h3>
+              <p className="off-cta__sub">You shoot it, we edit it. Short-form & long-form editing, no strategy or management.</p>
+              <div className="off-cta__actions">
+                <Link to="/offers/videoediting" className="off-btn off-btn--solid">View editing rates →</Link>
+              </div>
+            </div>
+            <div className="off-cta off-cta--flush">
+              <h3 className="off-cta__head">Video Production</h3>
+              <p className="off-cta__sub">We shoot it, we edit it. Full production, strategy included.</p>
+              <div className="off-cta__actions">
+                <Link to="/offers/videoproduction" className="off-btn off-btn--solid">View production rates →</Link>
+              </div>
             </div>
           </div>
         </div>

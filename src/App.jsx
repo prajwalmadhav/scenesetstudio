@@ -27,9 +27,13 @@ const WorkPage = lazy(() => import('./pages/Work'))
 const ProcessPage = lazy(() => import('./pages/Process'))
 const CaseStudyPage = lazy(() => import('./pages/CaseStudy'))
 const ServicesPage = lazy(() => import('./pages/Services'))
-const OffersPage = lazy(() => import('./pages/Offers'))
-const VideoEditingPage = lazy(() => import('./pages/VideoEditing'))
 const LinksPage = lazy(() => import('./pages/Links'))
+const QrCodePage = lazy(() => import('./pages/QrCode'))
+const PortfolioBookingPage = lazy(() => import('./pages/PortfolioBooking'))
+const VideoProductionPage = lazy(() => import('./pages/VideoProduction'))
+const OfferSite = lazy(() => import('./pages/OfferSite'))
+import { OFFER_ROUTES } from './lib/offerData'
+const OFFER_PATHS = OFFER_ROUTES.map((r) => r.path)
 const AboutPage = lazy(() => import('./pages/About'))
 const ContactPage = lazy(() => import('./pages/Contact'))
 const BookingPage = lazy(() => import('./pages/Booking'))
@@ -156,21 +160,27 @@ function App() {
 function AppContent() {
   const { pathname } = useLocation()
   const isAdmin = pathname.startsWith('/admin')
+  const isOffer = OFFER_PATHS.includes(pathname)
+  const hasOwnNav = isAdmin || isOffer || pathname === '/portfolio-booking'
   return (
     <>
       <BrandWatermark />
       <ScrollToTop />
-      {!isAdmin && <Navbar />}
-      <FloatingContact />
+      {!hasOwnNav && <Navbar />}
+      {!isOffer && <FloatingContact />}
       <Suspense fallback={null}>
         <Routes>
           <Route path="/"             element={<HomePage />} />
           <Route path="/work"         element={<WorkPage />} />
           <Route path="/work/:client" element={<CaseStudyPage />} />
           <Route path="/services"          element={<ServicesPage />} />
-          <Route path="/offers"            element={<OffersPage />} />
-          <Route path="/offers/videoediting" element={<VideoEditingPage />} />
           <Route path="/links"             element={<LinksPage />} />
+          <Route path="/qrcode"            element={<QrCodePage />} />
+          <Route path="/portfolio-booking" element={<PortfolioBookingPage />} />
+          <Route path="/offers/videoproduction" element={<VideoProductionPage />} />
+          {OFFER_ROUTES.map((r) => (
+            <Route key={r.path} path={r.path} element={<OfferSite audience={r.audience} />} />
+          ))}
           <Route path="/about"        element={<AboutPage />} />
           <Route path="/contact"      element={<ContactPage />} />
           <Route path="/booking"      element={<BookingPage />} />

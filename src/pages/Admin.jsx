@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { getLinks, saveLinks, emptyLink } from '../lib/links'
+import { getQrLinks, saveQrLinks, emptyQrLink } from '../lib/qrcode'
 
 const ADMIN_PASSWORD = 'sss2026'
 
@@ -217,6 +218,91 @@ function LinksManager() {
   )
 }
 
+/* ── QR Code Page Manager ── */
+function QrCodeManager() {
+  const [links, setLinks] = useState(getQrLinks)
+  const [modal, setModal] = useState(null)
+
+  function persist(list) {
+    setLinks(list)
+    saveQrLinks(list)
+  }
+
+  function save(form) {
+    const exists = links.find(l => l.id === form.id)
+    persist(exists ? links.map(l => l.id === form.id ? form : l) : [...links, form])
+    setModal(null)
+  }
+
+  function remove(id) {
+    if (confirm('Remove this link button?')) persist(links.filter(l => l.id !== id))
+  }
+
+  function move(index, dir) {
+    const next = index + dir
+    if (next < 0 || next >= links.length) return
+    const list = [...links]
+    ;[list[index], list[next]] = [list[next], list[index]]
+    persist(list)
+  }
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
+        <div>
+          <h2 style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: 'clamp(22px, 3vw, 32px)', color: '#F2F0EB', letterSpacing: '-0.03em', margin: '0 0 6px' }}>QR Code Page</h2>
+          <p style={{ fontFamily: 'var(--font-body)', fontSize: '13px', fontWeight: 300, color: 'rgba(242,240,235,0.4)', margin: 0 }}>
+            {links.length} button{links.length === 1 ? '' : 's'} · live at <a href="/qrcode" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(242,240,235,0.6)' }}>/qrcode ↗</a> · point your printed QR code here
+          </p>
+        </div>
+        <button onClick={() => setModal(emptyQrLink())} style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#0a0a0a', background: '#F2F0EB', border: 'none', padding: '10px 22px', cursor: 'pointer' }}>
+          + New Link
+        </button>
+      </div>
+
+      {links.length === 0 ? (
+        <div style={{ padding: '64px', textAlign: 'center', border: '1px dashed #1e1e1e', color: 'rgba(242,240,235,0.2)', fontFamily: 'var(--font-body)', fontSize: '13px' }}>
+          No links yet — add your first button
+        </div>
+      ) : (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+          {links.map((l, i) => (
+            <div key={l.id} style={{ display: 'grid', gridTemplateColumns: 'auto 1fr auto auto', alignItems: 'center', gap: '16px', padding: '16px 20px', background: '#0d0d0d', border: '1px solid #161616', transition: 'border-color 0.15s' }}
+              onMouseEnter={e => e.currentTarget.style.borderColor = '#2a2a2a'}
+              onMouseLeave={e => e.currentTarget.style.borderColor = '#161616'}
+            >
+              {/* reorder */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                <button onClick={() => move(i, -1)} disabled={i === 0} style={{ background: 'none', border: 'none', color: i === 0 ? 'rgba(242,240,235,0.12)' : 'rgba(242,240,235,0.4)', cursor: i === 0 ? 'default' : 'pointer', fontSize: '11px', lineHeight: 1, padding: 0 }}>▲</button>
+                <button onClick={() => move(i, 1)} disabled={i === links.length - 1} style={{ background: 'none', border: 'none', color: i === links.length - 1 ? 'rgba(242,240,235,0.12)' : 'rgba(242,240,235,0.4)', cursor: i === links.length - 1 ? 'default' : 'pointer', fontSize: '11px', lineHeight: 1, padding: 0 }}>▼</button>
+              </div>
+
+              <div style={{ minWidth: 0 }}>
+                <p style={{ fontFamily: 'var(--font-body)', fontWeight: 500, fontSize: '14px', color: '#F2F0EB', margin: '0 0 2px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  {l.label || '—'}
+                  {l.primary && <span style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '2px 7px', background: 'rgba(212,0,30,0.12)', border: '1px solid rgba(212,0,30,0.4)', color: '#D4001E' }}>Primary</span>}
+                </p>
+                <a href={l.href} target="_blank" rel="noopener noreferrer" style={{ fontFamily: 'var(--font-body)', fontWeight: 300, fontSize: '12px', color: 'rgba(242,240,235,0.35)', margin: 0, textDecoration: 'none', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block' }}>{l.href}</a>
+              </div>
+
+              <button onClick={() => setModal(l)} style={{ background: 'none', border: '1px solid #1e1e1e', color: 'rgba(242,240,235,0.4)', padding: '5px 12px', cursor: 'pointer', fontSize: '11px', fontFamily: 'var(--font-body)', transition: 'color 0.15s, border-color 0.15s' }}
+                onMouseEnter={e => { e.currentTarget.style.color = '#F2F0EB'; e.currentTarget.style.borderColor = '#333' }}
+                onMouseLeave={e => { e.currentTarget.style.color = 'rgba(242,240,235,0.4)'; e.currentTarget.style.borderColor = '#1e1e1e' }}
+              >Edit</button>
+              <button onClick={() => remove(l.id)} style={{ background: 'none', border: '1px solid #1e1e1e', color: 'rgba(212,0,30,0.5)', padding: '5px 12px', cursor: 'pointer', fontSize: '11px', fontFamily: 'var(--font-body)', transition: 'color 0.15s, border-color 0.15s' }}
+                onMouseEnter={e => { e.currentTarget.style.color = '#D4001E'; e.currentTarget.style.borderColor = 'rgba(212,0,30,0.3)' }}
+                onMouseLeave={e => { e.currentTarget.style.color = 'rgba(212,0,30,0.5)'; e.currentTarget.style.borderColor = '#1e1e1e' }}
+              >Del</button>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {modal && <LinkModal link={modal} onSave={save} onClose={() => setModal(null)} />}
+    </div>
+  )
+}
+
 /* ── Coming Soon placeholder ── */
 function ComingSoon({ label }) {
   return (
@@ -229,6 +315,7 @@ function ComingSoon({ label }) {
 
 const NAV_ITEMS = [
   { id: 'links',        label: 'Links Page',    icon: '◈' },
+  { id: 'qrcode',       label: 'QR Code Page',  icon: '▣' },
   { id: 'testimonials', label: 'Testimonials',  icon: '◇', soon: true },
   { id: 'casestudies',  label: 'Case Studies',  icon: '◉', soon: true },
 ]
@@ -282,6 +369,7 @@ function Dashboard({ onLogout }) {
       {/* Main */}
       <main style={{ flex: 1, padding: '48px', overflowY: 'auto', maxWidth: '1100px' }}>
         {page === 'links'        && <LinksManager />}
+        {page === 'qrcode'       && <QrCodeManager />}
         {page === 'testimonials' && <ComingSoon label="Testimonials" />}
         {page === 'casestudies'  && <ComingSoon label="Case Studies" />}
       </main>

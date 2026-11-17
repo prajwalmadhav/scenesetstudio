@@ -1,0 +1,406 @@
+/* ─────────────────────────────────────────────────────────
+   QR landing page — services, reels, IG-style posts, testimonials
+   Extends links.css (hero + quick-link buttons). Self-contained
+   styles prefixed .qr-
+   ───────────────────────────────────────────────────────── */
+
+.qr-section {
+  padding: 72px 0;
+  border-top: 1px solid var(--border);
+}
+
+.qr-wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.qr-section-head {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.qr-eyebrow {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.qr-section-title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(24px, 5vw, 34px);
+  letter-spacing: -0.02em;
+  color: var(--cream);
+  margin: 0;
+}
+
+.qr-section-sub {
+  margin-top: 10px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--muted);
+}
+
+/* ── Services ── */
+.qr-services {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.qr-service-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 22px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  text-decoration: none;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.qr-service-card:hover {
+  border-color: rgba(242, 240, 235, 0.25);
+  transform: translateY(-2px);
+}
+
+.qr-service-card--featured {
+  border-color: rgba(212, 0, 30, 0.5);
+}
+
+.qr-service-card__main {
+  min-width: 0;
+}
+
+.qr-service-card__name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--cream);
+}
+
+.qr-service-card__badge {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 100px;
+  background: rgba(212, 0, 30, 0.14);
+  border: 1px solid rgba(212, 0, 30, 0.4);
+  color: var(--accent);
+}
+
+.qr-service-card__desc {
+  margin-top: 4px;
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 300;
+  color: var(--muted);
+}
+
+.qr-service-card__price {
+  flex-shrink: 0;
+  text-align: right;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.qr-service-card__price span {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 300;
+  color: var(--muted);
+}
+
+.qr-services-cta {
+  margin-top: 22px;
+  text-align: center;
+}
+
+/* ── Reels — horizontal scroll of vertical portfolio cards ── */
+.qr-reels-row {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding: 4px 24px 12px;
+  margin: 0 -24px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.qr-reels-row::-webkit-scrollbar {
+  display: none;
+}
+
+.qr-reel-card {
+  position: relative;
+  flex: 0 0 auto;
+  width: 148px;
+  aspect-ratio: 9 / 16;
+  border-radius: 16px;
+  overflow: hidden;
+  scroll-snap-align: start;
+  text-decoration: none;
+  background: #000;
+  border: 1px solid var(--border);
+}
+
+.qr-reel-card__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+  transition: opacity 0.25s, transform 0.4s;
+}
+
+.qr-reel-card:hover .qr-reel-card__img {
+  opacity: 1;
+  transform: scale(1.04);
+}
+
+.qr-reel-card__shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.85) 100%);
+}
+
+.qr-reel-card__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(242, 240, 235, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(2px);
+}
+
+.qr-reel-card__play svg {
+  width: 14px;
+  height: 14px;
+  fill: #f2f0eb;
+  margin-left: 2px;
+}
+
+.qr-reel-card__label {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  color: #f2f0eb;
+  line-height: 1.3;
+}
+
+.qr-reel-card__label small {
+  display: block;
+  font-weight: 300;
+  font-size: 10.5px;
+  color: rgba(242, 240, 235, 0.6);
+  margin-top: 2px;
+}
+
+/* ── Instagram-style posts ── */
+.qr-ig-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.qr-ig-card {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  display: block;
+  overflow: hidden;
+  background: #000;
+}
+
+.qr-ig-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s;
+}
+
+.qr-ig-card:hover .qr-ig-card__img {
+  transform: scale(1.06);
+}
+
+.qr-ig-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  transition: opacity 0.25s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.qr-ig-card:hover .qr-ig-card__overlay {
+  opacity: 1;
+}
+
+.qr-ig-card__overlay svg {
+  width: 16px;
+  height: 16px;
+  color: #f2f0eb;
+}
+
+.qr-ig-follow {
+  margin-top: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--cream);
+  text-decoration: none;
+}
+
+.qr-ig-follow svg {
+  width: 16px;
+  height: 16px;
+}
+
+.qr-ig-follow:hover {
+  color: var(--accent);
+}
+
+/* ── Testimonials — honest empty state ── */
+.qr-testimonial-empty {
+  border: 1px dashed var(--border);
+  border-radius: 16px;
+  padding: 40px 28px;
+  text-align: center;
+}
+
+.qr-testimonial-empty__icon {
+  font-size: 22px;
+  color: rgba(242, 240, 235, 0.25);
+  letter-spacing: 4px;
+  margin-bottom: 14px;
+}
+
+.qr-testimonial-empty__text {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--muted);
+  max-width: 380px;
+  margin: 0 auto 20px;
+  line-height: 1.6;
+}
+
+.qr-testimonial-card {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+  padding: 28px 26px;
+}
+
+.qr-testimonial-card__stars {
+  color: var(--accent);
+  font-size: 13px;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.qr-testimonial-card__quote {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: rgba(242, 240, 235, 0.85);
+  font-style: italic;
+}
+
+.qr-testimonial-card__who {
+  margin-top: 16px;
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.qr-testimonial-card__who strong {
+  color: var(--cream);
+  font-weight: 500;
+}
+
+/* ── Generic small button reused from offers.css tokens ── */
+.qr-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  border-radius: 100px;
+  padding: 13px 24px;
+  border: 1px solid rgba(242, 240, 235, 0.22);
+  color: var(--cream);
+  background: transparent;
+  transition: background 0.25s, border-color 0.25s;
+}
+
+.qr-btn:hover {
+  background: rgba(242, 240, 235, 0.06);
+  border-color: rgba(242, 240, 235, 0.4);
+}
+
+.qr-btn--solid {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.qr-btn--solid:hover {
+  background: #b8001a;
+  border-color: #b8001a;
+}
+
+@media (max-width: 480px) {
+  .qr-section {
+    padding: 56px 0;
+  }
+  .qr-wrap {
+    padding: 0 20px;
+  }
+  .qr-service-card {
+    padding: 16px 18px;
+  }
+}

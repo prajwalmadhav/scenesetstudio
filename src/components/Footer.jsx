@@ -142,7 +142,7 @@ export default function Footer() {
             <a href="#services">Advertising</a>
             <a href="#services">Social Media</a>
             <a href="#services">Web Design</a>
-            <a href="#services">Video Production</a>
+            <Link to="/offers/videoproduction">Video Production</Link>
             <Link to="/offers/videoediting">Video Editing</Link>
           </div>
           <div className="footer-nav__col">
